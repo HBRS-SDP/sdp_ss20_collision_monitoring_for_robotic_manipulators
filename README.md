@@ -27,3 +27,6 @@ Otherwise the following commands need to be run from the build folder:
     ...\sdp_ss20_collision_monitoring_for_robotic_manipulators\build$ cmake ..
     ...\sdp_ss20_collision_monitoring_for_robotic_manipulators\build$ cmake --build .
 ```
+
+## Execution
+The executable file compiles as /build/Collision_Monitoring
