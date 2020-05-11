@@ -10,12 +10,13 @@ find_package(orocos_kdl)
 find_package(kdl_parser)
 
 include_directories(
-  include
-  /usr/local/include
-  /usr/include/eigen3
-  ${Eigen_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIR}
-  ${orocos_kdl_INCLUDE_DIRS}
+    src
+    include
+    /usr/local/include
+    /usr/include/eigen3
+    ${Eigen_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIR}
+    ${orocos_kdl_INCLUDE_DIRS}
 )
 
 # Set the c++ version
@@ -24,12 +25,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 ## Declare a C++ library
 add_library(youbot_kdl
-   src/basic_shapes.cpp
-   src/arm_model.cpp
+    src/basic_shapes.cpp
+    src/arm_model.cpp
 )
 
 # Configure config header file 
-configure_file(Collision_Monitoring_Config.h.in Collision_Monitoring_Config.h)
+configure_file(src/Collision_Monitoring_Config.h.in ../src/Collision_Monitoring_Config.h)
 
 # Executable
 add_executable(Collision_Monitoring
@@ -38,7 +39,16 @@ add_executable(Collision_Monitoring
     src/amr_model.cpp
 )
 
+# add kdl library
+link_directories("/usr/local/include/kdl")
+
+target_link_libraries(Collision_Monitoring
+    orocos-kdl
+    ${orocos-kdl_LIBRARIES}
+    ${kdl_parser_LIBRARIES}
+)
+
 # List of directories to search for include files
 target_include_directories(Collision_Monitoring PUBLIC
-                           "${PROJECT_BINARY_DIR}"
+                           "${PROJECT_BINARY_DIR}/src"
                            )
