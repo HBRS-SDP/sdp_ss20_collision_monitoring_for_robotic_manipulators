@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.5.2)
 
 # Project name and version
 project(Collision_Monitoring VERSION 1.0)
