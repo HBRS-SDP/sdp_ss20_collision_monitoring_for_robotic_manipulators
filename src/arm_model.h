@@ -3,8 +3,9 @@
 
 // KDL Libraries
 #include <kdl/tree.hpp>
-#include <kdl/treefksolver.hpp>
-#include <kdl/treefksolverpos_recursive.hpp>
+#include <kdl/chain.hpp>
+#include <kdl/chainfksolver.hpp>
+#include <kdl/chainfksolverpos_recursive.hpp>
 #include <kdl_parser/kdl_parser.hpp>
 
 #include <vector>
@@ -18,6 +19,7 @@ class KinovaArm
         KDL::Tree arm_tree;
         int nr_joints;
         KDL::Frame pos;
+        KDL::Chain chain;
 
     public:
         //Constructor
