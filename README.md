@@ -4,6 +4,12 @@
 - Samuel Parra
 - Brennan Penfold
 
+## References
+This library is an implementation of the following papers:
+
+* Real-Time Obstacle Avoidance for Manipulators and Mobile Robots, Oussama Khatib, 1986.
+* Biologically-inspired dynamical systems for movement generation: automatic real-time goal adaptation and obstacle avoidance, H. Hoffmann et al., 2019.
+
 
 ## Requirements:
 - KDL (https://www.orocos.org/kdl/installation-manual)
@@ -29,4 +35,4 @@ Otherwise the following commands need to be run from the build folder:
 ```
 
 ## Execution
-The executable file compiles as /build/Collision_Monitoring
+The executable file compiles as /build/collision_monitoring
