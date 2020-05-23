@@ -30,7 +30,7 @@ add_library(youbot_kdl
 )
 
 # Configure config header file 
-configure_file(src/Collision_Monitoring_Config.h.in ../src/Collision_Monitoring_Config.h)
+configure_file(include/Collision_Monitoring_Config.h.in ../include/Collision_Monitoring_Config.h)
 
 # Executable
 add_executable(Collision_Monitoring
