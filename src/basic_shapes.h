@@ -6,9 +6,11 @@
 
 namespace shapes
 {
-    class IShape
+    class Primitive
     {
         protected:
+            // Discuss with Gjordje
+
             // start with a point and then we can overload for other shapes
             // and then finally links
             virtual double get_shortest_dist(std::vector<double>) = 0;
@@ -18,11 +20,11 @@ namespace shapes
 
             // I'm not sure if this is necessary but this mentions it should be there
             // https://www.learncpp.com/cpp-tutorial/126-pure-virtual-functions-abstract-base-classes-and-interface-classes/
-            virtual ~IShape() {}
+            virtual ~Primitive() {}
 
     };
 
-    class Cylinder: public IShape
+    class Cylinder: public Primitive
     {
         private:
             float length;
@@ -33,7 +35,7 @@ namespace shapes
             virtual std::vector<double> get_closest_point(std::vector<double>) = 0;
     };
 
-    class n_ellipsoid: public IShape
+    class n_ellipsoid: public Primitive
     {
         private:
             //Shape parameters

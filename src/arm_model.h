@@ -13,7 +13,20 @@
 #include "basic_shapes.h"
 
 
-class KinovaArm
+class Arm
+{
+    protected:
+        //Constructor
+        virtual Arm();
+        //Destructor
+        virtual ~Arm();
+
+        virtual bool updatePose(std::vector<double>);
+        virtual std::vector<double> base_position;
+        virtual std::vector<Primitive> links;
+}
+
+class KinovaArm: public Arm
 {
     private:
         KDL::Tree arm_tree;
@@ -23,23 +36,14 @@ class KinovaArm
 
     public:
         //Constructor
-        KinovaArm(std::string urdf_filename);
+        virtual Arm(std::string urdf_filename);
         //Destructor
-        ~KinovaArm();
+        virtual ~Arm();
 
-        bool updatePose(std::vector<double>);
-        std::vector<Link> links;
+        virtual bool updatePose(std::vector<double>);
+        virtual std::vector<double> base_position;
+        virtual std::vector<Primitive> links;
 }
 
-class Link: public shapes::Cylinder
-{
-    private:
-        //any private variables
-    public:
-        Link* parent_link;
-        std::vector<double> base_point;
-        std::vector<double> endpoint;
-
-}
 
 #endif // ARM_MODEL_H
