@@ -9,6 +9,10 @@ find_package(Eigen3 REQUIRED)
 find_package(orocos_kdl)
 find_package(kdl_parser)
 
+set(CATCH_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/test)
+add_library(Catch INTERFACE)
+target_include_directories(Catch INTERFACE ${CATCH_INCLUDE_DIR})
+
 include_directories(
     src
     include
@@ -23,20 +27,14 @@ include_directories(
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-## Declare a C++ library
-add_library(youbot_kdl
-    src/basic_shapes.cpp
-    src/arm_model.cpp
-)
-
 # Configure config header file 
-configure_file(include/collision_monitoring_Config.h.in ../include/collision_monitoring_Config.h)
+configure_file(include/collision_monitoring_config.h.in ../include/collision_monitoring_config.h)
 
 # Executable
 add_executable(Collision_Monitoring
-    src/Collision_Monitoring.cpp
-    src/basic_shapes.cpp
-    src/amr_model.cpp
+    src/collision_monitoring.cpp
+    src/primitives.cpp
+    src/arm.cpp
 )
 
 add_executable(tests
@@ -46,10 +44,6 @@ add_executable(tests
 # src/Collision_Monitoring.cpp
 # src/basic_shapes.cpp
 # src/amr_model.cpp
-
-include(CTest)
-include(Catch)
-catch_discover_tests(tests)
 
 # add kdl library
 link_directories("/usr/local/include/kdl")
