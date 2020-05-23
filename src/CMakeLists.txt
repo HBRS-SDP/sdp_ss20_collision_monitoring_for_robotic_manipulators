@@ -7,6 +7,7 @@ include_directories(
     ../include
     ../collision_monitoring/include
     /usr/local/include
+    /opt/ros/kinetic/include
     ${Eigen_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIR}
     ${orocos_kdl_INCLUDE_DIRS}
