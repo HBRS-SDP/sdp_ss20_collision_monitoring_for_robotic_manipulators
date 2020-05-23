@@ -5,18 +5,20 @@
 #include <vector>
 
 
-class Primitive {
+class Primitive
+{
     protected:
+
         // start with a point and then we can overload for other primitives
         // and then finally links
         virtual double getShortestDistance(std::vector<double>) = 0;
 
         // Same as above start with point then overload
         virtual std::vector<double> getClosestPoint(std::vector<double>) = 0;
+    
+    public:
 
-        // I'm not sure if this is necessary but this mentions it should be there
-        // https://www.learncpp.com/cpp-tutorial/126-pure-virtual-functions-abstract-base-classes-and-interface-classes/
-        virtual ~Primitive() {}
+        virtual ~Primitive();
 
 };
 

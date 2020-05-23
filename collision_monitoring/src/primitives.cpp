@@ -16,7 +16,8 @@ double Cylinder::get_shortest_dist(std::vector<double>){
 
 std::vector<double> Cylinder::get_closest_point(std::vector<double>){
 
-    return 0;
+    std::vector<double> return_var = {0., 0.};
+    return return_var;
 }
 
 

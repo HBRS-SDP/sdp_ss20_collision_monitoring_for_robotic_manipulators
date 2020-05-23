@@ -1,2 +1,8 @@
+include_directories(
+    ../include
+    ../collision_monitoring/include
+)
+
+enable_testing()
 add_executable(tests test.cpp)
-target_link_libraries(tests PRIVATE KinovaArm catch)
+add_test(Tests tests)

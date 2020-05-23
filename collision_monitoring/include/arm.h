@@ -9,12 +9,16 @@
 class Arm
 {
     protected:
-        //Destructor
-        virtual ~Arm();
 
         virtual bool updatePose(std::vector<double>);
         std::vector<double> base_position;
         std::vector<Primitive> links;
+
+    public:
+    
+        //Destructor
+        virtual ~Arm();
+
 };
 
 

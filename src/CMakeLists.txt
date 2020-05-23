@@ -1,3 +1,4 @@
+find_package(Boost REQUIRED COMPONENTS system)
 find_package(Eigen3 REQUIRED)
 find_package(orocos_kdl)
 find_package(kdl_parser)
@@ -5,6 +6,7 @@ find_package(kdl_parser)
 include_directories(
     ../include
     ../collision_monitoring/include
+    /usr/local/include
     ${Eigen_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIR}
     ${orocos_kdl_INCLUDE_DIRS}
