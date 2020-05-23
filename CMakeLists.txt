@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5.2)
+cmake_minimum_required(VERSION 3.5.0)
 
 # Project name and version
 project(Collision_Monitoring VERSION 1.0)
@@ -30,7 +30,7 @@ add_library(youbot_kdl
 )
 
 # Configure config header file 
-configure_file(include/Collision_Monitoring_Config.h.in ../include/Collision_Monitoring_Config.h)
+configure_file(include/collision_monitoring_Config.h.in ../include/collision_monitoring_Config.h)
 
 # Executable
 add_executable(Collision_Monitoring
@@ -38,6 +38,18 @@ add_executable(Collision_Monitoring
     src/basic_shapes.cpp
     src/amr_model.cpp
 )
+
+add_executable(tests
+    test/test.cpp
+)
+
+# src/Collision_Monitoring.cpp
+# src/basic_shapes.cpp
+# src/amr_model.cpp
+
+include(CTest)
+include(Catch)
+catch_discover_tests(tests)
 
 # add kdl library
 link_directories("/usr/local/include/kdl")
