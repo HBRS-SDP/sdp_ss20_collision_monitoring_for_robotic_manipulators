@@ -15,6 +15,7 @@ include_directories(
 
 add_library(CollisionMonitoring
     src/primitives.cpp
+    src/arm.cpp
 )
 
 target_link_libraries(CollisionMonitoring

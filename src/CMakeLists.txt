@@ -4,9 +4,12 @@ find_package(orocos_kdl)
 find_package(kdl_parser)
 
 include_directories(
+    include
     ../include
     ../collision_monitoring/include
     /usr/local/include
+    /usr/include/eigen3
+    /opt/ros/kinetic/include
     ${Eigen_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIR}
     ${orocos_kdl_INCLUDE_DIRS}
@@ -23,6 +26,7 @@ target_include_directories(KinovaArm PUBLIC
 
 add_executable(KinovaCollisionMonitoring
     collision_monitoring.cpp
+    kinova_arm.cpp
 )
 
 target_link_libraries(KinovaCollisionMonitoring PRIVATE

@@ -8,6 +8,7 @@
 
 class Arm
 {
+
     protected:
 
         virtual bool updatePose(std::vector<double>);
@@ -17,9 +18,26 @@ class Arm
     public:
     
         //Destructor
-        virtual ~Arm();
+        ~Arm() {}
 
 };
+
+class SampleArm
+{
+    public:
+        SampleArm();
+        //Destructor
+        virtual ~SampleArm();
+
+    protected:
+
+        virtual bool updatePose(std::vector<double>);
+        std::vector<double> base_position;
+        std::vector<Primitive> links;
+
+};
+
+
 
 
 

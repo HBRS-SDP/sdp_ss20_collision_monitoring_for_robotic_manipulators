@@ -18,11 +18,11 @@ class Primitive
     
     public:
 
-        virtual ~Primitive();
+        virtual ~Primitive() {}
 
 };
 
-class Cylinder: public Primitive {
+class Cylinder: public Primitive{
     private:
         float length;
         float radius;
