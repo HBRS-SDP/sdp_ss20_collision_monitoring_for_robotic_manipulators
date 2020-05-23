@@ -1,3 +1,0 @@
-// The configured options and versions
-#define Collision_Monitoring_VERSION_MAJOR @Collision_Monitoring_VERSION_MAJOR@
-#define Collision_Monitoring_VERSION_MINOR @Collision_Monitoring_VERSION_MINOR@

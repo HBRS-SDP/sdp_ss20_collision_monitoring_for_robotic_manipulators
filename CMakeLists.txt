@@ -27,9 +27,6 @@ include_directories(
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Configure config header file 
-configure_file(include/collision_monitoring_config.h.in ../include/collision_monitoring_config.h)
-
 # Executable
 add_executable(Collision_Monitoring
     src/collision_monitoring.cpp
