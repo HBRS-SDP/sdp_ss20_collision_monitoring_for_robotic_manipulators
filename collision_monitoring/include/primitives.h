@@ -3,6 +3,7 @@
 
 #include <tuple>
 #include <vector>
+#include <Eigen/Dense>
 
 
 class Primitive
@@ -11,39 +12,55 @@ class Primitive
 
         // start with a point and then we can overload for other primitives
         // and then finally links
-        virtual double getShortestDistance(std::vector<double>) = 0;
+        virtual double getShortestDistance(Primitive *obstacle) = 0;
 
         // Same as above start with point then overload
-        virtual std::vector<double> getClosestPoint(std::vector<double>) = 0;
+        // virtual std::vector<double> getClosestPoint(std::vector<double>) = 0;
     
     public:
+        Eigen::Matrix4d pose;
+        //virtual ~Primitive();
 
-        virtual ~Primitive();
+};
 
+class Edge{
+    private:
+        Eigen::Vector3d basePoint;
+        Eigen::Vector3d endPoint;
+        Eigen::Vector3d projectionPoint(Eigen::Vector3d point);
+
+    public:
+        Edge(Eigen::Vector3d basePoint, Eigen::Vector3d endPoint);
+        ~Edge();
+        Eigen::Vector3d getBasePoint();
+        Eigen::Vector3d getEndPoint();
+        double getShortestDistanceVertex(Eigen::Vector3d vertex);
+        double getShortestDistanceEdge(Edge edge);
+        
 };
 
 class Cylinder: public Primitive {
     private:
         float length;
         float radius;
-
+        
     public:
-        Cylinder(std::vector<double> pose, double length, double radius);
-        virtual ~Cylinder();
-        virtual double get_shortest_dist(std::vector<double>) = 0;
-        virtual std::vector<double> get_closest_point(std::vector<double>) = 0;
+        Cylinder(Eigen::Matrix4d pose, double length, double radius);
+        ~Cylinder();
+        double getShortestDistance(Primitive *obstacle);
+        // std::vector<double> getClosestPoint(std::vector<double>);
 };
 
-class N_ellipsoid: public Primitive {
-    private:
-        //Primitve parameters
+// class N_ellipsoid: public Primitive {
+//     private:
+//         //Primitve parameters
 
-    public:
-        N_ellipsoid(std::vector<double> pose);
-        virtual ~N_ellipsoid();
-        virtual double get_shortest_dist(std::vector<double>) = 0;
-        virtual std::vector<double> get_closest_point(std::vector<double>) = 0;
-};
+//     public:
+//         N_ellipsoid(std::vector<double> pose);
+//         ~N_ellipsoid();
+//         double getShortestDistance(N_ellipsoid *);
+//         std::vector<double> getClosestPoint(std::vector<double>);
+// };
 
 
 #endif // PRIMITIVES_H
