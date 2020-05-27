@@ -1,12 +1,8 @@
 #include "monitor.h"
-#include "arm.h"
-#include "primitive.h"
-
-#include <vector>
 
 Monitor::Monitor(Arm arm, std::vector<Primitive> obstacles){
-    this->arm = arm;
-    this->obstacles = obstacles;
+    //this->arm = arm;
+    //this->obstacles = obstacles;
 }
 
 Monitor::~Monitor(){

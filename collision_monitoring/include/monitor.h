@@ -5,7 +5,8 @@
 #include "arm.h"
 #include "primitives.h"
 
-class Monitor {
+class Monitor
+{
 
     public: 
 
@@ -14,6 +15,7 @@ class Monitor {
         // Void on return type of these functions temporally
         void monitorCollisionWithObjects();
         void monitorCollisionWithArm();
+        Monitor(Arm arm, std::vector<Primitive> obstacles);
         ~Monitor();
 };
 

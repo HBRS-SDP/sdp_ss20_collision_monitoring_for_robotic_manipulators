@@ -5,7 +5,8 @@
 #include <Eigen/Dense>
 #include "primitives.h"
 
-class Obstacle {
+class Obstacle
+{
 
     protected: 
 
@@ -14,7 +15,8 @@ class Obstacle {
     
     public: 
 
-        void updatePosition(Eigen::Matrix4d pose);
+        void updatePose(Eigen::Matrix4d pose);
+        Obstacle(Eigen::Matrix4d pose, std::vector<Primitive> primitives);
         ~Obstacle();
 };
 

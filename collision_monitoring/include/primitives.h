@@ -19,7 +19,7 @@ class Primitive
     
     public:
         Eigen::Matrix4d pose;
-        //virtual ~Primitive();
+        // virtual ~Primitive();
 
 };
 
