@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <kdl/chain.hpp>
+#include "primitives.h"
 
 int main(int argc, char* argv[])
 {
