@@ -1,8 +1,7 @@
 #include "arm.h"
 
 
-SampleArm::SampleArm(){}
-        //Destructor
-SampleArm::~SampleArm(){}
+Arm::~Arm (){}
 
-bool SampleArm::updatePose(std::vector<double>){}
+
+bool Arm::updatePose(std::vector<double>) {}

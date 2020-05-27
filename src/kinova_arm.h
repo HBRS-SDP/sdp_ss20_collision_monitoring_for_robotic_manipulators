@@ -21,11 +21,11 @@ class KinovaArm: public Arm
 
     public:
         //Constructor
-        KinovaArm(std::string urdf_filename);
+        KinovaArm();
         //Destructor
-        virtual ~KinovaArm();
+        ~KinovaArm();
 
-        virtual bool updatePose(std::vector<double>);
+        bool updatePose(std::vector<double>);
         std::vector<double> base_position;
         std::vector<Primitive> links;
 };
