@@ -8,20 +8,15 @@
 
 class Arm
 {
-    protected:
-
-        virtual bool updatePose(std::vector<double>);
-        std::vector<double> base_position;
-        std::vector<Primitive> links;
-
     public:
     
         //Destructor
         virtual ~Arm();
+        virtual bool updatePose(std::vector<double>);
+        std::vector<double> base_position;
+        std::vector<Primitive> links;
 
 };
-
-
 
 
 #endif // ARM_H

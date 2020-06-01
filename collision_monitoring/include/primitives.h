@@ -19,7 +19,7 @@ class Primitive
     
     public:
         Eigen::Matrix4d pose;
-        // virtual ~Primitive();
+        //virtual ~Primitive();
 
 };
 
@@ -39,7 +39,7 @@ class Edge{
         
 };
 
-class Cylinder: public Primitive {
+class Cylinder: public Primitive{
     private:
         float length;
         float radius;
