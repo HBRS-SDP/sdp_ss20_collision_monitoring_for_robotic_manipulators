@@ -2,7 +2,7 @@
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
-//#include "kinova_arm.h"
+#include "kinova_arm.h"
 #include "primitives.h"
 #include "obstacle.h"
 #include "monitor.h"
@@ -41,4 +41,8 @@ TEST_CASE("Monitor test", "[obstacle]") {
     // REQUIRE(obstacle->pose == pose_1);
     // obstacle->updatePose(pose_2);
     // REQUIRE(obstacle->pose == pose_2);
+}
+
+TEST_CASE("Kinova_arm init", "[arm]") {
+        KinovaArm *arm_1 = new KinovaArm("../urdf/GEN3_URDF_V12.urdf")
 }
