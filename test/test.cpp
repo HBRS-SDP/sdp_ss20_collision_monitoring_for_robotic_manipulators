@@ -44,5 +44,5 @@ TEST_CASE("Monitor test", "[obstacle]") {
 }
 
 TEST_CASE("Kinova_arm init", "[arm]") {
-        KinovaArm *arm_1 = new KinovaArm("../urdf/GEN3_URDF_V12.urdf")
+        KinovaArm kinovaArm("../urdf/GEN3_URDF_V12.urdf");
 }

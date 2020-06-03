@@ -8,12 +8,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_subdirectory(collision_monitoring)
-add_subdirectory(test)
 
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(Eigen3 REQUIRED)
 find_package(orocos_kdl)
-find_package(kdl_parser)
 
 include_directories(
     include
@@ -47,3 +45,5 @@ target_link_libraries(KinovaCollisionMonitoring PRIVATE
     ${orocos-kdl_LIBRARIES}
     ${kdl_parser_LIBRARIES}
 )
+
+add_subdirectory(test)
