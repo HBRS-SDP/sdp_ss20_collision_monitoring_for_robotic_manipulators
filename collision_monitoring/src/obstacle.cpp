@@ -2,7 +2,7 @@
 
 
 // Constructor
-Obstacle::Obstacle(Eigen::Matrix4d pose, std::vector<Primitive> primitives){
+Obstacle::Obstacle(Eigen::Matrix4d pose, std::vector<Primitive*> primitives){
     // this->pose = pose;
     // this->primitves = primitives;
 }

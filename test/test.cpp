@@ -5,6 +5,7 @@
 //#include "kinova_arm.h"
 #include "primitives.h"
 #include "obstacle.h"
+#include "monitor.h"
 #include "vector"
 
 // unsigned int Factorial( unsigned int number ) {
@@ -18,7 +19,7 @@
 //     REQUIRE( Factorial(10) == 3628800 );
 // }
 
-TEST_CASE("Obstacle generation and pose", "[obstacle]") {
+TEST_CASE("Monitor test", "[obstacle]") {
     double radius_1 = 10;
     double length_1 = 70.710678118654755;
     Eigen::Matrix4d pose_1;

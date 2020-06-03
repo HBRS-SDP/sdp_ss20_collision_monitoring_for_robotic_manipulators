@@ -8,16 +8,17 @@
 
 class Primitive
 {
-    protected:
+    // private:
 
-        // start with a point and then we can overload for other primitives
-        // and then finally links
-        virtual double getShortestDistance(Primitive *obstacle) = 0;
+    //     // start with a point and then we can overload for other primitives
+    //     // and then finally links
+        
 
-        // Same as above start with point then overload
-        // virtual std::vector<double> getClosestPoint(std::vector<double>) = 0;
+    //     // Same as above start with point then overload
+    //     // virtual std::vector<double> getClosestPoint(std::vector<double>) = 0;
     
     public:
+        virtual double getShortestDistance(Primitive *obstacle) = 0;
         Eigen::Matrix4d pose;
         //virtual ~Primitive();
 

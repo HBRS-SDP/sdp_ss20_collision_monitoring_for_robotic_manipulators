@@ -11,11 +11,11 @@ class Monitor
     public: 
 
         Arm arm;
-        std::vector<Primitive> obstacles;
+        std::vector<Primitive*> obstacles;
         // Void on return type of these functions temporally
         void monitorCollisionWithObjects();
         void monitorCollisionWithArm();
-        Monitor(Arm arm, std::vector<Primitive> obstacles);
+        Monitor(Arm arm, std::vector<Primitive*> obstacles);
         ~Monitor();
 };
 

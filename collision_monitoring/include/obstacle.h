@@ -11,12 +11,12 @@ class Obstacle
     protected: 
 
         Eigen::Matrix4d pose;
-        std::vector<Primitive> primitives;
+        std::vector<Primitive*> primitives;
     
     public: 
 
         void updatePose(Eigen::Matrix4d pose);
-        Obstacle(Eigen::Matrix4d pose, std::vector<Primitive> primitives);
+        Obstacle(Eigen::Matrix4d pose, std::vector<Primitive*> primitives);
         ~Obstacle();
 };
 

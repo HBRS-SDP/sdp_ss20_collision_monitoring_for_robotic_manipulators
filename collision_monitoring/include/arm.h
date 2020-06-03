@@ -14,7 +14,7 @@ class Arm
         virtual ~Arm();
         virtual bool updatePose(std::vector<double>);
         std::vector<double> base_position;
-        std::vector<Primitive> links;
+        std::vector<Primitive*> links;
 
 };
 

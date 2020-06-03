@@ -1,8 +1,8 @@
 #include "monitor.h"
 
-Monitor::Monitor(Arm arm, std::vector<Primitive> obstacles){
-    //this->arm = arm;
-    //this->obstacles = obstacles;
+Monitor::Monitor(Arm arm, std::vector<Primitive*> obstacles){
+    this->arm = arm;
+    this->obstacles = obstacles;
 }
 
 Monitor::~Monitor(){
@@ -10,15 +10,22 @@ Monitor::~Monitor(){
 }
 
 void Monitor::monitorCollisionWithObjects(){
-    // to implement
-    // for each link of arm
-        // for each obstacle
-            // for each primitive in obstacle
-                //calculate distance to link
+
+    for (int i = 0; i < this->arm.links.size(); i++ ) {
+        for ( int j = 0; i < this->obstacles.size(); j++) {
+            double distance;
+            distance = this->arm.links[i]->getShortestDistance(this->obstacles[j]);
+        }
+    }
 }
 
 void Monitor::monitorCollisionWithArm(){
-    // to implement
-    //for each link of arm
-        //calculate distance to other link
+    for (int i = 0; i < this->arm.links.size(); i++) {
+        for (int j = 0; j < this->arm.links.size(); j ++) {
+            if (i != j) {
+                double distance;
+                distance = this->arm.links[i]->getShortestDistance(this->arm.links[j]);
+            }
+        }
+    }
 }
