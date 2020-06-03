@@ -5,8 +5,6 @@
 #include <kdl/chain.hpp>
 #include <kdl/chainfksolver.hpp>
 #include <kdl/chainfksolverpos_recursive.hpp>
-#include <kdl/frames.hpp>
-#include <kdl/frames_io.hpp>
 #include <kdl_parser/kdl_parser.hpp>
 #include "primitives.h"
 #include "arm.h"
@@ -23,11 +21,11 @@ class KinovaArm: public Arm
 
     public:
         //Constructor
-        KinovaArm(std::string urdf_filename);
+        KinovaArm();
         //Destructor
-        virtual ~KinovaArm();
+        ~KinovaArm();
 
-        virtual bool updatePose(std::vector<double>);
+        bool updatePose(std::vector<double>);
         std::vector<double> base_position;
         std::vector<Primitive> links;
 };
