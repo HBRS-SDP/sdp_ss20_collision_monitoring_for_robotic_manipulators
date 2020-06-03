@@ -17,7 +17,7 @@ find_package(kdl_parser)
 
 include_directories(
     include
-    /collision_monitoring/include
+    collision_monitoring/include
     /usr/local/include
     /usr/include/eigen3
     /opt/ros/kinetic/include
