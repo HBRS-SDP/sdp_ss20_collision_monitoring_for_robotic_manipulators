@@ -21,7 +21,7 @@ class KinovaArm: public Arm
 
     public:
         //Constructor
-        KinovaArm();
+        KinovaArm(std::string urdf_filename);
         //Destructor
         ~KinovaArm();
 
