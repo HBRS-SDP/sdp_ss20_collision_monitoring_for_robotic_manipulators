@@ -44,5 +44,5 @@ TEST_CASE("Monitor test", "[obstacle]") {
 }
 
 TEST_CASE("Kinova_arm init", "[arm]") {
-        KinovaArm kinovaArm("../urdf/GEN3_URDF_V12.urdf");
+        KinovaArm kinovaArm("/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/urdf/GEN3_URDF_V12.urdf");
 }
