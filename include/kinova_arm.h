@@ -6,6 +6,8 @@
 #include <kdl/chainfksolver.hpp>
 #include <kdl/chainfksolverpos_recursive.hpp>
 #include <kdl_parser/kdl_parser.hpp>
+#include <kdl/frames.hpp>
+#include <kdl/frames_io.hpp>
 #include "primitives.h"
 #include "arm.h"
 
@@ -25,7 +27,7 @@ class KinovaArm: public Arm
         //Destructor
         ~KinovaArm();
 
-        bool updatePose(std::vector<double>);
+        bool updatePose(std::vector<double> joint_positions);
         std::vector<double> base_position;
         std::vector<Primitive> links;
 };
