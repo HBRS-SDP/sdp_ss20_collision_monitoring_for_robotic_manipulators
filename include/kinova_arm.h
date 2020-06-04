@@ -36,7 +36,7 @@ class KinovaArm: public Arm
 
         bool updatePose(std::vector<double> joint_positions);
         std::vector<double> base_position;
-        std::vector<Primitive> links;
+        std::vector<Primitive*> links;
 };
 
 #endif // KINOVA_ARM_H
