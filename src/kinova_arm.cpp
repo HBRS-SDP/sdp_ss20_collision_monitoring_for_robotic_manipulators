@@ -18,7 +18,6 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 	nr_joints = chain.getNrOfJoints();
 
 	fksolver = new ChainFkSolverPos_recursive(chain);
-	jointpositions = JntArray(nr_joints);
 
 	for(int i = 0; i < nr_joints; i++)
 	{
@@ -46,6 +45,7 @@ KinovaArm::~KinovaArm(){
 }
 
 bool KinovaArm::updatePose(std::vector<double> joint_positions){
+	KDL::JntArray jointpositions = JntArray(nr_joints);
 
 
 	// pass the joint angles from function input into the joint array

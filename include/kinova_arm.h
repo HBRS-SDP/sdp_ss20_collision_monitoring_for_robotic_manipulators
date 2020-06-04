@@ -27,7 +27,6 @@ class KinovaArm: public Arm
         std::vector<KDL::Frame*> poses;
         KDL::Chain chain;
         KDL::ChainFkSolverPos_recursive* fksolver;
-        KDL::JntArray jointpositions;
 
     public:
         //Constructor
