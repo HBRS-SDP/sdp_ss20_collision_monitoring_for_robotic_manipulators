@@ -54,11 +54,11 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
 	// solve for the frame at the "link" of the chain for the given joint positions
 	for(int link_num = 0; link_num < nr_joints; link_num++)
 	{
-		if(fksolver.JntToCart(jointpositions, pos, link_num) >= 0)
+		if(fksolver.JntToCart(jointpositions, *poses[link_num], link_num) >= 0)
 		{
 			#ifdef DEBUG
 			std::cout << "Calculations to link number: " << link_num << std::endl 
-			          << pos << std::endl
+			          << poses[link_num] << std::endl
 					  << "Success" << std::endl;
 			#endif //DEBUG
 		}
