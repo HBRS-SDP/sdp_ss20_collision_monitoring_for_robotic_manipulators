@@ -2,6 +2,10 @@
 
 using namespace KDL;
 
+double d2r(double v) {
+	return v / 180 * M_PI;
+}
+
 KinovaArm::KinovaArm(std::string urdf_filename){
     // Import the tree from urdf
 	// pulled from https://wiki.ros.org/kdl_parser/Tutorials/Start%20using%20the%20KDL%20parser
@@ -12,6 +16,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 
 
 	nr_joints = chain.getNrOfJoints();
+	std::cout << "num_joints: " << nr_joints << std::endl;
 }
 
 KinovaArm::~KinovaArm(){
@@ -27,7 +32,7 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
 	// pass the joint angles from function input into the joint array
 	for(int i=0; i<nr_joints; i++)
 	{
-		jointpositions(i) = joint_positions[i];
+		jointpositions(i) = d2r(joint_positions[i]);
 	}
 
 
@@ -36,9 +41,8 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
 	{
 		if(fksolver.JntToCart(jointpositions, pos, link_num) >= 0)
 		{
-			std::cout << "Calculations to link number: " << link << std::endl << pos << std::endl
+			std::cout << "Calculations to link number: " << link_num << std::endl << pos << std::endl
 					<< "Success" << std::endl;
-			return true;
 		}
 		// If calculation fails print error
 		else
@@ -47,4 +51,6 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
 			return false;
 		}
 	}
+
+	return true;
 }

@@ -1,6 +1,10 @@
 #ifndef KINOVA_ARM_H
 #define KINOVA_ARM_H
 
+#include <vector>
+#include <math.h>
+#include <Eigen/Core>
+
 #include <kdl/tree.hpp>
 #include <kdl/chain.hpp>
 #include <kdl/chainfksolver.hpp>

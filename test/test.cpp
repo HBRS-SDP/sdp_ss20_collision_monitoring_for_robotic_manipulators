@@ -6,7 +6,10 @@
 #include "primitives.h"
 #include "obstacle.h"
 #include "monitor.h"
-#include "vector"
+
+#include <vector>
+#include <Eigen/Core>
+#include <math.h>
 
 // unsigned int Factorial( unsigned int number ) {
 //     return number <= 1 ? number : Factorial(number-1)*number;
@@ -51,4 +54,6 @@ TEST_CASE("Kinova_arm init", "[arm]") {
 
 TEST_CASE("Kinova_arm set position", "[arm]") {
         KinovaArm kinovaArm(urdf_filename);
+        std::vector<double> testPose = {30, 30, 30, 30, 30, 30, 30};
+        kinovaArm.updatePose(testPose);
 }
