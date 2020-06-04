@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.5.0)
+cmake_minimum_required(VERSION 2.8.3)
 
 # Project name and version
-project(Kinova_Collision_Monitoring VERSION 1.0)
+project(Kinova_Collision_Monitoring)
 
 # Set the c++ version
 set(CMAKE_CXX_STANDARD 11)
@@ -17,12 +17,15 @@ include_directories(
     include
     collision_monitoring/include
     /usr/local/include
+    /usr/local/lib
     /usr/include/eigen3
-    /opt/ros/kinetic/include
     ${Eigen_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIR}
     ${orocos_kdl_INCLUDE_DIRS}
 )
+
+# set the path to the library folder
+link_directories(/usr/local/lib)
 
 add_library(KinovaArm STATIC
     src/kinova_arm.cpp
@@ -42,8 +45,8 @@ target_link_libraries(KinovaCollisionMonitoring PRIVATE
     KinovaArm
     CollisionMonitoring
     orocos-kdl
+    kdl_parser
     ${orocos-kdl_LIBRARIES}
-    ${kdl_parser_LIBRARIES}
 )
 
 add_subdirectory(test)
