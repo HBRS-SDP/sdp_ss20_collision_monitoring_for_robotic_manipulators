@@ -131,6 +131,10 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
 			std::cout << "Error: could not calculate forward kinematics" << std::endl;
 			return false;
 		}
+		if(link_num < nr_joints - 1)
+		{
+			links[link_num]->pose = to_mat(*poses[link_num], *poses[link_num+1]);
+		}
 	}
 
 	return true;
