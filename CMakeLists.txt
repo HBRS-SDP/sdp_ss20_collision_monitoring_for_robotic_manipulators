@@ -19,6 +19,7 @@ include_directories(
     /usr/local/include
     /usr/local/lib
     /usr/include/eigen3
+    /opt/ros/kinetic/include
     ${Eigen_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIR}
     ${orocos_kdl_INCLUDE_DIRS}
