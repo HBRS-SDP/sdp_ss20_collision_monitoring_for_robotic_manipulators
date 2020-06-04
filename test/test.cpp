@@ -43,6 +43,12 @@ TEST_CASE("Monitor test", "[obstacle]") {
     // REQUIRE(obstacle->pose == pose_2);
 }
 
+std::string urdf_filename = "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/urdf/GEN3_URDF_V12.urdf";
+
 TEST_CASE("Kinova_arm init", "[arm]") {
-        KinovaArm kinovaArm("/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/urdf/GEN3_URDF_V12.urdf");
+        KinovaArm kinovaArm(urdf_filename);
+}
+
+TEST_CASE("Kinova_arm set position", "[arm]") {
+        KinovaArm kinovaArm(urdf_filename);
 }
