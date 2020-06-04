@@ -26,6 +26,37 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 	#ifdef DEBUG
 		std::cout << "num_joints: " << nr_joints << std::endl;
 	#endif //DEBUG
+
+	// ---------------- initialise the arm to init point ------------- //
+
+	// initailise the chain solver and the joint array
+	ChainFkSolverPos_recursive fksolver = ChainFkSolverPos_recursive(chain);
+	JntArray jointpositions = JntArray(nr_joints);
+
+	// pass the joint angles from function input into the joint array
+	for(int i=0; i<nr_joints; i++)
+	{
+		jointpositions(i) = 0.0;
+	}
+
+
+	// solve for the frame at the "link" of the chain for the given joint positions
+	for(int link_num = 0; link_num < nr_joints; link_num++)
+	{
+		if(fksolver.JntToCart(jointpositions, *poses[link_num], link_num) >= 0)
+		{
+			#ifdef DEBUG
+			std::cout << "Calculations to link number: " << link_num << std::endl 
+			          << *poses[link_num] << std::endl
+					  << "Success" << std::endl;
+			#endif //DEBUG
+		}
+		// If calculation fails print error
+		else
+		{
+			std::cout << "Error: could not calculate forward kinematics" << std::endl;
+		}
+	}
 }
 
 KinovaArm::~KinovaArm(){
