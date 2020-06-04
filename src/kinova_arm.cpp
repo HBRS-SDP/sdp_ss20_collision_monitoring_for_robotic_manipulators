@@ -58,7 +58,7 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
 		{
 			#ifdef DEBUG
 			std::cout << "Calculations to link number: " << link_num << std::endl 
-			          << poses[link_num] << std::endl
+			          << *poses[link_num] << std::endl
 					  << "Success" << std::endl;
 			#endif //DEBUG
 		}
