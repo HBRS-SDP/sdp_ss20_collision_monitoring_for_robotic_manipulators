@@ -16,7 +16,10 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 
 
 	nr_joints = chain.getNrOfJoints();
-	std::cout << "num_joints: " << nr_joints << std::endl;
+
+	#ifdef DEBUG
+		std::cout << "num_joints: " << nr_joints << std::endl;
+	#endif //DEBUG
 }
 
 KinovaArm::~KinovaArm(){
@@ -41,8 +44,11 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
 	{
 		if(fksolver.JntToCart(jointpositions, pos, link_num) >= 0)
 		{
-			std::cout << "Calculations to link number: " << link_num << std::endl << pos << std::endl
-					<< "Success" << std::endl;
+			#ifdef DEBUG
+			std::cout << "Calculations to link number: " << link_num << std::endl 
+			          << pos << std::endl
+					  << "Success" << std::endl;
+			#endif //DEBUG
 		}
 		// If calculation fails print error
 		else

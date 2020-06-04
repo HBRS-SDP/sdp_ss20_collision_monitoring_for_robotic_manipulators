@@ -1,6 +1,8 @@
 #ifndef KINOVA_ARM_H
 #define KINOVA_ARM_H
 
+#define DEBUG
+
 #include <vector>
 #include <math.h>
 #include <Eigen/Core>
