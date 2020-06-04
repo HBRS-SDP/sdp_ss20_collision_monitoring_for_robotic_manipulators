@@ -24,7 +24,7 @@ class KinovaArm: public Arm
     private:
         KDL::Tree arm_tree;
         int nr_joints;
-        KDL::Frame pos;
+        std::vector<KDL::Frame*> poses;
         KDL::Chain chain;
 
     public:

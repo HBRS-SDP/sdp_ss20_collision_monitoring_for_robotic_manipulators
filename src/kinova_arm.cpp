@@ -17,12 +17,24 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 
 	nr_joints = chain.getNrOfJoints();
 
+	for(int i = 0; i < nr_joints; i++)
+	{
+		KDL::Frame* pose = new KDL::Frame();
+		poses.push_back(pose);
+	}
+
 	#ifdef DEBUG
 		std::cout << "num_joints: " << nr_joints << std::endl;
 	#endif //DEBUG
 }
 
 KinovaArm::~KinovaArm(){
+
+	// delete the pose frames
+	for(int i = 0; i < nr_joints; i++)
+	{
+		delete(poses[i]);
+	}
 
 }
 

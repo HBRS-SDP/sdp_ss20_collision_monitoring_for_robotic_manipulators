@@ -52,6 +52,11 @@ TEST_CASE("Kinova_arm init", "[arm]") {
         KinovaArm kinovaArm(urdf_filename);
 }
 
+TEST_CASE("Kinova_arm destructor", "[arm]") {
+        KinovaArm* kinovaArm = new KinovaArm(urdf_filename);
+        delete(kinovaArm);
+}
+
 TEST_CASE("Kinova_arm set position", "[arm]") {
         KinovaArm kinovaArm(urdf_filename);
         std::vector<double> testPose = {30, 30, 30, 30, 30, 30, 30};
