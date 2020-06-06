@@ -24,19 +24,19 @@ class Primitive
 
 };
 
-class Edge{
+class Line{
     private:
         Eigen::Vector3d basePoint;
         Eigen::Vector3d endPoint;
         Eigen::Vector3d projectionPoint(Eigen::Vector3d point);
 
     public:
-        Edge(Eigen::Vector3d basePoint, Eigen::Vector3d endPoint);
-        ~Edge();
+        Line(Eigen::Vector3d basePoint, Eigen::Vector3d endPoint);
+        ~Line();
         Eigen::Vector3d getBasePoint();
         Eigen::Vector3d getEndPoint();
-        double getShortestDistanceVertex(Eigen::Vector3d vertex);
-        double getShortestDistanceEdge(Edge edge);
+        double getShortestDistanceToVertex(Eigen::Vector3d vertex);
+        double getShortestDistanceToLine(Line line);
         
 };
 
