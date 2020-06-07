@@ -39,7 +39,7 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
         Eigen::Vector3d v = directionVect.cross(midLine);
         Eigen::Matrix3d r;
         // Check to see if the midline is only in the z direction
-        if( v.isZero()) {
+        if( !v.isZero()) {
             double c = directionVect.dot(midLine);
             double s = v.norm();
             Eigen::Matrix3d k;
