@@ -156,7 +156,7 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
         // Create a vector in the z direction
         Eigen::Vector3d directionVect(0, 0, 1);
         // Get the vector that is prependicular to the midline and z vector
-        Eigen::Vector3d v = directionVect.cross(midLine);
+        Eigen::Vector3d v = directionVect.cross(midLine/midLine.norm());
         // matrix to store the rotaion matrix
         Eigen::Matrix3d r;
 
