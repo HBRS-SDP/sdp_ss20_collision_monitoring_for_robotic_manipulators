@@ -29,11 +29,11 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
 	Eigen::Matrix4d startPose = frameToMatrix(startLink);
 	Eigen::Matrix4d endPose = frameToMatrix(endLink);
 	Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector4d basePoint = startPose * origin;
+    Eigen::Vector4d endPoint = endPose * origin;
 	Eigen::Matrix4d finalPose;
 
-	if(!startPose.isApprox(endPose)) {
-		Eigen::Vector4d basePoint = startPose * origin;
-		Eigen::Vector4d endPoint = endPose * origin;
+	if(!basePoint.isApprox(endPoint)) {
 		Eigen::Vector3d midLine = (endPoint - basePoint).head<3>();
 		Eigen::Vector3d directionVect(0, 0, 1);
 		Eigen::Vector3d v = directionVect.cross(midLine);
