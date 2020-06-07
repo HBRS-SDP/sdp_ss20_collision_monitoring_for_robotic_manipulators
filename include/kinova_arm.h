@@ -21,6 +21,13 @@
 // the debug var to turn verbose on and off
 #define DEBUG
 
+
+/*
+TODO:
+    - implement base position
+    - talk to Djordje about fksolver
+*/
+
 /**
  * An implementation of the Arm interface.
  * 
@@ -82,6 +89,7 @@ class KinovaArm: public Arm
         /// The KDL chain used for calculating kinematics
         KDL::Chain chain;
 
+        /// The KDL joint array to hold the joint angles
         KDL::JntArray jointArray;
 
         /**
