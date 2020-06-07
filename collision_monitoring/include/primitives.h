@@ -54,7 +54,7 @@ class Cylinder: public Primitive{
 
 // class N_ellipsoid: public Primitive {
 //     private:
-//         //Primitve parameters
+//         //Primitive parameters
 
 //     public:
 //         N_ellipsoid(std::vector<double> pose);
