@@ -67,8 +67,10 @@ TEST_CASE("Kinova_arm set position", "[arm]") {
                 0.470212, 1, -0.0657618, -0.251506,
                 -0.0607506, 0, 0.565619, 0.763581,
                 0, 0, 0, 1;
-    REQUIRE( abs((link2Pose - kinovaArm.links[2]->pose).norm()) < 0.01);
-    REQUIRE( abs((endLinkPose - kinovaArm.links[5]->pose).norm()) < 0.01);
+    std::cout<<"link 2:\n"<<kinovaArm.links[2]->pose<<std::endl;
+    std::cout<<"link 5:\n"<<kinovaArm.links[5]->pose<<std::endl;
+    REQUIRE( fabs((link2Pose - kinovaArm.links[2]->pose).norm()) < 0.01);
+    REQUIRE( fabs((endLinkPose - kinovaArm.links[5]->pose).norm()) < 0.01);
 }
 
 TEST_CASE("Kinova_arm test link positions", "[arm]") {
@@ -79,7 +81,7 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
 
     Eigen::Vector4d origin(0, 0, 0, 1);
 
-    for(int i=0; i < kinovaArm.nr_joints-1; i++) {
+    for(int i=0; i < kinovaArm.nJoints-1; i++) {
         // get endpoints from the frames calculation
         Eigen::Matrix4d baseMatLink = kinovaArm.frameToMatrix(*kinovaArm.poses[i]);
         Eigen::Matrix4d endMatLink = kinovaArm.frameToMatrix(*kinovaArm.poses[i+1]);
@@ -95,7 +97,7 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
         Eigen::Vector3d endPointLine  = (pose * zDirectionObstacle).head(3);
 
         // compare using the two methods
-        REQUIRE( abs((basePointLine - basePointLink).norm()) < 0.001);
-        REQUIRE( abs((endPointLine - endPointLink).norm()) < 0.001);
+        REQUIRE( fabs((basePointLine - basePointLink).norm()) < 0.001);
+        REQUIRE( fabs((endPointLine - endPointLink).norm()) < 0.001);
     }
 }
