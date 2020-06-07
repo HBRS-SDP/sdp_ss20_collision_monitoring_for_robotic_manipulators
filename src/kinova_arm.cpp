@@ -28,7 +28,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // ---------------- initialise the arm to init point ------------- //
 
     // initailise the chain solver and the joint array
-    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
+    this->fksolver = std::make_shared<KDL::ChainFkSolverPos_recursive>(chain);
     jointArray = KDL::JntArray(nJoints);
 
     // pass the joint angles from function input into the joint array
@@ -40,7 +40,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // solve for the frame at the "link" of the chain for the given joint positions
     for(int link_num = 0; link_num < nJoints; link_num++)
     {
-        fksolver.JntToCart(jointArray, *poses[link_num], link_num);
+        this->fksolver->JntToCart(jointArray, *poses[link_num], link_num);
     }
 
     // TODO convert to config file
@@ -71,9 +71,6 @@ KinovaArm::~KinovaArm(){
 
 bool KinovaArm::updatePose(std::vector<double> jointPositions){
 
-    // initailise the chain solver and the joint array
-    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
-
     // pass the joint angles from function input into the joint array
     for(int i=0; i<nJoints; i++)
     {
@@ -84,7 +81,7 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
     // solve for the frame at the "link" of the chain for the given joint positions
     for(int link_num = 0; link_num < nJoints; link_num++)
     {
-        if(fksolver.JntToCart(jointArray, *poses[link_num], link_num) >= 0)
+        if(this->fksolver->JntToCart(jointArray, *poses[link_num], link_num) >= 0)
         {
             #ifdef DEBUG
             // print the resulting link calculations

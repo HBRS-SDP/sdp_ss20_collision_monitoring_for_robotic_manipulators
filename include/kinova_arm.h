@@ -81,6 +81,7 @@ class KinovaArm: public Arm
         KDL::Chain chain;
 
         KDL::JntArray jointArray;
+        std::shared_ptr<KDL::ChainFkSolverPos_recursive> fksolver;
 
         /**
          * Transforms KDL::Frames to Eigen::Matrix4d
