@@ -35,7 +35,6 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
 
     if(!basePoint.isApprox(endPoint)) {
         Eigen::Vector3d midLine = (endPoint - basePoint).head<3>();
-        std::cout<<"endpoint: "<<endPoint<<" basePoint: "<<basePoint<<" midLine: "<<midLine<<std::endl;
         Eigen::Vector3d directionVect(0, 0, 1);
         Eigen::Vector3d v = directionVect.cross(midLine);
         Eigen::Matrix3d r;
@@ -47,7 +46,6 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
             k << 0, -v(2), v(1),
                 v(2), 0, -v(0),
                 -v(1), v(2), 0;
-            std::cout<<"k: "<<k<<" c: "<<c<<" v: "<<v<<" s: "<<s<<std::endl;
             r = Eigen::MatrixXd::Identity(3,3) + k + (k*k)*((1-c)/(s*s));
         }
         else {
