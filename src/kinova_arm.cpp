@@ -25,7 +25,6 @@ Eigen::Matrix4d KinovaArm::frameToMatrix(KDL::Frame frame)
 // TODO calc the pose from start and endpoints
 Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame endLink)
 {
-    Eigen::Matrix4d pose;
     Eigen::Matrix4d startPose = frameToMatrix(startLink);
     Eigen::Matrix4d endPose = frameToMatrix(endLink);
     Eigen::Vector4d origin(0, 0, 0, 1);
@@ -33,8 +32,8 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
     Eigen::Vector4d endPoint = endPose * origin;
     Eigen::Matrix4d finalPose;
 
-    if(!basePoint.isApprox(endPoint)) {
-        Eigen::Vector3d midLine = (endPoint - basePoint).head<3>();
+    if(abs((basePoint - endPoint).norm()) < 0.01) {
+        Eigen::Vector3d midLine = (endPoint - basePoint).head(3);
         Eigen::Vector3d directionVect(0, 0, 1);
         Eigen::Vector3d v = directionVect.cross(midLine);
         Eigen::Matrix3d r;
@@ -160,9 +159,9 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
             std::cout << "Error: could not calculate forward kinematics" << std::endl;
             return false;
         }
-        if(link_num < nr_joints - 1)
+        if(link_num != 0)
         {
-            links[link_num]->pose = linkFramesToPose(*poses[link_num], *poses[link_num+1]);
+            links[link_num-1]->pose = linkFramesToPose(*poses[link_num-1], *poses[link_num]);
         }
     }
 

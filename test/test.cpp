@@ -63,18 +63,18 @@ TEST_CASE("Kinova_arm set position", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
     std::vector<double> testPose = {30, 30, 30, 30, 30, 30, 30};
     kinovaArm.updatePose(testPose);
-    Eigen::Matrix4d endLinkPose;
     Eigen::Matrix4d link2Pose;
-    endLinkPose << 0.565619, 0, 0.0607506, 0.285814,
-                   0.470212, 1, -0.0657618, -0.251506,
-                   -0.0607506, 0, 0.565619, 0.763581,
-                   0, 0, 0, 1;
+    Eigen::Matrix4d endLinkPose;
     link2Pose << 0.43092, 0, 0.0879094, -0.0026875,
-                0.376225, 1, -0.0581178, 0.00465583,
-                -0.0879094, 0, 0.43092, 0.28481,
+                   0.376225, 1, -0.0581178, -0.00465583,
+                   -0.0879094, 0, 0.43092, 0.28481,
+                   0, 0, 0, 1;
+    endLinkPose << 0.565619, 0, 0.0607506, 0.285814,
+                0.470212, 1, -0.0657618, -0.251506,
+                -0.0607506, 0, 0.565619, 0.763581,
                 0, 0, 0, 1;
-    REQUIRE( endLinkPose.isApprox(kinovaArm.links[5]->pose));
-    REQUIRE( link2Pose.isApprox(kinovaArm.links[2]->pose));
+    REQUIRE( abs((link2Pose - kinovaArm.links[2]->pose).norm()) < 0.01);
+    REQUIRE( abs((endLinkPose - kinovaArm.links[5]->pose).norm()) < 0.01);
 }
 
 TEST_CASE("Kinova_arm test link positions", "[arm]") {
@@ -93,7 +93,6 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
 
         // Get the pose from these points using the same method in kinovaArm
         Eigen::Matrix4d pose = kinovaArm.linkFramesToPose(*kinovaArm.poses[i], *kinovaArm.poses[i+1]);
-        std::cout << pose << std::endl;
 
         // get endpoints from the pose calculation
         Eigen::Vector4d zDirectionObstacle(0, 0, kinovaArm.lengths[i], 1);
