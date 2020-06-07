@@ -13,16 +13,9 @@
 #include "obstacle.h"
 #include "monitor.h"
 
-// unsigned int Factorial( unsigned int number ) {
-//     return number <= 1 ? number : Factorial(number-1)*number;
-// }
-
-// TEST_CASE( "Factorials are computed", "[factorial]" ) {
-//     REQUIRE( Factorial(1) == 1 );
-//     REQUIRE( Factorial(2) == 2 );
-//     REQUIRE( Factorial(3) == 6 );
-//     REQUIRE( Factorial(10) == 3628800 );
-// }
+double deg2rad(double v) {
+    return v / 180 * M_PI;
+}
 
 TEST_CASE("Monitor test", "[obstacle]") {
     double radius_1 = 10;
@@ -61,7 +54,8 @@ TEST_CASE("Kinova_arm destructor", "[arm]") {
 
 TEST_CASE("Kinova_arm set position", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
-    std::vector<double> testPose = {30, 30, 30, 30, 30, 30, 30};
+    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
+                                    deg2rad(30), deg2rad(30), deg2rad(30)};
     kinovaArm.updatePose(testPose);
     Eigen::Matrix4d link2Pose;
     Eigen::Matrix4d endLinkPose;
@@ -79,7 +73,8 @@ TEST_CASE("Kinova_arm set position", "[arm]") {
 
 TEST_CASE("Kinova_arm test link positions", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
-    std::vector<double> testPose = {30, 30, 30, 30, 30, 30, 30};
+    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
+                                    deg2rad(30), deg2rad(30), deg2rad(30)};
     kinovaArm.updatePose(testPose);
 
     Eigen::Vector4d origin(0, 0, 0, 1);

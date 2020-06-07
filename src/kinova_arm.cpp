@@ -1,13 +1,6 @@
 #include "kinova_arm.h"
 
 
-// TODO add to the class
-double d2r(double v) {
-    return v / 180 * M_PI;
-}
-
-
-// TODO add to the class
 Eigen::Matrix4d KinovaArm::frameToMatrix(KDL::Frame frame)
 {
     Eigen::Matrix4d matrix;
@@ -21,8 +14,7 @@ Eigen::Matrix4d KinovaArm::frameToMatrix(KDL::Frame frame)
     return matrix;
 }
 
-// TODO add to the class
-// TODO calc the pose from start and endpoints
+
 Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame endLink)
 {
     Eigen::Matrix4d startPose = frameToMatrix(startLink);
@@ -138,7 +130,7 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
     // pass the joint angles from function input into the joint array
     for(int i=0; i<nr_joints; i++)
     {
-        jointpositions(i) = d2r(joint_positions[i]);
+        jointpositions(i) = joint_positions[i];
     }
 
 
