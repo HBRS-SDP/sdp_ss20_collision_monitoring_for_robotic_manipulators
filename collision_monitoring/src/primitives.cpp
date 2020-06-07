@@ -137,7 +137,7 @@ double Cylinder::getShortestDistance(Primitive *obstacle){
 // }
 
 
-// N ellipsoide funcitons and declaration
+// N ellipsoide functions and declaration
 
 // N_ellipsoid::N_ellipsoid(std::vector<double> pose){
 

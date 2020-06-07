@@ -51,7 +51,7 @@ TEST_CASE( "2nd test case", "[cylinders]" ) {
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(10.233213170882209).margin(0.001) );
 }
 
-TEST_CASE( "3rd test case lamda >= 1", "[cylinders]" ) {
+TEST_CASE( "3rd test case lambda >= 1", "[cylinders]" ) {
     double radius_1 = 10;
     double length_1 = 95.39392014169457;
     Eigen::Matrix4d pose_1;
@@ -74,7 +74,7 @@ TEST_CASE( "3rd test case lamda >= 1", "[cylinders]" ) {
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(14.779612647907754).margin(0.001) );
 }
 
-TEST_CASE( "4th test case lamda <= 0", "[cylinders]" ) {
+TEST_CASE( "4th test case lambda <= 0", "[cylinders]" ) {
     double radius_1 = 10;
     double length_1 = 70.0;
     Eigen::Matrix4d pose_1;
