@@ -5,6 +5,8 @@
 #include <math.h>
 #include <Eigen/Core>
 #include <Eigen/Geometry>
+#include <memory>
+#include <iostream>
 
 #include <kdl/tree.hpp>
 #include <kdl/chain.hpp>
@@ -57,7 +59,7 @@ class KinovaArm: public Arm
          * by the updatePose() function. For the kinova arm the links are 
          * modelled by cylinders with a length and radius
          */
-        std::vector<Primitive*> links;
+        std::vector<std::shared_ptr<Primitive> > links;
 
 
     private:
@@ -75,7 +77,7 @@ class KinovaArm: public Arm
         int nJoints;
 
         ///  A vector of all the link KDL frames
-        std::vector<KDL::Frame*> poses;
+        std::vector<std::shared_ptr<KDL::Frame> > poses;
 
         /// The KDL chain used for calculating kinematics
         KDL::Chain chain;
