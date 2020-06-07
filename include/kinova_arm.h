@@ -6,6 +6,7 @@
 #include <vector>
 #include <math.h>
 #include <Eigen/Core>
+#include <Eigen/Geometry>
 
 #include <kdl/tree.hpp>
 #include <kdl/chain.hpp>
@@ -26,7 +27,10 @@ class KinovaArm: public Arm
         int nr_joints;
         std::vector<KDL::Frame*> poses;
         KDL::Chain chain;
-        // KDL::ChainFkSolverPos_recursive* fksolver;
+        Eigen::Matrix4d frameToMatrix(KDL::Frame frame);
+        Eigen::Matrix4d linkFramesToPose(KDL::Frame startLink, KDL::Frame endLink);
+        std::vector<double> lengths;
+        std::vector<double> radii;
 
     public:
         //Constructor

@@ -2,14 +2,16 @@
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
+#include <vector>
+#include <Eigen/Core>
+#include <math.h>
+
+
+#define private public
 #include "kinova_arm.h"
 #include "primitives.h"
 #include "obstacle.h"
 #include "monitor.h"
-
-#include <vector>
-#include <Eigen/Core>
-#include <math.h>
 
 // unsigned int Factorial( unsigned int number ) {
 //     return number <= 1 ? number : Factorial(number-1)*number;
@@ -49,16 +51,45 @@ TEST_CASE("Monitor test", "[obstacle]") {
 std::string urdf_filename = "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/urdf/GEN3_URDF_V12.urdf";
 
 TEST_CASE("Kinova_arm init", "[arm]") {
-        KinovaArm kinovaArm(urdf_filename);
+    KinovaArm kinovaArm(urdf_filename);
 }
 
 TEST_CASE("Kinova_arm destructor", "[arm]") {
-        KinovaArm* kinovaArm = new KinovaArm(urdf_filename);
-        delete(kinovaArm);
+    KinovaArm* kinovaArm = new KinovaArm(urdf_filename);
+    delete(kinovaArm);
 }
 
 TEST_CASE("Kinova_arm set position", "[arm]") {
-        KinovaArm kinovaArm(urdf_filename);
-        std::vector<double> testPose = {30, 30, 30, 30, 30, 30, 30};
-        kinovaArm.updatePose(testPose);
+    KinovaArm kinovaArm(urdf_filename);
+    std::vector<double> testPose = {30, 30, 30, 30, 30, 30, 30};
+    kinovaArm.updatePose(testPose);
+}
+
+TEST_CASE("Kinova_arm test link positions", "[arm]") {
+    KinovaArm kinovaArm(urdf_filename);
+    std::vector<double> testPose = {30, 30, 30, 30, 30, 30, 30};
+    kinovaArm.updatePose(testPose);
+
+    Eigen::Vector4d origin(0, 0, 0, 1);
+
+    for(int i=0; i < kinovaArm.nr_joints-1; i++) {
+        // get endpoints from the frames calculation
+        Eigen::Matrix4d baseMatLink = kinovaArm.frameToMatrix(*kinovaArm.poses[i]);
+        Eigen::Matrix4d endMatLink = kinovaArm.frameToMatrix(*kinovaArm.poses[i+1]);
+        Eigen::Vector3d basePointLink = (baseMatLink * origin).head(3);
+        Eigen::Vector3d endPointLink = (endMatLink * origin).head(3);
+        std::cout<<"here 1"<<std::endl;
+
+        // Get the pose from these points using the same method in kinovaArm
+        Eigen::Matrix4d pose = kinovaArm.linkFramesToPose(*kinovaArm.poses[i], *kinovaArm.poses[i+1]);
+
+        // get endpoints from the pose calculation
+        Eigen::Vector4d zDirectionObstacle(0, 0, kinovaArm.lengths[i], 1);
+        Eigen::Vector3d basePointLine = (pose * origin).head(3);
+        Eigen::Vector3d endPointLine  = (pose * zDirectionObstacle).head(3);
+
+        // compare using the two methods
+        REQUIRE( abs((basePointLine - basePointLink).norm()) < 0.001);
+        REQUIRE( abs((endPointLine - endPointLink).norm()) < 0.001);
+    }
 }

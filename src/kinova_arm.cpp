@@ -10,7 +10,7 @@ double d2r(double v) {
 
 
 // TODO add to the class
-Eigen::Matrix4d frame_to_matrix(KDL::Frame frame)
+Eigen::Matrix4d KinovaArm::frameToMatrix(KDL::Frame frame)
 {
 	Eigen::Matrix4d matrix;
 	for(int i=0; i < 4; i++)
@@ -25,17 +25,31 @@ Eigen::Matrix4d frame_to_matrix(KDL::Frame frame)
 
 // TODO add to the class
 // TODO calc the pose from start and endpoints
-Eigen::Matrix4d to_mat(KDL::Frame start_link, KDL::Frame end_link)
+Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame endLink)
 {
 	Eigen::Matrix4d pose;
-	Eigen::Matrix4d start_pose = frame_to_matrix(start_link);
-	Eigen::Matrix4d end_pose = frame_to_matrix(end_link);
+	Eigen::Matrix4d startPose = frameToMatrix(startLink);
+	Eigen::Matrix4d endPose = frameToMatrix(endLink);
 	Eigen::Vector4d origin(0, 0, 0, 1);
-	Eigen::Vector4d basePoint = start_pose * origin;
-	Eigen::Vector4d endPoint = end_pose * origin;
+	Eigen::Vector4d basePoint = startPose * origin;
+	Eigen::Vector4d endPoint = endPose * origin;
+	Eigen::Vector3d midLine = (endPoint - basePoint).head<3>();
+	Eigen::Vector3d directionVect(0, 0, 1);
+	Eigen::Vector3d v = directionVect.cross(midLine);
+	double c = directionVect.dot(midLine);
+	double s = v.norm();
+	Eigen::Matrix3d k;
+	k << 0, -v(2), v(1),
+	     v(2), 0, -v(0),
+		 -v(1), v(2), 0;
+	Eigen::Matrix3d r = Eigen::MatrixXd::Identity(3,3) + k + (k*k)*((1-c)/(s*s));
+	Eigen::Matrix4d finalPose;
+	finalPose << r(0,0), r(0,1), r(0,2), basePoint(0),
+				 r(1,0), r(1,1), r(1,2), basePoint(1),
+				 r(2,0), r(2,1), r(2,2), basePoint(2),
+				 0,      0,      0,      1;
 
-
-	return start_pose;
+	return finalPose;
 }
 
 
@@ -79,12 +93,12 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 	}
 
 	// TODO convert to config file
-	double radii[6] = {0.04, 0.04, 0.04, 0.04, 0.04, 0.04};
-	double lengths[6] = {0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593};
+	radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
+	lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593});
 
 	for(int i = 0; i < 6; i++)
 	{
-		Eigen::Matrix4d pose = to_mat(*poses[i], *poses[i+1]);
+		Eigen::Matrix4d pose = linkFramesToPose(*poses[i], *poses[i+1]);
 		Primitive* link = new Cylinder(pose, lengths[i], radii[i]);
 		links.push_back(link);
 	}
@@ -133,7 +147,7 @@ bool KinovaArm::updatePose(std::vector<double> joint_positions){
 		}
 		if(link_num < nr_joints - 1)
 		{
-			links[link_num]->pose = to_mat(*poses[link_num], *poses[link_num+1]);
+			links[link_num]->pose = linkFramesToPose(*poses[link_num], *poses[link_num+1]);
 		}
 	}
 
