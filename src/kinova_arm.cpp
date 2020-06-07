@@ -1,7 +1,5 @@
 #include "kinova_arm.h"
 
-using namespace KDL;
-
 
 // TODO add to the class
 double d2r(double v) {
@@ -76,8 +74,8 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 	// ---------------- initialise the arm to init point ------------- //
 
 	// initailise the chain solver and the joint array
-	ChainFkSolverPos_recursive fksolver = ChainFkSolverPos_recursive(chain);
-	JntArray jointpositions = JntArray(nr_joints);
+	KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
+	KDL::JntArray jointpositions = KDL::JntArray(nr_joints);
 
 	// pass the joint angles from function input into the joint array
 	for(int i=0; i<nr_joints; i++)
@@ -118,8 +116,8 @@ KinovaArm::~KinovaArm(){
 bool KinovaArm::updatePose(std::vector<double> joint_positions){
 
     // initailise the chain solver and the joint array
-	ChainFkSolverPos_recursive fksolver = ChainFkSolverPos_recursive(chain);
-	JntArray jointpositions = JntArray(nr_joints);
+	KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
+	KDL::JntArray jointpositions = KDL::JntArray(nr_joints);
 
 	// pass the joint angles from function input into the joint array
 	for(int i=0; i<nr_joints; i++)
