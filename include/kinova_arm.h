@@ -80,6 +80,8 @@ class KinovaArm: public Arm
         /// The KDL chain used for calculating kinematics
         KDL::Chain chain;
 
+        KDL::JntArray jointArray;
+
         /**
          * Transforms KDL::Frames to Eigen::Matrix4d
          * 
