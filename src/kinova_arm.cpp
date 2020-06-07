@@ -56,6 +56,12 @@ KinovaArm::KinovaArm(std::string urdf_filename){
         links.push_back(link);
     }
 
+
+
+    // Mathematical constants, declared in constructor for speed
+    this->origin << 0, 0, 0, 1;
+    this->directionVect << 0, 0, 1;
+    this->i3 = Eigen::MatrixXd::Identity(3,3);
 }
 
 KinovaArm::~KinovaArm(){
@@ -129,9 +135,6 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
     Eigen::Matrix4d startPose = frameToMatrix(startLink);
     Eigen::Matrix4d endPose = frameToMatrix(endLink);
 
-    // Create origin matrix to get start and end points
-    Eigen::Vector4d origin(0, 0, 0, 1);
-
     // Find the start and end points
     Eigen::Vector4d basePoint = startPose * origin;
     Eigen::Vector4d endPoint = endPose * origin;
@@ -144,8 +147,6 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
 
         // Get the vector representing the line from the start to end point
         Eigen::Vector3d midLine = (endPoint - basePoint).head(3);
-        // Create a vector in the z direction
-        Eigen::Vector3d directionVect(0, 0, 1);
         // Get the vector that is prependicular to the midline and z vector
         Eigen::Vector3d v = directionVect.cross(midLine/midLine.norm());
         // matrix to store the rotaion matrix
@@ -160,11 +161,11 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
             k << 0, -v(2), v(1),
                 v(2), 0, -v(0),
                 -v(1), v(2), 0;
-            r = Eigen::MatrixXd::Identity(3,3) + k + (k*k)*((1-c)/(s*s));
+            r = i3 + k + (k*k)*((1-c)/(s*s));
         }
         else {
             // no rotation required, return identity matrix
-            r = Eigen::MatrixXd::Identity(3,3);
+            r = i3;
         }
 
         // Construct the final matrix based off the start point and rotation Mat

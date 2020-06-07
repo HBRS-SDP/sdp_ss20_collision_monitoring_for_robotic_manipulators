@@ -92,6 +92,11 @@ class KinovaArm: public Arm
         /// The KDL joint array to hold the joint angles
         KDL::JntArray jointArray;
 
+        /// Mathematical constants, declared in constructor for speed
+        Eigen::Vector4d origin;
+        Eigen::Vector3d directionVect;
+        Eigen::MatrixXd i3;
+
         /**
          * Transforms KDL::Frames to Eigen::Matrix4d
          * 
