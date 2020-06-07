@@ -31,7 +31,7 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
 	Eigen::Vector4d origin(0, 0, 0, 1);
 	Eigen::Matrix4d finalPose;
 
-	if(startPose.isApprox(endPose)) {
+	if(!startPose.isApprox(endPose)) {
 		Eigen::Vector4d basePoint = startPose * origin;
 		Eigen::Vector4d endPoint = endPose * origin;
 		Eigen::Vector3d midLine = (endPoint - basePoint).head<3>();
