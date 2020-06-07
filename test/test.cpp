@@ -67,6 +67,7 @@ TEST_CASE("Kinova_arm set position", "[arm]") {
                 0.470212, 1, -0.620803, -0.251506,
                 -0.573497, 0, 0.565619, 0.763581,
                 0, 0, 0, 1;
+
     REQUIRE( fabs((link2Pose - kinovaArm.links[2]->pose).norm()) < 0.1);
     REQUIRE( fabs((endLinkPose - kinovaArm.links[5]->pose).norm()) < 0.1);
 }
@@ -93,10 +94,6 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
         Eigen::Vector4d zDirectionObstacle(0, 0, kinovaArm.lengths[i], 1);
         Eigen::Vector3d basePointLine = (pose * origin).head(3);
         Eigen::Vector3d endPointLine  = (pose * zDirectionObstacle).head(3);
-
-        std::cout << "pose:\n"<< pose<<"\nbaseLine:\n"<<basePointLine
-                  << "\nendPointLine:\n"<< endPointLine<<"\nbasePointLink:\n"<<basePointLink
-                  << "\nendPointLink:\n"<< endPointLink<<std::endl;
 
         // compare using the two methods
         REQUIRE( fabs((basePointLine - basePointLink).norm()) < 0.1);
