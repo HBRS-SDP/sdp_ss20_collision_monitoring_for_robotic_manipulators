@@ -29,23 +29,33 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
 	Eigen::Matrix4d startPose = frameToMatrix(startLink);
 	Eigen::Matrix4d endPose = frameToMatrix(endLink);
 	Eigen::Vector4d origin(0, 0, 0, 1);
-	Eigen::Vector4d basePoint = startPose * origin;
-	Eigen::Vector4d endPoint = endPose * origin;
-	Eigen::Vector3d midLine = (endPoint - basePoint).head<3>();
-	Eigen::Vector3d directionVect(0, 0, 1);
-	Eigen::Vector3d v = directionVect.cross(midLine);
-	double c = directionVect.dot(midLine);
-	double s = v.norm();
-	Eigen::Matrix3d k;
-	k << 0, -v(2), v(1),
-	     v(2), 0, -v(0),
-		 -v(1), v(2), 0;
-	Eigen::Matrix3d r = Eigen::MatrixXd::Identity(3,3) + k + (k*k)*((1-c)/(s*s));
 	Eigen::Matrix4d finalPose;
-	finalPose << r(0,0), r(0,1), r(0,2), basePoint(0),
-				 r(1,0), r(1,1), r(1,2), basePoint(1),
-				 r(2,0), r(2,1), r(2,2), basePoint(2),
-				 0,      0,      0,      1;
+
+	if(startPose.isApprox(endPose)) {
+		Eigen::Vector4d basePoint = startPose * origin;
+		Eigen::Vector4d endPoint = endPose * origin;
+		Eigen::Vector3d midLine = (endPoint - basePoint).head<3>();
+		Eigen::Vector3d directionVect(0, 0, 1);
+		Eigen::Vector3d v = directionVect.cross(midLine);
+		double c = directionVect.dot(midLine);
+		double s = v.norm();
+		Eigen::Matrix3d k;
+		k << 0, -v(2), v(1),
+			v(2), 0, -v(0),
+			-v(1), v(2), 0;
+		Eigen::Matrix3d r = Eigen::MatrixXd::Identity(3,3) + k + (k*k)*((1-c)/(s*s));
+		finalPose << r(0,0), r(0,1), r(0,2), basePoint(0),
+					r(1,0), r(1,1), r(1,2), basePoint(1),
+					r(2,0), r(2,1), r(2,2), basePoint(2),
+					0,      0,      0,      1;
+	}
+	else {
+		finalPose << 0, 0, 0, 0,
+                     0, 0, 0, 0,
+                     0, 0, 0, 0,
+                  	 0, 0, 0, 1;
+	}
+	
 
 	return finalPose;
 }
