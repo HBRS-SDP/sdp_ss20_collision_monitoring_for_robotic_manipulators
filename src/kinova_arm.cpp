@@ -4,14 +4,16 @@
 KinovaArm::KinovaArm(std::string urdf_filename){
 
     // ------------- import and initialise the KDL model --------------- //
+    /// This is used to import the URDF file
+    KDL::Tree armTree;
 
     // Import the tree from urdf
-    if (!kdl_parser::treeFromFile(urdf_filename, arm_tree)){
+    if (!kdl_parser::treeFromFile(urdf_filename, armTree)){
         std::cout << "Failed to construct kdl tree" << std::endl;
     }
 
     // Convert the tree to a chain and get the number of joints
-    arm_tree.getChain("base_link", "EndEffector_Link", chain);
+    armTree.getChain("base_link", "EndEffector_Link", chain);
     nJoints = chain.getNrOfJoints();
 
     // init frames for all the joints
