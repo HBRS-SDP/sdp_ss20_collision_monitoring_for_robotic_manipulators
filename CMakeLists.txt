@@ -38,7 +38,7 @@ target_include_directories(KinovaArm PUBLIC
 )
 
 add_executable(KinovaCollisionMonitoring
-    src/collision_monitoring.cpp
+    src/arm_controller.cpp
     src/kinova_arm.cpp
 )
 

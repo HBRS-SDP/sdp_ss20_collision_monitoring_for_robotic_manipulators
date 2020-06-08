@@ -77,9 +77,6 @@ class KinovaArm: public Arm
         /// A vector of the radius of each of the links
         std::vector<double> radii;
 
-        /// This is used to import the URDF file
-        KDL::Tree arm_tree;
-
         /// The number of joints in the chain
         int nJoints;
 
