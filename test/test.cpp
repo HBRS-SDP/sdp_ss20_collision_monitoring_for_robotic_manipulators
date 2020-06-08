@@ -17,31 +17,34 @@ double deg2rad(double v) {
     return v / 180 * M_PI;
 }
 
-TEST_CASE("Monitor test", "[obstacle]") {
+std::string urdf_filename = "../urdf/GEN3_URDF_V12.urdf";
+
+TEST_CASE("Kinova_arm distance to obstacle", "[monitor]") {
+
+    KinovaArm kinovaArm(urdf_filename);
+    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
+                                    deg2rad(30), deg2rad(30), deg2rad(30)};
+    kinovaArm.updatePose(testPose);
+
     double radius_1 = 10;
     double length_1 = 70.710678118654755;
+
     Eigen::Matrix4d pose_1;
     pose_1 << 0.89455844, -0.14058875,  0.42426407,  0,
                 -0.14058875,  0.81254834,  0.56568542,  0,
                 -0.42426407, -0.56568542,  0.70710678,  0,
                 0,          0,          0,          1;
 
-    Eigen::Matrix4d pose_2;
-    pose_2 << 0.76552284, -0.18758173, -0.61545745,  50,
-                -0.18758173,  0.84993462, -0.49236596,  0,
-                0.61545745,  0.49236596,  0.61545745,  0,
-                0,          0,          0,          1;
+    Cylinder Link_1(pose_1, length_1, radius_1);
+    std::vector<Primitive*> obstacle;
+    obstacle.push_back(&Link_1);
 
-    // Cylinder Link_1 = new Cylinder(pose_1, length_1, radius_1);
-    // std::vector primitives = new std::vector<Obstacle>;
-    // primitives->insert(Link_1);
-    // Obstacle obstacle = new Obstacle(pose_1, primitives);
-    // REQUIRE(obstacle->pose == pose_1);
-    // obstacle->updatePose(pose_2);
-    // REQUIRE(obstacle->pose == pose_2);
+    Monitor monitor(kinovaArm, obstacle);
+    std::cout << "AAAAAAAAAAAAA";
+    std::vector<std::vector<double>> distances = monitor.monitorCollisionWithObjects();
+
+    REQUIRE( 10 > 0.1 );
 }
-
-std::string urdf_filename = "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/urdf/GEN3_URDF_V12.urdf";
 
 TEST_CASE("Kinova_arm init", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);

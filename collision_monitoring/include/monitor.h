@@ -2,6 +2,7 @@
 #define MONITOR_H
 
 #include <vector>
+#include <iostream>
 #include "arm.h"
 #include "primitives.h"
 
@@ -13,8 +14,8 @@ class Monitor
         Arm arm;
         std::vector<Primitive*> obstacles;
         // Void on return type of these functions temporally
-        void monitorCollisionWithObjects();
-        void monitorCollisionWithArm();
+        std::vector<std::vector<double>> monitorCollisionWithObjects();
+        std::vector<std::vector<double>> monitorCollisionWithArm();
         Monitor(Arm arm, std::vector<Primitive*> obstacles);
         ~Monitor();
 };
