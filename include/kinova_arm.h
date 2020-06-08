@@ -78,7 +78,7 @@ class KinovaArm: public Arm
         std::vector<double> radii;
 
         /// This is used to import the URDF file
-        KDL::Tree arm_tree;
+        KDL::Tree armTree;
 
         /// The number of joints in the chain
         int nJoints;
