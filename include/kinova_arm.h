@@ -66,7 +66,7 @@ class KinovaArm: public Arm
          * by the updatePose() function. For the kinova arm the links are 
          * modelled by cylinders with a length and radius
          */
-        std::vector<std::shared_ptr<Primitive> > links;
+        std::vector<Primitive*> links;
 
 
     private:
