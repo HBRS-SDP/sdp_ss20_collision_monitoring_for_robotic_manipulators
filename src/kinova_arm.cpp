@@ -54,7 +54,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     for(int i = 0; i < 6; i++)
     {
         Eigen::Matrix4d pose = linkFramesToPose(*poses[i], *poses[i+1]);
-        std::shared_ptr<Cylinder> link = std::make_shared<Cylinder>(pose, lengths[i], radii[i]);
+        Cylinder* link = new Cylinder(pose, lengths[i], radii[i]);
         links.push_back(link);
     }
 
@@ -67,6 +67,9 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 }
 
 KinovaArm::~KinovaArm(){
+    for(int i=0; i < links.size(); i++){
+        delete(links[i]);
+    }
 }
 
 bool KinovaArm::updatePose(std::vector<double> jointPositions){

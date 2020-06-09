@@ -4,6 +4,8 @@ find_package(Boost REQUIRED COMPONENTS system)
 find_package(Eigen3 REQUIRED)
 find_package(orocos_kdl)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 include_directories(
     ../include
     ../collision_monitoring/include
