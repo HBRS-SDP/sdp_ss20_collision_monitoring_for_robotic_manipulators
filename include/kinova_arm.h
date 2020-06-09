@@ -81,7 +81,7 @@ class KinovaArm: public Arm
         int nJoints;
 
         ///  A vector of all the link KDL frames
-        std::vector<std::shared_ptr<KDL::Frame> > poses;
+        std::vector<KDL::Frame*> poses;
 
         /// The KDL chain used for calculating kinematics
         KDL::Chain chain;
