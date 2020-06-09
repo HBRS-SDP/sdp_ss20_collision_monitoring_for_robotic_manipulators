@@ -10,7 +10,6 @@ Line::Line(Eigen::Vector3d basePoint, Eigen::Vector3d endPoint){
 
 Line::~Line(){
 
-
 }
 
 Eigen::Vector3d Line::getBasePoint(){
@@ -41,8 +40,11 @@ double Line::getShortestDistanceToVertex(Eigen::Vector3d vertex){
     length = (this->endPoint - this->basePoint).norm();
 
     lambda = (vertex - this->basePoint).dot(this->endPoint - this->basePoint) / pow(length, 2);
-    std::cout <<  "lambda: " << lambda << std::endl;
-    std::cout <<  "vertex: " << vertex << std::endl;
+
+    #ifdef DEBUG
+        std::cout <<  "lambda: " << lambda << std::endl;
+        std::cout <<  "vertex: " << vertex << std::endl;
+    #endif //DEBUG
     
     if(lambda <= 0){
         m = this->basePoint;
@@ -56,10 +58,12 @@ double Line::getShortestDistanceToVertex(Eigen::Vector3d vertex){
         m = Eigen::Vector3d(x, y, z);
     }
 
-    std::cout <<  "m: " << std::endl << m << std::endl;
-
     distance = (vertex - m).norm();
-    std::cout <<  "distance: " << distance << std::endl;
+    
+    #ifdef DEBUG
+        std::cout <<  "m: " << std::endl << m << std::endl;
+        std::cout <<  "distance: " << distance << std::endl;
+    #endif //DEBUG
 
     return distance;
 }
@@ -72,11 +76,12 @@ double Line::getShortestDistanceToLine(Line line){
     endPointProjected = this->projectionPoint( line.getEndPoint() );
     midPoint =  (this->endPoint + this->basePoint) / 2;
 
-    std::cout <<  "basePoint: " << std::endl << line.getBasePoint() << std::endl;
-    std::cout <<  "endPoint: " << std::endl << line.getEndPoint() << std::endl;
-
-    std::cout <<  "basePointProjected: " << std::endl << basePointProjected << std::endl;
-    std::cout <<  "endPointProjected: " << std::endl << endPointProjected << std::endl;
+    #ifdef DEBUG
+        std::cout <<  "basePoint: " << std::endl << line.getBasePoint() << std::endl;
+        std::cout <<  "endPoint: " << std::endl << line.getEndPoint() << std::endl;
+        std::cout <<  "basePointProjected: " << std::endl << basePointProjected << std::endl;
+        std::cout <<  "endPointProjected: " << std::endl << endPointProjected << std::endl;
+    #endif //DEBUG
 
     Line projectedLine(basePointProjected, endPointProjected);
     
@@ -84,6 +89,9 @@ double Line::getShortestDistanceToLine(Line line){
 
     return shortestDistance;
 }
+
+
+
 
 Cylinder::Cylinder(Eigen::Matrix4d pose, double length, double radius){
     this->pose = pose;
@@ -95,63 +103,153 @@ Cylinder::~Cylinder(){
 
 }
 
+float Cylinder::getLength(){
+    return this->length;
+}
 
-double Cylinder::getShortestDistance(Primitive *obstacle){
-    Cylinder *obstacleCylinder = dynamic_cast<Cylinder*>(obstacle);
-    
+float Cylinder::getRadius(){
+    return this->radius;
+}
+
+
+double Cylinder::getShortestDistance(Primitive *primitive){
+    Cylinder *cylinder = dynamic_cast<Cylinder*>(primitive);
+    if(cylinder){
+        this->getShortestDistance(cylinder);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            this->getShortestDistance(sphere);
+        }else{
+
+        }
+    }
+}
+
+double Cylinder::getShortestDistance(Cylinder *cylinder){    
     double shortestDistance = 0;
     Eigen::Vector3d startObstacle, endObstacle, basePoint, endPoint;
 
     Eigen::Vector4d origin(0, 0, 0, 1);
     Eigen::Vector4d zDirectionCylinder(0, 0, this->length, 1);
-    Eigen::Vector4d zDirectionObstacle(0, 0, obstacleCylinder->length, 1);
+    Eigen::Vector4d zDirectionObstacle(0, 0, cylinder->length, 1);
 
     basePoint = (this->pose * origin).head(3);
     endPoint  = (this->pose * zDirectionCylinder).head(3);
 
     Line axisOfSymmetryCylinder(basePoint, endPoint);
 
-    std::cout << "st_c: " << std::endl << basePoint << std::endl;
-    std::cout << "ed_c: " << std::endl << endPoint << std::endl;
     
-    startObstacle = (obstacleCylinder->pose * origin).head(3);
-    endObstacle  = (obstacleCylinder->pose * zDirectionObstacle).head(3);
+    startObstacle = (cylinder->pose * origin).head(3);
+    endObstacle  = (cylinder->pose * zDirectionObstacle).head(3);
 
     Line axisOfSymmetryObstacle(startObstacle, endObstacle);
-
-    std::cout << "st_o: " << std::endl << startObstacle << std::endl;
-    std::cout << "ed_o: " << std::endl << endObstacle << std::endl;
-
     
-    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToLine(axisOfSymmetryObstacle) - this->radius - obstacleCylinder->radius;
+    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToLine(axisOfSymmetryObstacle) - this->radius - cylinder->radius;
 
-    std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
+    #ifdef DEBUG
+        std::cout << "st_c: " << std::endl << basePoint << std::endl;
+        std::cout << "ed_c: " << std::endl << endPoint << std::endl;#
+        std::cout << "st_o: " << std::endl << startObstacle << std::endl;
+        std::cout << "ed_o: " << std::endl << endObstacle << std::endl;
+        std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
+    #endif //DEBUG
 
     return shortestDistance;
 }
 
-// std::vector<double> Cylinder::getClosestPoint(std::vector<double>){
+double Cylinder::getShortestDistance(Sphere *sphere){
+    double shortestDistance = 0;
+    Eigen::Vector3d basePoint, endPoint, sphereCenter;
 
-//     std::vector<double> return_var = {0., 0.};
-//     return return_var;
-// }
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector4d zDirectionCylinder(0, 0, this->length, 1);
 
+    basePoint = (this->pose * origin).head(3);
+    endPoint  = (this->pose * zDirectionCylinder).head(3);
 
-// N ellipsoide functions and declaration
+    Line axisOfSymmetryCylinder(basePoint, endPoint);
+    
+    sphereCenter = (sphere->pose * origin).head(3);
 
-// N_ellipsoid::N_ellipsoid(std::vector<double> pose){
+    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToVertex(sphereCenter) - this->radius - sphere->getRadius();
 
-// }
+    #ifdef DEBUG
+        std::cout << "st_c: " << std::endl << basePoint << std::endl;
+        std::cout << "ed_c: " << std::endl << endPoint << std::endl;
+        std::cout << "st_o: " << std::endl << sphereCenter << std::endl;
+        std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
+    #endif //DEBUG
 
-// N_ellipsoid::~N_ellipsoid(){
+    return shortestDistance;
+}
 
-// }
+Sphere::Sphere(Eigen::Matrix4d pose, double radius){
+    this->pose = pose;
+    this->radius = radius;
+}
 
-// double N_ellipsoid::getShortestDistance(N_ellipsoid *){
+Sphere::~Sphere(){
 
-//     return 0;
-// }
+}
 
-// std::vector<double> N_ellipsoid::getClosestPoint(std::vector<double>){
+float Sphere::getRadius(){
+    return this->radius;
+}
 
-// }
+double Sphere::getShortestDistance(Primitive *primitive){
+    Cylinder *cylinder = dynamic_cast<Cylinder*>(primitive);
+    if(cylinder){
+        this->getShortestDistance(cylinder);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            this->getShortestDistance(sphere);
+        }else{
+
+        }
+    }
+}
+
+double Sphere::getShortestDistance(Cylinder *cylinder){
+    double shortestDistance = 0;
+    Eigen::Vector3d basePoint, endPoint, sphereCenter;
+
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector4d zDirectionCylinder(0, 0, cylinder->getLength(), 1);
+
+    basePoint = (cylinder->pose * origin).head(3);
+    endPoint  = (cylinder->pose * zDirectionCylinder).head(3);
+
+    Line axisOfSymmetryCylinder(basePoint, endPoint);
+    
+    sphereCenter = (this->pose * origin).head(3);
+
+    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToVertex(sphereCenter) - cylinder->getRadius() - this->getRadius();
+
+    #ifdef DEBUG
+        std::cout << "st_c: " << std::endl << basePoint << std::endl;
+        std::cout << "ed_c: " << std::endl << endPoint << std::endl;
+        std::cout << "st_o: " << std::endl << sphereCenter << std::endl;
+        std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
+    #endif //DEBUG
+
+    return shortestDistance;
+}
+
+double Sphere::getShortestDistance(Sphere *sphere){
+    double shortestDistance;
+    Eigen::Vector3d obstacleSphereCenter, myCenter;
+    Eigen::Vector4d origin(0, 0, 0, 1);
+
+    obstacleSphereCenter = (sphere->pose * origin).head(3);
+    myCenter = (this->pose * origin).head(3);
+
+    shortestDistance = (obstacleSphereCenter - myCenter).norm() - sphere->getRadius() - this->radius;
+
+    #ifdef DEBUG
+        std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
+    #endif //DEBUG
+
+    return shortestDistance;
+}

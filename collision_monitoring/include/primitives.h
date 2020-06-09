@@ -5,6 +5,9 @@
 #include <vector>
 #include <Eigen/Dense>
 
+class Line;
+class Cylinder;
+class Sphere;
 
 class Primitive
 {
@@ -18,10 +21,12 @@ class Primitive
     //     // virtual std::vector<double> getClosestPoint(std::vector<double>) = 0;
     
     public:
-        virtual double getShortestDistance(Primitive *obstacle) = 0;
+        virtual double getShortestDistance(Primitive *primitive) = 0;
+        virtual double getShortestDistance(Cylinder *cylinder) = 0;
+        virtual double getShortestDistance(Sphere *sphere) = 0;
+        // virtual double getShortestDistance(Capsule capsule) = 0;
         Eigen::Matrix4d pose;
         //virtual ~Primitive();
-
 };
 
 class Line{
@@ -41,27 +46,43 @@ class Line{
 };
 
 class Cylinder: public Primitive{
-    private:
+    protected:
         float length;
         float radius;
         
     public:
         Cylinder(Eigen::Matrix4d pose, double length, double radius);
         ~Cylinder();
-        double getShortestDistance(Primitive *obstacle);
+
+        float getLength();
+        float getRadius();
+
+        double getShortestDistance(Primitive *primitive);
+        double getShortestDistance(Cylinder *cylinder);
+        double getShortestDistance(Sphere *sphere);
         // std::vector<double> getClosestPoint(std::vector<double>);
 };
 
-// class N_ellipsoid: public Primitive {
-//     private:
-//         //Primitive parameters
+// class Capsule: public Cylinder{
 
-//     public:
-//         N_ellipsoid(std::vector<double> pose);
-//         ~N_ellipsoid();
-//         double getShortestDistance(N_ellipsoid *);
-//         std::vector<double> getClosestPoint(std::vector<double>);
 // };
+
+class Sphere: public Primitive{
+    private:
+        float radius;
+        
+    public:
+        Sphere(Eigen::Matrix4d pose, double radius);
+        ~Sphere();
+
+        float getRadius();
+
+        double getShortestDistance(Primitive *primitive);
+        double getShortestDistance(Cylinder *cylinder);
+        double getShortestDistance(Sphere *sphere);
+        // std::vector<double> getClosestPoint(std::vector<double>);
+};
+
 
 
 #endif // PRIMITIVES_H

@@ -25,7 +25,3 @@ set(KINOVA_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../src/kinova_arm.cpp)
 set(TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
 add_executable(tests ${TEST_SOURCES} ${KINOVA_SOURCES})
 target_link_libraries(tests Catch KinovaArm CollisionMonitoring kdl_parser)
-
-set(TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/test_cylinder.cpp)
-add_executable(test_cylinder ${TEST_SOURCES} ${KINOVA_SOURCES})
-target_link_libraries(test_cylinder Catch KinovaArm CollisionMonitoring kdl_parser)
