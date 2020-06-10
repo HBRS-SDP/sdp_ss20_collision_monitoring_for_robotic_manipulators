@@ -1,0 +1,117 @@
+#ifndef KINOVA_ARM_H
+#define KINOVA_ARM_H
+
+#include <vector>
+#include <math.h>
+#include <Eigen/Core>
+#include <Eigen/Geometry>
+#include <memory>
+#include <iostream>
+
+#include <kdl/tree.hpp>
+#include <kdl/chain.hpp>
+#include <kdl/chainfksolver.hpp>
+#include <kdl/chainfksolverpos_recursive.hpp>
+#include <kdl_parser/kdl_parser.hpp>
+#include <kdl/frames.hpp>
+#include <kdl/frames_io.hpp>
+#include "primitives.h"
+#include "arm.h"
+
+// the debug var to turn verbose on and off
+#define DEBUG
+
+
+/*
+TODO:
+    - implement base position
+    - talk to Djordje about fksolver
+*/
+
+/**
+ * An implementation of the Arm interface.
+ * 
+ * This implementation is specifically for the KINOVA arm in the HBRS robotics
+ * lab.
+ */
+
+class KinovaArm: public Arm
+{
+    public:
+        /**
+         * KinovaArm constructor
+         * 
+         * @param urdf_filename The global location of the urdf file used to
+         *     import the arm kinematics model
+         * @return An instance of KinovaArm class
+         */
+        KinovaArm(std::string urdf_filename);
+        /// KinovaArm Destructor
+        ~KinovaArm();
+
+        /**
+         * A function to update the current virtual representation of the arm
+         * 
+         * @param jointPositions The angular positions of the arm joints
+         *     in order of the joint in radians
+         * @return The boolean true for a successful update, False otherwise
+         */
+        bool updatePose(std::vector<double> jointPositions);
+
+
+    private:
+
+        /// A vector of the length of each of the links
+        std::vector<double> lengths;
+
+        /// A vector of the radius of each of the links
+        std::vector<double> radii;
+
+        /// The number of joints in the chain
+        int nJoints;
+
+        ///  A vector of all the link KDL frames
+        std::vector<KDL::Frame*> poses;
+
+        /// The KDL chain used for calculating kinematics
+        KDL::Chain chain;
+
+        /// The KDL joint array to hold the joint angles
+        KDL::JntArray jointArray;
+
+        /// Mathematical constants, declared in constructor for speed
+        Eigen::Vector4d origin;
+        Eigen::Vector3d directionVect;
+        Eigen::MatrixXd i3;
+
+        /**
+         * Transforms KDL::Frames to Eigen::Matrix4d
+         * 
+         * A function that is used to transform KDL frames into homogeneous
+         * transformation functions in Eigen format
+         * 
+         * @param frame The KDL::Frame to transform
+         * 
+         * @return Eigen::Matrix4d representation of a homogeneous transform
+         */
+        Eigen::Matrix4d frameToMatrix(KDL::Frame frame);
+
+        /**
+         * Creates a link pose from the current (start) and next (end) link poses
+         * 
+         * The function converts the start and end link to Frames to a pose with
+         * the position at the start frame and the z axis pointing towards the 
+         * end frame.
+         * 
+         * @param startLink The current or start link used as the base of the 
+         *     cylinder
+         * @param endlink The next or end link that gives the z direction of the
+         *     pose
+         * 
+         * @return The homogenous representation of the cylinder pose
+         */
+        Eigen::Matrix4d linkFramesToPose(KDL::Frame startLink, KDL::Frame endLink);
+
+};
+
+#endif // KINOVA_ARM_H

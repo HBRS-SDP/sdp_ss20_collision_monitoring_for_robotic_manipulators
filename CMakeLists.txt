@@ -6,7 +6,7 @@ project(Kinova_Collision_Monitoring)
 # Set the c++ version
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-#set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Debug)
 
 add_subdirectory(collision_monitoring)
 
