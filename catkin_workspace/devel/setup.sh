@@ -11,7 +11,7 @@
 
 # since this file is sourced either use the provided _CATKIN_SETUP_DIR
 # or fall back to the destination set at configure time
-: ${_CATKIN_SETUP_DIR:=/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/catkin_workspace/devel}
+: ${_CATKIN_SETUP_DIR:=/home/samuelpg/Documents/MAS/SS2020/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/catkin_workspace/devel}
 _SETUP_UTIL="$_CATKIN_SETUP_DIR/_setup_util.py"
 unset _CATKIN_SETUP_DIR
 
