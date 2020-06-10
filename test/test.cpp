@@ -13,7 +13,6 @@
 #define private public
 #include "kinova_arm.h"
 #include "primitives.h"
-#include "obstacle.h"
 #include "monitor.h"
 #include "arm.h"
 
