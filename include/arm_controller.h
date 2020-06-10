@@ -30,7 +30,7 @@
  * lab.
  */
 
-class CollisionMonitor
+class ArmController
 {
     public:
         /**
@@ -40,11 +40,11 @@ class CollisionMonitor
          *     from the arm to any obstacles
          * @return An instance of CollisionMonitor class
          */
-        CollisionMonitor(Monitor monitorObject);
+        ArmController(Monitor* monitorObject);
         /// KinovaArm Destructor
-        ~CollisionMonitor();
+        ~ArmController();
 
-        Monitor monitor;
+        Monitor* monitor;
         Eigen::Vector3d goal;
 
         /**
