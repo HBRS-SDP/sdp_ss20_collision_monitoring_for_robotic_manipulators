@@ -1,3 +1,10 @@
+// A simple program that computes the square root of a number
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <kdl/chain.hpp>
+#include "primitives.h"
 #include "ros/ros.h"
 #include "sensor_msgs/JointState.h"
 
@@ -28,4 +35,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-// %EndTag(FULLTEXT)%
