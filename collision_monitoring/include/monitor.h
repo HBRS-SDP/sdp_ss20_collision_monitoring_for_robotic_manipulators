@@ -19,17 +19,56 @@ class Monitor
 
     public: 
 
-        Arm* arm;
-        std::vector<Primitive*> obstacles;
 
-        /** monitor collision with obstacles. 
+        Arm* arm; /* Arm to monitor */
+        std::vector<Primitive*> obstacles; /* Obstacles in the workspace */
+
+        /** Collision monitorin with obstacles. 
         *
+        * This methods monitors the distance from one link of the arm 
+        * to obstacles in the workspace. 
+        *
+        * @returns a matrix with the distance of each link to the other obstacles.
         */
         std::vector<std::vector<double>> monitorCollisionWithObjects();
+
+        /** Collision monitoring with the arm itself.
+        *
+        * This methods monitors the distance from one link of the arm 
+        * to other links. 
+        *
+        * @returns a matrix with the distance of each link to the other links.
+        */
         std::vector<std::vector<double>> monitorCollisionWithArm();
+
+
+        /** Adds primitive to list of obstacles
+        *
+        * Adds a primitive to the list of obstacles.
+        * @param obstacle address of the obstacle to be added.
+        */
         void addObstacle(Primitive* obstacle);
+        
+        /** Adds arm to list of obstacles
+        *
+        * This method decomposes an arm into its primitives to add it into 
+        * the vector of obtacles.
+        *
+        * @param arm address of the arm to be treated as an obstacle.
+        */
         void addObstacle(Arm* arm);
+
+        /** Constructor of Monitor
+        *
+        * This is the constructor for the monitor class, it takes as paramter the arm
+        * to be monitored. 
+        *
+        * @param arm arm to monitor collision.
+        */
         Monitor(Arm* arm);
+
+        /** Destructor for the monitor class
+        */
         ~Monitor();
 };
 
