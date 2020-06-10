@@ -58,8 +58,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
         links.push_back(link);
     }
 
-
-
+    std::cout << links.size() << std::endl;
     // Mathematical constants, declared in constructor for speed
     this->origin << 0, 0, 0, 1;
     this->directionVect << 0, 0, 1;

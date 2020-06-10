@@ -16,7 +16,6 @@ include_directories(
 add_library(CollisionMonitoring
     src/primitives.cpp
     src/monitor.cpp
-    src/obstacle.cpp
     src/arm.cpp
 )
 
