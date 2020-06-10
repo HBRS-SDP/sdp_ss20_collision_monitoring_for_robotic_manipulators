@@ -38,17 +38,4 @@ target_include_directories(KinovaArm PUBLIC
                            "${PROJECT_BINARY_DIR}"
 )
 
-add_executable(KinovaCollisionMonitoring
-    src/arm_controller.cpp
-    src/kinova_arm.cpp
-)
-
-target_link_libraries(KinovaCollisionMonitoring PRIVATE
-    KinovaArm
-    CollisionMonitoring
-    orocos-kdl
-    kdl_parser
-    ${orocos-kdl_LIBRARIES}
-)
-
 add_subdirectory(test)

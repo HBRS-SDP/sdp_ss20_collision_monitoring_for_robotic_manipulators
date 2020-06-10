@@ -161,7 +161,7 @@ add_subdirectory(collision_monitoring)
 # add_executable(${PROJECT_NAME}_node src/kinova_arm_node.cpp)
 add_executable(KinovaCollisionMonitoring
     src/arm_controller.cpp
-    src/kinova_arm.cpp
+    src/kinova_CM_node.cpp
 )
 
 ## Rename C++ executable without prefix
