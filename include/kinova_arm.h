@@ -58,16 +58,6 @@ class KinovaArm: public Arm
          */
         bool updatePose(std::vector<double> jointPositions);
 
-        /// The homogeneous transform of the base of the arm in the global frame
-        // std::vector<double> base_position;
-
-        /**
-         * The list of links used for distance calculation, these are updated
-         * by the updatePose() function. For the kinova arm the links are 
-         * modelled by cylinders with a length and radius
-         */
-        // std::vector<Primitive*> links;
-
 
     private:
 
@@ -81,7 +71,7 @@ class KinovaArm: public Arm
         int nJoints;
 
         ///  A vector of all the link KDL frames
-        std::vector<std::shared_ptr<KDL::Frame> > poses;
+        std::vector<KDL::Frame*> poses;
 
         /// The KDL chain used for calculating kinematics
         KDL::Chain chain;

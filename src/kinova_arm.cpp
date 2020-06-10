@@ -19,7 +19,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // init frames for all the joints
     for(int i = 0; i < nJoints; i++)
     {
-        poses.push_back(std::make_shared<KDL::Frame>());
+        poses.push_back(new KDL::Frame());
     }
     
     #ifdef DEBUG
@@ -54,8 +54,8 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     for(int i = 0; i < 6; i++)
     {
         Eigen::Matrix4d pose = linkFramesToPose(*poses[i], *poses[i+1]);
-        Cylinder link(pose, lengths[i], radii[i]);
-        links.push_back(&link);
+        Cylinder* link = new Cylinder(pose, lengths[i], radii[i]);
+        links.push_back(link);
     }
 
     std::cout << links.size() << std::endl;
@@ -66,6 +66,14 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 }
 
 KinovaArm::~KinovaArm(){
+
+    for(int i=0; i < links.size(); i++){
+        delete(links[i]);
+    }
+
+    for(int i=0; i < poses.size(); i++){
+        delete(poses[i]);
+    }
 }
 
 bool KinovaArm::updatePose(std::vector<double> jointPositions){

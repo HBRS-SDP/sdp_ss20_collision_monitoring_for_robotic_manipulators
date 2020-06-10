@@ -11,46 +11,60 @@ Monitor::~Monitor(){
 }
 
 std::vector<std::vector<double>> Monitor::monitorCollisionWithObjects(){
+    
     std::vector<std::vector<double>> distances_to_objects;
 
-    std::cout << "links: " << this->arm->links.size() << std::endl;
-    std::cout << "obstacle: " << this->obstacles.size() << std::endl;
-
-    for (int i = 0; i < this->arm->links.size(); i++ ) {
+    for (int i = 0; i < this->obstacles.size(); i++ ) {
         
         std::vector<double> distances;
-        
-        for ( int j = 0; i < this->obstacles.size(); j++) {
 
-            double dis = this->arm->links[i]->getShortestDistance( this->obstacles[j] );
-            distances.push_back(dis);
-            
-            std::cout << "value: " << dis << std::endl;
+        for (int j = 0; j < this->arm->links.size(); j++) {
+            distances.push_back(this->arm->links[j]->getShortestDistance( this->obstacles[i] ));
         }
+        
         distances_to_objects.push_back(distances);
     }
 
-    for (auto &i : distances_to_objects) {
-        std::cout << "VVVVV";
-        for (auto &j : i) {
-            std::cout << j << " ";
+    #ifdef DEBUG
+    for (int i = 0; i < distances_to_objects.size(); i++) {
+        std::cout << "distances to obstacle [" << i << "]:";
+
+        for (int j = 0; j < distances_to_objects[i].size(); j++){
+            std::cout << distances_to_objects[i][j] << " "; 
         }
         std::cout << std::endl;
     }
+    #endif //DEBUG
 
     return distances_to_objects;
 }
 
 std::vector<std::vector<double>> Monitor::monitorCollisionWithArm(){
+    
     std::vector<std::vector<double>> distances_to_objects;
-    // for (int i = 0; i < arm.links.size(); i++) {
-    //     std::vector<double> distances;
-    //     for (int j = 0; j < arm.links.size(); j ++) {
-    //         if (i != j) {
-    //             distances.push_back(arm.links[i]->getShortestDistance(obstacles[j]));
-    //         }
-    //     }
-    //     distances_to_objects.push_back(distances);
-    // }
-    // return distances_to_objects;
+
+    for (int i = 0; i < this->arm->links.size(); i++) {
+        std::vector<double> distances;
+        for (int j = 0; j < this->arm->links.size(); j++) {
+            if (i != j) {
+                distances.push_back(this->arm->links[i]->getShortestDistance(this->arm->links[j]));
+            } else {
+                distances.push_back(0);
+            }
+        }
+        distances_to_objects.push_back(distances);
+    }
+
+    #ifdef DEBUG
+    for (int i = 0; i < distances_to_objects.size(); i++) {
+        std::cout << "distances from link [" << i << "] to other links:";
+
+        for (int j = 0; j < distances_to_objects[i].size(); j++){
+            std::cout << distances_to_objects[i][j] << " "; 
+        }
+        std::cout << std::endl;
+    }
+    #endif //DEBUG
+
+    return distances_to_objects;
 }
