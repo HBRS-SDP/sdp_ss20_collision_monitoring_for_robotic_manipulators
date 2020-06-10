@@ -1,28 +1,20 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(kinova_arm)
+project(sdp_test)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
-# Set the c++ version
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_BUILD_TYPE Debug)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  std_msgs
+  rospy
   sensor_msgs
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-find_package(Boost REQUIRED COMPONENTS system)
-find_package(Eigen3 REQUIRED)
-find_package(orocos_kdl)
-find_package(kdl_parser)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -55,15 +47,21 @@ find_package(kdl_parser)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
+#add_message_files(
+#  DIRECTORY
+#  msg
+#  FILES 
+#  Num.msg
 #   Message1.msg
 #   Message2.msg
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
+#add_service_files(
+#  DIRECTORY 
+#  srv 
+#  FILES 
+#  AddTwoInts.srv
 #   Service1.srv
 #   Service2.srv
 # )
@@ -76,10 +74,10 @@ find_package(kdl_parser)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+#generate_messages(
+#  DEPENDENCIES
+#  std_msgs
+#)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -111,9 +109,9 @@ find_package(kdl_parser)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
- INCLUDE_DIRS include
-#  LIBRARIES kinova_arm
- CATKIN_DEPENDS gazebo_ros_pkgs ros_kortex roscpp std_msgs sensor_msgs
+#  INCLUDE_DIRS include
+#  LIBRARIES sdp_test
+ CATKIN_DEPENDS roscpp rospy sensor_msgs
 #  DEPENDS system_lib
 )
 
@@ -124,30 +122,14 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
+# include
   ${catkin_INCLUDE_DIRS}
-  include
-  collision_monitoring/include
-  /usr/local/include
-  /usr/local/lib
-  /usr/include/eigen3
-  /opt/ros/kinetic/include
-  ${Eigen_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIR}
-  ${orocos_kdl_INCLUDE_DIRS}
 )
-
-link_directories(/usr/local/lib)
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/kinova_arm.cpp
+#   src/${PROJECT_NAME}/sdp_test.cpp
 # )
-
-add_library(KinovaArm STATIC
-  src/kinova_arm.cpp
-  include/kinova_arm.h
-)
-add_subdirectory(collision_monitoring)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -157,11 +139,7 @@ add_subdirectory(collision_monitoring)
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/kinova_arm_node.cpp)
-add_executable(KinovaCollisionMonitoring
-    src/arm_controller.cpp
-    src/kinova_arm.cpp
-)
+add_executable(pose_listener_node src/subscriber.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -171,18 +149,11 @@ add_executable(KinovaCollisionMonitoring
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(pose_listener_node pose_listener_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
-target_link_libraries(KinovaCollisionMonitoring PRIVATE
-  KinovaArm
-  CollisionMonitoring
-  orocos-kdl
-  kdl_parser
-  ${orocos-kdl_LIBRARIES}
+target_link_libraries(pose_listener_node
+ ${catkin_LIBRARIES}
 )
 
 
@@ -233,7 +204,7 @@ target_link_libraries(KinovaCollisionMonitoring PRIVATE
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_kinova_arm.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_sdp_test.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
