@@ -27,7 +27,9 @@ class Monitor
         */
         std::vector<std::vector<double>> monitorCollisionWithObjects();
         std::vector<std::vector<double>> monitorCollisionWithArm();
-        Monitor(Arm* arm, std::vector<Primitive*> obstacles);
+        void addObstacle(Primitive* obstacle);
+        void addObstacle(Arm* arm);
+        Monitor(Arm* arm);
         ~Monitor();
 };
 

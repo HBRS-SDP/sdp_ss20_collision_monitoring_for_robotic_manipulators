@@ -136,11 +136,9 @@ TEST_CASE("Kinova_arm distance to obstacle", "[monitor]") {
                 0,          0,          0,          1;
 
     Cylinder Link_1(pose_1, length_1, radius_1);
-   
-    std::vector<Primitive*> obstacle;
-    obstacle.push_back(&Link_1);
 
-    Monitor monitor(&kinovaArm, obstacle);
+    Monitor monitor(&kinovaArm);
+    monitor.addObstacle(&Link_1);
 
     std::vector<std::vector<double>> distancesToObstacles = monitor.monitorCollisionWithObjects();
     std::vector<std::vector<double>> distancesToLinks = monitor.monitorCollisionWithArm();

@@ -1,17 +1,26 @@
 #include "monitor.h"
 #include <vector>
 
-Monitor::Monitor(Arm* arm, std::vector<Primitive*> obstacles){
+Monitor::Monitor(Arm* arm){
     this->arm = arm;
-    this->obstacles = obstacles;
 }
 
 Monitor::~Monitor(){
 
 }
 
+void Monitor::addObstacle(Primitive* obstacle) {
+    this->obstacles.push_back(obstacle);
+}
+
+void Monitor::addObstacle(Arm* arm) {
+    for (int i = 0; i < arm->links.size(); i++) {
+        this->obstacles.push_back(arm->links[i]);
+    }
+}
+
 std::vector<std::vector<double>> Monitor::monitorCollisionWithObjects(){
-    
+
     std::vector<std::vector<double>> distances_to_objects;
 
     for (int i = 0; i < this->obstacles.size(); i++ ) {
