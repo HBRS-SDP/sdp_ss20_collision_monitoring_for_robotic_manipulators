@@ -119,6 +119,21 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
 }
 
 
+Eigen::Matrix4d KinovaArm::getPose(void)
+{
+    return frameToMatrix(*poses.back());
+}
+
+Eigen::Matrix4d KinovaArm::getPose(int jointNumber)
+{
+    if(jointNumber >= poses.size() | jointNumber < 0){
+        std::cout << "Access joint number larger than array in getPose";
+        return frameToMatrix(*poses.back());
+    }
+    return frameToMatrix(*poses[jointNumber]);
+}
+
+
 Eigen::Matrix4d KinovaArm::frameToMatrix(KDL::Frame frame)
 {
     // init a matrix to fill

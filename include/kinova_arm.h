@@ -59,6 +59,11 @@ class KinovaArm: public Arm
         bool updatePose(std::vector<double> jointPositions);
 
 
+        Eigen::Matrix4d  getPose(void);
+
+        Eigen::Matrix4d  getPose(int jointNumber);
+
+
     private:
 
         /// A vector of the length of each of the links
@@ -66,9 +71,6 @@ class KinovaArm: public Arm
 
         /// A vector of the radius of each of the links
         std::vector<double> radii;
-
-        /// The number of joints in the chain
-        int nJoints;
 
         ///  A vector of all the link KDL frames
         std::vector<KDL::Frame*> poses;
