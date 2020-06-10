@@ -62,7 +62,9 @@ class CollisionMonitor
         void goalCallback(const geometry_msgs::Point::ConstPtr& msg);
 
     private:
-        
+
+        std::vector<std::vector<double>> objectDistance;
+        std::vector<std::vector<double>> armDistances;
 
 };
 
