@@ -12,8 +12,6 @@ set(CMAKE_BUILD_TYPE Debug)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  gazebo_ros_pkgs
-  ros_kortex
   roscpp
   std_msgs
 )
@@ -145,8 +143,8 @@ link_directories(/usr/local/lib)
 # )
 
 add_library(KinovaArm STATIC
-    src/kinova_arm.cpp
-    include/kinova_arm.h
+  src/kinova_arm.cpp
+  include/kinova_arm.h
 )
 add_subdirectory(collision_monitoring)
 
@@ -179,11 +177,11 @@ add_executable(KinovaCollisionMonitoring
 #   ${catkin_LIBRARIES}
 # )
 target_link_libraries(KinovaCollisionMonitoring PRIVATE
-    KinovaArm
-    CollisionMonitoring
-    orocos-kdl
-    kdl_parser
-    ${orocos-kdl_LIBRARIES}
+  KinovaArm
+  CollisionMonitoring
+  orocos-kdl
+  kdl_parser
+  ${orocos-kdl_LIBRARIES}
 )
 
 
