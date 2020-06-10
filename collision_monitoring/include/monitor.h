@@ -7,12 +7,13 @@
 #include "primitives.h"
 
 /**
- * A collision monitor with methods to determine the distance to obstacles or links of the arm
+ * A collision monitor to determine the distance to obstacles and other links
  * 
- * The Monitor class is a collision monitor which stores the address of an instance of the class Arm
- * and maintains a list of obstacles. It can perform collision monitoring with obtacles by determining
- * the distance to obstacles in the workspace, or collision monitoring with the arm itself by 
- * monitoring the distance between the links.  
+ * The Monitor class is a collision monitor which stores the address of an 
+ * instance of the class Arm and maintains a list of obstacles. It can perform 
+ * collision monitoring with obtacles by determining the distance to obstacles 
+ * in the workspace, or collision monitoring with the arm itself by monitoring 
+ * the distance between the links.  
  */
 class Monitor
 {
@@ -28,7 +29,8 @@ class Monitor
         * This methods monitors the distance from one link of the arm 
         * to obstacles in the workspace. 
         *
-        * @returns a matrix with the distance of each link to the other obstacles.
+        * @returns a matrix with the distance of each link to the other 
+        * obstacles.
         */
         std::vector<std::vector<double>> monitorCollisionWithObjects();
 
@@ -60,8 +62,8 @@ class Monitor
 
         /** Constructor of Monitor
         *
-        * This is the constructor for the monitor class, it takes as paramter the arm
-        * to be monitored. 
+        * This is the constructor for the monitor class, it takes as 
+        * paramter the arm to be monitored. 
         *
         * @param arm arm to monitor collision.
         */
