@@ -23,7 +23,7 @@ double deg2rad(double v) {
 
 std::string urdf_filename = "../urdf/GEN3_URDF_V12.urdf";
 
-TEST_CASE( "1st test case", "[cylinders]" ) {
+TEST_CASE( "1st test case", "[Cylinder - Cylinder]" ) {
     double radius_1 = 10;
     double length_1 = 70.710678118654755;
     Eigen::Matrix4d pose_1;
@@ -46,7 +46,7 @@ TEST_CASE( "1st test case", "[cylinders]" ) {
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(15.007002100700248).margin(0.001) );
 }
 
-TEST_CASE( "2nd test case", "[cylinders]" ) {
+TEST_CASE( "2nd test case", "[Cylinder - Cylinder]" ) {
     double radius_1 = 10;
     double length_1 = 95.39392014169457;
     Eigen::Matrix4d pose_1;
@@ -63,13 +63,13 @@ TEST_CASE( "2nd test case", "[cylinders]" ) {
                 0.85714286,  -0.28571429,   0.42857143,  30,
                 0,           0,           0,           1;
 
-    Cylinder *Link_1 = new Cylinder(pose_1, length_1, radius_1);
-    Cylinder *Link_2 = new Cylinder(pose_2, length_2, radius_2);
+    Primitive *Link_1 = new Cylinder(pose_1, length_1, radius_1);
+    Primitive *Link_2 = new Cylinder(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(10.233213170882209).margin(0.001) );
 }
 
-TEST_CASE( "3rd test case lambda >= 1", "[cylinders]" ) {
+TEST_CASE( "3rd test case lambda >= 1", "[Cylinder - Cylinder]" ) {
     double radius_1 = 10;
     double length_1 = 95.39392014169457;
     Eigen::Matrix4d pose_1;
@@ -86,13 +86,13 @@ TEST_CASE( "3rd test case lambda >= 1", "[cylinders]" ) {
                 0.88900089,  0.25400025,  0.38100038, 30,
                 0,          0,          0,          1;
 
-    Cylinder *Link_1 = new Cylinder(pose_1, length_1, radius_1);
-    Cylinder *Link_2 = new Cylinder(pose_2, length_2, radius_2);
+    Primitive *Link_1 = new Cylinder(pose_1, length_1, radius_1);
+    Primitive *Link_2 = new Cylinder(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(14.779612647907754).margin(0.001) );
 }
 
-TEST_CASE( "4th test case lambda <= 0", "[cylinders]" ) {
+TEST_CASE( "4th test case lambda <= 0", "[Cylinder - Cylinder]" ) {
     double radius_1 = 10;
     double length_1 = 70.0;
     Eigen::Matrix4d pose_1;
@@ -109,11 +109,108 @@ TEST_CASE( "4th test case lambda <= 0", "[cylinders]" ) {
                 0.88900089,  0.25400025,  0.38100038, 30,
                 0,          0,          0,          1;
 
-    Cylinder *Link_1 = new Cylinder(pose_1, length_1, radius_1);
-    Cylinder *Link_2 = new Cylinder(pose_2, length_2, radius_2);
+    Primitive *Link_1 = new Cylinder(pose_1, length_1, radius_1);
+    Primitive *Link_2 = new Cylinder(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(-2.4123024273687186).margin(0.001) );
 }
+
+
+TEST_CASE( "1st test case sphere", "[Sphere - Sphere]" ) {
+    double radius_1 = 20;
+    Eigen::Matrix4d pose_1;
+    pose_1 << 0.51701611,  -0.33046266,   0.78961305, -70,
+                -0.33046266,   0.77389397,   0.54026156,   5,
+                -0.78961305, -0.54026156,   0.29091007, -15,
+                0,           0,           0,           1;
+
+    double radius_2 = 30;
+    Eigen::Matrix4d pose_2;
+    pose_2 << 0.12071974, -0.60161281, -0.78961305, 25,
+                -0.60161281,  0.58837018, -0.54026156, 70,
+                0.78961305,  0.54026156, -0.29091007, 20,
+                0,          0,          0,          1;
+
+    Primitive *Sphere_1 = new Sphere(pose_1, radius_1);
+    Primitive *Sphere_2 = new Sphere(pose_2, radius_2);
+
+    REQUIRE( Sphere_1->getShortestDistance(Sphere_2) == Approx(70.3).margin(0.1) );
+}
+
+TEST_CASE( "2nd test case sphere", "[Sphere - Cylinder]" ) {
+    double radius_1 = 12;
+    Eigen::Matrix4d pose_1;
+    pose_1 << -0.41648471, -0.22511371, -0.8808316,  11.8,
+                -0.22511371,  0.96422398, -0.13998546, 18,
+                0.8808316,   0.13998546, -0.45226072, 27,
+                0,          0,          0,          1;
+
+    double radius_2 = 10;
+    double length_2 = 62.10475022089695;
+    Eigen::Matrix4d pose_2;
+    pose_2 << 0.66072227,   0.19602713,  -0.72458226,  60,
+                0.19602713,   0.88673988,   0.41864753, -16,
+                0.72458226,  -0.41864753,   0.54746215,  30,
+                0,           0,           0,           1;
+
+    Primitive *Sphere_1 = new Sphere(pose_1, radius_1);
+    Primitive *Link_2 = new Cylinder(pose_2, length_2, radius_2);
+
+    REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(13.1).margin(0.1) );
+    REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(13.1).margin(0.1) );
+}
+
+
+TEST_CASE( "3rd test case sphere", "[Sphere - Cylinder]" ) {
+    double radius_1 = 12;
+    Eigen::Matrix4d pose_1;
+    pose_1 << -0.04687922,  -0.69791948,  -0.71464029, -10,
+                -0.69791948,   0.53472035,  -0.47642686,  45,
+                0.71464029,   0.47642686,  -0.51215887,  28,
+                0,           0,           0,           1;
+
+    double radius_2 = 10;
+    double length_2 = 62.10475022089695;
+    Eigen::Matrix4d pose_2;
+    pose_2 << 0.66072227,   0.19602713,  -0.72458226,  60,
+                0.19602713,   0.88673988,   0.41864753, -16,
+                0.72458226,  -0.41864753,   0.54746215,  30,
+                0,           0,           0,           1;
+
+    Primitive *Sphere_1 = new Sphere(pose_1, radius_1);
+    Primitive *Link_2 = new Cylinder(pose_2, length_2, radius_2);
+
+    REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(34.1).margin(0.1) );
+    REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(34.1).margin(0.1) );
+}
+
+TEST_CASE( "4th test case sphere", "[Sphere - Cylinder]" ) {
+    double radius_1 = 12;
+    Eigen::Matrix4d pose_1;
+    pose_1 << -0.21308182,   0.24106113,  -0.94682927,  86,
+                0.24106113,   0.95209683,   0.18815197, -26,
+                0.94682927,  -0.18815197,  -0.26098499,  28,
+                0,           0,           0,           1;     
+     
+
+    double radius_2 = 10;
+    double length_2 = 62.10475022089695;
+    Eigen::Matrix4d pose_2;
+    pose_2 << 0.66072227,   0.19602713,  -0.72458226,  60,
+                0.19602713,   0.88673988,   0.41864753, -16,
+                0.72458226,  -0.41864753,   0.54746215,  30,
+                0,           0,           0,           1;
+
+    Primitive *Sphere_1 = new Sphere(pose_1, radius_1);
+    Primitive *Link_2 = new Cylinder(pose_2, length_2, radius_2);
+
+    std::cout << Sphere_1->getShortestDistance(Link_2) << std::endl;
+    std::cout << Link_2->getShortestDistance(Sphere_1) << std::endl;
+
+    REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(5.9).margin(0.1) );
+    REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(5.9).margin(0.1) );
+}
+
 
 TEST_CASE("Kinova_arm distance to obstacle", "[monitor]") {
 
