@@ -20,7 +20,7 @@ void Monitor::addObstacle(Arm* arm) {
     }
 }
 
-std::vector<std::vector<double>> Monitor::monitorCollisionWithObjects(){
+std::vector<std::vector<double>> Monitor::distanceToObjects(){
 
     std::vector<std::vector<double>> distanceToObjects;
 
@@ -52,7 +52,7 @@ std::vector<std::vector<double>> Monitor::monitorCollisionWithObjects(){
     return distanceToObjects;
 }
 
-std::vector<std::vector<double>> Monitor::monitorCollisionWithArm(){
+std::vector<std::vector<double>> Monitor::distanceBetweenArmLinks(){
     
     std::vector<std::vector<double>> distanceToObjects;
 
