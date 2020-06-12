@@ -32,7 +32,7 @@ class Monitor
         * @returns a matrix with the distance of each link to the other 
         * obstacles.
         */
-        std::vector<std::vector<double>> monitorCollisionWithObjects();
+        std::vector<std::vector<double>> distanceToObjects();
 
         /** Collision monitoring with the arm itself.
         *
@@ -41,7 +41,7 @@ class Monitor
         *
         * @returns a matrix with the distance of each link to the other links.
         */
-        std::vector<std::vector<double>> monitorCollisionWithArm();
+        std::vector<std::vector<double>> distanceBetweenArmLinks();
 
 
         /** Adds primitive to list of obstacles

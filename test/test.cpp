@@ -139,8 +139,8 @@ TEST_CASE("Kinova_arm distance to obstacle", "[monitor]") {
     Monitor monitor(&kinovaArm);
     monitor.addObstacle(&Link_1);
 
-    std::vector<std::vector<double>> distancesToObstacles = monitor.monitorCollisionWithObjects();
-    std::vector<std::vector<double>> distancesToLinks = monitor.monitorCollisionWithArm();
+    std::vector<std::vector<double>> distancesToObstacles = monitor.distanceToObjects();
+    std::vector<std::vector<double>> distancesToLinks = monitor.distanceBetweenArmLinks();
 
     REQUIRE( 10 > 0.1 );    
 }
