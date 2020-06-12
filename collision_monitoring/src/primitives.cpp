@@ -93,27 +93,27 @@ double Line::getShortestDistanceToLine(Line line){
 
 
 
-Cylinder::Cylinder(Eigen::Matrix4d pose, double length, double radius){
+Capsule::Capsule(Eigen::Matrix4d pose, double length, double radius){
     this->pose = pose;
     this->length = length;
     this->radius = radius;
 }
 
-Cylinder::~Cylinder(){
+Capsule::~Capsule(){
 
 }
 
-float Cylinder::getLength(){
+float Capsule::getLength(){
     return this->length;
 }
 
-float Cylinder::getRadius(){
+float Capsule::getRadius(){
     return this->radius;
 }
 
 
-double Cylinder::getShortestDistance(Primitive *primitive){
-    Cylinder *cylinder = dynamic_cast<Cylinder*>(primitive);
+double Capsule::getShortestDistance(Primitive *primitive){
+    Capsule *cylinder = dynamic_cast<Capsule*>(primitive);
     if(cylinder){
         this->getShortestDistance(cylinder);
     }else{
@@ -126,26 +126,79 @@ double Cylinder::getShortestDistance(Primitive *primitive){
     }
 }
 
-double Cylinder::getShortestDistance(Cylinder *cylinder){    
+double Capsule::getShortestDistance(Capsule *cylinder){    
     double shortestDistance = 0;
-    Eigen::Vector3d startObstacle, endObstacle, basePoint, endPoint;
+    double lambdaM1, lambdaM2;
+    Eigen::Vector3d basePointObstacle, endPointObstacle, basePointOwn, endPointOwn;
+    Capsule *cylinderOwn;
+    Capsule *cylinderObstacle;
 
+    if(this->length > cylinder->getLength()){
+        cylinderOwn = this;
+        cylinderObstacle = cylinder;
+    }
+    else{
+        cylinderOwn = cylinder;
+        cylinderObstacle = this;
+    }
+    
     Eigen::Vector4d origin(0, 0, 0, 1);
-    Eigen::Vector4d zDirectionCylinder(0, 0, this->length, 1);
-    Eigen::Vector4d zDirectionObstacle(0, 0, cylinder->length, 1);
+    Eigen::Vector4d zDirectionOwn(0, 0, cylinderOwn->length, 1);
+    Eigen::Vector4d zDirectionObstacle(0, 0, cylinderObstacle->length, 1);
 
-    basePoint = (this->pose * origin).head(3);
-    endPoint  = (this->pose * zDirectionCylinder).head(3);
+    basePointOwn = (cylinderOwn->pose * origin).head(3);
+    endPointOwn  = (cylinderOwn->pose * zDirectionOwn).head(3);
 
-    Line axisOfSymmetryCylinder(basePoint, endPoint);
+    Line axisOfSymmetryOwn(basePointOwn, endPointOwn);
 
-    
-    startObstacle = (cylinder->pose * origin).head(3);
-    endObstacle  = (cylinder->pose * zDirectionObstacle).head(3);
+    basePointObstacle = (cylinderObstacle->pose * origin).head(3);
+    endPointObstacle  = (cylinderObstacle->pose * zDirectionObstacle).head(3);
 
-    Line axisOfSymmetryObstacle(startObstacle, endObstacle);
-    
-    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToLine(axisOfSymmetryObstacle) - this->radius - cylinder->radius;
+    Line axisOfSymmetryObstacle(basePointObstacle, endPointObstacle);
+
+
+    lambdaM1 = (basePointObstacle - basePointOwn).dot(endPointOwn - basePointOwn) / pow(cylinderOwn->getLength(), 2);
+    lambdaM2 = (endPointObstacle - basePointOwn).dot(endPointOwn - basePointOwn) / pow(cylinderOwn->getLength(), 2);
+
+    if(lambdaM1 >= 0 && lambdaM1 <= 1){
+        if(lambdaM2 >=0 && lambdaM2 <= 1){
+            //m1 and m2 inside
+            shortestDistance = axisOfSymmetryOwn.getShortestDistanceToLine(axisOfSymmetryObstacle);
+        }else{
+            // //m1 inside
+            #ifdef DEBUG
+                std::cout << "m1 inside" << std::endl;
+                std::cout << basePointObstacle << std::endl;
+                std::cout << axisOfSymmetryOwn.getShortestDistanceToVertex(basePointObstacle) << std::endl;
+                std::cout << axisOfSymmetryObstacle.getShortestDistanceToVertex(endPointOwn) << std::endl;
+            #endif //DEBUG
+            if( axisOfSymmetryOwn.getShortestDistanceToVertex(basePointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToVertex(endPointOwn) ){
+                std::cout << "here" << std::endl;
+                shortestDistance = axisOfSymmetryOwn.getShortestDistanceToLine(axisOfSymmetryObstacle);
+                std::cout << shortestDistance << std::endl;
+            }else{
+                shortestDistance = axisOfSymmetryObstacle.getShortestDistanceToLine(axisOfSymmetryOwn);
+            }
+        }
+    }else if(lambdaM2 >=0 && lambdaM2 <= 1){
+        //m2 inside
+        #ifdef DEBUG
+            std::cout << "m2 inside" << std::endl;
+            std::cout << endPointObstacle << std::endl;
+            std::cout << axisOfSymmetryOwn.getShortestDistanceToVertex(endPointObstacle) << std::endl;
+            std::cout << axisOfSymmetryObstacle.getShortestDistanceToVertex(basePointOwn) << std::endl;
+        #endif //DEBUG
+        if( axisOfSymmetryOwn.getShortestDistanceToVertex(endPointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToVertex(basePointOwn) ){
+            shortestDistance = axisOfSymmetryOwn.getShortestDistanceToLine(axisOfSymmetryObstacle);
+        }else{
+            shortestDistance = axisOfSymmetryObstacle.getShortestDistanceToLine(axisOfSymmetryOwn);
+        }
+    }else{
+        //m1 and m2 outside
+        shortestDistance = axisOfSymmetryObstacle.getShortestDistanceToLine(axisOfSymmetryOwn);
+    }
+
+    shortestDistance = shortestDistance - cylinderOwn->getRadius() - cylinderObstacle->getRadius();
 
     #ifdef DEBUG
         std::cout << "st_c: " << std::endl << basePoint << std::endl;
@@ -158,7 +211,7 @@ double Cylinder::getShortestDistance(Cylinder *cylinder){
     return shortestDistance;
 }
 
-double Cylinder::getShortestDistance(Sphere *sphere){
+double Capsule::getShortestDistance(Sphere *sphere){
     double shortestDistance = 0;
     Eigen::Vector3d basePoint, endPoint, sphereCenter;
 
@@ -198,7 +251,7 @@ float Sphere::getRadius(){
 }
 
 double Sphere::getShortestDistance(Primitive *primitive){
-    Cylinder *cylinder = dynamic_cast<Cylinder*>(primitive);
+    Capsule *cylinder = dynamic_cast<Capsule*>(primitive);
     if(cylinder){
         this->getShortestDistance(cylinder);
     }else{
@@ -211,7 +264,7 @@ double Sphere::getShortestDistance(Primitive *primitive){
     }
 }
 
-double Sphere::getShortestDistance(Cylinder *cylinder){
+double Sphere::getShortestDistance(Capsule *cylinder){
     double shortestDistance = 0;
     Eigen::Vector3d basePoint, endPoint, sphereCenter;
 

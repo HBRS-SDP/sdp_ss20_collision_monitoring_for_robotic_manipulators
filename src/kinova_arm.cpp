@@ -54,7 +54,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     for(int i = 0; i < 6; i++)
     {
         Eigen::Matrix4d pose = linkFramesToPose(*poses[i], *poses[i+1]);
-        Cylinder* link = new Cylinder(pose, lengths[i], radii[i]);
+        Capsule* link = new Capsule(pose, lengths[i], radii[i]);
         links.push_back(link);
     }
 
