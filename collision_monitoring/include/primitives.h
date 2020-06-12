@@ -6,7 +6,7 @@
 #include <Eigen/Dense>
 
 class Line;
-class Cylinder;
+class Capsule;
 class Sphere;
 
 class Primitive
@@ -22,7 +22,7 @@ class Primitive
     
     public:
         virtual double getShortestDistance(Primitive *primitive) = 0;
-        virtual double getShortestDistance(Cylinder *cylinder) = 0;
+        virtual double getShortestDistance(Capsule *cylinder) = 0;
         virtual double getShortestDistance(Sphere *sphere) = 0;
         // virtual double getShortestDistance(Capsule capsule) = 0;
         Eigen::Matrix4d pose;
@@ -45,25 +45,25 @@ class Line{
         
 };
 
-class Cylinder: public Primitive{
+class Capsule: public Primitive{
     protected:
         float length;
         float radius;
         
     public:
-        Cylinder(Eigen::Matrix4d pose, double length, double radius);
-        ~Cylinder();
+        Capsule(Eigen::Matrix4d pose, double length, double radius);
+        ~Capsule();
 
         float getLength();
         float getRadius();
 
         double getShortestDistance(Primitive *primitive);
-        double getShortestDistance(Cylinder *cylinder);
+        double getShortestDistance(Capsule *cylinder);
         double getShortestDistance(Sphere *sphere);
         // std::vector<double> getClosestPoint(std::vector<double>);
 };
 
-// class Capsule: public Cylinder{
+// class Cylinder: public Capsule{
 
 // };
 
@@ -78,7 +78,7 @@ class Sphere: public Primitive{
         float getRadius();
 
         double getShortestDistance(Primitive *primitive);
-        double getShortestDistance(Cylinder *cylinder);
+        double getShortestDistance(Capsule *cylinder);
         double getShortestDistance(Sphere *sphere);
         // std::vector<double> getClosestPoint(std::vector<double>);
 };
