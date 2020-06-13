@@ -6,6 +6,7 @@ project(Kinova_Collision_Monitoring)
 # Set the c++ version
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_BUILD_TYPE Debug)
 
 add_subdirectory(collision_monitoring)
 
@@ -35,19 +36,6 @@ add_library(KinovaArm STATIC
 
 target_include_directories(KinovaArm PUBLIC
                            "${PROJECT_BINARY_DIR}"
-)
-
-add_executable(KinovaCollisionMonitoring
-    src/arm_controller.cpp
-    src/kinova_arm.cpp
-)
-
-target_link_libraries(KinovaCollisionMonitoring PRIVATE
-    KinovaArm
-    CollisionMonitoring
-    orocos-kdl
-    kdl_parser
-    ${orocos-kdl_LIBRARIES}
 )
 
 add_subdirectory(test)
