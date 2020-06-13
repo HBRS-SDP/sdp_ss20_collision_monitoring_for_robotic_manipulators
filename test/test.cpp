@@ -203,8 +203,8 @@ TEST_CASE( "4th test case sphere", "[Sphere - Capsule]" ) {
     Primitive *Sphere_1 = new Sphere(pose_1, radius_1);
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
-    std::cout << Sphere_1->getShortestDistance(Link_2) << std::endl;
-    std::cout << Link_2->getShortestDistance(Sphere_1) << std::endl;
+    //std::cout << Sphere_1->getShortestDistance(Link_2) << std::endl;
+    //std::cout << Link_2->getShortestDistance(Sphere_1) << std::endl;
 
     REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(5.9).margin(0.1) );
     REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(5.9).margin(0.1) );

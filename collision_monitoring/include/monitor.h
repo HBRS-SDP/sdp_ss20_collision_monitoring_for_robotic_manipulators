@@ -24,7 +24,7 @@ class Monitor
         Arm* arm; /* Arm to monitor */
         std::vector<Primitive*> obstacles; /* Obstacles in the workspace */
         
-        /** Collision monitorin with obstacles. 
+        /** Collision monitoring with obstacles. 
         *
         * This methods monitors the distance from one link of the arm 
         * to obstacles in the workspace. 
