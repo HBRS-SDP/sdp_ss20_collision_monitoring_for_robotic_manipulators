@@ -152,14 +152,14 @@ class Line{
  */
 class Capsule: public Primitive{
     protected:
-        float length; /* lenght of the capsule */
+        float length; /* length of the capsule */
         float radius; /* radius of the capsule */
         
     public:
         /** Constructor of Capsule class
         * 
         * @param pose start point of the line represented with a Matrix4d.
-        * @param length lenght of the capsule
+        * @param length length of the capsule
         * @param radius radius of the capsule
         */
         Capsule(Eigen::Matrix4d pose, double length, double radius);
@@ -167,9 +167,9 @@ class Capsule: public Primitive{
         /* Destructor of the class Capsule */
         ~Capsule();
 
-        /** Getter of lenght
+        /** Getter of length
         *
-        * @return the lenght of the capsule
+        * @return the length of the capsule
         */
         float getLength();
 
