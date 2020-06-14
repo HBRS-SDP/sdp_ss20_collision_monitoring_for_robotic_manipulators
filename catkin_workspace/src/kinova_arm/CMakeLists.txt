@@ -160,8 +160,13 @@ add_subdirectory(collision_monitoring)
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/kinova_arm_node.cpp)
 add_executable(KinovaCollisionMonitoring
-    src/arm_controller.cpp
-    src/kinova_CM_node.cpp
+  src/arm_controller.cpp
+  src/kinova_CM_node.cpp
+)
+
+add_executable(KinovaTestMonitoring
+  src/input_output_testing.cpp
+  src/arm_controller.cpp
 )
 
 ## Rename C++ executable without prefix
@@ -179,6 +184,14 @@ add_executable(KinovaCollisionMonitoring
 #   ${catkin_LIBRARIES}
 # )
 target_link_libraries(KinovaCollisionMonitoring PRIVATE
+  KinovaArm
+  CollisionMonitoring
+  orocos-kdl
+  kdl_parser
+  ${orocos-kdl_LIBRARIES}
+)
+
+target_link_libraries(KinovaTestMonitoring PRIVATE
   KinovaArm
   CollisionMonitoring
   orocos-kdl

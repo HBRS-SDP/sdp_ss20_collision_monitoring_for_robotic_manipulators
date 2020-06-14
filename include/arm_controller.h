@@ -61,8 +61,15 @@ class ArmController
          */
         void goalCallback(const geometry_msgs::Point::ConstPtr& msg);
 
+        /**
+         * Function that uses internal parameters to send instructions to arm
+         */
+        void controlLoop(void);
+
     private:
 
+        int numJoints;
+        std::vector<double> jointAngles;
         std::vector<std::vector<double>> objectDistance;
         std::vector<std::vector<double>> armDistances;
 
