@@ -2,3 +2,5 @@
 build
 python_scripts
 devel
+logs
+.catkin_tools
