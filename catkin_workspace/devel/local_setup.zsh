@@ -1,8 +1,1 @@
-#!/usr/bin/env zsh
-# generated from catkin/cmake/templates/local_setup.zsh.in
-
-CATKIN_SHELL=zsh
-
-# source setup.sh from same directory as this file
-_CATKIN_SETUP_DIR=$(builtin cd -q "`dirname "$0"`" > /dev/null && pwd)
-emulate -R zsh -c 'source "$_CATKIN_SETUP_DIR/setup.sh" --extend --local'
+/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/catkin_workspace/devel/.private/catkin_tools_prebuild/local_setup.zsh

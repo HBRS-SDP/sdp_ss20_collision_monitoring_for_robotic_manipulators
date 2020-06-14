@@ -1,8 +1,1 @@
-#!/usr/bin/env bash
-# generated from catkin/cmake/templates/setup.bash.in
-
-CATKIN_SHELL=bash
-
-# source setup.sh from same directory as this file
-_CATKIN_SETUP_DIR=$(builtin cd "`dirname "${BASH_SOURCE[0]}"`" > /dev/null && pwd)
-. "$_CATKIN_SETUP_DIR/setup.sh"
+/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/catkin_workspace/devel/.private/catkin_tools_prebuild/setup.bash
