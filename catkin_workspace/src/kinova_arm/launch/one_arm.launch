@@ -20,7 +20,7 @@
     <arg name="robot_name" default="my_$(arg arm)"/>
 
     <!-- Use trajectory controllers and MoveIt -->
-    <arg name="use_trajectory_controller" default="true"/>
+    <arg name="use_trajectory_controller" default="false"/>
 
     <!-- Gazebo parameters -->
     <arg name="use_sim_time" default="true"/>
