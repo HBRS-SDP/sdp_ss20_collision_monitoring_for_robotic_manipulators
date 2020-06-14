@@ -1,1 +1,0 @@
-/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/catkin_workspace/devel/.private/catkin_tools_prebuild/local_setup.zsh
