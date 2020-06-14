@@ -10,8 +10,8 @@ ArmController::ArmController(Monitor* monitorObject) {
     origin << 0, 0, 0, 1;
 
     goal = (currEndPose * origin).head(3);
-    objectDistances = monitor->monitorCollisionWithObjects();
-    armDistances = monitor->monitorCollisionWithArm();
+    objectDistances = monitor->distanceToObjects();
+    armDistances = monitor->distanceBetweenArmLinks();
 
     for(int i=0; i<numJoints; i++) {
         jointAngles.push_back(0.0);
@@ -45,8 +45,8 @@ std::vector<double> ArmController::controlLoop(void) {
     this->monitor->arm->updatePose(this->jointAngles);
     Eigen::Matrix4d currEndPose = monitor->arm->getPose();
     Eigen::Vector3d currEndPoint = (currEndPose * origin).head(3);
-    objectDistances = monitor->monitorCollisionWithObjects();
-    armDistances = monitor->monitorCollisionWithArm();
+    objectDistances = monitor->distanceToObjects();
+    armDistances = monitor->distanceBetweenArmLinks();
 
     return jointVelocities;
 }

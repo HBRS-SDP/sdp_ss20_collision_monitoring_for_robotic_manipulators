@@ -114,7 +114,7 @@ find_package(kdl_parser)
 catkin_package(
  INCLUDE_DIRS include
 #  LIBRARIES kinova_arm
- CATKIN_DEPENDS gazebo_ros_pkgs ros_kortex roscpp std_msgs sensor_msgs geometry_msgs
+#  CATKIN_DEPENDS gazebo_ros_pkgs ros_kortex roscpp std_msgs sensor_msgs geometry_msgs
 #  DEPENDS system_lib
 )
 
@@ -129,7 +129,6 @@ include_directories(
   include
   collision_monitoring/include
   /usr/local/include
-  /usr/local/lib
   /usr/include/eigen3
   /opt/ros/kinetic/include
   ${Eigen_INCLUDE_DIRS}

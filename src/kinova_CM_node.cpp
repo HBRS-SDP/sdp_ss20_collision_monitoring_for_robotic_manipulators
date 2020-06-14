@@ -24,9 +24,9 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "kinova_controller");
     ros::NodeHandle n;
     ros::Subscriber armSub = n.subscribe("my_gen3/joint_states", 1000, &ArmController::armCallback, &armController1);
-    ros::Subscriber goalSub = n.subscribe("kinova_controller/goal")
+    ros::Subscriber goalSub = n.subscribe("kinova_controller/goal", 1000, &ArmController::goalCallback, &armController1);
 
-    ros::Publisher armPub = n.advertise<>("", 1000);
+    ros::Publisher armPub = n.advertise<sensor_msgs::JointState>("kinova_controller/joint_commands", 1000);
     
     ros::Rate loop_rate(10);
 
