@@ -18,9 +18,6 @@
 #include "primitives.h"
 #include "arm.h"
 
-// the debug var to turn verbose on and off
-#define DEBUG
-
 
 /*
 TODO:
