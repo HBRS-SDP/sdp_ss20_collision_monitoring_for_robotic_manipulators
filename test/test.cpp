@@ -1,6 +1,10 @@
 // Pulled from https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
+
+// the debug var to turn verbose on and off
+#define DEBUG
+
 #include "catch.hpp"
 #include <vector>
 #include <Eigen/Core>
