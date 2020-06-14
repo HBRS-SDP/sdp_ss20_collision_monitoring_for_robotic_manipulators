@@ -78,6 +78,8 @@ class ArmController
          */
         void updateObstacles(const visualization_msgs::Marker::ConstPtr& msg);
 
+        std::vector<RvizObstacle*> rvizObstacles;
+
     private:
 
         int numJoints;
@@ -87,7 +89,7 @@ class ArmController
         std::vector<std::vector<double>> armDistances;
         Eigen::Vector4d origin;
 
-        std::vector<RvizObstacle*> rvizObstacles;
+
 
 };
 

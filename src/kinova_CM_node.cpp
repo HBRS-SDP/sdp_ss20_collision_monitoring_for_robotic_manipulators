@@ -8,6 +8,7 @@
 #include "ros/ros.h"
 #include "arm_controller.h"
 #include "sensor_msgs/JointState.h"
+#include "visualization_msgs/Marker.h"
 
 
 int main(int argc, char **argv)
@@ -29,6 +30,7 @@ int main(int argc, char **argv)
 
 
     ros::Publisher armPub = n.advertise<sensor_msgs::JointState>("kinova_controller/joint_commands", 1000);
+    ros::Publisher markersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/markers", 1000);
     
     ros::Rate loop_rate(10);
 
@@ -37,6 +39,9 @@ int main(int argc, char **argv)
 
     while(ros::ok()) {
         jointVelocities = armController1.controlLoop();
+        for(int i=0; i<armController1.rvizObstacles.size(); i++){
+            markersPub.publish(armController1.rvizObstacles[i]->marker);
+        }
         ros::spinOnce();
         loop_rate.sleep();
     }

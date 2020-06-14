@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
 
     ros::Publisher goalPub = n.advertise<geometry_msgs::Point>("kinova_controller/goal", 1000);
-    ros::Publisher obstaclePub = n.advertise<visualization_msgs::Marker>("kinova_controller/goal", 1000);
+    ros::Publisher obstaclePub = n.advertise<visualization_msgs::Marker>("kinova_controller/obstacles", 1000);
     
     ros::Rate loop_rate(10);
 
