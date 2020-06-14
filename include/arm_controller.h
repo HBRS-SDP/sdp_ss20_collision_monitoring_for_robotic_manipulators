@@ -64,14 +64,16 @@ class ArmController
         /**
          * Function that uses internal parameters to send instructions to arm
          */
-        void controlLoop(void);
+        std::vector<double> controlLoop(void);
 
     private:
 
         int numJoints;
+
         std::vector<double> jointAngles;
-        std::vector<std::vector<double>> objectDistance;
+        std::vector<std::vector<double>> objectDistances;
         std::vector<std::vector<double>> armDistances;
+        Eigen::Vector4d origin;
 
 };
 
