@@ -15,6 +15,7 @@
 #include <kdl_parser/kdl_parser.hpp>
 #include <kdl/frames.hpp>
 #include <kdl/frames_io.hpp>
+#include <kdl/chainiksolvervel_wdls.hpp>
 #include "primitives.h"
 #include "arm.h"
 
@@ -60,6 +61,12 @@ class KinovaArm: public Arm
 
         Eigen::Matrix4d  getPose(int jointNumber);
 
+        /// The KDL joint array to hold the joint angles
+        KDL::JntArray jointArray;
+        KDL::JntArray jointVels;
+
+        std::vector<double> ikVelocitySolver(KDL::Twist twist);
+
 
     private:
 
@@ -74,9 +81,6 @@ class KinovaArm: public Arm
 
         /// The KDL chain used for calculating kinematics
         KDL::Chain chain;
-
-        /// The KDL joint array to hold the joint angles
-        KDL::JntArray jointArray;
 
         /// Mathematical constants, declared in constructor for speed
         Eigen::Vector4d origin;

@@ -31,11 +31,13 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // initailise the chain solver and the joint array
     KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
     jointArray = KDL::JntArray(nJoints);
+    jointVels = KDL::JntArray(nJoints);
 
     // pass the joint angles from function input into the joint array
     for(int i=0; i<nJoints; i++)
     {
         jointArray(i) = 0.0;
+        jointVels(i) = 0.0;
     }
 
     // solve for the frame at the "link" of the chain for the given joint positions
@@ -208,5 +210,17 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
 
     // Return the final pose
     return finalPose;
+}
+
+std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
+
+    std::vector<double> jointVelocitiesOut;
+    KDL::ChainIkSolverVel_wdls ikSolver(chain);
+    ikSolver.CartToJnt(jointVels, twist, jointArray);
+    for (int i=0; i<jointVels.rows(); i++){
+        std::cout << "joint vel1:\n" << jointVels(i) << std::endl;
+        jointVelocitiesOut.push_back(jointVels(i));
+    }
+    return jointVelocitiesOut;
 }
 

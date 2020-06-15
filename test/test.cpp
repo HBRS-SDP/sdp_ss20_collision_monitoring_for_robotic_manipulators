@@ -303,3 +303,32 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
         REQUIRE( fabs((endPointLine - endPointLink).norm()) < 0.1);
     }
 }
+
+TEST_CASE("Kinova_arm test inverse kinematics", "[arm]") {
+    KinovaArm kinovaArm(urdf_filename);
+    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
+                                    deg2rad(30), deg2rad(30), deg2rad(30)};
+    kinovaArm.updatePose(testPose);
+
+    double x, y, z, alpha, beta, gamma;
+
+    x = 1;
+    y = 0;
+    z = 0;
+    alpha = 0;
+    beta = 0;
+    gamma = 0;
+
+
+    std::vector<double> output;
+    KDL::Vector pos(x, y, z);
+    KDL::Vector rot(alpha, beta, gamma);
+    KDL::Twist twist(pos, rot);
+
+    std::cout << "Twist:\n" << twist <<std::endl;
+    output = kinovaArm.ikVelocitySolver(twist);
+    std::cout << "Joint vel:\n";
+    for (int i=0; i<output.size(); i++) {
+        std::cout << "   " << output[i] << std::endl;
+    }
+}
