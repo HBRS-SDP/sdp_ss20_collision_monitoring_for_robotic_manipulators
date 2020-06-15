@@ -14,7 +14,7 @@ void Monitor::addObstacle(Primitive* obstacle) {
 }
 
 void Monitor::addObstacle(Arm* arm) {
-    // Adds every link of the arm (a primitve) to the obstacles vector.
+    // Adds every link of the arm (a primitive) to the obstacles vector.
     for (int i = 0; i < arm->links.size(); i++) {
         this->obstacles.push_back(arm->links[i]);
     }
