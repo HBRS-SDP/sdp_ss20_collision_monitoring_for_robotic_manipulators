@@ -71,7 +71,7 @@ class ArmController
         /**
          * Function that uses internal parameters to send instructions to arm
          */
-        std::vector<double> controlLoop(void);
+        KDL::Twist controlLoop(void);
 
         /**
          * A function that updates the obstacle poses or adds one if it doesn't exist
@@ -89,8 +89,6 @@ class ArmController
         std::vector<std::vector<double>> armDistances;
         Eigen::Vector4d origin;
         std::vector<Primitive*> obstaclesAllocated;
-
-
 
 };
 

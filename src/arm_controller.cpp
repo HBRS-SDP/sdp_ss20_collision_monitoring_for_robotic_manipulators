@@ -47,9 +47,9 @@ void ArmController::goalCallback(const geometry_msgs::Point::ConstPtr& msg) {
     std::cout << "\tNew goal: "<<this->goal<<std::endl;
 }
 
-std::vector<double> ArmController::controlLoop(void) {
+KDL::Twist ArmController::controlLoop(void) {
     // Variable for storing the resulting joint velocities
-    std::vector<double> jointVelocities;
+    double x, y, z, alpha, beta, gamma;
     // Update the current state to match real arm state
     this->monitor->arm->updatePose(this->jointAngles);
     Eigen::Matrix4d currEndPose = monitor->arm->getPose();
@@ -65,8 +65,19 @@ std::vector<double> ArmController::controlLoop(void) {
     std::cout << std::endl;
 
     // TODO the code for the object avoidance
+    x = 0;
+    y = 0;
+    z = 0;
+    alpha = 0;
+    beta = 0;
+    gamma = 0;
 
-    return jointVelocities;
+
+    
+    KDL::Vector pos(x, y, z);
+    KDL::Vector rot(alpha, beta, gamma);
+    KDL::Twist twist(pos, rot);
+    return twist;
 }
 
 void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& msg) {
