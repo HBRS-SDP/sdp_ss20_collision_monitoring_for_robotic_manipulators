@@ -29,10 +29,10 @@ ArmController::~ArmController() {
 
 void ArmController::armCallback(const sensor_msgs::JointState::ConstPtr& msg) {
     // copy the joint angles
-    std::cout << "armCallback:\n";
-    for (int i=0; i<msg->position.size(); i++) {
-        std::cout << msg->position[i] << std::endl;
-    }
+    // std::cout << "armCallback:\n";
+    // for (int i=0; i<msg->position.size(); i++) {
+    //     std::cout << msg->position[i] << std::endl;
+    // }
     jointAngles.assign(msg->position.begin(), msg->position.end());
 
 }
@@ -50,18 +50,19 @@ void ArmController::goalCallback(const geometry_msgs::Point::ConstPtr& msg) {
 std::vector<double> ArmController::controlLoop(void) {
     // Variable for storing the resulting joint velocities
     std::vector<double> jointVelocities;
-    std::cout << 1 <<std::endl;
     // Update the current state to match real arm state
     this->monitor->arm->updatePose(this->jointAngles);
-    std::cout << 2 <<std::endl;
     Eigen::Matrix4d currEndPose = monitor->arm->getPose();
-    std::cout << 3 <<std::endl;
     Eigen::Vector3d currEndPoint = (currEndPose * origin).head(3);
-    std::cout << 4 <<std::endl;
     objectDistances = monitor->distanceToObjects();
-    std::cout << 5 <<std::endl;
     armDistances = monitor->distanceBetweenArmLinks();
-    std::cout << 6 <<std::endl;
+    std::cout << "Distanced to objects:";
+    for (int i=0; i<objectDistances.size(); i++) {
+        for (int j=0; j<objectDistances[i].size(); j++) {
+            std::cout << "  " << objectDistances[i][j];
+        }
+    }
+    std::cout << std::endl;
 
     // TODO the code for the object avoidance
 
