@@ -22,6 +22,9 @@ ArmController::~ArmController() {
     for (int i=0; i<rvizObstacles.size();i++) {
         delete(rvizObstacles[i]);
     }
+    for (int i=0; i<obstaclesAllocated.size();i++) {
+        delete(obstaclesAllocated[i]);
+    }
 }
 
 void ArmController::armCallback(const sensor_msgs::JointState::ConstPtr& msg) {
@@ -80,8 +83,9 @@ void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& 
         if(newObstacle) {
             RvizObstacle* rvizObstacle = new RvizObstacle(msg, rvizObstacles.size());
             rvizObstacles.push_back(rvizObstacle);
-            Sphere sphere(rvizObstacle->pose, rvizObstacle->marker.scale.x);
-            monitor->addObstacle(&sphere);
+            Sphere* sphere = new Sphere(rvizObstacle->pose, rvizObstacle->marker.scale.x);
+            obstaclesAllocated.push_back(sphere);
+            monitor->addObstacle(sphere);
         }
     }
     else {

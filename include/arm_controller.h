@@ -88,6 +88,7 @@ class ArmController
         std::vector<std::vector<double>> objectDistances;
         std::vector<std::vector<double>> armDistances;
         Eigen::Vector4d origin;
+        std::vector<Primitive*> obstaclesAllocated;
 
 
 
