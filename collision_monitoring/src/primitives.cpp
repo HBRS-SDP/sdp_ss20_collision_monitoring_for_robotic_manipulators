@@ -289,7 +289,78 @@ Eigen::Vector3d Capsule::getShortestDirection(Primitive *primitive){
 
 Eigen::Vector3d Capsule::getShortestDirection(Capsule *capsule){
     Eigen::Vector3d shortestDirection, ownClosestPoint, obstacleClosestPoint;
+    Eigen::MatrixXd closestPoints(2, 3);
     
+    double lambdaM1, lambdaM2;
+    Eigen::Vector3d basePointObstacle, endPointObstacle, basePointOwn, endPointOwn;
+    Capsule *capsuleOwn;
+    Capsule *capsuleObstacle;
+
+    if(this->length > capsule->getLength()){
+        capsuleOwn = this;
+        capsuleObstacle = capsule;
+    }
+    else{
+        capsuleOwn = capsule;
+        capsuleObstacle = this;
+    }
+    
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector4d zDirectionOwn(0, 0, capsuleOwn->length, 1);
+    Eigen::Vector4d zDirectionObstacle(0, 0, capsuleObstacle->length, 1);
+
+    basePointOwn = (capsuleOwn->pose * origin).head(3);
+    endPointOwn  = (capsuleOwn->pose * zDirectionOwn).head(3);
+
+    Line axisOfSymmetryOwn(basePointOwn, endPointOwn);
+
+    basePointObstacle = (capsuleObstacle->pose * origin).head(3);
+    endPointObstacle  = (capsuleObstacle->pose * zDirectionObstacle).head(3);
+
+    Line axisOfSymmetryObstacle(basePointObstacle, endPointObstacle);
+
+
+    lambdaM1 = (basePointObstacle - basePointOwn).dot(endPointOwn - basePointOwn) / pow(capsuleOwn->getLength(), 2);
+    lambdaM2 = (endPointObstacle - basePointOwn).dot(endPointOwn - basePointOwn) / pow(capsuleOwn->getLength(), 2);
+
+    if(lambdaM1 >= 0 && lambdaM1 <= 1){
+        if(lambdaM2 >=0 && lambdaM2 <= 1){
+            //m1 and m2 inside
+            closestPoints = axisOfSymmetryOwn.getClosestPointsBetweenLines(axisOfSymmetryObstacle);
+            ownClosestPoint = closestPoints.row(0);
+            obstacleClosestPoint = closestPoints.row(1);
+        }else{
+            //m1 inside
+            if( axisOfSymmetryOwn.getShortestDistanceToPoint(basePointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToPoint(endPointOwn) ){
+                closestPoints = axisOfSymmetryOwn.getClosestPointsBetweenLines(axisOfSymmetryObstacle);
+                ownClosestPoint = closestPoints.row(0);
+                obstacleClosestPoint = closestPoints.row(1);
+            }else{
+                closestPoints = axisOfSymmetryObstacle.getClosestPointsBetweenLines(axisOfSymmetryOwn);
+                obstacleClosestPoint = closestPoints.row(0);
+                ownClosestPoint = closestPoints.row(1);
+            }
+        }
+    }else if(lambdaM2 >=0 && lambdaM2 <= 1){
+        //m2 inside
+        if( axisOfSymmetryOwn.getShortestDistanceToPoint(endPointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToPoint(basePointOwn) ){
+            closestPoints = axisOfSymmetryOwn.getClosestPointsBetweenLines(axisOfSymmetryObstacle);
+            ownClosestPoint = closestPoints.row(0);
+            obstacleClosestPoint = closestPoints.row(1);
+        }else{
+            closestPoints = axisOfSymmetryObstacle.getClosestPointsBetweenLines(axisOfSymmetryOwn);
+            obstacleClosestPoint = closestPoints.row(0);
+            ownClosestPoint = closestPoints.row(1);
+        }
+    }else{
+        //m1 and m2 outside
+        closestPoints = axisOfSymmetryObstacle.getClosestPointsBetweenLines(axisOfSymmetryOwn);
+        obstacleClosestPoint = closestPoints.row(0);
+        ownClosestPoint = closestPoints.row(1);
+    }
+
+    shortestDirection = obstacleClosestPoint - ownClosestPoint;
+
     return shortestDirection;
 }
 
