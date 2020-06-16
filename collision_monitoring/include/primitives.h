@@ -30,7 +30,7 @@ class Sphere;
 class Primitive
 {    
     public:
-        /** Performs a dinamic cast to overload the distance functions
+        /** Performs a dynamic cast to overload the distance functions
         * 
         * This method takes an object that inherits from primitive and
         * performs a dynamic cast to call the correct getShortestDistance
@@ -71,6 +71,38 @@ class Primitive
         * @return the closest distance between the primitive and cylinder
         */
         //virtual double getShortestDistance(Cylinder *cylinder) = 0;
+
+        /** Performs a dynamic cast to overload the direction functions
+        * 
+        * This method takes an object that inherits from primitive and
+        * performs a dynamic cast to call the correct getShortestDirection
+        * method depending on the class of the shape. returns a Vector3d.
+        *
+        * @param primitive address of the primitive object.
+        * @return a vector in 3D that represents the closes direction between this and the second primitive.
+        */
+        virtual Eigen::Vector3d getShortestDirection(Primitive *primitive) = 0;
+
+        /** Finds the shortest distance between this primitive and a Capsule primitive
+        * 
+        * This method takes a capsule object and returns the closest direction
+        * between this primitive and a capsule object. returns a Vector3d.
+        *
+        * @param capsule address of the primitive object
+        * @return a vector in 3D that represents the closes direction between the primitive and capsule
+        */
+
+        virtual Eigen::Vector3d getShortestDirection(Capsule *capsule) = 0;
+        
+        /** Finds the shortest distance between this primitive and a Sphere primitive
+        * 
+        * This method takes a capsule object and returns the closest direction
+        * between this primitive and a sphere object. returns a Vector3d.
+        *
+        * @param sphere address of the primitive object
+        * @return a vector in 3D that represents the closes direction between the primitive and sphere
+        */
+        virtual Eigen::Vector3d getShortestDirection(Sphere *sphere) = 0;
 
         Eigen::Matrix4d pose; /* pose of the primitive */
 
@@ -121,6 +153,16 @@ class Line{
         * @return A vector3d object with the end point.
         */
         Eigen::Vector3d getEndPoint();
+
+        /** Finds the closest point on this Line to a point
+        *
+        * This method takes a point and returns the closest point
+        * on this Line and the given point. returns a Vector3d.
+        * 
+        * @param point a point space represented with a Vector3d\
+        * @return the closest point on the Line to point
+        */
+        Eigen::Vector3d getClosestPointToPoint(Eigen::Vector3d point);
 
         /** Finds the shortest distance between this Line and a point
         *
@@ -183,7 +225,10 @@ class Capsule: public Primitive{
         double getShortestDistance(Primitive *primitive);
         double getShortestDistance(Capsule *capsule);
         double getShortestDistance(Sphere *sphere);
-        // std::vector<double> getClosestPoint(std::vector<double>);
+        
+        Eigen::Vector3d getShortestDirection(Primitive *primitive);
+        Eigen::Vector3d getShortestDirection(Capsule *capsule);
+        Eigen::Vector3d getShortestDirection(Sphere *sphere);
 };
 
 // class Cylinder: public Primitive{
@@ -225,7 +270,10 @@ class Sphere: public Primitive{
         double getShortestDistance(Primitive *primitive);
         double getShortestDistance(Capsule *capsule);
         double getShortestDistance(Sphere *sphere);
-        // std::vector<double> getClosestPoint(std::vector<double>);
+
+        Eigen::Vector3d getShortestDirection(Primitive *primitive);
+        Eigen::Vector3d getShortestDirection(Capsule *capsule);
+        Eigen::Vector3d getShortestDirection(Sphere *sphere);
 };
 
 

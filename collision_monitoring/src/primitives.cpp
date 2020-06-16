@@ -32,6 +32,11 @@ Eigen::Vector3d Line::projectionPoint(Eigen::Vector3d point){
     return projectedPoint;
 }
 
+Eigen::Vector3d Line::getClosestPointToPoint(Eigen::Vector3d point){
+    Eigen::Vector3d closestPoint;
+    return closestPoint;
+}
+
 double Line::getShortestDistanceToPoint(Eigen::Vector3d point){
     Eigen::Vector3d m;
     double lambda, x, y, z, p1, p2, length;
@@ -235,6 +240,30 @@ double Capsule::getShortestDistance(Sphere *sphere){
     return shortestDistance;
 }
 
+Eigen::Vector3d Capsule::getShortestDirection(Primitive *primitive){
+    Capsule *cylinder = dynamic_cast<Capsule*>(primitive);
+    if(cylinder){
+        this->getShortestDirection(cylinder);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            this->getShortestDirection(sphere);
+        }else{
+
+        }
+    }
+}
+
+Eigen::Vector3d Capsule::getShortestDirection(Capsule *capsule){
+    Eigen::Vector3d shortestDirection;
+    return shortestDirection;
+}
+
+Eigen::Vector3d Capsule::getShortestDirection(Sphere *sphere){
+    Eigen::Vector3d shortestDirection;
+    return shortestDirection;
+}
+
 Sphere::Sphere(Eigen::Matrix4d pose, double radius){
     this->pose = pose;
     this->radius = radius;
@@ -290,17 +319,66 @@ double Sphere::getShortestDistance(Capsule *cylinder){
 
 double Sphere::getShortestDistance(Sphere *sphere){
     double shortestDistance;
-    Eigen::Vector3d obstacleSphereCenter, myCenter;
+    Eigen::Vector3d obstacleSphereCenter, ownCenter;
     Eigen::Vector4d origin(0, 0, 0, 1);
 
     obstacleSphereCenter = (sphere->pose * origin).head(3);
-    myCenter = (this->pose * origin).head(3);
+    ownCenter = (this->pose * origin).head(3);
 
-    shortestDistance = (obstacleSphereCenter - myCenter).norm() - sphere->getRadius() - this->radius;
+    shortestDistance = (obstacleSphereCenter - ownCenter).norm() - sphere->getRadius() - this->radius;
 
     #ifdef DEBUG
         std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
     #endif //DEBUG
 
     return shortestDistance;
+}
+
+Eigen::Vector3d Sphere::getShortestDirection(Primitive *primitive){
+    Capsule *cylinder = dynamic_cast<Capsule*>(primitive);
+    if(cylinder){
+        this->getShortestDirection(cylinder);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            this->getShortestDirection(sphere);
+        }else{
+
+        }
+    }
+}
+
+Eigen::Vector3d Sphere::getShortestDirection(Capsule *capsule){
+    Eigen::Vector3d shortestDirection;
+
+    double shortestDistance = 0;
+    Eigen::Vector3d basePoint, endPoint, sphereCenter;
+
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector4d zDirectionCylinder(0, 0, cylinder->getLength(), 1);
+
+    basePoint = (cylinder->pose * origin).head(3);
+    endPoint  = (cylinder->pose * zDirectionCylinder).head(3);
+
+    Line axisOfSymmetryCylinder(basePoint, endPoint);
+    
+    sphereCenter = (this->pose * origin).head(3);
+
+    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToPoint(sphereCenter) - cylinder->getRadius() - this->getRadius();
+
+
+    return shortestDirection;
+}
+
+Eigen::Vector3d Sphere::getShortestDirection(Sphere *sphere){
+    Eigen::Vector3d shortestDirection;
+    Eigen::Vector3d obstacleSphereCenter, ownCenter;
+    Eigen::Vector4d origin(0, 0, 0, 1);
+
+    obstacleSphereCenter = (sphere->pose * origin).head(3);
+    ownCenter = (this->pose * origin).head(3);
+
+    shortestDirection = obstacleSphereCenter - ownCenter;    
+
+    return shortestDirection;
 }
