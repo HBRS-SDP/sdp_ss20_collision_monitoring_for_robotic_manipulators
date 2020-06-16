@@ -265,6 +265,22 @@ Eigen::Vector3d Capsule::getShortestDirection(Capsule *capsule){
 
 Eigen::Vector3d Capsule::getShortestDirection(Sphere *sphere){
     Eigen::Vector3d shortestDirection;
+    Eigen::Vector3d basePoint, endPoint, sphereCenter, closestPoint;
+
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector4d zDirectionCapsule(0, 0, this->length, 1);
+
+    basePoint = (this->pose * origin).head(3);
+    endPoint  = (this->pose * zDirectionCapsule).head(3);
+
+    Line axisOfSymmetryCapsule(basePoint, endPoint);
+    
+    sphereCenter = (sphere->pose * origin).head(3);
+
+    closestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(sphereCenter);
+
+    shortestDirection = closestPoint - sphereCenter;
+
     return shortestDirection;
 }
 
