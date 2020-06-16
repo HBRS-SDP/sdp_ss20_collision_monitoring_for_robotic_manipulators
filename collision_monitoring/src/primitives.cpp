@@ -61,10 +61,35 @@ Eigen::Vector3d Line::getClosestPointToPoint(Eigen::Vector3d point){
     return closestPoint;
 }
 
-Eigen::Vector3d Line::getClosestPointsBetweenLines(Line line){
+Eigen::MatrixXd Line::getClosestPointsBetweenLines(Line line){
+    Eigen::MatrixXd closestPoints(2, 3);
     Eigen::Vector3d ownclosestPoint, obstacleClosestPoint;
+    Eigen::Vector3d obstacleProjectedClosestPoint;
 
-    return ownclosestPoint;
+    Eigen::Vector3d basePointProjected, endPointProjected, midPoint;
+    double shortestDistance;
+
+    basePointProjected = this->projectionPoint( line.getBasePoint() );
+    endPointProjected = this->projectionPoint( line.getEndPoint() );
+    midPoint =  (this->endPoint + this->basePoint) / 2;
+
+    #ifdef DEBUG
+        std::cout <<  "basePoint: " << std::endl << line.getBasePoint() << std::endl;
+        std::cout <<  "endPoint: " << std::endl << line.getEndPoint() << std::endl;
+        std::cout <<  "basePointProjected: " << std::endl << basePointProjected << std::endl;
+        std::cout <<  "endPointProjected: " << std::endl << endPointProjected << std::endl;
+    #endif //DEBUG
+
+    Line projectedLine(basePointProjected, endPointProjected);
+    
+    obstacleProjectedClosestPoint = projectedLine.getClosestPointToPoint(midPoint);
+    obstacleClosestPoint = line.getClosestPointToPoint(obstacleProjectedClosestPoint);
+    ownclosestPoint = line.getClosestPointToPoint(obstacleClosestPoint);
+
+    closestPoints.row(0) = ownclosestPoint;
+    closestPoints.row(1) = obstacleClosestPoint;
+
+    return closestPoints;
 }
 
 double Line::getShortestDistanceToPoint(Eigen::Vector3d point){

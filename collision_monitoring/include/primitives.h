@@ -172,7 +172,7 @@ class Line{
         * @param line a line represented with a Vector3d\
         * @return the closests points on this line and on line
         */
-        Eigen::Vector3d getClosestPointsBetweenLines(Line line);
+        Eigen::MatrixXd getClosestPointsBetweenLines(Line line);
 
         /** Finds the shortest distance between this Line and a point
         *
