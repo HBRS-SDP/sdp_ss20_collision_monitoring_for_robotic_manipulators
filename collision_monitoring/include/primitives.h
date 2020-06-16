@@ -81,7 +81,7 @@ class Primitive
         * @param primitive address of the primitive object.
         * @return a vector in 3D that represents the closes direction between this and the second primitive.
         */
-        virtual Eigen::Vector3d getShortestDirection(Primitive *primitive) = 0;
+        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive) = 0;
 
         /** Finds the shortest distance between this primitive and a Capsule primitive
         * 
@@ -92,7 +92,7 @@ class Primitive
         * @return a vector in 3D that represents the closes direction between the primitive and capsule
         */
 
-        virtual Eigen::Vector3d getShortestDirection(Capsule *capsule) = 0;
+        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule) = 0;
         
         /** Finds the shortest distance between this primitive and a Sphere primitive
         * 
@@ -102,7 +102,7 @@ class Primitive
         * @param sphere address of the primitive object
         * @return a vector in 3D that represents the closes direction between the primitive and sphere
         */
-        virtual Eigen::Vector3d getShortestDirection(Sphere *sphere) = 0;
+        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere) = 0;
 
         Eigen::Matrix4d pose; /* pose of the primitive */
 
@@ -236,9 +236,9 @@ class Capsule: public Primitive{
         double getShortestDistance(Capsule *capsule);
         double getShortestDistance(Sphere *sphere);
         
-        Eigen::Vector3d getShortestDirection(Primitive *primitive);
-        Eigen::Vector3d getShortestDirection(Capsule *capsule);
-        Eigen::Vector3d getShortestDirection(Sphere *sphere);
+        void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
+        void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
+        void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere);
 };
 
 // class Cylinder: public Primitive{
@@ -281,9 +281,9 @@ class Sphere: public Primitive{
         double getShortestDistance(Capsule *capsule);
         double getShortestDistance(Sphere *sphere);
 
-        Eigen::Vector3d getShortestDirection(Primitive *primitive);
-        Eigen::Vector3d getShortestDirection(Capsule *capsule);
-        Eigen::Vector3d getShortestDirection(Sphere *sphere);
+        void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
+        void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
+        void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere);
 };
 
 

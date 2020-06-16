@@ -273,22 +273,23 @@ double Capsule::getShortestDistance(Sphere *sphere){
     return shortestDistance;
 }
 
-Eigen::Vector3d Capsule::getShortestDirection(Primitive *primitive){
+void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
     Capsule *capsule = dynamic_cast<Capsule*>(primitive);
     if(capsule){
-        this->getShortestDirection(capsule);
+        this->getShortestDirection(shortestDirection, capsule);
     }else{
         Sphere *sphere = dynamic_cast<Sphere*>(primitive);
         if(sphere){
-            this->getShortestDirection(sphere);
+            this->getShortestDirection(shortestDirection, sphere);
         }else{
 
         }
     }
 }
 
-Eigen::Vector3d Capsule::getShortestDirection(Capsule *capsule){
-    Eigen::Vector3d shortestDirection, ownClosestPoint, obstacleClosestPoint;
+void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule){
+    //Eigen::Vector3d shortestDirection;
+    Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
     Eigen::MatrixXd closestPoints(2, 3);
     
     double lambdaM1, lambdaM2;
@@ -361,11 +362,11 @@ Eigen::Vector3d Capsule::getShortestDirection(Capsule *capsule){
 
     shortestDirection = obstacleClosestPoint - ownClosestPoint;
 
-    return shortestDirection;
+    //return shortestDirection;
 }
 
-Eigen::Vector3d Capsule::getShortestDirection(Sphere *sphere){
-    Eigen::Vector3d shortestDirection;
+void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere){
+    //Eigen::Vector3d shortestDirection;
     Eigen::Vector3d basePoint, endPoint, sphereCenter, closestPoint;
 
     Eigen::Vector4d origin(0, 0, 0, 1);
@@ -380,7 +381,7 @@ Eigen::Vector3d Capsule::getShortestDirection(Sphere *sphere){
     closestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(sphereCenter);
     shortestDirection = closestPoint - sphereCenter;
 
-    return shortestDirection;
+    //return shortestDirection;
 }
 
 Sphere::Sphere(Eigen::Matrix4d pose, double radius){
@@ -453,22 +454,22 @@ double Sphere::getShortestDistance(Sphere *sphere){
     return shortestDistance;
 }
 
-Eigen::Vector3d Sphere::getShortestDirection(Primitive *primitive){
+void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
     Capsule *capsule = dynamic_cast<Capsule*>(primitive);
     if(capsule){
-        this->getShortestDirection(capsule);
+        this->getShortestDirection(shortestDirection, capsule);
     }else{
         Sphere *sphere = dynamic_cast<Sphere*>(primitive);
         if(sphere){
-            this->getShortestDirection(sphere);
+            this->getShortestDirection(shortestDirection, sphere);
         }else{
 
         }
     }
 }
 
-Eigen::Vector3d Sphere::getShortestDirection(Capsule *capsule){
-    Eigen::Vector3d shortestDirection;
+void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule){
+    //Eigen::Vector3d shortestDirection;
     Eigen::Vector3d basePoint, endPoint, sphereCenter, closestPoint;
 
     Eigen::Vector4d origin(0, 0, 0, 1);
@@ -483,18 +484,25 @@ Eigen::Vector3d Sphere::getShortestDirection(Capsule *capsule){
     closestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(sphereCenter);
     shortestDirection = closestPoint - sphereCenter;
 
-    return shortestDirection;
+    //return shortestDirection;
 }
 
-Eigen::Vector3d Sphere::getShortestDirection(Sphere *sphere){
-    Eigen::Vector3d shortestDirection;
+void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere){
+
     Eigen::Vector3d obstacleSphereCenter, ownCenter;
     Eigen::Vector4d origin(0, 0, 0, 1);
+
+    std::cout << "ALAN NNNNNNNN" << std::endl;
 
     obstacleSphereCenter = (sphere->pose * origin).head(3);
     ownCenter = (this->pose * origin).head(3);
 
     shortestDirection = obstacleSphereCenter - ownCenter;    
 
-    return shortestDirection;
+    std::cout << obstacleSphereCenter << std::endl;
+    std::cout << ownCenter << std::endl;
+    std::cout << shortestDirection << std::endl;
+    std::cout << shortestDirection.norm() << std::endl;
+
+
 }
