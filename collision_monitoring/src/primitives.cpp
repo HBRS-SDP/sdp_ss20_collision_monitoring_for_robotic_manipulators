@@ -65,7 +65,7 @@ double Line::getShortestDistanceToPoint(Eigen::Vector3d point){
     Eigen::Vector3d closestPoint;
     double distance = 0;
     
-    this->getClosestPointToPoint(point);
+    closestPoint = this->getClosestPointToPoint(point);
 
     distance = (point - closestPoint).norm();
     
@@ -354,9 +354,7 @@ Eigen::Vector3d Sphere::getShortestDirection(Primitive *primitive){
 
 Eigen::Vector3d Sphere::getShortestDirection(Capsule *capsule){
     Eigen::Vector3d shortestDirection;
-
-    double shortestDistance = 0;
-    Eigen::Vector3d basePoint, endPoint, sphereCenter;
+    Eigen::Vector3d basePoint, endPoint, sphereCenter, closestPoint;
 
     Eigen::Vector4d origin(0, 0, 0, 1);
     Eigen::Vector4d zDirectionCapsule(0, 0, capsule->getLength(), 1);
@@ -368,8 +366,9 @@ Eigen::Vector3d Sphere::getShortestDirection(Capsule *capsule){
     
     sphereCenter = (this->pose * origin).head(3);
 
-    shortestDistance = axisOfSymmetryCapsule.getShortestDistanceToPoint(sphereCenter) - capsule->getRadius() - this->getRadius();
+    closestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(sphereCenter);
 
+    shortestDirection = closestPoint - sphereCenter;
 
     return shortestDirection;
 }
