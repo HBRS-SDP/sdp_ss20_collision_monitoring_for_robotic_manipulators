@@ -63,6 +63,17 @@ Eigen::Vector3d Line::getClosestPointToPoint(Eigen::Vector3d point){
 
 Eigen::Vector3d Line::getClosestPointToLine(Line line){
     Eigen::Vector3d closestPoint;
+    Eigen::Vector3d basePointProjected, endPointProjected, midPoint;
+    double shortestDistance;
+
+    basePointProjected = this->projectionPoint( line.getBasePoint() );
+    endPointProjected = this->projectionPoint( line.getEndPoint() );
+    midPoint =  (this->endPoint + this->basePoint) / 2;
+
+    Line projectedLine(basePointProjected, endPointProjected);
+    
+    closestPoint = projectedLine.getClosestPointToPoint(midPoint);
+
     return closestPoint;
 }
 
