@@ -164,15 +164,15 @@ class Line{
         */
         Eigen::Vector3d getClosestPointToPoint(Eigen::Vector3d point);
 
-        /** Finds the closest point on this Line to another Line
+        /** Finds the closest points on this Line and on another Line
         *
         * This method takes a point and returns the closest point
         * on this Line and the given line. returns a Vector3d.
         * 
-        * @param point a point space represented with a Vector3d\
-        * @return the closest point on this Line to line
+        * @param line a line represented with a Vector3d\
+        * @return the closests points on this line and on line
         */
-        Eigen::Vector3d getClosestPointToLine(Line line);
+        Eigen::Vector3d getClosestPointsBetweenLines(Line line);
 
         /** Finds the shortest distance between this Line and a point
         *
