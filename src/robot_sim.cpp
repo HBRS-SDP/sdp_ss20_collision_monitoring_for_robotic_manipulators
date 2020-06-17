@@ -33,7 +33,7 @@ class KinovaSimulator
             ros::NodeHandle np;
 
             np.param<std::string>("/velocity_topic", inputTopic, "joint_command");
-            np.param<std::string>("/joint_state_topic", outputTopic, "joint_state");
+            np.param<std::string>("/joint_state_topic", outputTopic, "joint_states");
         
             curTime = ros::Time::now().toNSec();
             prevTime = curTime;
@@ -41,7 +41,6 @@ class KinovaSimulator
                 jointStates.velocity.push_back(0.0);
                 jointStates.position.push_back(0.0);
             }
-            std::cout << "inputTopic: " << inputTopic << std::endl;
 
             ros::NodeHandle n;
 

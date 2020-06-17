@@ -24,9 +24,9 @@ int main(int argc, char **argv)
     std::string jointVelocityTopic;
     // setup the first monitor function
     n.param<std::string>(ros::this_node::getName()+"/urdf_model", modelPath, "./urdf/GEN3_URDF_V12.urdf");
-    n.param<std::string>(ros::this_node::getName()+"/input_joint_topic", jointStatesTopic, "my_gen3/joint_states");
+    n.param<std::string>(ros::this_node::getName()+"/joint_state_topic", jointStatesTopic, "joint_states");
     n.param<std::string>(ros::this_node::getName()+"/goal_topic", goalTopic, ros::this_node::getName()+"/goal");
-    n.param<std::string>(ros::this_node::getName()+"/output_joint_topic", jointVelocityTopic, ros::this_node::getName()+"/joint_commands");
+    n.param<std::string>(ros::this_node::getName()+"/velocity_topic", jointVelocityTopic, ros::this_node::getName()+"/joint_command");
 
     std::string model = modelPath;
     KinovaArm arm1(model);
