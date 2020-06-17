@@ -439,13 +439,11 @@ double Sphere::getShortestDistance(Capsule *capsule){
 
 double Sphere::getShortestDistance(Sphere *sphere){
     double shortestDistance;
-    Eigen::Vector3d obstacleSphereCenter, ownCenter;
-    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector3d shortestDirection;
+    
+    this->getShortestDirection(shortestDirection ,sphere);
 
-    obstacleSphereCenter = (sphere->pose * origin).head(3);
-    ownCenter = (this->pose * origin).head(3);
-
-    shortestDistance = (obstacleSphereCenter - ownCenter).norm() - sphere->getRadius() - this->radius;
+    shortestDistance = shortestDirection.norm() - sphere->getRadius() - this->radius;
 
     #ifdef DEBUG
         std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
@@ -488,7 +486,6 @@ void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *c
 }
 
 void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere){
-
     Eigen::Vector3d obstacleSphereCenter, ownCenter;
     Eigen::Vector4d origin(0, 0, 0, 1);
 
@@ -503,6 +500,4 @@ void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sp
         std::cout << "shortest direction: " << shortestDirection << std::endl;
         std::cout << "shortest direction norm: " << shortestDirection.norm() << std::endl;
     #endif //DEBUG
-
-
 }
