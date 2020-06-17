@@ -44,10 +44,10 @@ TEST_CASE( "1st test case", "[Capsule - Capsule]" ) {
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
     Link_1->getShortestDirection(shortestDirection, Link_2);
-    std::cout << shortestDirection << std::endl;
-    std::cout << shortestDirection.norm() << std::endl;
+    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
+    Link_2->getShortestDirection(shortestDirection, Link_1);
+    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
     
-
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(15.007002100700248).margin(0.001) );
 }
 

@@ -321,14 +321,7 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *
         ownClosestPoint = closestPoints.row(1);
     }
     
-
-
-    std::cout << closestPoints << std::endl;
-    std::cout << obstacleClosestPoint << ownClosestPoint << std::endl;
-
     shortestDirection = obstacleClosestPoint - ownClosestPoint;
-
-    //return shortestDirection;
 }
 
 void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere){
