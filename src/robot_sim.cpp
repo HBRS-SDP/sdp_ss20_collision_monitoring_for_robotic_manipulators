@@ -41,6 +41,7 @@ class KinovaSimulator
                 jointStates.velocity.push_back(0.0);
                 jointStates.position.push_back(0.0);
             }
+            std::cout << "inputTopic: " << inputTopic << std::endl;
 
             ros::NodeHandle n;
 
@@ -75,7 +76,7 @@ int main(int argc, char **argv)
 
 
     // Create the armController class based off the first monitor
-    KinovaSimulator kinovaSimulator();
+    KinovaSimulator kinovaSimulator = KinovaSimulator();
 
     ros::spin();
 
