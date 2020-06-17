@@ -142,83 +142,17 @@ double Capsule::getShortestDistance(Primitive *primitive){
 
 double Capsule::getShortestDistance(Capsule *capsule){    
     double shortestDistance = 0;
-    double lambdaM1, lambdaM2;
-    Eigen::Vector3d basePointObstacle, endPointObstacle, basePointOwn, endPointOwn;
-    Capsule *capsuleOwn;
-    Capsule *capsuleObstacle;
+    Eigen::Vector3d shortestDirection;
 
-    if(this->length > capsule->getLength()){
-        capsuleOwn = this;
-        capsuleObstacle = capsule;
-    }
-    else{
-        capsuleOwn = capsule;
-        capsuleObstacle = this;
-    }
-    
-    Eigen::Vector4d origin(0, 0, 0, 1);
-    Eigen::Vector4d zDirectionOwn(0, 0, capsuleOwn->length, 1);
-    Eigen::Vector4d zDirectionObstacle(0, 0, capsuleObstacle->length, 1);
+    this->getShortestDirection(shortestDirection, capsule);
 
-    basePointOwn = (capsuleOwn->pose * origin).head(3);
-    endPointOwn  = (capsuleOwn->pose * zDirectionOwn).head(3);
-
-    Line axisOfSymmetryOwn(basePointOwn, endPointOwn);
-
-    basePointObstacle = (capsuleObstacle->pose * origin).head(3);
-    endPointObstacle  = (capsuleObstacle->pose * zDirectionObstacle).head(3);
-
-    Line axisOfSymmetryObstacle(basePointObstacle, endPointObstacle);
-
-
-    lambdaM1 = (basePointObstacle - basePointOwn).dot(endPointOwn - basePointOwn) / pow(capsuleOwn->getLength(), 2);
-    lambdaM2 = (endPointObstacle - basePointOwn).dot(endPointOwn - basePointOwn) / pow(capsuleOwn->getLength(), 2);
-
-    if(lambdaM1 >= 0 && lambdaM1 <= 1){
-        if(lambdaM2 >=0 && lambdaM2 <= 1){
-            //m1 and m2 inside
-            shortestDistance = axisOfSymmetryOwn.getShortestDistanceToLine(axisOfSymmetryObstacle);
-        }else{
-            // //m1 inside
-            #ifdef DEBUG
-                std::cout << "m1 inside" << std::endl;
-                std::cout << basePointObstacle << std::endl;
-                std::cout << axisOfSymmetryOwn.getShortestDistanceToPoint(basePointObstacle) << std::endl;
-                std::cout << axisOfSymmetryObstacle.getShortestDistanceToPoint(endPointOwn) << std::endl;
-            #endif //DEBUG
-            if( axisOfSymmetryOwn.getShortestDistanceToPoint(basePointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToPoint(endPointOwn) ){
-                shortestDistance = axisOfSymmetryOwn.getShortestDistanceToLine(axisOfSymmetryObstacle);
-            }else{
-                shortestDistance = axisOfSymmetryObstacle.getShortestDistanceToLine(axisOfSymmetryOwn);
-            }
-        }
-    }else if(lambdaM2 >=0 && lambdaM2 <= 1){
-        //m2 inside
-        #ifdef DEBUG
-            std::cout << "m2 inside" << std::endl;
-            std::cout << endPointObstacle << std::endl;
-            std::cout << axisOfSymmetryOwn.getShortestDistanceToPoint(endPointObstacle) << std::endl;
-            std::cout << axisOfSymmetryObstacle.getShortestDistanceToPoint(basePointOwn) << std::endl;
-        #endif //DEBUG
-        if( axisOfSymmetryOwn.getShortestDistanceToPoint(endPointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToPoint(basePointOwn) ){
-            shortestDistance = axisOfSymmetryOwn.getShortestDistanceToLine(axisOfSymmetryObstacle);
-        }else{
-            shortestDistance = axisOfSymmetryObstacle.getShortestDistanceToLine(axisOfSymmetryOwn);
-        }
-    }else{
-        //m1 and m2 outside
-        shortestDistance = axisOfSymmetryObstacle.getShortestDistanceToLine(axisOfSymmetryOwn);
-    }
-
-    shortestDistance = shortestDistance - capsuleOwn->getRadius() - capsuleObstacle->getRadius();
+    shortestDistance = shortestDirection.norm() - this->radius - capsule->getRadius();
 
     #ifdef DEBUG
-        std::cout << "st_c: " << std::endl << basePoint << std::endl;
-        std::cout << "ed_c: " << std::endl << endPoint << std::endl;#
-        std::cout << "st_o: " << std::endl << startObstacle << std::endl;
-        std::cout << "ed_o: " << std::endl << endObstacle << std::endl;
         std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
     #endif //DEBUG
+
+    return shortestDistance;
 
     return shortestDistance;
 }
