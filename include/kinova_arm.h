@@ -80,7 +80,8 @@ class KinovaArm: public Arm
         std::vector<KDL::Frame*> poses;
 
         /// The KDL chain used for calculating kinematics
-        KDL::Chain chain;
+        KDL::Chain fkChain;
+        KDL::Chain ikChain;
 
         /// Mathematical constants, declared in constructor for speed
         Eigen::Vector4d origin;

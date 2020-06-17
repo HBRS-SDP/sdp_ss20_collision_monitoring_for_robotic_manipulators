@@ -308,6 +308,8 @@ TEST_CASE("Kinova_arm test inverse kinematics", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
     std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
                                     deg2rad(30), deg2rad(30), deg2rad(30)};
+    std::vector<double> outputPose = {0.768989, 2.89724, -0.913496, -5.39591, -1.04212,
+                                      2.87854, 0.806753};
     kinovaArm.updatePose(testPose);
 
     double x, y, z, alpha, beta, gamma;
@@ -324,11 +326,12 @@ TEST_CASE("Kinova_arm test inverse kinematics", "[arm]") {
     KDL::Vector pos(x, y, z);
     KDL::Vector rot(alpha, beta, gamma);
     KDL::Twist twist(pos, rot);
+    double difference;
 
-    std::cout << "Twist:\n" << twist <<std::endl;
     output = kinovaArm.ikVelocitySolver(twist);
-    std::cout << "Joint vel:\n";
     for (int i=0; i<output.size(); i++) {
         std::cout << "   " << output[i] << std::endl;
+        difference += fabs(output[i]- outputPose[i]);
     }
+    REQUIRE( difference < 0.001);
 }

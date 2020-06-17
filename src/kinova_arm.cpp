@@ -13,8 +13,9 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     }
 
     // Convert the tree to a chain and get the number of joints
-    armTree.getChain("base_link", "EndEffector_Link", chain);
-    nJoints = chain.getNrOfJoints();
+    armTree.getChain("base_link", "EndEffector_Link", fkChain);
+    armTree.getChain("base_link", "EndEffector_Link", ikChain);
+    nJoints = fkChain.getNrOfJoints();
 
     // init frames for all the joints
     for(int i = 0; i < nJoints; i++)
@@ -29,7 +30,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // ---------------- initialise the arm to init point ------------- //
 
     // initailise the chain solver and the joint array
-    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
+    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(fkChain);
     jointArray = KDL::JntArray(nJoints);
     jointVels = KDL::JntArray(nJoints);
 
@@ -81,12 +82,13 @@ KinovaArm::~KinovaArm(){
 bool KinovaArm::updatePose(std::vector<double> jointPositions){
 
     // initailise the chain solver and the joint array
-    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
+    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(fkChain);
 
     // pass the joint angles from function input into the joint array
     for(int i=0; i<nJoints; i++)
     {
         jointArray(i) = jointPositions[i];
+        // std::cout << "joint pose1:\n" << jointVels(i) << " : "<< jointArray(i) << std::endl;
     }
 
 
@@ -101,6 +103,10 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
                       << *poses[link_num] << std::endl
                       << "Success" << std::endl;
             #endif //DEBUG
+            // for(int i=0; i<nJoints; i++)
+            // {   
+            //     std::cout << "joint pose2:\n" << jointVels(i) << " : "<< jointArray(i) << std::endl;
+            // }
         }
         // If calculation fails print error and return false
         else
@@ -118,6 +124,18 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
 
     // Return true if performed successfully
     return true;
+}
+
+
+std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
+
+    std::vector<double> jointVelocitiesOut;
+    KDL::ChainIkSolverVel_wdls ikSolver = KDL::ChainIkSolverVel_wdls(ikChain);
+    ikSolver.CartToJnt(jointArray, twist, jointVels);
+    for (int i=0; i<jointVels.rows(); i++){
+        jointVelocitiesOut.push_back(jointVels(i));
+    }
+    return jointVelocitiesOut;
 }
 
 
@@ -210,17 +228,5 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
 
     // Return the final pose
     return finalPose;
-}
-
-std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
-
-    std::vector<double> jointVelocitiesOut;
-    KDL::ChainIkSolverVel_wdls ikSolver(chain);
-    ikSolver.CartToJnt(jointVels, twist, jointArray);
-    for (int i=0; i<jointVels.rows(); i++){
-        std::cout << "joint vel1:\n" << jointVels(i) << std::endl;
-        jointVelocitiesOut.push_back(jointVels(i));
-    }
-    return jointVelocitiesOut;
 }
 
