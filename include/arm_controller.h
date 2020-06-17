@@ -47,7 +47,8 @@ class ArmController
          *     from the arm to any obstacles
          * @return An instance of CollisionMonitor class
          */
-        ArmController(Monitor* monitorObject);
+        ArmController(Monitor* monitorObject, double k, double d, 
+                                            double gamma, double beta);
         /// KinovaArm Destructor
         ~ArmController();
 
@@ -74,6 +75,13 @@ class ArmController
         KDL::Twist controlLoop(void);
 
         /**
+        *
+        */ 
+        Eigen::Vector3d obstaclePotentialField(Eigen::Vector3d currentPosition, 
+                                                Eigen::Vector3d velocity);
+
+        /**
+
          * A function that updates the obstacle poses or adds one if it doesn't exist
          */
         void updateObstacles(const visualization_msgs::Marker::ConstPtr& msg);
@@ -83,12 +91,17 @@ class ArmController
     private:
 
         int numJoints;
+        double D;
+        double K;
+        double gamma;
+        double beta;
 
         std::vector<double> jointAngles;
         std::vector<std::vector<double>> objectDistances;
         std::vector<std::vector<double>> armDistances;
         Eigen::Vector4d origin;
         std::vector<Primitive*> obstaclesAllocated;
+        KDL::Twist twist;
 
 };
 

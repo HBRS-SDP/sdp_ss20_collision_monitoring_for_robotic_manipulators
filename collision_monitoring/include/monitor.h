@@ -43,7 +43,6 @@ class Monitor
         */
         std::vector<std::vector<double>> distanceBetweenArmLinks();
 
-
         /** Adds primitive to list of obstacles
         *
         * Adds a primitive to the list of obstacles.

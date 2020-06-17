@@ -1,7 +1,8 @@
 // A simple program that computes the square root of a number
 #include "arm_controller.h"
 
-ArmController::ArmController(Monitor* monitorObject) {
+ArmController::ArmController(Monitor* monitorObject, double k, double d,
+                                                    double gamma, double beta) {
     Eigen::Matrix4d endpose;
     monitor = monitorObject;
     Eigen::Matrix4d currEndPose = monitor->arm->getPose();
@@ -16,6 +17,17 @@ ArmController::ArmController(Monitor* monitorObject) {
     for(int i=0; i<numJoints; i++) {
         jointAngles.push_back(0.0);
     }
+
+    // Constants for obstacle avoidance
+    K = k;
+    D = d;
+    this->gamma = gamma;
+    this->beta = beta;
+
+    // Initiate current velocity as 0
+    twist.vel = KDL::Vector {0, 0, 0 };
+    twist.rot = KDL::Vector {0, 0, 0 };
+
 }
 
 ArmController::~ArmController() {
@@ -42,6 +54,31 @@ void ArmController::goalCallback(const geometry_msgs::Point::ConstPtr& msg) {
     std::cout << "\tNew goal: "<<this->goal<<std::endl;
 }
 
+Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPosition, 
+                                        Eigen::Vector3d velocity) {
+    Eigen::Vector3d potentialField;
+    for(int i = 0; i < monitor->obstacles.size(); i++) {
+        
+        Eigen::Vector3d direction; 
+        monitor->arm->links.back()->getShortestDirection(direction, 
+                                            monitor->obstacles[i]);
+        // Rotation matrix
+        Eigen::MatrixXd rotation = direction * velocity.transpose();
+
+        // Phi
+        // φ = cos ((o − x) v/(|o − x| · |v|))
+        double phi_denominator = velocity.squaredNorm()*direction.squaredNorm();
+        double phi_numerator = direction.transpose()*velocity;
+        double phi = std::acos(phi_numerator/phi_denominator);
+
+        double exp = std::exp(-beta*phi);
+
+        // R i vφ i exp(−βφ i )
+        potentialField += (rotation * velocity) * phi * exp;
+    }
+    return gamma * potentialField;
+}
+
 KDL::Twist ArmController::controlLoop(void) {
     // Variable for storing the resulting joint velocities
     double x, y, z, alpha, beta, gamma;
@@ -51,7 +88,7 @@ KDL::Twist ArmController::controlLoop(void) {
     Eigen::Vector3d currEndPoint = (currEndPose * origin).head(3);
     objectDistances = monitor->distanceToObjects();
     armDistances = monitor->distanceBetweenArmLinks();
-    std::cout << "Distanced to objects:";
+    std::cout << "Distanced to objects: " << objectDistances.size();
     for (int i=0; i<objectDistances.size(); i++) {
         for (int j=0; j<objectDistances[i].size(); j++) {
             std::cout << "  " << objectDistances[i][j];
@@ -59,19 +96,22 @@ KDL::Twist ArmController::controlLoop(void) {
     }
     std::cout << std::endl;
 
+    //v̇ = K(g−x) − Dv + p(x, v)
+
+    Eigen::Vector3d currVelocity = {twist.vel[0], twist.vel[1], twist.vel[2]};
+    Eigen::Vector3d newVelocity = K * (goal - currEndPoint) - D * currVelocity
+                                + obstaclePotentialField(currEndPoint, 
+                                currVelocity);
+
+    std::cout << newVelocity << std::endl;
+
     // TODO the code for the object avoidance
-    x = 1;
-    y = 0;
-    z = 0;
-    alpha = 0;
-    beta = 0;
-    gamma = 0;
+    x = newVelocity[0];
+    y = newVelocity[1];
+    z = newVelocity[2];
 
-
-    
-    KDL::Vector pos(x, y, z);
-    KDL::Vector rot(alpha, beta, gamma);
-    KDL::Twist twist(pos, rot);
+    twist.vel = KDL::Vector { x, y, z };
+    twist.rot = KDL::Vector {0, 0, 0 };
     return twist;
 }
 
