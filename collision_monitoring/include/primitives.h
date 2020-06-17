@@ -41,33 +41,33 @@ class Primitive
         */
         virtual double getShortestDistance(Primitive *primitive) = 0;
 
-        /** Returns the distance between this primitive and a Capsule primitive
+        /** Finds the shortest distance between this primitive and a Capsule primitive
         * 
         * This method takes a capsule object and returns the closest distance
         * between this primitive and a capsule object. returns a double value.
         *
-        * @param primitive address of the primitive object
+        * @param capsule address of the primitive object
         * @return the closest distance between the primitive and capsule
         */
 
         virtual double getShortestDistance(Capsule *capsule) = 0;
         
-        /** Returns the distance between this primitive and a Sphere primitive
+        /** Finds the shortest distance between this primitive and a Sphere primitive
         * 
         * This method takes a capsule object and returns the closest distance
         * between this primitive and a sphere object. returns a double value.
         *
-        * @param primitive address of the primitive object
+        * @param sphere address of the primitive object
         * @return the closest distance between the primitive and sphere
         */
         virtual double getShortestDistance(Sphere *sphere) = 0;
 
-        /** Returns the distance between this primitive and a Cylinder primitive
+        /** Finds the shortest distance between this primitive and a Cylinder primitive
         * 
         * This method takes a capsule object and returns the closest distance
         * between this primitive and a cylinder object. returns a double value.
         *
-        * @param primitive address of the primitive object
+        * @param cylinder address of the primitive object
         * @return the closest distance between the primitive and cylinder
         */
         //virtual double getShortestDistance(Cylinder *cylinder) = 0;
@@ -87,12 +87,15 @@ class Line{
         Eigen::Vector3d basePoint; /* start point of the line */
         Eigen::Vector3d endPoint; /* end point of the line */
 
-        /** one liner
+        /** Projects a point onto the xy-plane of the line
         *
-        * description
+        * The reference frame of the line is on the midpoint of the line
+        * with the z-axis in direction of the normal of the line.
+        * This method projects a point onto the xy-plane of the
+        * reference frame of the line and return the resulting point.
         * 
         * @param point a point space represented with a Vector3d\
-        * @return A Vector3d object.
+        * @return the projected point
         */
         Eigen::Vector3d projectionPoint(Eigen::Vector3d point);
 
@@ -119,21 +122,23 @@ class Line{
         */
         Eigen::Vector3d getEndPoint();
 
-        /** one liner
+        /** Finds the shortest distance between this Line and a point
         *
-        * description
+        * This method takes a point and returns the closest distance
+        * between this Line and the given point. returns a double value.
         * 
         * @param point a point space represented with a Vector3d\
-        * @return A Vector3d object.
+        * @return the closest distance between the Line and point
         */
-        double getShortestDistanceToVertex(Eigen::Vector3d vertex);
+        double getShortestDistanceToPoint(Eigen::Vector3d point);
 
-        /** one liner
+        /** Finds the shortest distance between this Line and another Line
         *
-        * description
+        * This method takes a Line and returns the closest distance
+        * between this Line and the given line. returns a double value.
         * 
-        * @param point a point space represented with a Vector3d\
-        * @return A Vector3d object.
+        * @param line a line represented with a Vector3d\
+        * @return the closest distance between the Line and line
         */
         double getShortestDistanceToLine(Line line);
         

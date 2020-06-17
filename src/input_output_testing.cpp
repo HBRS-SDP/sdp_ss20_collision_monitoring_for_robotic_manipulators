@@ -7,7 +7,8 @@
 #include "ros/ros.h"
 #include "arm_controller.h"
 #include "sensor_msgs/JointState.h"
-#include "trajectory_interface/JointTrajectory.h"
+#include "trajectory_msgs/JointTrajectory.h"
+#include "std_msgs/String.h"
 
 void armCallback_0(const sensor_msgs::JointState::ConstPtr& msg)
 {
@@ -24,14 +25,19 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "pose_listener");
     ros::NodeHandle n;
     ros::Subscriber joint_angles = n.subscribe("/my_gen3/joint_states", 1000, &armCallback_0);
-    ros::Publisher trajectory = n.advertise<trajectory_interface::JointTrajectory>("/my_gen3/gen3_joint_trajectory_controller/command", 1000);
+    ros::Publisher trajectory = n.advertise<trajectory_msgs::JointTrajectory>("/my_gen3/gen3_joint_trajectory_controller/command", 1000);
 
     ros::Rate loop_rate(10);
 
-    while (rps::ok())
+    int count = 0;
+
+    while (ros::ok())
     {
         std_msgs::String msg;
         std::stringstream ss;
+
+
+        
         ss << "hello world " << count;
         msg.data = ss.str();
 
@@ -43,7 +49,7 @@ int main(int argc, char **argv)
          * given as a template parameter to the advertise<>() call, as was done
          * in the constructor above.
          */
-        chatter_pub.publish(msg);
+        // chatter_pub.publish(msg);
 
         ros::spinOnce();
 

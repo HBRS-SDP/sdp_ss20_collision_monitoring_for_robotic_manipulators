@@ -32,18 +32,18 @@ Eigen::Vector3d Line::projectionPoint(Eigen::Vector3d point){
     return projectedPoint;
 }
 
-double Line::getShortestDistanceToVertex(Eigen::Vector3d vertex){
+double Line::getShortestDistanceToPoint(Eigen::Vector3d point){
     Eigen::Vector3d m;
     double lambda, x, y, z, p1, p2, length;
     double distance = 0;
 
     length = (this->endPoint - this->basePoint).norm();
 
-    lambda = (vertex - this->basePoint).dot(this->endPoint - this->basePoint) / pow(length, 2);
+    lambda = (point - this->basePoint).dot(this->endPoint - this->basePoint) / pow(length, 2);
 
     #ifdef DEBUG
         std::cout <<  "lambda: " << lambda << std::endl;
-        std::cout <<  "vertex: " << vertex << std::endl;
+        std::cout <<  "point: " << point << std::endl;
     #endif //DEBUG
     
     if(lambda <= 0){
@@ -58,7 +58,7 @@ double Line::getShortestDistanceToVertex(Eigen::Vector3d vertex){
         m = Eigen::Vector3d(x, y, z);
     }
 
-    distance = (vertex - m).norm();
+    distance = (point - m).norm();
     
     #ifdef DEBUG
         std::cout <<  "m: " << std::endl << m << std::endl;
@@ -85,7 +85,7 @@ double Line::getShortestDistanceToLine(Line line){
 
     Line projectedLine(basePointProjected, endPointProjected);
     
-    shortestDistance = projectedLine.getShortestDistanceToVertex(midPoint);
+    shortestDistance = projectedLine.getShortestDistanceToPoint(midPoint);
 
     return shortestDistance;
 }
@@ -169,13 +169,11 @@ double Capsule::getShortestDistance(Capsule *cylinder){
             #ifdef DEBUG
                 std::cout << "m1 inside" << std::endl;
                 std::cout << basePointObstacle << std::endl;
-                std::cout << axisOfSymmetryOwn.getShortestDistanceToVertex(basePointObstacle) << std::endl;
-                std::cout << axisOfSymmetryObstacle.getShortestDistanceToVertex(endPointOwn) << std::endl;
+                std::cout << axisOfSymmetryOwn.getShortestDistanceToPoint(basePointObstacle) << std::endl;
+                std::cout << axisOfSymmetryObstacle.getShortestDistanceToPoint(endPointOwn) << std::endl;
             #endif //DEBUG
-            if( axisOfSymmetryOwn.getShortestDistanceToVertex(basePointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToVertex(endPointOwn) ){
-                std::cout << "here" << std::endl;
+            if( axisOfSymmetryOwn.getShortestDistanceToPoint(basePointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToPoint(endPointOwn) ){
                 shortestDistance = axisOfSymmetryOwn.getShortestDistanceToLine(axisOfSymmetryObstacle);
-                std::cout << shortestDistance << std::endl;
             }else{
                 shortestDistance = axisOfSymmetryObstacle.getShortestDistanceToLine(axisOfSymmetryOwn);
             }
@@ -185,10 +183,10 @@ double Capsule::getShortestDistance(Capsule *cylinder){
         #ifdef DEBUG
             std::cout << "m2 inside" << std::endl;
             std::cout << endPointObstacle << std::endl;
-            std::cout << axisOfSymmetryOwn.getShortestDistanceToVertex(endPointObstacle) << std::endl;
-            std::cout << axisOfSymmetryObstacle.getShortestDistanceToVertex(basePointOwn) << std::endl;
+            std::cout << axisOfSymmetryOwn.getShortestDistanceToPoint(endPointObstacle) << std::endl;
+            std::cout << axisOfSymmetryObstacle.getShortestDistanceToPoint(basePointOwn) << std::endl;
         #endif //DEBUG
-        if( axisOfSymmetryOwn.getShortestDistanceToVertex(endPointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToVertex(basePointOwn) ){
+        if( axisOfSymmetryOwn.getShortestDistanceToPoint(endPointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToPoint(basePointOwn) ){
             shortestDistance = axisOfSymmetryOwn.getShortestDistanceToLine(axisOfSymmetryObstacle);
         }else{
             shortestDistance = axisOfSymmetryObstacle.getShortestDistanceToLine(axisOfSymmetryOwn);
@@ -225,7 +223,7 @@ double Capsule::getShortestDistance(Sphere *sphere){
     
     sphereCenter = (sphere->pose * origin).head(3);
 
-    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToVertex(sphereCenter) - this->radius - sphere->getRadius();
+    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToPoint(sphereCenter) - this->radius - sphere->getRadius();
 
     #ifdef DEBUG
         std::cout << "st_c: " << std::endl << basePoint << std::endl;
@@ -278,7 +276,7 @@ double Sphere::getShortestDistance(Capsule *cylinder){
     
     sphereCenter = (this->pose * origin).head(3);
 
-    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToVertex(sphereCenter) - cylinder->getRadius() - this->getRadius();
+    shortestDistance = axisOfSymmetryCylinder.getShortestDistanceToPoint(sphereCenter) - cylinder->getRadius() - this->getRadius();
 
     #ifdef DEBUG
         std::cout << "st_c: " << std::endl << basePoint << std::endl;
