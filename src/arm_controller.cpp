@@ -28,11 +28,6 @@ ArmController::~ArmController() {
 }
 
 void ArmController::armCallback(const sensor_msgs::JointState::ConstPtr& msg) {
-    // copy the joint angles
-    // std::cout << "armCallback:\n";
-    // for (int i=0; i<msg->position.size(); i++) {
-    //     std::cout << msg->position[i] << std::endl;
-    // }
     jointAngles.assign(msg->position.begin(), msg->position.end());
 
 }
