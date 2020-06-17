@@ -19,16 +19,23 @@
 #include "kinova_arm.h"
 #include "monitor.h"
 #include "ros/ros.h"
+#include <ros/console.h>
 #include "sensor_msgs/JointState.h"
 #include "geometry_msgs/Point.h"
+#include "visualization_msgs/Marker.h"
 
 
-/**
- * An implementation of the Arm interface.
- * 
- * This implementation is specifically for the KINOVA arm in the HBRS robotics
- * lab.
- */
+class RvizObstacle
+{
+    public:
+        int idx;
+        visualization_msgs::Marker marker;
+        Eigen::Matrix4d pose;
+        RvizObstacle(visualization_msgs::Marker::ConstPtr markerIn, int index);
+        ~RvizObstacle();
+        Eigen::Matrix4d updatePose(visualization_msgs::Marker::ConstPtr markerIn);
+
+};
 
 class ArmController
 {
@@ -64,7 +71,14 @@ class ArmController
         /**
          * Function that uses internal parameters to send instructions to arm
          */
-        std::vector<double> controlLoop(void);
+        KDL::Twist controlLoop(void);
+
+        /**
+         * A function that updates the obstacle poses or adds one if it doesn't exist
+         */
+        void updateObstacles(const visualization_msgs::Marker::ConstPtr& msg);
+
+        std::vector<RvizObstacle*> rvizObstacles;
 
     private:
 
@@ -74,6 +88,7 @@ class ArmController
         std::vector<std::vector<double>> objectDistances;
         std::vector<std::vector<double>> armDistances;
         Eigen::Vector4d origin;
+        std::vector<Primitive*> obstaclesAllocated;
 
 };
 

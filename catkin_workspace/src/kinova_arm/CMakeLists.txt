@@ -114,7 +114,7 @@ find_package(kdl_parser)
 catkin_package(
  INCLUDE_DIRS include
 #  LIBRARIES kinova_arm
- CATKIN_DEPENDS gazebo_ros_pkgs ros_kortex roscpp std_msgs sensor_msgs geometry_msgs
+#  CATKIN_DEPENDS gazebo_ros_pkgs ros_kortex roscpp std_msgs sensor_msgs geometry_msgs
 #  DEPENDS system_lib
 )
 
@@ -129,7 +129,6 @@ include_directories(
   include
   collision_monitoring/include
   /usr/local/include
-  /usr/local/lib
   /usr/include/eigen3
   /opt/ros/kinetic/include
   ${Eigen_INCLUDE_DIRS}
@@ -169,6 +168,10 @@ add_executable(KinovaTestMonitoring
   src/arm_controller.cpp
 )
 
+add_executable(KinovaInterface
+  src/kinova_interfacer.cpp
+)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -189,6 +192,7 @@ target_link_libraries(KinovaCollisionMonitoring PRIVATE
   orocos-kdl
   kdl_parser
   ${orocos-kdl_LIBRARIES}
+  ${catkin_LIBRARIES}
 )
 
 target_link_libraries(KinovaTestMonitoring PRIVATE
@@ -197,6 +201,11 @@ target_link_libraries(KinovaTestMonitoring PRIVATE
   orocos-kdl
   kdl_parser
   ${orocos-kdl_LIBRARIES}
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(KinovaInterface PRIVATE
+  ${catkin_LIBRARIES}
 )
 
 

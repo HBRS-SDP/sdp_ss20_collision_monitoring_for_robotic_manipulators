@@ -11,7 +11,7 @@
  * 
  * The Monitor class is a collision monitor which stores the address of an 
  * instance of the class Arm and maintains a list of obstacles. It can perform 
- * collision monitoring with obtacles by determining the distance to obstacles 
+ * collision monitoring with obstacles by determining the distance to obstacles 
  * in the workspace, or collision monitoring with the arm itself by monitoring 
  * the distance between the links.  
  */
@@ -50,11 +50,12 @@ class Monitor
         * @param obstacle address of the obstacle to be added.
         */
         void addObstacle(Primitive* obstacle);
-        
+        void addObstacle(Sphere* obstacle);
+        void addObstacle(Capsule* obstacle);
         /** Adds arm to list of obstacles
         *
         * This method decomposes an arm into its primitives to add it into 
-        * the vector of obtacles.
+        * the vector of obstacles.
         *
         * @param arm address of the arm to be treated as an obstacle.
         */

@@ -1,6 +1,10 @@
 // Pulled from https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
+
+// the debug var to turn verbose on and off
+#define DEBUG
+
 #include "catch.hpp"
 #include <vector>
 #include <Eigen/Core>
@@ -45,6 +49,9 @@ TEST_CASE( "1st test case", "[Capsule - Capsule]" ) {
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(15.007002100700248).margin(0.001) );
     REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(15.007002100700248).margin(0.001) );
+
+    delete Link_1;
+    delete Link_2;
 }
 
 TEST_CASE( "2nd test case", "[Capsule - Capsule]" ) {
@@ -70,6 +77,9 @@ TEST_CASE( "2nd test case", "[Capsule - Capsule]" ) {
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(10.233213170882209).margin(0.001) );
     REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(10.233213170882209).margin(0.001) );
+
+    delete Link_1;
+    delete Link_2;
 }
 
 TEST_CASE( "3rd test case lambda >= 1", "[Capsule - Capsule]" ) {
@@ -96,6 +106,8 @@ TEST_CASE( "3rd test case lambda >= 1", "[Capsule - Capsule]" ) {
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(14.779612647907754).margin(0.001) );
     REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(14.779612647907754).margin(0.001) );
 
+    delete Link_1;
+    delete Link_2;
 }
 
 TEST_CASE( "4th test case lambda <= 0", "[Capsule - Capsule]" ) {
@@ -122,6 +134,8 @@ TEST_CASE( "4th test case lambda <= 0", "[Capsule - Capsule]" ) {
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(1.21253086204284).margin(0.001) );
     REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(1.21253086204284).margin(0.001) );
 
+    delete Link_1;
+    delete Link_2;
 }
 
 
@@ -144,6 +158,9 @@ TEST_CASE( "1st test case sphere", "[Sphere - Sphere]" ) {
     Primitive *Sphere_2 = new Sphere(pose_2, radius_2);
 
     REQUIRE( Sphere_1->getShortestDistance(Sphere_2) == Approx(70.3).margin(0.1) );
+
+    delete Sphere_1;
+    delete Sphere_2;
 }
 
 TEST_CASE( "2nd test case sphere", "[Sphere - Capsule]" ) {
@@ -167,6 +184,9 @@ TEST_CASE( "2nd test case sphere", "[Sphere - Capsule]" ) {
 
     REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(13.1).margin(0.1) );
     REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(13.1).margin(0.1) );
+
+    delete Link_2;
+    delete Sphere_1;
 }
 
 
@@ -191,6 +211,9 @@ TEST_CASE( "3rd test case sphere", "[Sphere - Capsule]" ) {
 
     REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(34.1).margin(0.1) );
     REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(34.1).margin(0.1) );
+
+    delete Link_2;
+    delete Sphere_1;
 }
 
 TEST_CASE( "4th test case sphere", "[Sphere - Capsule]" ) {
@@ -218,6 +241,9 @@ TEST_CASE( "4th test case sphere", "[Sphere - Capsule]" ) {
 
     REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(5.9).margin(0.1) );
     REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(5.9).margin(0.1) );
+
+    delete Link_2;
+    delete Sphere_1;
 }
 
 
@@ -308,4 +334,35 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
         REQUIRE( fabs((basePointLine - basePointLink).norm()) < 0.1);
         REQUIRE( fabs((endPointLine - endPointLink).norm()) < 0.1);
     }
+}
+
+TEST_CASE("Kinova_arm test inverse kinematics", "[arm]") {
+    KinovaArm kinovaArm(urdf_filename);
+    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
+                                    deg2rad(30), deg2rad(30), deg2rad(30)};
+    std::vector<double> outputPose = {0.768989, 2.89724, -0.913496, -5.39591, -1.04212,
+                                      2.87854, 0.806753};
+    kinovaArm.updatePose(testPose);
+
+    double x, y, z, alpha, beta, gamma;
+
+    x = 1;
+    y = 0;
+    z = 0;
+    alpha = 0;
+    beta = 0;
+    gamma = 0;
+
+
+    std::vector<double> output;
+    KDL::Vector pos(x, y, z);
+    KDL::Vector rot(alpha, beta, gamma);
+    KDL::Twist twist(pos, rot);
+    double difference;
+
+    output = kinovaArm.ikVelocitySolver(twist);
+    for (int i=0; i<output.size(); i++) {
+        difference += fabs(output[i]- outputPose[i]);
+    }
+    REQUIRE( difference < 0.001);
 }

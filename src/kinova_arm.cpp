@@ -13,8 +13,8 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     }
 
     // Convert the tree to a chain and get the number of joints
-    armTree.getChain("base_link", "EndEffector_Link", chain);
-    nJoints = chain.getNrOfJoints();
+    armTree.getChain("base_link", "EndEffector_Link", fkChain);
+    nJoints = fkChain.getNrOfJoints();
 
     // init frames for all the joints
     for(int i = 0; i < nJoints; i++)
@@ -29,13 +29,15 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // ---------------- initialise the arm to init point ------------- //
 
     // initailise the chain solver and the joint array
-    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
+    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(fkChain);
     jointArray = KDL::JntArray(nJoints);
+    jointVels = KDL::JntArray(nJoints);
 
     // pass the joint angles from function input into the joint array
     for(int i=0; i<nJoints; i++)
     {
         jointArray(i) = 0.0;
+        jointVels(i) = 0.0;
     }
 
     // solve for the frame at the "link" of the chain for the given joint positions
@@ -79,7 +81,7 @@ KinovaArm::~KinovaArm(){
 bool KinovaArm::updatePose(std::vector<double> jointPositions){
 
     // initailise the chain solver and the joint array
-    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
+    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(fkChain);
 
     // pass the joint angles from function input into the joint array
     for(int i=0; i<nJoints; i++)
@@ -119,6 +121,27 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
 }
 
 
+std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
+
+    // vector to store output values
+    std::vector<double> jointVelocitiesOut;
+
+    // inverse kinemetics solver
+    KDL::ChainIkSolverVel_wdls ikSolver = KDL::ChainIkSolverVel_wdls(fkChain);
+
+    //solver for joint velocities
+    ikSolver.CartToJnt(jointArray, twist, jointVels);
+
+    // push velocities onto the vector
+    for (int i=0; i<jointVels.rows(); i++){
+        jointVelocitiesOut.push_back(jointVels(i));
+    }
+
+    // Return the joint velocities
+    return jointVelocitiesOut;
+}
+
+
 Eigen::Matrix4d KinovaArm::getPose(void)
 {
     return frameToMatrix(*poses.back());
@@ -126,10 +149,13 @@ Eigen::Matrix4d KinovaArm::getPose(void)
 
 Eigen::Matrix4d KinovaArm::getPose(int jointNumber)
 {
+    // input sanitization
     if(jointNumber >= poses.size() | jointNumber < 0){
         std::cout << "Access joint number larger than array in getPose";
         return frameToMatrix(*poses.back());
     }
+
+    // return joint pose
     return frameToMatrix(*poses[jointNumber]);
 }
 
