@@ -7,11 +7,9 @@ Monitor::Monitor(Arm* arm){
 
 Monitor::~Monitor(){
     std::cout << "###" << this->obstacles.size() << std::endl;
-    for( int i=0; i < this->obstacles.size(); i++){
-        std::cout << "###" << this->obstacles[i] << std::endl;
-        std::cout << "###" << this->obstacles[i]->pose << std::endl;
-        delete obstacles[i];
-        obstacles[i] = NULL;
+    for( int i=0; i < this->obstaclesToDelete.size(); i++){
+        delete obstaclesToDelete[i];
+        obstaclesToDelete[i] = NULL;
     }
 }
 
@@ -30,11 +28,13 @@ void Monitor::addObstacle(Primitive* obstacle) {
 
 void Monitor::addObstacle(Sphere* obstacle) {
     Sphere* obstacleCopy = new Sphere(obstacle);
+    obstaclesToDelete.push_back(obstacleCopy);
     obstacles.push_back(obstacleCopy);
 }
 
 void Monitor::addObstacle(Capsule* obstacle) {
     Capsule* obstacleCopy = new Capsule(obstacle);
+    obstaclesToDelete.push_back(obstacleCopy);
     obstacles.push_back(obstacleCopy);
 }
 
@@ -43,7 +43,7 @@ void Monitor::addObstacle(Arm* arm) {
     // Adds every link of the arm (a primitive) to the obstacles vector.
     for (int i = 0; i < arm->links.size(); i++) {
         // this->obstacles.push_back(arm->links[i]);
-        this->addObstacle(arm->links[i]);
+        obstacles.push_back(arm->links[i]);
     }
 }
 
