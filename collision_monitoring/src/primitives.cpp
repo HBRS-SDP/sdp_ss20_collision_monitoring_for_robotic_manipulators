@@ -131,41 +131,6 @@ float Capsule::getRadius(){
     return this->radius;
 }
 
-
-double Capsule::getShortestDistance(Primitive *primitive){
-    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
-    if(capsule){
-        return this->getShortestDistance(capsule);
-    }else{
-        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
-        if(sphere){
-            return this->getShortestDistance(sphere);
-        }else{
-
-        }
-    }
-}
-
-double Capsule::getShortestDistance(Capsule *capsule){    
-    double shortestDistance = 0;
-    Eigen::Vector3d shortestDirection;
-
-    this->getShortestDirection(shortestDirection, capsule);
-    shortestDistance = shortestDirection.norm() - this->radius - capsule->getRadius();
-
-    return shortestDistance;
-}
-
-double Capsule::getShortestDistance(Sphere *sphere){
-    double shortestDistance = 0;
-    Eigen::Vector3d shortestDirection;
-
-    this->getShortestDirection(shortestDirection, sphere);
-    shortestDistance = shortestDirection.norm() - this->radius - sphere->getRadius();
-
-    return shortestDistance;
-}
-
 void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
     Capsule *capsule = dynamic_cast<Capsule*>(primitive);
     if(capsule){
@@ -271,6 +236,41 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *s
     shortestDirection = closestPoint - sphereCenter;
 }
 
+double Capsule::getShortestDistance(Primitive *primitive){
+    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
+    if(capsule){
+        return this->getShortestDistance(capsule);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            return this->getShortestDistance(sphere);
+        }else{
+
+        }
+    }
+}
+
+double Capsule::getShortestDistance(Capsule *capsule){    
+    double shortestDistance = 0;
+    Eigen::Vector3d shortestDirection;
+
+    this->getShortestDirection(shortestDirection, capsule);
+    shortestDistance = shortestDirection.norm() - this->radius - capsule->getRadius();
+
+    return shortestDistance;
+}
+
+double Capsule::getShortestDistance(Sphere *sphere){
+    double shortestDistance = 0;
+    Eigen::Vector3d shortestDirection;
+
+    this->getShortestDirection(shortestDirection, sphere);
+    shortestDistance = shortestDirection.norm() - this->radius - sphere->getRadius();
+
+    return shortestDistance;
+}
+
+
 Sphere::Sphere(Eigen::Matrix4d pose, double radius){
     this->pose = pose;
     this->radius = radius;
@@ -287,40 +287,6 @@ Sphere::~Sphere(){
 
 float Sphere::getRadius(){
     return this->radius;
-}
-
-double Sphere::getShortestDistance(Primitive *primitive){
-    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
-    if(capsule){
-        return this->getShortestDistance(capsule);
-    }else{
-        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
-        if(sphere){
-            return this->getShortestDistance(sphere);
-        }else{
-
-        }
-    }
-}
-
-double Sphere::getShortestDistance(Capsule *capsule){
-    double shortestDistance = 0;
-    Eigen::Vector3d shortestDirection;
-    this->getShortestDirection(shortestDirection, capsule);
-
-    shortestDistance = shortestDirection.norm() - capsule->getRadius() - this->getRadius();
-
-    return shortestDistance;
-}
-
-double Sphere::getShortestDistance(Sphere *sphere){
-    double shortestDistance;
-    Eigen::Vector3d shortestDirection;
-    
-    this->getShortestDirection(shortestDirection ,sphere);
-    shortestDistance = shortestDirection.norm() - sphere->getRadius() - this->radius;
-
-    return shortestDistance;
 }
 
 void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
@@ -361,4 +327,38 @@ void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sp
     ownCenter = (this->pose * origin).head(3);
 
     shortestDirection = obstacleSphereCenter - ownCenter;
+}
+
+double Sphere::getShortestDistance(Primitive *primitive){
+    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
+    if(capsule){
+        return this->getShortestDistance(capsule);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            return this->getShortestDistance(sphere);
+        }else{
+
+        }
+    }
+}
+
+double Sphere::getShortestDistance(Capsule *capsule){
+    double shortestDistance = 0;
+    Eigen::Vector3d shortestDirection;
+    this->getShortestDirection(shortestDirection, capsule);
+
+    shortestDistance = shortestDirection.norm() - capsule->getRadius() - this->getRadius();
+
+    return shortestDistance;
+}
+
+double Sphere::getShortestDistance(Sphere *sphere){
+    double shortestDistance;
+    Eigen::Vector3d shortestDirection;
+    
+    this->getShortestDirection(shortestDirection ,sphere);
+    shortestDistance = shortestDirection.norm() - sphere->getRadius() - this->radius;
+
+    return shortestDistance;
 }
