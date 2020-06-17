@@ -14,23 +14,34 @@
 
 int main(int argc, char **argv)
 {
+    ros::init(argc, argv, "kinova_controller");
+    std::string nodeName = ros::this_node::getName();
+    std::cout << "nodeName: " << nodeName << std::endl;
+    ros::NodeHandle n;
+    std::string modelPath;
+    std::string jointStatesTopic;
+    std::string goalTopic;
+    std::string jointVelocityTopic;
     // setup the first monitor function
-    std::string urdf_filename1 = "./urdf/GEN3_URDF_V12.urdf";
-    KinovaArm arm1(urdf_filename1);
+    n.param<std::string>(ros::this_node::getName()+"/urdf_model", modelPath, "./urdf/GEN3_URDF_V12.urdf");
+    n.param<std::string>(ros::this_node::getName()+"/input_joint_topic", jointStatesTopic, "my_gen3/joint_states");
+    n.param<std::string>(ros::this_node::getName()+"/goal_topic", goalTopic, ros::this_node::getName()+"/goal");
+    n.param<std::string>(ros::this_node::getName()+"/output_joint_topic", jointVelocityTopic, ros::this_node::getName()+"/joint_commands");
+
+    std::string model = modelPath;
+    KinovaArm arm1(model);
     Monitor monitor1(&arm1);
 
     // Create the armController class based off the first monitor
     ArmController armController1(&monitor1);
 
     // Init ROS listener
-    ros::init(argc, argv, "kinova_controller");
-    ros::NodeHandle n;
-    ros::Subscriber armSub = n.subscribe("my_gen3/joint_states", 1000, &ArmController::armCallback, &armController1);
-    ros::Subscriber goalSub = n.subscribe("kinova_controller/goal", 1000, &ArmController::goalCallback, &armController1);
+    ros::Subscriber armSub = n.subscribe(jointStatesTopic, 1000, &ArmController::armCallback, &armController1);
+    ros::Subscriber goalSub = n.subscribe(goalTopic, 1000, &ArmController::goalCallback, &armController1);
     ros::Subscriber obstacleSub = n.subscribe("kinova_controller/obstacles", 1000, &ArmController::updateObstacles, &armController1);
 
 
-    ros::Publisher armPub = n.advertise<sensor_msgs::JointState>("kinova_controller/joint_commands", 1000);
+    ros::Publisher armPub = n.advertise<sensor_msgs::JointState>(jointVelocityTopic, 1000);
     ros::Publisher markersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/markers", 1000);
     
     ros::Rate loop_rate(10);

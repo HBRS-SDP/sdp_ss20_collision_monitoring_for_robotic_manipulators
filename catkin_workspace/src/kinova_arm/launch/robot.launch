@@ -1,0 +1,13 @@
+<launch>
+
+  <arg name="model" default="$(find kortex_description)/arms/gen3/7dof/urdf/GEN3_URDF_V12.urdf"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+  <param name="arm_controller/urdf_model" value="$(arg model)" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring" />
+  <node name="rviz" pkg="rviz" type="rviz" required="true"/>
+
+</launch>
