@@ -153,11 +153,11 @@ float Capsule::getRadius(){
 double Capsule::getShortestDistance(Primitive *primitive){
     Capsule *capsule = dynamic_cast<Capsule*>(primitive);
     if(capsule){
-        this->getShortestDistance(capsule);
+        return this->getShortestDistance(capsule);
     }else{
         Sphere *sphere = dynamic_cast<Sphere*>(primitive);
         if(sphere){
-            this->getShortestDistance(sphere);
+            return this->getShortestDistance(sphere);
         }else{
 
         }
@@ -400,11 +400,11 @@ float Sphere::getRadius(){
 double Sphere::getShortestDistance(Primitive *primitive){
     Capsule *capsule = dynamic_cast<Capsule*>(primitive);
     if(capsule){
-        this->getShortestDistance(capsule);
+        return this->getShortestDistance(capsule);
     }else{
         Sphere *sphere = dynamic_cast<Sphere*>(primitive);
         if(sphere){
-            this->getShortestDistance(sphere);
+            return this->getShortestDistance(sphere);
         }else{
 
         }
