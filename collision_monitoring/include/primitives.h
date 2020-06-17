@@ -163,7 +163,7 @@ class Capsule: public Primitive{
         * @param radius radius of the capsule
         */
         Capsule(Eigen::Matrix4d pose, double length, double radius);
-
+        Capsule(Capsule* capsule);
         /* Destructor of the class Capsule */
         ~Capsule();
 
@@ -212,6 +212,7 @@ class Sphere: public Primitive{
         * @param radius radius of the sphere
         */
         Sphere(Eigen::Matrix4d pose, double radius);
+        Sphere(Sphere* sphere);
 
         /* Destructor of the class Sphere */
         ~Sphere();
