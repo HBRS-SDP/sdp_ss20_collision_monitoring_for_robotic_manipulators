@@ -6,17 +6,22 @@ Monitor::Monitor(Arm* arm){
 }
 
 Monitor::~Monitor(){
-
+    for( int i=0; i < this->obstacles.size(); i++){
+        delete this->obstacles[i];
+    }
 }
 
 void Monitor::addObstacle(Primitive* obstacle) {
-    this->obstacles.push_back(obstacle);
+    Primitive* copy_obstacle;
+    std::memcpy(copy_obstacle, obstacle, sizeof(obstacle));
+    this->obstacles.push_back(copy_obstacle);
 }
 
 void Monitor::addObstacle(Arm* arm) {
     // Adds every link of the arm (a primitve) to the obstacles vector.
     for (int i = 0; i < arm->links.size(); i++) {
-        this->obstacles.push_back(arm->links[i]);
+        // this->obstacles.push_back(arm->links[i]);
+        Monitor::addObstacle(arm->links[i]);
     }
 }
 
