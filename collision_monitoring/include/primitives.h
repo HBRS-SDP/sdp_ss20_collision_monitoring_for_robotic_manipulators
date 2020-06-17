@@ -34,20 +34,20 @@ class Primitive
         * 
         * This method takes an object that inherits from primitive and
         * performs a dynamic cast to call the correct getShortestDirection
-        * method depending on the class of the shape. returns a Vector3d.
+        * method depending on the class of the shape.
         *
-        * @param primitive address of the primitive object.
-        * @return a vector in 3D that represents the closes direction between this and the second primitive.
+        * @param        primitive           address of the primitive object.
+        * @param[out]   shortestDirection   a vector in 3D that represents the closes direction between this and the second primitive.
         */
         virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive) = 0;
 
         /** Finds the shortest distance between this primitive and a Capsule primitive
         * 
         * This method takes a capsule object and returns the closest direction
-        * between this primitive and a capsule object. returns a Vector3d.
+        * between this primitive and a capsule object.
         *
-        * @param capsule address of the primitive object
-        * @return a vector in 3D that represents the closes direction between the primitive and capsule
+        * @param        capsule             address of the primitive object
+        * @param[out]   shortestDirection   a vector in 3D that represents the closes direction between the primitive and capsule
         */
 
         virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule) = 0;
@@ -57,8 +57,8 @@ class Primitive
         * This method takes a capsule object and returns the closest direction
         * between this primitive and a sphere object. returns a Vector3d.
         *
-        * @param sphere address of the primitive object
-        * @return a vector in 3D that represents the closes direction between the primitive and sphere
+        * @param        sphere              address of the primitive object
+        * @param[out]   shortestDirection   a vector in 3D that represents the closes direction between the primitive and sphere
         */
         virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere) = 0;
         /** Performs a dynamic cast to overload the distance functions
@@ -67,8 +67,8 @@ class Primitive
         * performs a dynamic cast to call the correct getShortestDistance
         * method depending on the class of the shape. returns a double value.
         *
-        * @param primitive address of the primitive object.
-        * @return the closest distance between this and the second primitive.
+        * @param    primitive   address of the primitive object.
+        * @return   the closest distance between this and the second primitive.
         */
         virtual double getShortestDistance(Primitive *primitive) = 0;
 
@@ -77,8 +77,8 @@ class Primitive
         * This method takes a capsule object and returns the closest distance
         * between this primitive and a capsule object. returns a double value.
         *
-        * @param capsule address of the primitive object
-        * @return the closest distance between the primitive and capsule
+        * @param    capsule     address of the primitive object
+        * @return   the closest distance between the primitive and capsule
         */
 
         virtual double getShortestDistance(Capsule *capsule) = 0;
@@ -88,8 +88,8 @@ class Primitive
         * This method takes a capsule object and returns the closest distance
         * between this primitive and a sphere object. returns a double value.
         *
-        * @param sphere address of the primitive object
-        * @return the closest distance between the primitive and sphere
+        * @param    sphere      address of the primitive object
+        * @return   the closest distance between the primitive and sphere
         */
         virtual double getShortestDistance(Sphere *sphere) = 0;
 
@@ -98,8 +98,8 @@ class Primitive
         * This method takes a capsule object and returns the closest distance
         * between this primitive and a cylinder object. returns a double value.
         *
-        * @param cylinder address of the primitive object
-        * @return the closest distance between the primitive and cylinder
+        * @param    cylinder    address of the primitive object
+        * @return   the closest distance between the primitive and cylinder
         */
         //virtual double getShortestDistance(Cylinder *cylinder) = 0;
 
@@ -125,16 +125,16 @@ class Line{
         * This method projects a point onto the xy-plane of the
         * reference frame of the line and return the resulting point.
         * 
-        * @param point a point space represented with a Vector3d\
-        * @return the projected point
+        * @param    point   a point space represented with a Vector3d\
+        * @return   the projected point
         */
         Eigen::Vector3d projectionPoint(Eigen::Vector3d point);
 
     public:
         /** Constructor of the Line class
         * 
-        * @param basePoint start point of the line represented with a Vector3d.
-        * @param endPoint end point of the line represented with a Vector3d.
+        * @param    basePoint   start point of the line represented with a Vector3d.
+        * @param    endPoint    end point of the line represented with a Vector3d.
         */
         Line(Eigen::Vector3d basePoint, Eigen::Vector3d endPoint);
 
@@ -158,8 +158,8 @@ class Line{
         * This method takes a point and returns the closest point
         * on this Line and the given point. returns a Vector3d.
         * 
-        * @param point a point space represented with a Vector3d\
-        * @return the closest point on this Line to point
+        * @param    point   a point space represented with a Vector3d\
+        * @return   the closest point on this Line to point
         */
         Eigen::Vector3d getClosestPointToPoint(Eigen::Vector3d point);
 
@@ -168,8 +168,8 @@ class Line{
         * This method takes a point and returns the closest point
         * on this Line and the given line. returns a Vector3d.
         * 
-        * @param line a line represented with a Vector3d\
-        * @return the closests points on this line and on line
+        * @param    line    a line represented with a Vector3d\
+        * @return   the closests points on this line and on line
         */
         void getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line line);
 
@@ -178,8 +178,8 @@ class Line{
         * This method takes a point and returns the closest distance
         * between this Line and the given point. returns a double value.
         * 
-        * @param point a point space represented with a Vector3d\
-        * @return the closest distance between the Line and point
+        * @param        point           a point space represented with a Vector3d\
+        * @param[out]   closestPoints   the closest distance between the Line and point
         */
         double getShortestDistanceToPoint(Eigen::Vector3d point);
 
@@ -188,8 +188,8 @@ class Line{
         * This method takes a Line and returns the closest distance
         * between this Line and the given line. returns a double value.
         * 
-        * @param line a line represented with a Vector3d\
-        * @return the closest distance between the Line and line
+        * @param    line    a line represented with a Vector3d\
+        * @return   the closest distance between the Line and line
         */
         double getShortestDistanceToLine(Line line);
         
@@ -210,8 +210,8 @@ class Capsule: public Primitive{
         /** Constructor of Capsule class
         * 
         * @param pose start point of the line represented with a Matrix4d.
-        * @param length length of the capsule
-        * @param radius radius of the capsule
+        * @param    length  length of the capsule
+        * @param    radius  radius of the capsule
         */
         Capsule(Eigen::Matrix4d pose, double length, double radius);
         Capsule(Capsule* capsule);
@@ -261,8 +261,8 @@ class Sphere: public Primitive{
     public:
         /** Constructor of Capsule class
         * 
-        * @param pose center point of the line represented with a Matrix4d.
-        * @param radius radius of the sphere
+        * @param    pose    center point of the line represented with a Matrix4d.
+        * @param    radius  radius of the sphere
         */
         Sphere(Eigen::Matrix4d pose, double radius);
         Sphere(Sphere* sphere);
