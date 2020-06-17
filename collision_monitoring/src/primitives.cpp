@@ -62,6 +62,7 @@ void Line::getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line lin
 
     Eigen::Vector3d basePointProjected, endPointProjected, midPoint;
     double shortestDistance;
+    double ratio;
 
     basePointProjected = this->projectionPoint( line.getBasePoint() );
     endPointProjected = this->projectionPoint( line.getEndPoint() );
@@ -70,8 +71,16 @@ void Line::getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line lin
     Line projectedLine(basePointProjected, endPointProjected);
     
     obstacleProjectedClosestPoint = projectedLine.getClosestPointToPoint(midPoint);
-    obstacleClosestPoint = line.getClosestPointToPoint(obstacleProjectedClosestPoint);
+
+    ratio = (obstacleProjectedClosestPoint - basePointProjected).norm() / (endPointProjected - basePointProjected).norm();
+
+    obstacleClosestPoint = (line.getEndPoint() - line.getBasePoint()) * ratio + line.getBasePoint();//line.getClosestPointToPoint(obstacleProjectedClosestPoint);
+    
     ownClosestPoint = this->getClosestPointToPoint(obstacleClosestPoint);
+
+    std::cout << "ratio: " << ratio << std::endl;
+    std::cout << "ownClosestPoint: " << std::endl << ownClosestPoint << std::endl;
+    std::cout << "obstacleClosestPoint: " << std::endl << obstacleClosestPoint << std::endl;
 
     closestPoints.row(0) = ownClosestPoint;
     closestPoints.row(1) = obstacleClosestPoint;
@@ -302,7 +311,7 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *
                 obstacleClosestPoint = closestPoints.row(0);
                 ownClosestPoint = closestPoints.row(1);
             }
-        }
+        }   
     }else if(lambdaM2 >=0 && lambdaM2 <= 1){
         //m2 inside
         if( axisOfSymmetryOwn.getShortestDistanceToPoint(endPointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToPoint(basePointOwn) ){
