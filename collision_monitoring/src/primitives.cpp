@@ -145,14 +145,7 @@ double Capsule::getShortestDistance(Capsule *capsule){
     Eigen::Vector3d shortestDirection;
 
     this->getShortestDirection(shortestDirection, capsule);
-
     shortestDistance = shortestDirection.norm() - this->radius - capsule->getRadius();
-
-    #ifdef DEBUG
-        std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
-    #endif //DEBUG
-
-    return shortestDistance;
 
     return shortestDistance;
 }
@@ -162,12 +155,7 @@ double Capsule::getShortestDistance(Sphere *sphere){
     Eigen::Vector3d shortestDirection;
 
     this->getShortestDirection(shortestDirection, sphere);
-
     shortestDistance = shortestDirection.norm() - this->radius - sphere->getRadius();
-
-    #ifdef DEBUG
-        std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
-    #endif //DEBUG
 
     return shortestDistance;
 }
