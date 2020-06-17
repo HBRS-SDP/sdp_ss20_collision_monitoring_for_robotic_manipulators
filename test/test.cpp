@@ -43,6 +43,9 @@ TEST_CASE( "1st test case", "[Capsule - Capsule]" ) {
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(15.007002100700248).margin(0.001) );
+
+    delete Link_1;
+    delete Link_2;
 }
 
 TEST_CASE( "2nd test case", "[Capsule - Capsule]" ) {
@@ -66,6 +69,9 @@ TEST_CASE( "2nd test case", "[Capsule - Capsule]" ) {
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(10.233213170882209).margin(0.001) );
+
+    delete Link_1;
+    delete Link_2;
 }
 
 TEST_CASE( "3rd test case lambda >= 1", "[Capsule - Capsule]" ) {
@@ -89,6 +95,9 @@ TEST_CASE( "3rd test case lambda >= 1", "[Capsule - Capsule]" ) {
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(14.779612647907754).margin(0.001) );
+
+    delete Link_1;
+    delete Link_2;
 }
 
 TEST_CASE( "4th test case lambda <= 0", "[Capsule - Capsule]" ) {
@@ -112,6 +121,9 @@ TEST_CASE( "4th test case lambda <= 0", "[Capsule - Capsule]" ) {
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(1.21253086204284).margin(0.001) );
+
+    delete Link_1;
+    delete Link_2;
 }
 
 
@@ -134,6 +146,9 @@ TEST_CASE( "1st test case sphere", "[Sphere - Sphere]" ) {
     Primitive *Sphere_2 = new Sphere(pose_2, radius_2);
 
     REQUIRE( Sphere_1->getShortestDistance(Sphere_2) == Approx(70.3).margin(0.1) );
+
+    delete Sphere_1;
+    delete Sphere_2;
 }
 
 TEST_CASE( "2nd test case sphere", "[Sphere - Capsule]" ) {
@@ -157,6 +172,9 @@ TEST_CASE( "2nd test case sphere", "[Sphere - Capsule]" ) {
 
     REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(13.1).margin(0.1) );
     REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(13.1).margin(0.1) );
+
+    delete Link_2;
+    delete Sphere_1;
 }
 
 
@@ -181,6 +199,9 @@ TEST_CASE( "3rd test case sphere", "[Sphere - Capsule]" ) {
 
     REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(34.1).margin(0.1) );
     REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(34.1).margin(0.1) );
+
+    delete Link_2;
+    delete Sphere_1;
 }
 
 TEST_CASE( "4th test case sphere", "[Sphere - Capsule]" ) {
@@ -208,6 +229,9 @@ TEST_CASE( "4th test case sphere", "[Sphere - Capsule]" ) {
 
     REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(5.9).margin(0.1) );
     REQUIRE( Link_2->getShortestDistance(Sphere_1) == Approx(5.9).margin(0.1) );
+
+    delete Link_2;
+    delete Sphere_1;
 }
 
 
