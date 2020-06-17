@@ -37,7 +37,9 @@ class KinovaSimulator
         
             curTime = ros::Time::now().toNSec();
             prevTime = curTime;
+            std::vector<std::string> strings = {"Actuator1", "Actuator2", "Actuator3", "Actuator4", "Actuator5", "Actuator6"};
             for (int i=0; i<6; i++) {
+                jointStates.name.push_back(strings[i]);
                 jointStates.velocity.push_back(0.0);
                 jointStates.position.push_back(0.0);
             }
@@ -59,14 +61,11 @@ class KinovaSimulator
             else {
                 deltaT = 0;
             }
-            
-            std::vector<string> names = std::vector<string>(7);
+
             for (int i=0; i<jointVelocities.size(); i++) {
-                names[i] = "Actuator" + (string)(i + 1);
                 jointStates.position[i] += jointVelocities[i] * (double)deltaT / 1000;
                 jointStates.velocity[i] = jointVelocities[i];
             }
-            jointStates.name = names;
             velPub.publish(jointStates);
         }
 };
