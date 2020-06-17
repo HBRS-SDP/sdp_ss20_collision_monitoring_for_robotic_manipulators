@@ -73,14 +73,8 @@ void Line::getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line lin
     obstacleProjectedClosestPoint = projectedLine.getClosestPointToPoint(midPoint);
 
     ratio = (obstacleProjectedClosestPoint - basePointProjected).norm() / (endPointProjected - basePointProjected).norm();
-
-    obstacleClosestPoint = (line.getEndPoint() - line.getBasePoint()) * ratio + line.getBasePoint();//line.getClosestPointToPoint(obstacleProjectedClosestPoint);
-    
+    obstacleClosestPoint = (line.getEndPoint() - line.getBasePoint()) * ratio + line.getBasePoint();
     ownClosestPoint = this->getClosestPointToPoint(obstacleClosestPoint);
-
-    std::cout << "ratio: " << ratio << std::endl;
-    std::cout << "ownClosestPoint: " << std::endl << ownClosestPoint << std::endl;
-    std::cout << "obstacleClosestPoint: " << std::endl << obstacleClosestPoint << std::endl;
 
     closestPoints.row(0) = ownClosestPoint;
     closestPoints.row(1) = obstacleClosestPoint;
