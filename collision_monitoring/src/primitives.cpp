@@ -492,17 +492,17 @@ void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sp
     Eigen::Vector3d obstacleSphereCenter, ownCenter;
     Eigen::Vector4d origin(0, 0, 0, 1);
 
-    std::cout << "ALAN NNNNNNNN" << std::endl;
-
     obstacleSphereCenter = (sphere->pose * origin).head(3);
     ownCenter = (this->pose * origin).head(3);
 
     shortestDirection = obstacleSphereCenter - ownCenter;    
 
-    std::cout << obstacleSphereCenter << std::endl;
-    std::cout << ownCenter << std::endl;
-    std::cout << shortestDirection << std::endl;
-    std::cout << shortestDirection.norm() << std::endl;
+    #ifdef DEBUG
+        std::cout << "obstacle center: " << obstacleSphereCenter << std::endl;
+        std::cout << "own center: " << ownCenter << std::endl;
+        std::cout << "shortest direction: " << shortestDirection << std::endl;
+        std::cout << "shortest direction norm: " << shortestDirection.norm() << std::endl;
+    #endif //DEBUG
 
 
 }
