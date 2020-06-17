@@ -30,6 +30,37 @@ class Sphere;
 class Primitive
 {    
     public:
+        /** Performs a dynamic cast to overload the direction functions
+        * 
+        * This method takes an object that inherits from primitive and
+        * performs a dynamic cast to call the correct getShortestDirection
+        * method depending on the class of the shape. returns a Vector3d.
+        *
+        * @param primitive address of the primitive object.
+        * @return a vector in 3D that represents the closes direction between this and the second primitive.
+        */
+        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive) = 0;
+
+        /** Finds the shortest distance between this primitive and a Capsule primitive
+        * 
+        * This method takes a capsule object and returns the closest direction
+        * between this primitive and a capsule object. returns a Vector3d.
+        *
+        * @param capsule address of the primitive object
+        * @return a vector in 3D that represents the closes direction between the primitive and capsule
+        */
+
+        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule) = 0;
+        
+        /** Finds the shortest distance between this primitive and a Sphere primitive
+        * 
+        * This method takes a capsule object and returns the closest direction
+        * between this primitive and a sphere object. returns a Vector3d.
+        *
+        * @param sphere address of the primitive object
+        * @return a vector in 3D that represents the closes direction between the primitive and sphere
+        */
+        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere) = 0;
         /** Performs a dynamic cast to overload the distance functions
         * 
         * This method takes an object that inherits from primitive and
@@ -71,38 +102,6 @@ class Primitive
         * @return the closest distance between the primitive and cylinder
         */
         //virtual double getShortestDistance(Cylinder *cylinder) = 0;
-
-        /** Performs a dynamic cast to overload the direction functions
-        * 
-        * This method takes an object that inherits from primitive and
-        * performs a dynamic cast to call the correct getShortestDirection
-        * method depending on the class of the shape. returns a Vector3d.
-        *
-        * @param primitive address of the primitive object.
-        * @return a vector in 3D that represents the closes direction between this and the second primitive.
-        */
-        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive) = 0;
-
-        /** Finds the shortest distance between this primitive and a Capsule primitive
-        * 
-        * This method takes a capsule object and returns the closest direction
-        * between this primitive and a capsule object. returns a Vector3d.
-        *
-        * @param capsule address of the primitive object
-        * @return a vector in 3D that represents the closes direction between the primitive and capsule
-        */
-
-        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule) = 0;
-        
-        /** Finds the shortest distance between this primitive and a Sphere primitive
-        * 
-        * This method takes a capsule object and returns the closest direction
-        * between this primitive and a sphere object. returns a Vector3d.
-        *
-        * @param sphere address of the primitive object
-        * @return a vector in 3D that represents the closes direction between the primitive and sphere
-        */
-        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere) = 0;
 
         Eigen::Matrix4d pose; /* pose of the primitive */
 
@@ -230,15 +229,14 @@ class Capsule: public Primitive{
         * @return the radius of the capsule
         */
         float getRadius();
-
-
-        double getShortestDistance(Primitive *primitive);
-        double getShortestDistance(Capsule *capsule);
-        double getShortestDistance(Sphere *sphere);
         
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere);
+
+        double getShortestDistance(Primitive *primitive);
+        double getShortestDistance(Capsule *capsule);
+        double getShortestDistance(Sphere *sphere);
 };
 
 // class Cylinder: public Primitive{
@@ -277,13 +275,13 @@ class Sphere: public Primitive{
         */
         float getRadius();
 
-        double getShortestDistance(Primitive *primitive);
-        double getShortestDistance(Capsule *capsule);
-        double getShortestDistance(Sphere *sphere);
-
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere);
+
+        double getShortestDistance(Primitive *primitive);
+        double getShortestDistance(Capsule *capsule);
+        double getShortestDistance(Sphere *sphere);
 };
 
 
