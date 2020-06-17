@@ -7,3 +7,4 @@ logs
 .rosinstall
 .catkin
 .built_by
+logs

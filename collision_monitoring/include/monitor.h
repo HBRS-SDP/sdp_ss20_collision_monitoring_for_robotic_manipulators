@@ -50,7 +50,8 @@ class Monitor
         * @param obstacle address of the obstacle to be added.
         */
         void addObstacle(Primitive* obstacle);
-        
+        void addObstacle(Sphere* obstacle);
+        void addObstacle(Capsule* obstacle);
         /** Adds arm to list of obstacles
         *
         * This method decomposes an arm into its primitives to add it into 
