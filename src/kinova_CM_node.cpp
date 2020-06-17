@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     n.param<std::string>(ros::this_node::getName()+"/urdf_model", modelPath, "./urdf/GEN3_URDF_V12.urdf");
     n.param<std::string>(ros::this_node::getName()+"/joint_state_topic", jointStatesTopic, "joint_states");
     n.param<std::string>(ros::this_node::getName()+"/goal_topic", goalTopic, ros::this_node::getName()+"/goal");
-    n.param<std::string>(ros::this_node::getName()+"/velocity_topic", jointVelocityTopic, ros::this_node::getName()+"/joint_command");
+    n.param<std::string>(ros::this_node::getName()+"/velocity_topic", jointVelocityTopic, "joint_command");
 
     std::string model = modelPath;
     KinovaArm arm1(model);

@@ -60,10 +60,13 @@ class KinovaSimulator
                 deltaT = 0;
             }
             
+            std::vector<string> names = std::vector<string>(7);
             for (int i=0; i<jointVelocities.size(); i++) {
+                names[i] = "Actuator" + (string)(i + 1);
                 jointStates.position[i] += jointVelocities[i] * (double)deltaT / 1000;
                 jointStates.velocity[i] = jointVelocities[i];
             }
+            jointStates.name = names;
             velPub.publish(jointStates);
         }
 };
