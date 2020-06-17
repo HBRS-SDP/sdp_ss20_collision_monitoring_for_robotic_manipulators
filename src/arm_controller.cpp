@@ -57,7 +57,6 @@ void ArmController::goalCallback(const geometry_msgs::Point::ConstPtr& msg) {
 Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPosition, 
                                         Eigen::Vector3d velocity) {
     Eigen::Vector3d potentialField = Eigen::Vector3d({0, 0, 0});
-    std::cout << potentialField << std::endl;
     
     for(int i = 0; i < monitor->obstacles.size(); i++) {
         
@@ -90,15 +89,9 @@ KDL::Twist ArmController::controlLoop(void) {
     Eigen::Vector3d currEndPoint = (currEndPose * origin).head(3);
     objectDistances = monitor->distanceToObjects();
     armDistances = monitor->distanceBetweenArmLinks();
-    std::cout << "Distanced to objects: " << objectDistances.size();
-    for (int i=0; i<objectDistances.size(); i++) {
-        for (int j=0; j<objectDistances[i].size(); j++) {
-            std::cout << "  " << objectDistances[i][j];
-        }
-    }
-    std::cout << std::endl;
 
     //v̇ = K(g−x) − Dv + p(x, v)
+    std::cout << "goal: " << goal << std::endl;
 
     Eigen::Vector3d currVelocity = {twist.vel[0], twist.vel[1], twist.vel[2]};
     Eigen::Vector3d newVelocity = K * (goal - currEndPoint) - D * currVelocity
