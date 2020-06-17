@@ -23,7 +23,6 @@
 /*
 TODO:
     - implement base position
-    - talk to Djordje about fksolver
 */
 
 /**
@@ -56,16 +55,34 @@ class KinovaArm: public Arm
          */
         bool updatePose(std::vector<double> jointPositions);
 
+        /**
+         * A function to find the inverse kinematics of an endeffector trajectory
+         * 
+         * @param twist The KDL::Twist velocity vector
+         * @return A vector of joint velocities used to achieve the desired velocity
+         */
+        std::vector<double> ikVelocitySolver(KDL::Twist twist);
 
+        /**
+         * A function to find the final joint pose
+         * 
+         * @return The last joint pose
+         */
         Eigen::Matrix4d  getPose(void);
 
+        /**
+         * A function to find the joint pose of a given joint
+         * 
+         * @param jointNumber The joint number to solve for the pose of
+         * @return The last joint pose
+         */
         Eigen::Matrix4d  getPose(int jointNumber);
 
         /// The KDL joint array to hold the joint angles
         KDL::JntArray jointArray;
+        /// The KDL joint array to hold the joint velocities
         KDL::JntArray jointVels;
 
-        std::vector<double> ikVelocitySolver(KDL::Twist twist);
 
 
     private:
@@ -81,7 +98,6 @@ class KinovaArm: public Arm
 
         /// The KDL chain used for calculating kinematics
         KDL::Chain fkChain;
-        KDL::Chain ikChain;
 
         /// Mathematical constants, declared in constructor for speed
         Eigen::Vector4d origin;

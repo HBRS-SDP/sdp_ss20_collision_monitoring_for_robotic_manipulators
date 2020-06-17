@@ -14,7 +14,6 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 
     // Convert the tree to a chain and get the number of joints
     armTree.getChain("base_link", "EndEffector_Link", fkChain);
-    armTree.getChain("base_link", "EndEffector_Link", ikChain);
     nJoints = fkChain.getNrOfJoints();
 
     // init frames for all the joints
@@ -88,7 +87,6 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
     for(int i=0; i<nJoints; i++)
     {
         jointArray(i) = jointPositions[i];
-        // std::cout << "joint pose1:\n" << jointVels(i) << " : "<< jointArray(i) << std::endl;
     }
 
 
@@ -103,10 +101,6 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
                       << *poses[link_num] << std::endl
                       << "Success" << std::endl;
             #endif //DEBUG
-            // for(int i=0; i<nJoints; i++)
-            // {   
-            //     std::cout << "joint pose2:\n" << jointVels(i) << " : "<< jointArray(i) << std::endl;
-            // }
         }
         // If calculation fails print error and return false
         else
@@ -129,12 +123,21 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
 
 std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
 
+    // vector to store output values
     std::vector<double> jointVelocitiesOut;
-    KDL::ChainIkSolverVel_wdls ikSolver = KDL::ChainIkSolverVel_wdls(ikChain);
+
+    // inverse kinemetics solver
+    KDL::ChainIkSolverVel_wdls ikSolver = KDL::ChainIkSolverVel_wdls(fkChain);
+
+    //solver for joint velocities
     ikSolver.CartToJnt(jointArray, twist, jointVels);
+
+    // push velocities onto the vector
     for (int i=0; i<jointVels.rows(); i++){
         jointVelocitiesOut.push_back(jointVels(i));
     }
+
+    // Return the joint velocities
     return jointVelocitiesOut;
 }
 
@@ -146,10 +149,13 @@ Eigen::Matrix4d KinovaArm::getPose(void)
 
 Eigen::Matrix4d KinovaArm::getPose(int jointNumber)
 {
+    // input sanitization
     if(jointNumber >= poses.size() | jointNumber < 0){
         std::cout << "Access joint number larger than array in getPose";
         return frameToMatrix(*poses.back());
     }
+
+    // return joint pose
     return frameToMatrix(*poses[jointNumber]);
 }
 
