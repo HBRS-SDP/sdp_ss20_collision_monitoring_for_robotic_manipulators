@@ -330,7 +330,6 @@ TEST_CASE("Kinova_arm test inverse kinematics", "[arm]") {
 
     output = kinovaArm.ikVelocitySolver(twist);
     for (int i=0; i<output.size(); i++) {
-        std::cout << "   " << output[i] << std::endl;
         difference += fabs(output[i]- outputPose[i]);
     }
     REQUIRE( difference < 0.001);
