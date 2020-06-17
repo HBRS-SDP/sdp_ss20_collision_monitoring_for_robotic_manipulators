@@ -23,6 +23,7 @@ double deg2rad(double v) {
 std::string urdf_filename = "../urdf/GEN3_URDF_V12.urdf";
 
 TEST_CASE( "1st test case", "[Capsule - Capsule]" ) {
+    Eigen::Vector3d shortestDirection;
     double radius_1 = 10;
     double length_1 = 70.710678118654755;
     Eigen::Matrix4d pose_1;
@@ -41,6 +42,11 @@ TEST_CASE( "1st test case", "[Capsule - Capsule]" ) {
 
     Primitive *Link_1 = new Capsule(pose_1, length_1, radius_1);
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
+
+    Link_1->getShortestDirection(shortestDirection, Link_2);
+    std::cout << shortestDirection << std::endl;
+    std::cout << shortestDirection.norm() << std::endl;
+    
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(15.007002100700248).margin(0.001) );
 }
