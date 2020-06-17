@@ -15,8 +15,8 @@
 class KinovaSimulator
 {
     public:
-        std::string inputPath;
-        std::string outputPath;
+        std::string inputTopic;
+        std::string outputTopic;
 
 
         ros::Subscriber subscriber;
@@ -30,10 +30,10 @@ class KinovaSimulator
 
         KinovaSimulator(){
 
-            ros::NodeHandle n;
+            ros::NodeHandle np;
 
-            n.param<std::string>("/velocity_topic", inputPath, "joint_command");
-            n.param<std::string>("/joint_state_topic", outputPath, "joint_state");
+            np.param<std::string>("/velocity_topic", inputTopic, "joint_command");
+            np.param<std::string>("/joint_state_topic", outputTopic, "joint_state");
         
             curTime = ros::Time::now().toNSec();
             prevTime = curTime;
@@ -42,9 +42,10 @@ class KinovaSimulator
                 jointStates.position.push_back(0.0);
             }
 
+            ros::NodeHandle n;
 
-            subscriber = n.subscribe(inputPath, 1000, &KinovaSimulator::subVelocity, this);
-            velPub = n.advertise<sensor_msgs::JointState>(outputPath, 1000);
+            subscriber = n.subscribe(inputTopic, 1000, &KinovaSimulator::subVelocity, this);
+            velPub = n.advertise<sensor_msgs::JointState>(outputTopic, 1000);
         }
 
         ~KinovaSimulator() {}
