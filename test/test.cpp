@@ -43,13 +43,6 @@ TEST_CASE( "1st test case", "[Capsule - Capsule]" ) {
     Primitive *Link_1 = new Capsule(pose_1, length_1, radius_1);
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
-    Link_1->getShortestDirection(shortestDirection, Link_2);
-    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
-    REQUIRE( shortestDirection.norm() - radius_1 - radius_2 == Approx(15.007002100700248).margin(0.001) );
-    Link_2->getShortestDirection(shortestDirection, Link_1);
-    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
-    REQUIRE( shortestDirection.norm() - radius_1 - radius_2 == Approx(15.007002100700248).margin(0.001) );
-
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(15.007002100700248).margin(0.001) );
     REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(15.007002100700248).margin(0.001) );
 }
@@ -74,13 +67,6 @@ TEST_CASE( "2nd test case", "[Capsule - Capsule]" ) {
 
     Primitive *Link_1 = new Capsule(pose_1, length_1, radius_1);
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
-
-    Link_1->getShortestDirection(shortestDirection, Link_2);
-    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
-    REQUIRE( shortestDirection.norm() - radius_1 - radius_2 == Approx(10.233213170882209).margin(0.001) );
-    Link_2->getShortestDirection(shortestDirection, Link_1);
-    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
-    REQUIRE( shortestDirection.norm() - radius_1 - radius_2 == Approx(10.233213170882209).margin(0.001) );
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(10.233213170882209).margin(0.001) );
     REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(10.233213170882209).margin(0.001) );
@@ -107,13 +93,6 @@ TEST_CASE( "3rd test case lambda >= 1", "[Capsule - Capsule]" ) {
     Primitive *Link_1 = new Capsule(pose_1, length_1, radius_1);
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
-    Link_1->getShortestDirection(shortestDirection, Link_2);
-    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
-    REQUIRE( shortestDirection.norm() - radius_1 - radius_2 == Approx(14.779612647907754).margin(0.001) );
-    Link_2->getShortestDirection(shortestDirection, Link_1);
-    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
-    REQUIRE( shortestDirection.norm() - radius_1 - radius_2 == Approx(14.779612647907754).margin(0.001) );
-
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(14.779612647907754).margin(0.001) );
     REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(14.779612647907754).margin(0.001) );
 
@@ -139,13 +118,6 @@ TEST_CASE( "4th test case lambda <= 0", "[Capsule - Capsule]" ) {
 
     Primitive *Link_1 = new Capsule(pose_1, length_1, radius_1);
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
-
-    Link_1->getShortestDirection(shortestDirection, Link_2);
-    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
-    REQUIRE( shortestDirection.norm() - radius_1 - radius_2 == Approx(1.21253086204284).margin(0.001) );
-    Link_2->getShortestDirection(shortestDirection, Link_1);
-    std::cout << shortestDirection.norm() - radius_1 - radius_2 << std::endl;
-    REQUIRE( shortestDirection.norm() - radius_1 - radius_2 == Approx(1.21253086204284).margin(0.001) );
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(1.21253086204284).margin(0.001) );
     REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(1.21253086204284).margin(0.001) );
