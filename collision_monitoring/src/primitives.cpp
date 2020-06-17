@@ -99,6 +99,12 @@ Capsule::Capsule(Eigen::Matrix4d pose, double length, double radius){
     this->radius = radius;
 }
 
+Capsule::Capsule(Capsule* capsule){
+    this->pose = capsule->pose;
+    this->length = capsule->getLength();
+    this->radius = capsule->getRadius();
+}
+
 Capsule::~Capsule(){
 
 }
@@ -238,6 +244,11 @@ double Capsule::getShortestDistance(Sphere *sphere){
 Sphere::Sphere(Eigen::Matrix4d pose, double radius){
     this->pose = pose;
     this->radius = radius;
+}
+
+Sphere::Sphere(Sphere* sphere) {
+    this->pose = sphere->pose;
+    this->radius = sphere->getRadius();
 }
 
 Sphere::~Sphere(){

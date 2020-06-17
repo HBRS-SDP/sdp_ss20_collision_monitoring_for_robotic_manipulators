@@ -6,22 +6,44 @@ Monitor::Monitor(Arm* arm){
 }
 
 Monitor::~Monitor(){
+    std::cout << "###" << this->obstacles.size() << std::endl;
     for( int i=0; i < this->obstacles.size(); i++){
-        delete this->obstacles[i];
+        std::cout << "###" << this->obstacles[i] << std::endl;
+        std::cout << "###" << this->obstacles[i]->pose << std::endl;
+        delete obstacles[i];
+        obstacles[i] = NULL;
     }
 }
 
 void Monitor::addObstacle(Primitive* obstacle) {
-    Primitive* copy_obstacle;
-    std::memcpy(copy_obstacle, obstacle, sizeof(obstacle));
-    this->obstacles.push_back(copy_obstacle);
+    Capsule *capsule = dynamic_cast<Capsule*>(obstacle);
+    if(capsule){
+        this->addObstacle(capsule);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(obstacle);
+        if(sphere){
+            this->addObstacle(sphere);
+        }
+    }
+
 }
+
+void Monitor::addObstacle(Sphere* obstacle) {
+    Sphere* obstacleCopy = new Sphere(obstacle);
+    obstacles.push_back(obstacleCopy);
+}
+
+void Monitor::addObstacle(Capsule* obstacle) {
+    Capsule* obstacleCopy = new Capsule(obstacle);
+    obstacles.push_back(obstacleCopy);
+}
+
 
 void Monitor::addObstacle(Arm* arm) {
     // Adds every link of the arm (a primitve) to the obstacles vector.
     for (int i = 0; i < arm->links.size(); i++) {
         // this->obstacles.push_back(arm->links[i]);
-        Monitor::addObstacle(arm->links[i]);
+        this->addObstacle(arm->links[i]);
     }
 }
 
