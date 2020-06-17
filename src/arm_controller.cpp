@@ -60,7 +60,7 @@ KDL::Twist ArmController::controlLoop(void) {
     std::cout << std::endl;
 
     // TODO the code for the object avoidance
-    x = 0;
+    x = 1;
     y = 0;
     z = 0;
     alpha = 0;

@@ -6,6 +6,7 @@
 #include <kdl/chain.hpp>
 #include "primitives.h"
 #include "ros/ros.h"
+#include "std_msgs/Float64.h"
 #include "arm_controller.h"
 #include "sensor_msgs/JointState.h"
 #include "visualization_msgs/Marker.h"
@@ -35,10 +36,21 @@ int main(int argc, char **argv)
     ros::Rate loop_rate(10);
 
 
+    KDL::Twist endeffectorVelocity;
     std::vector<double> jointVelocities;
+    sensor_msgs::JointState jointStates;
+    for (int i=0; i<arm1.nJoints; i++) {
+        jointStates.velocity.push_back(0.0);
+    }
+
 
     while(ros::ok()) {
-        jointVelocities = armController1.controlLoop();
+        endeffectorVelocity = armController1.controlLoop();
+        jointVelocities = arm1.ikVelocitySolver(endeffectorVelocity);
+        for(int i=0; i<arm1.nJoints; i++){
+            jointStates.velocity[i] = jointVelocities[i];
+        }
+        armPub.publish(jointStates);
         for(int i=0; i<armController1.rvizObstacles.size(); i++){
             markersPub.publish(armController1.rvizObstacles[i]->marker);
         }
