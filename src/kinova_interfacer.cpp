@@ -27,7 +27,7 @@ int main(int argc, char **argv)
         int mode;
         double diameter;
         int shape;
-        std::cout << "Choose input mode; goal(1) or obstacle(2):\n";
+        std::cout << "Choose input mode; goal(1) or obstacle(2): ";
         std::cin >> mode;
         switch(mode) {
             case 1:

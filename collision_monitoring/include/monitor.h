@@ -23,7 +23,8 @@ class Monitor
 
         Arm* arm; /* Arm to monitor */
         std::vector<Primitive*> obstacles; /* Obstacles in the workspace */
-        
+        std::vector<Primitive*> obstaclesToDelete; /* Obstacles to delete in 
+        destructor */
         /** Collision monitoring with obstacles. 
         *
         * This methods monitors the distance from one link of the arm 
@@ -42,7 +43,6 @@ class Monitor
         * @returns a matrix with the distance of each link to the other links.
         */
         std::vector<std::vector<double>> distanceBetweenArmLinks();
-
 
         /** Adds primitive to list of obstacles
         *

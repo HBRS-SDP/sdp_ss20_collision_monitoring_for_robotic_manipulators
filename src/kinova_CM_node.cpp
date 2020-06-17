@@ -33,7 +33,7 @@ int main(int argc, char **argv)
     Monitor monitor1(&arm1);
 
     // Create the armController class based off the first monitor
-    ArmController armController1(&monitor1);
+    ArmController armController1(&monitor1, 1, 0, 100, 20/3.1425);
 
     // Init ROS listener
     ros::Subscriber armSub = n.subscribe(jointStatesTopic, 1000, &ArmController::armCallback, &armController1);
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     ros::Publisher armPub = n.advertise<sensor_msgs::JointState>(jointVelocityTopic, 1000);
     ros::Publisher markersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/markers", 1000);
     
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(1.5);
 
 
     KDL::Twist endeffectorVelocity;

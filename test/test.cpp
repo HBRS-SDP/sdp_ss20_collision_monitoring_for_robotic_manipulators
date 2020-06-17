@@ -27,6 +27,7 @@ double deg2rad(double v) {
 std::string urdf_filename = "../urdf/GEN3_URDF_V12.urdf";
 
 TEST_CASE( "1st test case", "[Capsule - Capsule]" ) {
+    Eigen::Vector3d shortestDirection;
     double radius_1 = 10;
     double length_1 = 70.710678118654755;
     Eigen::Matrix4d pose_1;
@@ -47,12 +48,14 @@ TEST_CASE( "1st test case", "[Capsule - Capsule]" ) {
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(15.007002100700248).margin(0.001) );
+    REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(15.007002100700248).margin(0.001) );
 
     delete Link_1;
     delete Link_2;
 }
 
 TEST_CASE( "2nd test case", "[Capsule - Capsule]" ) {
+    Eigen::Vector3d shortestDirection;
     double radius_1 = 10;
     double length_1 = 95.39392014169457;
     Eigen::Matrix4d pose_1;
@@ -73,12 +76,14 @@ TEST_CASE( "2nd test case", "[Capsule - Capsule]" ) {
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(10.233213170882209).margin(0.001) );
+    REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(10.233213170882209).margin(0.001) );
 
     delete Link_1;
     delete Link_2;
 }
 
 TEST_CASE( "3rd test case lambda >= 1", "[Capsule - Capsule]" ) {
+    Eigen::Vector3d shortestDirection;
     double radius_1 = 10;
     double length_1 = 95.39392014169457;
     Eigen::Matrix4d pose_1;
@@ -99,12 +104,14 @@ TEST_CASE( "3rd test case lambda >= 1", "[Capsule - Capsule]" ) {
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(14.779612647907754).margin(0.001) );
+    REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(14.779612647907754).margin(0.001) );
 
     delete Link_1;
     delete Link_2;
 }
 
 TEST_CASE( "4th test case lambda <= 0", "[Capsule - Capsule]" ) {
+    Eigen::Vector3d shortestDirection;
     double radius_1 = 10;
     double length_1 = 70.0;
     Eigen::Matrix4d pose_1;
@@ -125,6 +132,7 @@ TEST_CASE( "4th test case lambda <= 0", "[Capsule - Capsule]" ) {
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(1.21253086204284).margin(0.001) );
+    REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(1.21253086204284).margin(0.001) );
 
     delete Link_1;
     delete Link_2;
