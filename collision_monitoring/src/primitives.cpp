@@ -249,24 +249,13 @@ double Capsule::getShortestDistance(Capsule *capsule){
 
 double Capsule::getShortestDistance(Sphere *sphere){
     double shortestDistance = 0;
-    Eigen::Vector3d basePoint, endPoint, sphereCenter;
+    Eigen::Vector3d shortestDirection;
 
-    Eigen::Vector4d origin(0, 0, 0, 1);
-    Eigen::Vector4d zDirectionCapsule(0, 0, this->length, 1);
+    this->getShortestDirection(shortestDirection, sphere);
 
-    basePoint = (this->pose * origin).head(3);
-    endPoint  = (this->pose * zDirectionCapsule).head(3);
-
-    Line axisOfSymmetryCapsule(basePoint, endPoint);
-    
-    sphereCenter = (sphere->pose * origin).head(3);
-
-    shortestDistance = axisOfSymmetryCapsule.getShortestDistanceToPoint(sphereCenter) - this->radius - sphere->getRadius();
+    shortestDistance = shortestDirection.norm() - this->radius - sphere->getRadius();
 
     #ifdef DEBUG
-        std::cout << "st_c: " << std::endl << basePoint << std::endl;
-        std::cout << "ed_c: " << std::endl << endPoint << std::endl;
-        std::cout << "st_o: " << std::endl << sphereCenter << std::endl;
         std::cout << "shortestDistance: " << std::endl << shortestDistance << std::endl;
     #endif //DEBUG
 
