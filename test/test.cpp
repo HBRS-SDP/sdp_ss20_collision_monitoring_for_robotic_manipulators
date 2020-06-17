@@ -116,6 +116,8 @@ TEST_CASE( "4th test case lambda <= 0", "[Capsule - Capsule]" ) {
 
 
 TEST_CASE( "1st test case sphere", "[Sphere - Sphere]" ) {
+    Eigen::Vector3d shortestDirection;
+
     double radius_1 = 20;
     Eigen::Matrix4d pose_1;
     pose_1 << 0.51701611,  -0.33046266,   0.78961305, -70,
@@ -133,6 +135,8 @@ TEST_CASE( "1st test case sphere", "[Sphere - Sphere]" ) {
     Primitive *Sphere_1 = new Sphere(pose_1, radius_1);
     Primitive *Sphere_2 = new Sphere(pose_2, radius_2);
 
+    Sphere_1->getShortestDirection(shortestDirection, Sphere_2);
+    REQUIRE( shortestDirection.norm()  - radius_1 - radius_2  == Approx(70.3).margin(0.1) );
     REQUIRE( Sphere_1->getShortestDistance(Sphere_2) == Approx(70.3).margin(0.1) );
 }
 
