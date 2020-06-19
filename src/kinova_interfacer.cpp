@@ -28,6 +28,10 @@ class MarkerPublisher {
             this->marker.pose.orientation.z = 0.0;
             this->marker.pose.orientation.w = 1.0;
 
+            this->marker.pose.position.x = positionX;
+            this->marker.pose.position.y = positionY;
+            this->marker.pose.position.z = positionZ;
+
             this->marker.color.a = 1.0; 
             this->marker.color.r = (float) rand() / RAND_MAX;
             this->marker.color.g = (float) rand() / RAND_MAX;
@@ -114,80 +118,59 @@ int main(int argc, char **argv)
                 std::cin >> shape;
                 switch(shape) {
                     case 1:
+                    {
                         std::cout << "Sphere selected, please input the required values.\n";
                         std::cout << "Frame_id: ";
-                        std::cin >> marker.header.frame_id;
-                        marker.header.stamp = ros::Time();
-                        std::cout << "NameSpace: ";
-                        std::cin >> marker.ns;
-                        std::cout << "ID: ";
-                        std::cin >> marker.id;
-                        marker.type = visualization_msgs::Marker::SPHERE;
-                        marker.action = visualization_msgs::Marker::ADD;
-                        std::cout << "Input position:\n";
-                        std::cout << "\tx: ";
-                        std::cin >> marker.pose.position.x;
-                        std::cout << "\ty: ";
-                        std::cin >> marker.pose.position.y;
-                        std::cout << "\tz: ";
-                        std::cin >> marker.pose.position.z;
-                        std::cout<< "Radius: ";
-                        std::cin >> radius;
-                        marker.scale.x = 2 * radius;
-                        marker.scale.y = 2 * radius;
-                        marker.scale.z = 2 * radius;
-
-                        marker.pose.orientation.x = 0.0;
-                        marker.pose.orientation.y = 0.0;
-                        marker.pose.orientation.z = 0.0;
-                        marker.pose.orientation.w = 1.0;
-
-                        marker.color.a = 1.0; 
-                        marker.color.r = (float) rand() / RAND_MAX;
-                        marker.color.g = (float) rand() / RAND_MAX;
-                        marker.color.b = (float) rand() / RAND_MAX;
-
-                        obstaclePub.publish(marker);
-
-                        break;
-                    
-                    case 2:
-                        std::cout << "Cylinder selected, please input the required values.\n";
-                        std::cout << "Frame_id: ";
-                        std::cin >> marker.header.frame_id;
+                        std::cin >> frame_id;
                         std::cout << "NameSpace: ";
                         std::cin >> ns;
                         std::cout << "ID: ";
                         std::cin >> id;
-                        marker.type = visualization_msgs::Marker::CYLINDER;
                         std::cout << "Input position:\n";
                         std::cout << "\tx: ";
-                        std::cin >> marker.pose.position.x;
+                        std::cin >> positionX;
                         std::cout << "\ty: ";
-                        std::cin >> marker.pose.position.y;
+                        std::cin >> positionY;
                         std::cout << "\tz: ";
-                        std::cin >> marker.pose.position.z;
+                        std::cin >> positionZ;
+                        std::cout<< "Radius: ";
+                        std::cin >> radius;
+
+                        MarkerPublisher m(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id, positionX, positionY, positionZ);
+                        m.setRadius(radius);
+
+                        m.Publish();
+                        break;
+                    }
+                    
+                    case 2:
+                    {
+                        std::cout << "Cylinder selected, please input the required values.\n";
+                        std::cout << "Frame_id: ";
+                        std::cin >> frame_id;
+                        std::cout << "NameSpace: ";
+                        std::cin >> ns;
+                        std::cout << "ID: ";
+                        std::cin >> id;
+                        std::cout << "Input position:\n";
+                        std::cout << "\tx: ";
+                        std::cin >> positionX;
+                        std::cout << "\ty: ";
+                        std::cin >> positionY;
+                        std::cout << "\tz: ";
+                        std::cin >> positionZ;
                         std::cout<< "Radius: ";
                         std::cin >> radius;
                         std::cout<< "Length: ";
                         std::cin >> length;
-                        marker.scale.x = 2 * radius;
-                        marker.scale.y = 2 * radius;
-                        marker.scale.z = length;
 
-                        marker.pose.orientation.x = 0.0;
-                        marker.pose.orientation.y = 0.0;
-                        marker.pose.orientation.z = 0.0;
-                        marker.pose.orientation.w = 1.0;
+                        MarkerPublisher m(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ);
+                        m.setRadius(radius);
+                        m.setLength(length);
 
-                        marker.color.a = 1.0; 
-                        marker.color.r = (float) rand() / RAND_MAX;
-                        marker.color.g = (float) rand() / RAND_MAX;
-                        marker.color.b = (float) rand() / RAND_MAX;
-
-                        obstaclePub.publish(marker);
-
+                        m.Publish();
                         break;
+                    }
                     case 3:
                     {
                         std::cout << "Capsule selected, please input the required values.\n";
