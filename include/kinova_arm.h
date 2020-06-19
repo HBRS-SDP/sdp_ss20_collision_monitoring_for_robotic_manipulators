@@ -102,7 +102,7 @@ class KinovaArm: public Arm
         /// Mathematical constants, declared in constructor for speed
         Eigen::Vector4d origin;
         Eigen::Vector3d directionVect;
-        Eigen::MatrixXd i3;
+        Eigen::Matrix3d i3;
 
         /**
          * Transforms KDL::Frames to Eigen::Matrix4d

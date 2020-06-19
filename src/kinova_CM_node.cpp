@@ -28,6 +28,7 @@ int main(int argc, char **argv)
     n.param<std::string>(ros::this_node::getName()+"/goal_topic", goalTopic, ros::this_node::getName()+"/goal");
     n.param<std::string>(ros::this_node::getName()+"/velocity_topic", jointVelocityTopic, "joint_command");
 
+
     std::string model = modelPath;
     KinovaArm arm1(model);
     Monitor monitor1(&arm1);
@@ -43,28 +44,37 @@ int main(int argc, char **argv)
 
     ros::Publisher armPub = n.advertise<sensor_msgs::JointState>(jointVelocityTopic, 1000);
     ros::Publisher markersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/markers", 1000);
+
     
-    ros::Rate loop_rate(1.5);
+    ros::Rate loop_rate(1.5); 
 
 
     KDL::Twist endeffectorVelocity;
     std::vector<double> jointVelocities;
     sensor_msgs::JointState jointStates;
     for (int i=0; i<arm1.nJoints; i++) {
+        jointStates.position.push_back(0.0);
         jointStates.velocity.push_back(0.0);
     }
 
 
     while(ros::ok()) {
         endeffectorVelocity = armController1.controlLoop();
+        std::cout << "end vel: "<<endeffectorVelocity <<std::endl;
         jointVelocities = arm1.ikVelocitySolver(endeffectorVelocity);
+        std::cout << "joint Vels: ";
+
         for(int i=0; i<arm1.nJoints; i++){
+            std::cout << jointVelocities[i] << " ";
             jointStates.velocity[i] = jointVelocities[i];
+            jointStates.position[i] = arm1.jointArray(i);
         }
+        std::cout<<std::endl;
         armPub.publish(jointStates);
         for(int i=0; i<armController1.rvizObstacles.size(); i++){
             markersPub.publish(armController1.rvizObstacles[i]->marker);
         }
+
         ros::spinOnce();
         loop_rate.sleep();
     }

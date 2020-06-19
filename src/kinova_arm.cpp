@@ -11,7 +11,6 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     if (!kdl_parser::treeFromFile(urdf_filename, armTree)){
         std::cout << "Failed to construct kdl tree" << std::endl;
     }
-
     // Convert the tree to a chain and get the number of joints
     armTree.getChain("base_link", "EndEffector_Link", fkChain);
     nJoints = fkChain.getNrOfJoints();
@@ -21,7 +20,6 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     {
         poses.push_back(new KDL::Frame());
     }
-    
     #ifdef DEBUG
         std::cout << "\nnum_joints: " << nJoints << std::endl;
     #endif //DEBUG
@@ -59,12 +57,13 @@ KinovaArm::KinovaArm(std::string urdf_filename){
         Capsule* link = new Capsule(pose, lengths[i], radii[i]);
         links.push_back(link);
     }
-
     std::cout << links.size() << std::endl;
     // Mathematical constants, declared in constructor for speed
     this->origin << 0, 0, 0, 1;
     this->directionVect << 0, 0, 1;
-    this->i3 = Eigen::MatrixXd::Identity(3,3);
+    this->i3 << 1, 0, 0,
+                0, 1, 0,
+                0, 0, 1;
 }
 
 KinovaArm::~KinovaArm(){
@@ -125,15 +124,28 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
 
     // vector to store output values
     std::vector<double> jointVelocitiesOut;
+    std::cout << "Twist: " << twist << std::endl;
 
     // inverse kinemetics solver
     KDL::ChainIkSolverVel_wdls ikSolver = KDL::ChainIkSolverVel_wdls(fkChain);
+    Eigen::MatrixXd weight_ts;
+    weight_ts.resize(6, 6);
+    weight_ts.setIdentity();
+    weight_ts(0, 0) = 1;
+    weight_ts(1, 1) = 1;
+    weight_ts(2, 2) = 1;
+    weight_ts(3, 3) = 0.4;
+    weight_ts(4, 4) = 0.4;
+    weight_ts(5, 5) = 0.4;
+    ikSolver.setWeightTS(weight_ts);
 
     //solver for joint velocities
     ikSolver.CartToJnt(jointArray, twist, jointVels);
 
+    std::cout << "ik joint vels, joint angles:" <<std::endl; 
     // push velocities onto the vector
     for (int i=0; i<jointVels.rows(); i++){
+        std::cout <<  jointVels(i) << ", "<< jointArray(i) <<std::endl;
         jointVelocitiesOut.push_back(jointVels(i));
     }
 
@@ -194,16 +206,15 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
     
     // Check to see if the link a starts and originates at the same point
     if(fabs((basePoint - endPoint).norm()) > 0.0001) {
-
         // Get the vector representing the line from the start to end point
         Eigen::Vector3d midLine = (endPoint - basePoint).head(3);
         // Get the vector that is prependicular to the midline and z vector
         Eigen::Vector3d v = directionVect.cross(midLine/midLine.norm());
         // matrix to store the rotaion matrix
-        Eigen::Matrix3d r;
-
+        Eigen::Matrix3d r = i3;
         // Check to see if the midline is only in the z direction
-        if( !v.isZero()) {
+        
+        if(!v.isZero()) {
             // Build the rotation vector
             double c = directionVect.dot(midLine);
             double s = v.norm();
