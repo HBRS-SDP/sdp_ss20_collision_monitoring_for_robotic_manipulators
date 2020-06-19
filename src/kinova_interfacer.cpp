@@ -8,6 +8,68 @@
 #include "geometry_msgs/Point.h"
 
 
+class MarkerPublisher {
+    public:
+        visualization_msgs::Marker marker;
+        ros::Publisher ownPublisher;
+
+        MarkerPublisher(ros::Publisher ownPublisher, int type, std::string frame_id, std::string ns, int id, double positionX, double positionY, double positionZ) {
+            std::cout << "Hello World!";
+            this->ownPublisher = ownPublisher;
+            this->marker.type = type;
+            this->marker.action = visualization_msgs::Marker::ADD;
+
+            this->marker.header.frame_id = frame_id;
+            this->marker.ns = ns;
+            this->marker.id = id;
+
+            this->marker.pose.orientation.x = 0.0;
+            this->marker.pose.orientation.y = 0.0;
+            this->marker.pose.orientation.z = 0.0;
+            this->marker.pose.orientation.w = 1.0;
+
+            this->marker.color.a = 1.0; 
+            this->marker.color.r = (float) rand() / RAND_MAX;
+            this->marker.color.g = (float) rand() / RAND_MAX;
+            this->marker.color.b = (float) rand() / RAND_MAX;
+        }
+
+        void setRadius(double radius){
+            switch (this->marker.type)
+            {
+            case visualization_msgs::Marker::SPHERE:
+                this->marker.scale.x = 2 * radius;
+                this->marker.scale.y = 2 * radius;
+                this->marker.scale.z = 2 * radius;
+                break;
+            case visualization_msgs::Marker::CYLINDER:
+                this->marker.scale.x = 2 * radius;
+                this->marker.scale.y = 2 * radius;
+                break;
+            default:
+                break;
+            }
+        }
+
+        void setLength(double length){
+            switch (this->marker.type)
+            {
+            case visualization_msgs::Marker::SPHERE:
+                break;
+            case visualization_msgs::Marker::CYLINDER:
+                this->marker.scale.z = length;
+                break;
+            default:
+                break;
+            }
+        }
+
+        void Publish(){
+            this->marker.header.stamp = ros::Time();
+            ownPublisher.publish(this->marker);
+        }
+};
+
 int main(int argc, char **argv)
 {
     // Init ROS listener
@@ -27,6 +89,12 @@ int main(int argc, char **argv)
         int mode;
         double length, radius;
         int shape;
+
+        std::string frame_id, ns;
+        int id;
+        double positionX, positionY, positionZ;
+        
+        
         std::cout << "Choose input mode; goal(1) or obstacle(2): ";
         std::cin >> mode;
         switch(mode) {
@@ -87,13 +155,11 @@ int main(int argc, char **argv)
                         std::cout << "Cylinder selected, please input the required values.\n";
                         std::cout << "Frame_id: ";
                         std::cin >> marker.header.frame_id;
-                        marker.header.stamp = ros::Time();
                         std::cout << "NameSpace: ";
-                        std::cin >> marker.ns;
+                        std::cin >> ns;
                         std::cout << "ID: ";
-                        std::cin >> marker.id;
+                        std::cin >> id;
                         marker.type = visualization_msgs::Marker::CYLINDER;
-                        marker.action = visualization_msgs::Marker::ADD;
                         std::cout << "Input position:\n";
                         std::cout << "\tx: ";
                         std::cin >> marker.pose.position.x;
@@ -122,6 +188,34 @@ int main(int argc, char **argv)
                         obstaclePub.publish(marker);
 
                         break;
+                    case 3:
+                    {
+                        std::cout << "Capsule selected, please input the required values.\n";
+                        std::cout << "Frame_id: ";
+                        std::cin >> frame_id;
+                        std::cout << "NameSpace: ";
+                        std::cin >> ns;
+                        std::cout << "ID: ";
+                        std::cin >> id;
+                        std::cout << "Input position:\n";
+                        std::cout << "\tx: ";
+                        std::cin >> positionX;
+                        std::cout << "\ty: ";
+                        std::cin >> positionY;
+                        std::cout << "\tz: ";
+                        std::cin >> positionZ;
+                        std::cout<< "Radius: ";
+                        std::cin >> radius;
+                        std::cout<< "Length: ";
+                        std::cin >> length;
+
+                        MarkerPublisher m(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ);
+                        m.setRadius(radius);
+                        m.setLength(length);
+
+                        m.Publish();
+                        break;
+                    }
                     default:
                         std::cout << "Incorrect input, please try again.\n";
                     
