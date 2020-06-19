@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 
     while(ros::ok()) {
         int mode;
-        double diameter;
+        double length, radius;
         int shape;
         std::cout << "Choose input mode; goal(1) or obstacle(2): ";
         std::cin >> mode;
@@ -63,11 +63,11 @@ int main(int argc, char **argv)
                         std::cin >> marker.pose.position.y;
                         std::cout << "\tz: ";
                         std::cin >> marker.pose.position.z;
-                        std::cout<< "Diameter: ";
-                        std::cin >> diameter;
-                        marker.scale.x = diameter;
-                        marker.scale.y = diameter;
-                        marker.scale.z = diameter;
+                        std::cout<< "Radius: ";
+                        std::cin >> radius;
+                        marker.scale.x = 2 * radius;
+                        marker.scale.y = 2 * radius;
+                        marker.scale.z = 2 * radius;
 
                         marker.pose.orientation.x = 0.0;
                         marker.pose.orientation.y = 0.0;
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
                         break;
                     
                     case 2:
-                        std::cout << "Sphere selected, please input the required values.\n";
+                        std::cout << "Cylinder selected, please input the required values.\n";
                         std::cout << "Frame_id: ";
                         std::cin >> marker.header.frame_id;
                         marker.header.stamp = ros::Time();
@@ -105,8 +105,8 @@ int main(int argc, char **argv)
                         std::cin >> radius;
                         std::cout<< "Length: ";
                         std::cin >> length;
-                        marker.scale.x = radius * 2;
-                        marker.scale.y = radius * 2;
+                        marker.scale.x = 2 * radius;
+                        marker.scale.y = 2 * radius;
                         marker.scale.z = length;
 
                         marker.pose.orientation.x = 0.0;
