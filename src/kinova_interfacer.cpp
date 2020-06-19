@@ -16,7 +16,7 @@ class MarkerPublisher {
         visualization_msgs::Marker marker;
         ros::Publisher ownPublisher;
 
-        MarkerPublisher(ros::Publisher ownPublisher, int type, std::string frame_id, std::string ns, int id, double positionX, double positionY, double positionZ) {
+        MarkerPublisher(ros::Publisher ownPublisher, int type, std::string frame_id, std::string ns, int id, double positionX, double positionY, double positionZ, double r, double g, double b) {
             this->ownPublisher = ownPublisher;
             this->marker.type = type;
             this->marker.action = visualization_msgs::Marker::ADD;
@@ -35,9 +35,9 @@ class MarkerPublisher {
             this->marker.pose.position.z = positionZ;
 
             this->marker.color.a = 1.0; 
-            this->marker.color.r = (float) rand() / RAND_MAX;
-            this->marker.color.g = (float) rand() / RAND_MAX;
-            this->marker.color.b = (float) rand() / RAND_MAX;
+            this->marker.color.r = r;
+            this->marker.color.g = g;
+            this->marker.color.b = b;
         }
 
         void setRadius(double radius){
@@ -93,7 +93,7 @@ int main(int argc, char **argv)
 
     while(ros::ok()) {
         int mode;
-        double length, radius;
+        double length, radius, r, g, b;
         int shape;
 
         std::string frame_id, ns;
@@ -138,7 +138,11 @@ int main(int argc, char **argv)
                         std::cout<< "Radius: ";
                         std::cin >> radius;
 
-                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id, positionX, positionY, positionZ);
+                        r = (float) rand() / RAND_MAX;
+                        g = (float) rand() / RAND_MAX;
+                        b = (float) rand() / RAND_MAX;
+
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id, positionX, positionY, positionZ, r, g, b);
                         mPublisher.setRadius(radius);
 
                         mPublisher.Publish();
@@ -166,7 +170,11 @@ int main(int argc, char **argv)
                         std::cout<< "Length: ";
                         std::cin >> length;
 
-                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ);
+                        r = (float) rand() / RAND_MAX;
+                        g = (float) rand() / RAND_MAX;
+                        b = (float) rand() / RAND_MAX;
+
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ, r, g, b);
                         mPublisher.setRadius(radius);
                         mPublisher.setLength(length);
 
@@ -194,7 +202,11 @@ int main(int argc, char **argv)
                         std::cout<< "Length: ";
                         std::cin >> length;
 
-                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ);
+                        r = (float) rand() / RAND_MAX;
+                        g = (float) rand() / RAND_MAX;
+                        b = (float) rand() / RAND_MAX;
+
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ, r, g, b);
                         mPublisher.setRadius(radius);
                         mPublisher.setLength(length);
 
@@ -205,10 +217,10 @@ int main(int argc, char **argv)
                         Eigen::Vector3d sphereBase = quat * base;
                         Eigen::Vector3d sphereEnd = quat * end;
 
-                        MarkerPublisher mPublisherBase(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id + 1, sphereBase[0], sphereBase[1], sphereBase[2]);
+                        MarkerPublisher mPublisherBase(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id + 1, sphereBase[0], sphereBase[1], sphereBase[2], r, g, b);
                         mPublisherBase.setRadius(radius);
 
-                        MarkerPublisher mPublisherEnd(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id + 2, sphereEnd[0], sphereEnd[1], sphereEnd[2]);
+                        MarkerPublisher mPublisherEnd(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id + 2, sphereEnd[0], sphereEnd[1], sphereEnd[2], r, g, b);
                         mPublisherEnd.setRadius(radius);
 
                         mPublisher.Publish();
