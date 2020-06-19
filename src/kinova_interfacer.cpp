@@ -6,6 +6,9 @@
 #include "ros/ros.h"
 #include "visualization_msgs/Marker.h"
 #include "geometry_msgs/Point.h"
+#include "Eigen/Geometry"
+#include "Eigen/Dense"
+
 
 
 class MarkerPublisher {
@@ -14,7 +17,6 @@ class MarkerPublisher {
         ros::Publisher ownPublisher;
 
         MarkerPublisher(ros::Publisher ownPublisher, int type, std::string frame_id, std::string ns, int id, double positionX, double positionY, double positionZ) {
-            std::cout << "Hello World!";
             this->ownPublisher = ownPublisher;
             this->marker.type = type;
             this->marker.action = visualization_msgs::Marker::ADD;
@@ -136,10 +138,10 @@ int main(int argc, char **argv)
                         std::cout<< "Radius: ";
                         std::cin >> radius;
 
-                        MarkerPublisher m(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id, positionX, positionY, positionZ);
-                        m.setRadius(radius);
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id, positionX, positionY, positionZ);
+                        mPublisher.setRadius(radius);
 
-                        m.Publish();
+                        mPublisher.Publish();
                         break;
                     }
                     
@@ -164,11 +166,11 @@ int main(int argc, char **argv)
                         std::cout<< "Length: ";
                         std::cin >> length;
 
-                        MarkerPublisher m(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ);
-                        m.setRadius(radius);
-                        m.setLength(length);
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ);
+                        mPublisher.setRadius(radius);
+                        mPublisher.setLength(length);
 
-                        m.Publish();
+                        mPublisher.Publish();
                         break;
                     }
                     case 3:
@@ -192,11 +194,26 @@ int main(int argc, char **argv)
                         std::cout<< "Length: ";
                         std::cin >> length;
 
-                        MarkerPublisher m(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ);
-                        m.setRadius(radius);
-                        m.setLength(length);
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, frame_id, ns, id, positionX, positionY, positionZ);
+                        mPublisher.setRadius(radius);
+                        mPublisher.setLength(length);
 
-                        m.Publish();
+                        Eigen::Vector3d base(positionX, positionY, positionZ - length / 2);
+                        Eigen::Vector3d end(positionX, positionY, positionZ + length / 2);
+                        Eigen::Quaterniond quat(mPublisher.marker.pose.orientation.w, mPublisher.marker.pose.orientation.x, mPublisher.marker.pose.orientation.y, mPublisher.marker.pose.orientation.z);
+
+                        Eigen::Vector3d sphereBase = quat * base;
+                        Eigen::Vector3d sphereEnd = quat * end;
+
+                        MarkerPublisher mPublisherBase(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id + 1, sphereBase[0], sphereBase[1], sphereBase[2]);
+                        mPublisherBase.setRadius(radius);
+
+                        MarkerPublisher mPublisherEnd(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id + 2, sphereEnd[0], sphereEnd[1], sphereEnd[2]);
+                        mPublisherEnd.setRadius(radius);
+
+                        mPublisher.Publish();
+                        mPublisherBase.Publish();
+                        mPublisherEnd.Publish();
                         break;
                     }
                     default:
