@@ -42,7 +42,7 @@ int main(int argc, char **argv)
                 break;
 
             case 2:
-                std::cout << "Choose an obstacle type; sphere(1), cylinder (2):\n";
+                std::cout << "Choose an obstacle type; sphere(1), cylinder (2), capsule(3):\n";
                 std::cin >> shape;
                 switch(shape) {
                     case 1:
@@ -75,9 +75,9 @@ int main(int argc, char **argv)
                         marker.pose.orientation.w = 1.0;
 
                         marker.color.a = 1.0; 
-                        marker.color.r = 0.0;
-                        marker.color.g = 1.0;
-                        marker.color.b = 0.0;
+                        marker.color.r = (float) rand() / RAND_MAX;
+                        marker.color.g = (float) rand() / RAND_MAX;
+                        marker.color.b = (float) rand() / RAND_MAX;
 
                         obstaclePub.publish(marker);
 
@@ -114,10 +114,10 @@ int main(int argc, char **argv)
                         marker.pose.orientation.z = 0.0;
                         marker.pose.orientation.w = 1.0;
 
-                        marker.color.a = 0.5; 
-                        marker.color.r = 1.0;
-                        marker.color.g = 0.0;
-                        marker.color.b = 0.0;
+                        marker.color.a = 1.0; 
+                        marker.color.r = (float) rand() / RAND_MAX;
+                        marker.color.g = (float) rand() / RAND_MAX;
+                        marker.color.b = (float) rand() / RAND_MAX;
 
                         obstaclePub.publish(marker);
 
