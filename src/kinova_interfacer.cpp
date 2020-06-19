@@ -42,7 +42,7 @@ int main(int argc, char **argv)
                 break;
 
             case 2:
-                std::cout << "Choose an obstacle type; sphere(1):\n";
+                std::cout << "Choose an obstacle type; sphere(1), cylinder (2):\n";
                 std::cin >> shape;
                 switch(shape) {
                     case 1:
@@ -82,7 +82,46 @@ int main(int argc, char **argv)
                         obstaclePub.publish(marker);
 
                         break;
+                    
+                    case 2:
+                        std::cout << "Sphere selected, please input the required values.\n";
+                        std::cout << "Frame_id: ";
+                        std::cin >> marker.header.frame_id;
+                        marker.header.stamp = ros::Time();
+                        std::cout << "NameSpace: ";
+                        std::cin >> marker.ns;
+                        std::cout << "ID: ";
+                        std::cin >> marker.id;
+                        marker.type = visualization_msgs::Marker::CYLINDER;
+                        marker.action = visualization_msgs::Marker::ADD;
+                        std::cout << "Input position:\n";
+                        std::cout << "\tx: ";
+                        std::cin >> marker.pose.position.x;
+                        std::cout << "\ty: ";
+                        std::cin >> marker.pose.position.y;
+                        std::cout << "\tz: ";
+                        std::cin >> marker.pose.position.z;
+                        std::cout<< "Radius: ";
+                        std::cin >> radius;
+                        std::cout<< "Length: ";
+                        std::cin >> length;
+                        marker.scale.x = radius * 2;
+                        marker.scale.y = radius * 2;
+                        marker.scale.z = length;
 
+                        marker.pose.orientation.x = 0.0;
+                        marker.pose.orientation.y = 0.0;
+                        marker.pose.orientation.z = 0.0;
+                        marker.pose.orientation.w = 1.0;
+
+                        marker.color.a = 0.5; 
+                        marker.color.r = 1.0;
+                        marker.color.g = 0.0;
+                        marker.color.b = 0.0;
+
+                        obstaclePub.publish(marker);
+
+                        break;
                     default:
                         std::cout << "Incorrect input, please try again.\n";
                     
