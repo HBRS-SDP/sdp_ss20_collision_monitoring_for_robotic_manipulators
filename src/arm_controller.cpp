@@ -114,7 +114,7 @@ KDL::Twist ArmController::controlLoop(void) {
     y = transformedVel[1];
     z = transformedVel[2];
 
-    twist.vel = KDL::Vector { 0.000001, 0.0, 0.0 };
+    twist.vel = KDL::Vector { 0.0000, 0.00001, 0.001 };
     twist.rot = KDL::Vector {0, 0, 0 };
     return twist;
 }
