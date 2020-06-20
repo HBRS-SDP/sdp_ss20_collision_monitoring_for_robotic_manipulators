@@ -125,6 +125,7 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
     // vector to store output values
     std::vector<double> jointVelocitiesOut;
     std::cout << "Twist: " << twist << std::endl;
+    std::cout << typeid(twist.vel.data[0]).name()<<std::endl;
 
     // inverse kinemetics solver
     KDL::ChainIkSolverVel_wdls ikSolver = KDL::ChainIkSolverVel_wdls(fkChain);

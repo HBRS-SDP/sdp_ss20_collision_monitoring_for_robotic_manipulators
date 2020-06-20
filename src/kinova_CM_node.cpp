@@ -46,7 +46,7 @@ int main(int argc, char **argv)
     ros::Publisher markersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/markers", 1000);
 
     
-    ros::Rate loop_rate(1.5); 
+    ros::Rate loop_rate(100); 
 
 
     KDL::Twist endeffectorVelocity;
@@ -70,6 +70,7 @@ int main(int argc, char **argv)
             jointStates.position[i] = arm1.jointArray(i);
         }
         std::cout<<std::endl;
+        std::cout<< arm1.getPose() << std::endl;
         armPub.publish(jointStates);
         for(int i=0; i<armController1.rvizObstacles.size(); i++){
             markersPub.publish(armController1.rvizObstacles[i]->marker);

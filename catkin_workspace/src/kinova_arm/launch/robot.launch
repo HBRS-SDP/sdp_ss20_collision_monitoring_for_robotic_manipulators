@@ -7,10 +7,9 @@
   <param name="arm_controller/input_joint_topic" value="joint_state" />
   <param name="arm_controller/output_joint_topic" value="joint_command" />
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
   <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
-  <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
+  <!-- <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/> -->
   <node name="rviz" pkg="rviz" type="rviz" required="true"/>
 
 </launch>
