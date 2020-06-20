@@ -51,7 +51,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 
     // Create the new link objects in default position and 
     // add them to the links vector
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < nJoints-1; i++)
     {
         Eigen::Matrix4d pose = linkFramesToPose(*poses[i], *poses[i+1]);
         Capsule* link = new Capsule(pose, lengths[i], radii[i]);
@@ -125,6 +125,7 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
     // vector to store output values
     std::vector<double> jointVelocitiesOut;
     std::cout << "Twist: " << twist << std::endl;
+    std::cout << typeid(twist.vel.data[0]).name()<<std::endl;
 
     // inverse kinemetics solver
     KDL::ChainIkSolverVel_wdls ikSolver = KDL::ChainIkSolverVel_wdls(fkChain);

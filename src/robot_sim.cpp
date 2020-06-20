@@ -21,11 +21,13 @@ class KinovaSimulator
 
         ros::Subscriber subscriber;
         ros::Publisher velPub;
-        int32_t curTime;
-        int32_t prevTime;
-        int32_t deltaT;
+        uint64_t curTime;
+        uint64_t prevTime;
+        uint64_t deltaT;
         std::vector<double> jointVelocities;
+        std::vector<double> jointPositions;
         sensor_msgs::JointState jointStates;
+        ros::Time time;
         
 
         KinovaSimulator(){
@@ -35,14 +37,20 @@ class KinovaSimulator
             np.param<std::string>("/velocity_topic", inputTopic, "joint_command");
             np.param<std::string>("/joint_state_topic", outputTopic, "joint_states");
         
-            curTime = ros::Time::now().toNSec();
+            time = ros::Time::now();
+            curTime = time.toNSec();
             prevTime = curTime;
-            std::vector<std::string> strings = {"Actuator1", "Actuator2", "Actuator3", "Actuator4", "Actuator5", "Actuator6"};
-            for (int i=0; i<6; i++) {
+            std::vector<std::string> strings = {"Actuator1", "Actuator2",
+                                                "Actuator3", "Actuator4",
+                                                "Actuator5", "Actuator6",
+                                                "Actuator7"};
+            for (int i=0; i<7; i++) {
                 jointStates.name.push_back(strings[i]);
                 jointStates.velocity.push_back(0.0);
                 jointStates.position.push_back(0.0);
             }
+            jointStates.header.stamp.nsec = time.toNSec();
+            jointStates.header.stamp.sec = time.toSec();
 
             ros::NodeHandle n;
 
@@ -53,19 +61,25 @@ class KinovaSimulator
         ~KinovaSimulator() {}
 
         void subVelocity(const sensor_msgs::JointState::ConstPtr& msg){
-            jointVelocities.assign(msg->position.begin(), msg->position.end());
-            curTime = ros::Time::now().toNSec();
+            jointVelocities.assign(msg->velocity.begin(), msg->velocity.end());
+            jointPositions.assign(msg->position.begin(), msg->position.end());
+
+            time = ros::Time::now();
+            curTime = time.toNSec();
             if (curTime > prevTime) {
                 deltaT = curTime -prevTime;
             }
             else {
                 deltaT = 0;
             }
-
+            std::cout << " current Pose, current velocity, next pose " << curTime << std::endl;
             for (int i=0; i<jointVelocities.size(); i++) {
-                jointStates.position[i] += jointVelocities[i] * (double)deltaT / 1000;
+                jointStates.position[i] = jointPositions[i] + jointVelocities[i] * ((double)deltaT) / 1000000000.0;
                 jointStates.velocity[i] = jointVelocities[i];
+                std::cout << jointPositions[i] << ", " << jointVelocities[i] << ", " << jointStates.position[i] << std::endl;
             }
+            jointStates.header.stamp.nsec = time.toNSec();
+            jointStates.header.stamp.sec = time.toSec();
             velPub.publish(jointStates);
         }
 };

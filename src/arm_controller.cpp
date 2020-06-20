@@ -92,7 +92,7 @@ KDL::Twist ArmController::controlLoop(void) {
 
     //v̇ = K(g−x) − Dv + p(x, v)
 
-    Eigen::Vector3d currVelocity = {twist.vel[0], twist.vel[1], twist.vel[2]};
+    Eigen::Vector3d currVelocity = {twist.vel.data[0], twist.vel.data[1], twist.vel.data[2]};
     Eigen::Vector3d newVelocity = K * (goal - currEndPoint) - D * currVelocity
                                 + ArmController::obstaclePotentialField(currEndPoint, 
                                 currVelocity);
@@ -107,11 +107,14 @@ KDL::Twist ArmController::controlLoop(void) {
                                 currVelocity) << std::endl;
 
     // TODO the code for the object avoidance
-    x = newVelocity[0];
-    y = newVelocity[1];
-    z = newVelocity[2];
+    std::cout << (double)newVelocity[0] <<std::endl;
+    Eigen::Vector4d transformedVel = {newVelocity[0], newVelocity[1], newVelocity[2], 0.0};
+    transformedVel = monitor->arm->getPose() * transformedVel;
+    x = transformedVel[0];
+    y = transformedVel[1];
+    z = transformedVel[2];
 
-    twist.vel = KDL::Vector { x, y, z };
+    twist.vel = KDL::Vector { 0.0000, 0.00001, 0.001 };
     twist.rot = KDL::Vector {0, 0, 0 };
     return twist;
 }
