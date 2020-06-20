@@ -89,9 +89,9 @@ int main(int argc, char **argv)
 
     visualization_msgs::Marker marker;
     geometry_msgs::Point point;
+    bool exit = false;
 
-
-    while(ros::ok()) {
+    while(ros::ok() && !exit) {
         int mode;
         double length, radius, r, g, b;
         int shape;
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
         double positionX, positionY, positionZ;
         
         
-        std::cout << "Choose input mode; goal(1) or obstacle(2): ";
+        std::cout << "Choose input mode; goal(1), obstacle(2) or exit (0): ";
         std::cin >> mode;
         switch(mode) {
             case 1:
@@ -233,7 +233,9 @@ int main(int argc, char **argv)
                     
                 }
                 break;
-                
+            case 0:
+                exit = true;
+                break;
             default:
                     std::cout << "Incorrect input, please try again.\n";
                     
