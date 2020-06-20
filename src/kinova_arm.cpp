@@ -51,7 +51,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 
     // Create the new link objects in default position and 
     // add them to the links vector
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < nJoints-1; i++)
     {
         Eigen::Matrix4d pose = linkFramesToPose(*poses[i], *poses[i+1]);
         Capsule* link = new Capsule(pose, lengths[i], radii[i]);

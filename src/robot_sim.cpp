@@ -40,8 +40,11 @@ class KinovaSimulator
             time = ros::Time::now();
             curTime = time.toNSec();
             prevTime = curTime;
-            std::vector<std::string> strings = {"Actuator1", "Actuator2", "Actuator3", "Actuator4", "Actuator5", "Actuator6"};
-            for (int i=0; i<6; i++) {
+            std::vector<std::string> strings = {"Actuator1", "Actuator2",
+                                                "Actuator3", "Actuator4",
+                                                "Actuator5", "Actuator6",
+                                                "Actuator7"};
+            for (int i=0; i<7; i++) {
                 jointStates.name.push_back(strings[i]);
                 jointStates.velocity.push_back(0.0);
                 jointStates.position.push_back(0.0);
