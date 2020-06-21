@@ -44,27 +44,21 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "kinova_controller");
     std::string nodeName = ros::this_node::getName();
     std::cout << "nodeName: " << nodeName << std::endl;
-    ros::NodeHandle n;
-    std::string modelPath1;
-    std::string jointStatesTopic1;
-    std::string goalTopic1;
-    std::string jointVelocityTopic1;
+    ros::NodeHandle n1;
+    ros::NodeHandle n2;
+    std::string modelPath;
+    std::string jointStatesTopic;
+    std::string goalTopic;
+    std::string jointVelocityTopic;
     std::string armNameSpace1;
-    std::string modelPath2;
-    std::string jointStatesTopic2;
-    std::string goalTopic2;
-    std::string jointVelocityTopic2;
-    std::string armNamespace2;
+    std::string armNameSpace2;
     // setup the first monitor function
-    n.param<std::string>(ros::this_node::getName()+"/urdf_model", modelPath, "./urdf/GEN3_URDF_V12.urdf");
-    n.param<std::string>(ros::this_node::getName()+"/joint_state_topic_1", jointStatesTopic1, "joint_states_1");
-    n.param<std::string>(ros::this_node::getName()+"/joint_state_topic_2", jointStatesTopic2, "joint_states_2");
-    n.param<std::string>(ros::this_node::getName()+"/goal_topic_1", goalTopic1, ros::this_node::getName()+"/goal_1");
-    n.param<std::string>(ros::this_node::getName()+"/goal_topic_2", goalTopic2, ros::this_node::getName()+"/goal_2");
-    n.param<std::string>(ros::this_node::getName()+"/velocity_topic_1", jointVelocityTopic1, "joint_command_1");
-    n.param<std::string>(ros::this_node::getName()+"/velocity_topic_2", jointVelocityTopic2, "joint_command_2");
-    n.param<std::string>(ros::this_node::getName()+"/set_arm_1_namespace", armNameSpace1, "/kinova_1");
-    n.param<std::string>(ros::this_node::getName()+"/set_arm_2_namespace", armNameSpace2, "/kinova_2");
+    n1.param<std::string>(ros::this_node::getName()+"/urdf_model", modelPath, "./urdf/GEN3_URDF_V12.urdf");
+    n1.param<std::string>(ros::this_node::getName()+"/joint_state_topic", jointStatesTopic, "joint_states_1");
+    n1.param<std::string>(ros::this_node::getName()+"/goal_topic", goalTopic, ros::this_node::getName()+"/goal_1");
+    n1.param<std::string>(ros::this_node::getName()+"/velocity_topic", jointVelocityTopic, "joint_command_1");
+    n1.param<std::string>(ros::this_node::getName()+"/set_arm_1_namespace", armNameSpace1, "/kinova_1");
+    n1.param<std::string>(ros::this_node::getName()+"/set_arm_2_namespace", armNameSpace2, "/kinova_2");
 
 
     std::string model = modelPath;
@@ -83,52 +77,76 @@ int main(int argc, char **argv)
     KinovaArm arm1(model, baseTransform1);
     KinovaArm arm2(model, baseTransform2);
     Monitor monitor1(&arm1);
+    Monitor monitor2(&arm2);
     monitor1.addObstacle(&arm2);
+    monitor2.addObstacle(&arm1);
     std::vector<double> initPose = {0, 0, 0, 0, 0, 0, 0};
     arm1.updatePose(initPose);
 
     // Create the armController class based off the first monitor
     ArmController armController1(&monitor1, 1, 0, 100, 20/3.1425);
+    ArmController armController2(&monitor2, 1, 0, 100, 20/3.1425);
 
-    // Init ROS listener
-    ros::Subscriber armSub = n.subscribe(jointStatesTopic, 1000, &ArmController::armCallback, &armController1);
-    ros::Subscriber goalSub = n.subscribe(goalTopic, 1000, &ArmController::goalCallback, &armController1);
-    ros::Subscriber obstacleSub = n.subscribe("kinova_controller/obstacles", 1000, &ArmController::updateObstacles, &armController1);
+    // Init ROS listeners for first arm
+    ros::Subscriber armSub1 = n1.subscribe(armNameSpace1+jointStatesTopic, 1000, &ArmController::armCallback, &armController1);
+    ros::Subscriber goalSub1 = n1.subscribe(armNameSpace1+goalTopic, 1000, &ArmController::goalCallback, &armController1);
+    ros::Subscriber obstacleSub1 = n1.subscribe(ros::this_node::getName()+"/obstacles", 1000, &ArmController::updateObstacles, &armController1);
+
+    // Init ROS listeners for second arm
+    ros::Subscriber armSub2 = n2.subscribe(armNameSpace1+jointStatesTopic, 1000, &ArmController::armCallback, &armController2);
+    ros::Subscriber goalSub2 = n2.subscribe(armNameSpace1+goalTopic, 1000, &ArmController::goalCallback, &armController2);
+    ros::Subscriber obstacleSub2 = n2.subscribe(ros::this_node::getName()+"/obstacles", 1000, &ArmController::updateObstacles, &armController2);
+
+    // Publish static positions
     tf2_ros::StaticTransformBroadcaster base_broadcaster;
     base_broadcaster.sendTransform(generateTF(baseTransform1, armNameSpace1+"/base_link"));
     base_broadcaster.sendTransform(generateTF(baseTransform2, armNameSpace2+"/base_link"));
 
 
-    ros::Publisher armPub = n.advertise<sensor_msgs::JointState>(jointVelocityTopic, 1000);
-    ros::Publisher markersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/markers", 1000);
+    ros::Publisher armPub1 = n1.advertise<sensor_msgs::JointState>(armNameSpace1 + jointVelocityTopic, 1000);
+    ros::Publisher armPub2 = n2.advertise<sensor_msgs::JointState>(armNameSpace2 + jointVelocityTopic, 1000);
+    ros::Publisher markersPub = n1.advertise<visualization_msgs::Marker>("kinova_controller/markers", 1000);
 
     
     ros::Rate loop_rate(100); 
 
 
-    KDL::Twist endeffectorVelocity;
-    std::vector<double> jointVelocities;
-    sensor_msgs::JointState jointStates;
+    KDL::Twist endeffectorVelocity1;
+    std::vector<double> jointVelocities1;
+    sensor_msgs::JointState jointStates1;
     for (int i=0; i<arm1.nJoints; i++) {
-        jointStates.position.push_back(0.0);
-        jointStates.velocity.push_back(0.0);
+        jointStates1.position.push_back(0.0);
+        jointStates1.velocity.push_back(0.0);
+    }
+
+    KDL::Twist endeffectorVelocity2;
+    std::vector<double> jointVelocities2;
+    sensor_msgs::JointState jointStates2;
+    for (int i=0; i<arm2.nJoints; i++) {
+        jointStates2.position.push_back(0.0);
+        jointStates2.velocity.push_back(0.0);
     }
 
 
     while(ros::ok()) {
-        endeffectorVelocity = armController1.controlLoop();
-        std::cout << "end vel: "<<endeffectorVelocity <<std::endl;
-        jointVelocities = arm1.ikVelocitySolver(endeffectorVelocity);
-        std::cout << "joint Vels: ";
+        endeffectorVelocity1 = armController1.controlLoop();
+        jointVelocities1 = arm1.ikVelocitySolver(endeffectorVelocity1);
+
+        endeffectorVelocity2 = armController2.controlLoop();
+        jointVelocities2 = arm2.ikVelocitySolver(endeffectorVelocity1);
 
         for(int i=0; i<arm1.nJoints; i++){
-            std::cout << jointVelocities[i] << " ";
-            jointStates.velocity[i] = jointVelocities[i];
-            jointStates.position[i] = arm1.jointArray(i);
+            jointStates1.velocity[i] = jointVelocities1[i];
+            jointStates1.position[i] = arm1.jointArray(i);
+
+            jointStates2.velocity[i] = jointVelocities2[i];
+            jointStates2.position[i] = arm2.jointArray(i);
         }
-        std::cout<<std::endl;
-        std::cout<< arm1.getPose() << std::endl;
-        armPub.publish(jointStates);
+
+
+        armPub1.publish(jointStates1);
+        armPub2.publish(jointStates2);
+
         for(int i=0; i<armController1.rvizObstacles.size(); i++){
             markersPub.publish(armController1.rvizObstacles[i]->marker);
         }

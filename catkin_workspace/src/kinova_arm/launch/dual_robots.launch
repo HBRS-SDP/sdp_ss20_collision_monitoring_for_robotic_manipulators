@@ -1,32 +1,32 @@
 <launch>
+    <arg name="model" default="$(find kortex_description)/arms/gen3/7dof/urdf/GEN3_URDF_V12.urdf"/>
 
   <group ns = "kinova_1">
-    <arg name="model" default="$(find kortex_description)/arms/gen3/7dof/urdf/GEN3_URDF_V12.urdf"/>
+
+    <param name="kinova_interfacer/goal_topic" value="/goal_point" />
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
   </group>
 
-  <group ns = "kinova_1">
-    <arg name="model" default="$(find kortex_description)/arms/gen3/7dof/urdf/GEN3_URDF_V12.urdf"/>
+  <group ns = "kinova_2">
+    <param name="kinova_interfacer/goal_topic" value="/goal_point" />
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
   </group>
-  
+
   <param name="arm_controller/urdf_model" value="$(arg model)" />
   <param name="publish_frequency" value="100" />
 
 
-  <param name="arm_controller/input_joint_topic_1" value="joint_state" />
-  <param name="arm_controller/output_joint_topic_1" value="joint_command" />
-  <param name="arm_controller/goal_topic_1" value="/goal_point_1" />
-  <param name="kinova_interfacer/goal_topic_1" value="/goal_point_1" />
+  <param name="arm_controller/input_joint_topic" value="/joint_states" />
+  <param name="arm_controller/output_joint_topic" value="/joint_command" />
+  <param name="arm_controller/goal_topic" value="/goal_point" />
+  <param name="arm_controller/set_arm_1_namespace" value="/kinova_1" />
+  <param name="arm_controller/set_arm_2_namespace" value="/kinova_2" />
 
-  <param name="arm_controller/input_joint_topic_2" value="joint_state" />
-  <param name="arm_controller/output_joint_topic_2" value="joint_command" />
-  <param name="arm_controller/goal_topic_2" value="/goal_point_2" />
-  <param name="kinova_interfacer/goal_topic_2" value="/goal_point_2" />
-
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
   <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
-  <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
   <node name="rviz" pkg="rviz" type="rviz" required="true"/>
 
 </launch>
