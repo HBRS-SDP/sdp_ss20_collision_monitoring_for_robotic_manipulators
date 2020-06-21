@@ -182,6 +182,11 @@ add_executable(KinovaInterface
   src/kinova_interfacer.cpp
 )
 
+
+add_executable(DualArmKinovaInterface
+  src/dual_arm_kinova_interfacer.cpp
+)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -224,6 +229,10 @@ target_link_libraries(KinovaTestMonitoring PRIVATE
 )
 
 target_link_libraries(KinovaInterface PRIVATE
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(DualArmKinovaInterface PRIVATE
   ${catkin_LIBRARIES}
 )
 

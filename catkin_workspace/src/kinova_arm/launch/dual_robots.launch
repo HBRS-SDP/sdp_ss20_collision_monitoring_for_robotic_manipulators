@@ -1,16 +1,21 @@
 <launch>
-    <arg name="model" default="$(find kortex_description)/arms/gen3/7dof/urdf/GEN3_URDF_V12.urdf"/>
+  <arg name="model" default="$(find kortex_description)/arms/gen3/7dof/urdf/GEN3_URDF_V12.urdf"/>
+  <arg name="namespace_1" default="kinova_1" />
+  <arg name="namespace_2" default="kinova_2" />
 
-  <group ns = "kinova_1">
-
-    <param name="kinova_interfacer/goal_topic" value="/goal_point" />
+  <group ns = "$(arg namespace_1)">
+    <param name="tf_prefix" value="$(arg namespace_1)"/>
+    <param name="velocity_topic" value="joint_command" />
+    <param name="joint_state_topic" value="joint_states" />
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
   </group>
 
-  <group ns = "kinova_2">
-    <param name="kinova_interfacer/goal_topic" value="/goal_point" />
+  <group ns = "$(arg namespace_2)">
+    <param name="tf_prefix" value="$(arg namespace_2)"/>
+    <param name="velocity_topic" value="joint_command" />
+    <param name="joint_state_topic" value="joint_states" />
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
@@ -20,13 +25,15 @@
   <param name="publish_frequency" value="100" />
 
 
-  <param name="arm_controller/input_joint_topic" value="/joint_states" />
-  <param name="arm_controller/output_joint_topic" value="/joint_command" />
-  <param name="arm_controller/goal_topic" value="/goal_point" />
-  <param name="arm_controller/set_arm_1_namespace" value="/kinova_1" />
-  <param name="arm_controller/set_arm_2_namespace" value="/kinova_2" />
+  <param name="arm_controller/joint_state_topic" value="/joint_states" />
+  <param name="arm_controller/velocity_topic" value="/joint_command" />
+  <param name="/goal_topic" value="/goal_point" />
+  <param name="/set_arm_1_namespace" value="/kinova_1" />
+  <param name="/set_arm_2_namespace" value="/kinova_2" />
+  <param name="/obstacle_topic" value="/obstacles_update" />
+  <param name="arm_controller/urdf_model" value="$(arg model)" />
 
-  <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
+  <node name="arm_controller" pkg="kinova_arm" type="DualKinovaCollisionMonitoring"/>
   <node name="rviz" pkg="rviz" type="rviz" required="true"/>
 
 </launch>

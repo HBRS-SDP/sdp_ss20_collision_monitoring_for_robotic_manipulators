@@ -37,8 +37,8 @@ class KinovaSimulator
             ros::NodeHandle np;
             ros::Duration(3).sleep();
 
-            np.param<std::string>(ros::this_node::getName()+"/velocity_topic", inputTopic, "/joint_command");
-            np.param<std::string>(ros::this_node::getName()+"/joint_state_topic", outputTopic, "/joint_states");
+            np.param<std::string>(ros::this_node::getNamespace()+"/velocity_topic", inputTopic, ros::this_node::getNamespace()+"/joint_command");
+            np.param<std::string>(ros::this_node::getNamespace()+"/joint_state_topic", outputTopic, ros::this_node::getNamespace()+"/joint_states");
         
             time = ros::Time::now();
             curTime = time.toNSec();

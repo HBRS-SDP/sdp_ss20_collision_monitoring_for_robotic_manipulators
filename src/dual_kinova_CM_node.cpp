@@ -50,15 +50,17 @@ int main(int argc, char **argv)
     std::string jointStatesTopic;
     std::string goalTopic;
     std::string jointVelocityTopic;
+    std::string obstacleTopic;
     std::string armNameSpace1;
     std::string armNameSpace2;
     // setup the first monitor function
     n1.param<std::string>(ros::this_node::getName()+"/urdf_model", modelPath, "./urdf/GEN3_URDF_V12.urdf");
-    n1.param<std::string>(ros::this_node::getName()+"/joint_state_topic", jointStatesTopic, "joint_states_1");
-    n1.param<std::string>(ros::this_node::getName()+"/goal_topic", goalTopic, ros::this_node::getName()+"/goal_1");
-    n1.param<std::string>(ros::this_node::getName()+"/velocity_topic", jointVelocityTopic, "joint_command_1");
-    n1.param<std::string>(ros::this_node::getName()+"/set_arm_1_namespace", armNameSpace1, "/kinova_1");
-    n1.param<std::string>(ros::this_node::getName()+"/set_arm_2_namespace", armNameSpace2, "/kinova_2");
+    n1.param<std::string>(ros::this_node::getName()+"/joint_state_topic", jointStatesTopic, "/joint_states");
+    n1.param<std::string>("/goal_topic", goalTopic, "/goal");
+    n1.param<std::string>(ros::this_node::getName()+"/velocity_topic", jointVelocityTopic, "/joint_command");
+    n1.param<std::string>("/obstacle_topic", obstacleTopic, "/obstacles_update");
+    n1.param<std::string>("/set_arm_1_namespace", armNameSpace1, "/kinova_1");
+    n1.param<std::string>("/set_arm_2_namespace", armNameSpace2, "/kinova_2");
 
 
     std::string model = modelPath;
@@ -78,8 +80,8 @@ int main(int argc, char **argv)
     KinovaArm arm2(model, baseTransform2);
     Monitor monitor1(&arm1);
     Monitor monitor2(&arm2);
-    monitor1.addObstacle(&arm2);
-    monitor2.addObstacle(&arm1);
+    // monitor1.addObstacle(&arm2);
+    // monitor2.addObstacle(&arm1);
     std::vector<double> initPose = {0, 0, 0, 0, 0, 0, 0};
     arm1.updatePose(initPose);
 
@@ -90,12 +92,12 @@ int main(int argc, char **argv)
     // Init ROS listeners for first arm
     ros::Subscriber armSub1 = n1.subscribe(armNameSpace1+jointStatesTopic, 1000, &ArmController::armCallback, &armController1);
     ros::Subscriber goalSub1 = n1.subscribe(armNameSpace1+goalTopic, 1000, &ArmController::goalCallback, &armController1);
-    ros::Subscriber obstacleSub1 = n1.subscribe(ros::this_node::getName()+"/obstacles", 1000, &ArmController::updateObstacles, &armController1);
+    ros::Subscriber obstacleSub1 = n1.subscribe(obstacleTopic, 1000, &ArmController::updateObstacles, &armController1);
 
     // Init ROS listeners for second arm
-    ros::Subscriber armSub2 = n2.subscribe(armNameSpace1+jointStatesTopic, 1000, &ArmController::armCallback, &armController2);
-    ros::Subscriber goalSub2 = n2.subscribe(armNameSpace1+goalTopic, 1000, &ArmController::goalCallback, &armController2);
-    ros::Subscriber obstacleSub2 = n2.subscribe(ros::this_node::getName()+"/obstacles", 1000, &ArmController::updateObstacles, &armController2);
+    ros::Subscriber armSub2 = n2.subscribe(armNameSpace2+jointStatesTopic, 1000, &ArmController::armCallback, &armController2);
+    ros::Subscriber goalSub2 = n2.subscribe(armNameSpace2+goalTopic, 1000, &ArmController::goalCallback, &armController2);
+    ros::Subscriber obstacleSub2 = n2.subscribe(obstacleTopic, 1000, &ArmController::updateObstacles, &armController2);
 
     // Publish static positions
     tf2_ros::StaticTransformBroadcaster base_broadcaster;
