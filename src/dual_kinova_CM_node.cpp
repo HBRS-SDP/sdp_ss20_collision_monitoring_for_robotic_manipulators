@@ -80,8 +80,8 @@ int main(int argc, char **argv)
     KinovaArm arm2(model, baseTransform2);
     Monitor monitor1(&arm1);
     Monitor monitor2(&arm2);
-    // monitor1.addObstacle(&arm2);
-    // monitor2.addObstacle(&arm1);
+    monitor1.addObstacle(&arm2);
+    monitor2.addObstacle(&arm1);
     std::vector<double> initPose = {0, 0, 0, 0, 0, 0, 0};
     arm1.updatePose(initPose);
 
