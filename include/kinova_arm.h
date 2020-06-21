@@ -104,7 +104,7 @@ class KinovaArm: public Arm
         std::vector<double> radii;
 
         ///  A vector of all the link KDL frames
-        std::vector<KDL::Frame*> poses;
+        std::vector<KDL::Frame*> localPoses;
 
         /// The KDL chain used for calculating kinematics
         KDL::Chain fkChain;
@@ -115,7 +115,7 @@ class KinovaArm: public Arm
         Eigen::Matrix3d i3;
 
         /**
-         * Transforms KDL::Frames to Eigen::Matrix4d
+         * Transforms local KDL::Frames to global Eigen::Matrix4d
          * 
          * A function that is used to transform KDL frames into homogeneous
          * transformation functions in Eigen format

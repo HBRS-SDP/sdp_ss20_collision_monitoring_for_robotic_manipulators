@@ -282,10 +282,29 @@ TEST_CASE("Kinova_arm init", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
 }
 
-// TEST_CASE("Kinova_arm destructor", "[arm]") {
-//     KinovaArm* kinovaArm = new KinovaArm(urdf_filename);
-//     delete(kinovaArm);
-// }
+TEST_CASE("Kinova_arm destructor", "[arm]") {
+    KinovaArm* kinovaArm = new KinovaArm(urdf_filename);
+    delete(kinovaArm);
+}
+
+TEST_CASE("Kinova_arm init with base transform", "[arm]") {
+    Eigen::Matrix4d basePosition;
+    basePosition << 1, 0, 0, 0.1,
+                    0, 1, 0, 0.2,
+                    0, 0, 1, 0.4,
+                    0, 0, 0, 1;
+    KinovaArm kinovaArm(urdf_filename, basePosition);
+}
+
+TEST_CASE("Kinova_arm base transform destructor", "[arm]") {
+    Eigen::Matrix4d basePosition;
+    basePosition << 1, 0, 0, 0.1,
+                    0, 1, 0, 0.2,
+                    0, 0, 1, 0.4,
+                    0, 0, 0, 1;
+    KinovaArm* kinovaArm = new KinovaArm(urdf_filename, basePosition);
+    delete(kinovaArm);
+}
 
 TEST_CASE("Kinova_arm set position", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
@@ -317,13 +336,13 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
 
     for(int i=0; i < kinovaArm.nJoints-1; i++) {
         // get endpoints from the frames calculation
-        Eigen::Matrix4d baseMatLink = kinovaArm.frameToMatrix(*kinovaArm.poses[i]);
-        Eigen::Matrix4d endMatLink = kinovaArm.frameToMatrix(*kinovaArm.poses[i+1]);
+        Eigen::Matrix4d baseMatLink = kinovaArm.frameToMatrix(*kinovaArm.localPoses[i]);
+        Eigen::Matrix4d endMatLink = kinovaArm.frameToMatrix(*kinovaArm.localPoses[i+1]);
         Eigen::Vector3d basePointLink = (baseMatLink * origin).head(3);
         Eigen::Vector3d endPointLink = (endMatLink * origin).head(3);
 
         // Get the pose from these points using the same method in kinovaArm
-        Eigen::Matrix4d pose = kinovaArm.linkFramesToPose(*kinovaArm.poses[i], *kinovaArm.poses[i+1]);
+        Eigen::Matrix4d pose = kinovaArm.linkFramesToPose(*kinovaArm.localPoses[i], *kinovaArm.localPoses[i+1]);
 
         // get endpoints from the pose calculation
         Eigen::Vector4d zDirectionObstacle(0, 0, kinovaArm.lengths[i], 1);

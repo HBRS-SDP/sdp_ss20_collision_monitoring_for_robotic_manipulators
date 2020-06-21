@@ -19,10 +19,10 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // init frames for all the joints
     for(int i = 0; i < nJoints; i++)
     {
-        poses.push_back(new KDL::Frame());
+        localPoses.push_back(new KDL::Frame());
     }
     #ifdef DEBUG
-        std::cout << "\nnum_joints: " << nJoints << " " << poses.size() << std::endl;
+        std::cout << "\nnum_joints: " << nJoints << " " << localPoses.size() << std::endl;
     #endif //DEBUG
 
     // ---------------- initialise the arm to init point ------------- //
@@ -42,7 +42,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // solve for the frame at the "link" of the chain for the given joint positions
     for(int link_num = 0; link_num < nJoints; link_num++)
     {
-        fksolver.JntToCart(jointArray, *poses[link_num], link_num);
+        fksolver.JntToCart(jointArray, *localPoses[link_num], link_num);
     }
 
     // TODO convert to config file
@@ -54,7 +54,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // add them to the links vector
     for(int i = 0; i < nJoints-1; i++)
     {
-        Eigen::Matrix4d pose = linkFramesToPose(*poses[i], *poses[i+1]);
+        Eigen::Matrix4d pose = linkFramesToPose(*localPoses[i], *localPoses[i+1]);
         Capsule* link = new Capsule(pose, lengths[i], radii[i]);
         links.push_back(link);
     }
@@ -90,10 +90,10 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
     // init frames for all the joints
     for(int i = 0; i < nJoints; i++)
     {
-        poses.push_back(new KDL::Frame());
+        localPoses.push_back(new KDL::Frame());
     }
     #ifdef DEBUG
-        std::cout << "\nnum_joints: " << nJoints << " " << poses.size() << std::endl;
+        std::cout << "\nnum_joints: " << nJoints << " " << localPoses.size() << std::endl;
     #endif //DEBUG
 
     // ---------------- initialise the arm to init point ------------- //
@@ -113,7 +113,7 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
     // solve for the frame at the "link" of the chain for the given joint positions
     for(int link_num = 0; link_num < nJoints; link_num++)
     {
-        fksolver.JntToCart(jointArray, *poses[link_num], link_num);
+        fksolver.JntToCart(jointArray, *localPoses[link_num], link_num);
     }
 
     // TODO convert to config file
@@ -125,7 +125,7 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
     // add them to the links vector
     for(int i = 0; i < nJoints-1; i++)
     {
-        Eigen::Matrix4d pose = linkFramesToPose(*poses[i], *poses[i+1]);
+        Eigen::Matrix4d pose = linkFramesToPose(*localPoses[i], *localPoses[i+1]);
         Capsule* link = new Capsule(pose, lengths[i], radii[i]);
         links.push_back(link);
     }
@@ -144,8 +144,8 @@ KinovaArm::~KinovaArm(){
         delete(links[i]);
     }
 
-    for(int i=0; i < poses.size(); i++){
-        delete(poses[i]);
+    for(int i=0; i < localPoses.size(); i++){
+        delete(localPoses[i]);
     }
 }
 
@@ -164,12 +164,12 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
     // solve for the frame at the "link" of the chain for the given joint positions
     for(int link_num = 0; link_num < nJoints; link_num++)
     {
-        if(fksolver.JntToCart(jointArray, *poses[link_num], link_num) >= 0)
+        if(fksolver.JntToCart(jointArray, *localPoses[link_num], link_num) >= 0)
         {
             #ifdef DEBUG
             // print the resulting link calculations
             std::cout << "Calculations to link number: " << link_num << std::endl 
-                      << *poses[link_num] << std::endl
+                      << *localPoses[link_num] << std::endl
                       << "Success" << std::endl;
             #endif //DEBUG
         }
@@ -183,7 +183,7 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
         // For all the link objects (nJoints-1) update the pose.
         if(link_num != 0)
         {
-            links[link_num-1]->pose = linkFramesToPose(*poses[link_num-1], *poses[link_num]);
+            links[link_num-1]->pose = linkFramesToPose(*localPoses[link_num-1], *localPoses[link_num]);
         }
     }
 
@@ -240,19 +240,19 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
 
 Eigen::Matrix4d KinovaArm::getPose(void)
 {
-    return frameToMatrix(*poses.back());
+    return frameToMatrix(*localPoses.back());
 }
 
 Eigen::Matrix4d KinovaArm::getPose(int jointNumber)
 {
     // input sanitization
-    if(jointNumber >= poses.size() | jointNumber < 0){
+    if(jointNumber >= localPoses.size() | jointNumber < 0){
         std::cout << "Access joint number larger than array in getPose";
-        return frameToMatrix(*poses.back());
+        return frameToMatrix(*localPoses.back());
     }
 
     // return joint pose
-    return frameToMatrix(*poses[jointNumber]);
+    return frameToMatrix(*localPoses[jointNumber]);
 }
 
 
@@ -328,6 +328,6 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
     }
 
     // Return the final pose
-    return finalPose;
+    return baseTransform * finalPose;
 }
 
