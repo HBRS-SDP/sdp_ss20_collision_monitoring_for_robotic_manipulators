@@ -21,7 +21,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
         poses.push_back(new KDL::Frame());
     }
     #ifdef DEBUG
-        std::cout << "\nnum_joints: " << nJoints << std::endl;
+        std::cout << "\nnum_joints: " << nJoints << " " << poses.size() << std::endl;
     #endif //DEBUG
 
     // ---------------- initialise the arm to init point ------------- //
@@ -34,7 +34,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // pass the joint angles from function input into the joint array
     for(int i=0; i<nJoints; i++)
     {
-        jointArray(i) = 0.0;
+        jointArray(i) = M_PI_2;
         jointVels(i) = 0.0;
     }
 
@@ -143,11 +143,22 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
     //solver for joint velocities
     ikSolver.CartToJnt(jointArray, twist, jointVels);
 
-    std::cout << "ik joint vels, joint angles:" <<std::endl; 
+    // std::cout << "ik joint vels, joint angles:" <<std::endl; 
     // push velocities onto the vector
     for (int i=0; i<jointVels.rows(); i++){
-        std::cout <<  jointVels(i) << ", "<< jointArray(i) <<std::endl;
-        jointVelocitiesOut.push_back(jointVels(i));
+        // std::cout <<  jointVels(i) << ", "<< jointArray(i) <<std::endl;
+        double velocity;
+        if(jointVels(i) > 1) {
+            velocity = 1;
+        }
+        else if(jointVels(i) < -1) {
+            velocity = -1;
+        }
+        else {
+            velocity = jointVels(i);
+        }
+
+        jointVelocitiesOut.push_back(velocity);
     }
 
     // Return the joint velocities

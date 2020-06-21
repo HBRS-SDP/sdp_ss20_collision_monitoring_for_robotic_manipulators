@@ -32,6 +32,8 @@ int main(int argc, char **argv)
     std::string model = modelPath;
     KinovaArm arm1(model);
     Monitor monitor1(&arm1);
+    std::vector<double> initPose = {0, 0, 0, 0, 0, 0, 0};
+    arm1.updatePose(initPose);
 
     // Create the armController class based off the first monitor
     ArmController armController1(&monitor1, 1, 0, 100, 20/3.1425);
@@ -46,7 +48,7 @@ int main(int argc, char **argv)
     ros::Publisher markersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/markers", 1000);
 
     
-    ros::Rate loop_rate(10); 
+    ros::Rate loop_rate(100); 
 
 
     KDL::Twist endeffectorVelocity;

@@ -100,21 +100,20 @@ KDL::Twist ArmController::controlLoop(void) {
     std::cout << newVelocity << std::endl;
 
     std::cout << "goal: " << goal << std::endl;
-    std::cout << "currEndPoint: " << currEndPoint << std::endl;
-    std::cout << "currVelocity: " << currVelocity << std::endl;
-    std::cout << "newVelocity: " << newVelocity << std::endl;
-    std::cout << "potential feild: " << ArmController::obstaclePotentialField(currEndPoint, 
+    std::cout << "currEndPoint: \n" << currEndPoint << std::endl;
+    std::cout << "point to goal: \n" << goal - currEndPoint << std::endl;
+    std::cout << "currVelocity: \n" << currVelocity << std::endl;
+    std::cout << "newVelocity: \n" << newVelocity << std::endl;
+    std::cout << "potential feild: \n" << ArmController::obstaclePotentialField(currEndPoint, 
                                 currVelocity) << std::endl;
 
-    // TODO the code for the object avoidance
-    std::cout << (double)newVelocity[0] <<std::endl;
     Eigen::Vector4d transformedVel = {newVelocity[0], newVelocity[1], newVelocity[2], 0.0};
-    transformedVel = monitor->arm->getPose() * transformedVel;
-    x = transformedVel[0];
-    y = transformedVel[1];
-    z = transformedVel[2];
+    // transformedVel = monitor->arm->getPose() * transformedVel;
+    x = newVelocity[0];
+    y = newVelocity[1];
+    z = newVelocity[2];
 
-    twist.vel = KDL::Vector { 0.0000, 0.00001, 0.001 };
+    twist.vel = KDL::Vector { x, y, z };
     twist.rot = KDL::Vector {0, 0, 0 };
     return twist;
 }

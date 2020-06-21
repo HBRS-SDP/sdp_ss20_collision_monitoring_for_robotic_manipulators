@@ -6,6 +6,8 @@
 #include <kdl/chain.hpp>
 #include "primitives.h"
 #include "ros/ros.h"
+#include <cstdio>
+#include <ros/time.h>
 #include "time.h"
 #include "std_msgs/Float64.h"
 #include "arm_controller.h"
@@ -33,9 +35,10 @@ class KinovaSimulator
         KinovaSimulator(){
 
             ros::NodeHandle np;
+            ros::Duration(3).sleep();
 
-            np.param<std::string>("/velocity_topic", inputTopic, "joint_command");
-            np.param<std::string>("/joint_state_topic", outputTopic, "joint_states");
+            np.param<std::string>(ros::this_node::getName()+"/velocity_topic", inputTopic, "/joint_command");
+            np.param<std::string>(ros::this_node::getName()+"/joint_state_topic", outputTopic, "/joint_states");
         
             time = ros::Time::now();
             curTime = time.toNSec();
@@ -47,7 +50,7 @@ class KinovaSimulator
             for (int i=0; i<7; i++) {
                 jointStates.name.push_back(strings[i]);
                 jointStates.velocity.push_back(0.0);
-                jointStates.position.push_back(0.0);
+                jointStates.position.push_back(M_PI_2);
             }
             jointStates.header.stamp.nsec = time.toNSec();
             jointStates.header.stamp.sec = time.toSec();
@@ -62,7 +65,6 @@ class KinovaSimulator
 
         void subVelocity(const sensor_msgs::JointState::ConstPtr& msg){
             jointVelocities.assign(msg->velocity.begin(), msg->velocity.end());
-            jointPositions.assign(msg->position.begin(), msg->position.end());
 
             time = ros::Time::now();
             curTime = time.toNSec();
@@ -72,15 +74,17 @@ class KinovaSimulator
             else {
                 deltaT = 0;
             }
-            std::cout << " current Pose, current velocity, next pose " << curTime << std::endl;
+            std::cout << " current Pose, current velocity, next pose " << ((double)deltaT / 1000000000.0) << std::endl;
             for (int i=0; i<jointVelocities.size(); i++) {
-                jointStates.position[i] = jointPositions[i] + jointVelocities[i] * ((double)deltaT) / 1000000000.0;
+                double prevPosition = jointStates.position[i];
+                jointStates.position[i] += jointVelocities[i] * ((double)deltaT / 1000000000.0);
                 jointStates.velocity[i] = jointVelocities[i];
-                std::cout << jointPositions[i] << ", " << jointVelocities[i] << ", " << jointStates.position[i] << std::endl;
+                std::cout << prevPosition << ", " << jointVelocities[i] << ", " << jointStates.position[i] << std::endl;
             }
             jointStates.header.stamp.nsec = time.toNSec();
             jointStates.header.stamp.sec = time.toSec();
             velPub.publish(jointStates);
+            prevTime = curTime;
         }
 };
 
@@ -88,7 +92,6 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "kinova_simulator");
     // setup the first monitor function
-
 
     // Create the armController class based off the first monitor
     KinovaSimulator kinovaSimulator = KinovaSimulator();

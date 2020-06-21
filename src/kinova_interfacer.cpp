@@ -81,8 +81,11 @@ int main(int argc, char **argv)
     // Init ROS listener
     ros::init(argc, argv, "kinova_interfacer");
     ros::NodeHandle n;
+    std::string goalTopic;
 
-    ros::Publisher goalPub = n.advertise<geometry_msgs::Point>("kinova_controller/goal", 1000);
+    n.param<std::string>(ros::this_node::getName()+"/goal_topic", goalTopic, ros::this_node::getName()+"/goal");
+
+    ros::Publisher goalPub = n.advertise<geometry_msgs::Point>(goalTopic, 1000);
     ros::Publisher obstaclePub = n.advertise<visualization_msgs::Marker>("kinova_controller/obstacles", 1000);
     
     ros::Rate loop_rate(10);
@@ -102,6 +105,7 @@ int main(int argc, char **argv)
         
         
         std::cout << "Choose input mode; goal(1) or obstacle(2): ";
+        std::cin.clear();
         std::cin >> mode;
         switch(mode) {
             case 1:

@@ -6,6 +6,9 @@
   <param name="arm_controller/urdf_model" value="$(arg model)" />
   <param name="arm_controller/input_joint_topic" value="joint_state" />
   <param name="arm_controller/output_joint_topic" value="joint_command" />
+  <param name="arm_controller/goal_topic" value="/goal_point" />
+  <param name="kinova_interfacer/goal_topic" value="/goal_point" />
+  <param name="publish_frequency" value="100" />
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
   <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
