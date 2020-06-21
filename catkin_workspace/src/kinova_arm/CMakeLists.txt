@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   sensor_msgs
   geometry_msgs
+  tf2_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -114,7 +115,7 @@ find_package(kdl_parser)
 catkin_package(
  INCLUDE_DIRS include
 #  LIBRARIES kinova_arm
-#  CATKIN_DEPENDS gazebo_ros_pkgs ros_kortex roscpp std_msgs sensor_msgs geometry_msgs
+ CATKIN_DEPENDS roscpp std_msgs sensor_msgs geometry_msgs tf2_ros
 #  DEPENDS system_lib
 )
 
