@@ -68,7 +68,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         // Phi
         // φ = cos ((o − x) v/(|o − x| · |v|))
-        double phi_denominator = velocity.squaredNorm()*direction.squaredNorm();
+        double phi_denominator = velocity.norm()*direction.norm();
         double phi_numerator = direction.transpose()*velocity;
         double phi = std::acos(phi_numerator/phi_denominator);
 
