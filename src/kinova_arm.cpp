@@ -1,4 +1,5 @@
 #include "kinova_arm.h"
+#define MAX_JOINT_VEL 10
 
 
 KinovaArm::KinovaArm(std::string urdf_filename){
@@ -148,11 +149,11 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
     for (int i=0; i<jointVels.rows(); i++){
         // std::cout <<  jointVels(i) << ", "<< jointArray(i) <<std::endl;
         double velocity;
-        if(jointVels(i) > 1) {
-            velocity = 1;
+        if(jointVels(i) > MAX_JOINT_VEL) {
+            velocity = MAX_JOINT_VEL;
         }
-        else if(jointVels(i) < -1) {
-            velocity = -1;
+        else if(jointVels(i) < -MAX_JOINT_VEL) {
+            velocity = -MAX_JOINT_VEL;
         }
         else {
             velocity = jointVels(i);
