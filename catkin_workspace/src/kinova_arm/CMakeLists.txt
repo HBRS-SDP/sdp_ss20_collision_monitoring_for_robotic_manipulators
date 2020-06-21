@@ -173,11 +173,6 @@ add_executable(KinovaSimulator
   src/robot_sim.cpp
 )
 
-add_executable(KinovaTestMonitoring
-  src/input_output_testing.cpp
-  src/arm_controller.cpp
-)
-
 add_executable(KinovaInterface
   src/kinova_interfacer.cpp
 )
@@ -211,15 +206,6 @@ target_link_libraries(KinovaCollisionMonitoring PRIVATE
 )
 
 target_link_libraries(DualKinovaCollisionMonitoring PRIVATE
-  KinovaArm
-  CollisionMonitoring
-  orocos-kdl
-  kdl_parser
-  ${orocos-kdl_LIBRARIES}
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(KinovaTestMonitoring PRIVATE
   KinovaArm
   CollisionMonitoring
   orocos-kdl
