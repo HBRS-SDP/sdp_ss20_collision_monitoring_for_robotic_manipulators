@@ -135,7 +135,7 @@ int main(int argc, char **argv)
         jointVelocities1 = arm1.ikVelocitySolver(endeffectorVelocity1);
 
         endeffectorVelocity2 = armController2.controlLoop();
-        jointVelocities2 = arm2.ikVelocitySolver(endeffectorVelocity1);
+        jointVelocities2 = arm2.ikVelocitySolver(endeffectorVelocity2);
 
         for(int i=0; i<arm1.nJoints; i++){
             jointStates1.velocity[i] = jointVelocities1[i];
