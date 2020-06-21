@@ -43,6 +43,16 @@ class KinovaArm: public Arm
          * @return An instance of KinovaArm class
          */
         KinovaArm(std::string urdf_filename);
+
+        /**
+         * KinovaArm constructor with set baseposition
+         * 
+         * @param urdf_filename The global location of the urdf file used to
+         *     import the arm kinematics model
+         * @param inputBaseTransform The global position of the robot base
+         * @return An instance of KinovaArm class
+         */
+        KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransform);
         /// KinovaArm Destructor
         ~KinovaArm();
 

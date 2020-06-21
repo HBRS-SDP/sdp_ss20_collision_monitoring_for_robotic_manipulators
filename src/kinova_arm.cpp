@@ -60,6 +60,77 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     }
     std::cout << links.size() << std::endl;
     // Mathematical constants, declared in constructor for speed
+    this->baseTransform << 1, 0, 0, 0,
+                           0, 1, 0, 0,
+                           0, 0, 1, 0,
+                           0, 0, 0, 1;
+    this->origin << 0, 0, 0, 1;
+    this->directionVect << 0, 0, 1;
+    this->i3 << 1, 0, 0,
+                0, 1, 0,
+                0, 0, 1;
+}
+
+KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransform){
+
+    // ------------- import and initialise the KDL model --------------- //
+    /// This is used to import the URDF file
+    KDL::Tree armTree;
+
+    this->baseTransform = inputBaseTransform;
+
+    // Import the tree from urdf
+    if (!kdl_parser::treeFromFile(urdf_filename, armTree)){
+        std::cout << "Failed to construct kdl tree" << std::endl;
+    }
+    // Convert the tree to a chain and get the number of joints
+    armTree.getChain("base_link", "EndEffector_Link", fkChain);
+    nJoints = fkChain.getNrOfJoints();
+
+    // init frames for all the joints
+    for(int i = 0; i < nJoints; i++)
+    {
+        poses.push_back(new KDL::Frame());
+    }
+    #ifdef DEBUG
+        std::cout << "\nnum_joints: " << nJoints << " " << poses.size() << std::endl;
+    #endif //DEBUG
+
+    // ---------------- initialise the arm to init point ------------- //
+
+    // initailise the chain solver and the joint array
+    KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(fkChain);
+    jointArray = KDL::JntArray(nJoints);
+    jointVels = KDL::JntArray(nJoints);
+
+    // pass the joint angles from function input into the joint array
+    for(int i=0; i<nJoints; i++)
+    {
+        jointArray(i) = M_PI_2;
+        jointVels(i) = 0.0;
+    }
+
+    // solve for the frame at the "link" of the chain for the given joint positions
+    for(int link_num = 0; link_num < nJoints; link_num++)
+    {
+        fksolver.JntToCart(jointArray, *poses[link_num], link_num);
+    }
+
+    // TODO convert to config file
+    // pass in the parameters for the link cylinder models
+    radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
+    lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593});
+
+    // Create the new link objects in default position and 
+    // add them to the links vector
+    for(int i = 0; i < nJoints-1; i++)
+    {
+        Eigen::Matrix4d pose = linkFramesToPose(*poses[i], *poses[i+1]);
+        Capsule* link = new Capsule(pose, lengths[i], radii[i]);
+        links.push_back(link);
+    }
+    std::cout << links.size() << std::endl;
+    // Mathematical constants, declared in constructor for speed
     this->origin << 0, 0, 0, 1;
     this->directionVect << 0, 0, 1;
     this->i3 << 1, 0, 0,
