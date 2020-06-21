@@ -13,6 +13,6 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
   <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
   <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
-  <node name="rviz" pkg="rviz" type="rviz" required="true"/>
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find kinova_arm)/rviz/kinova.rviz"/>
 
 </launch>
