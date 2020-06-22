@@ -62,7 +62,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
     Eigen::Vector3d potentialField = Eigen::Vector3d({0, 0, 0});
 
     Eigen::Vector4d origin(0, 0, 0, 1);
-    Eigen::Vector3d startArrow, endArrow;
+    Eigen::Vector3d startArrow;
     
     double angle = 3.1415/2;
     
@@ -116,11 +116,11 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         std::cout << potentialField << std::endl;
 
-        MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, startArrow(0), startArrow(1), startArrow(2), 1.0, 0.0, 0.0, 1.0);
+        MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
         
         mPublisherArrow.setRadius(0.005);
         mPublisherArrow.setLength(0.005);
-        mPublisherArrow.setPoints(startArrow, potentialField);
+        mPublisherArrow.setPoints(startArrow, startArrow + potentialField);
         mPublisherArrow.Publish();
     }
 
