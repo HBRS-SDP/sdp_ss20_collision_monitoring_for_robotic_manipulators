@@ -91,11 +91,6 @@ void MarkerPublisher::setPoints(Eigen::Vector3d start, Eigen::Vector3d end){
         endPoint.y = end(1);
         endPoint.z = end(2);
 
-        std::cout << start << std::endl;
-        std::cout << end << std::endl;
-        std::cout << startPoint << std::endl;
-        std::cout << endPoint << std::endl;
-
         this->marker.points.clear();
         this->marker.points.push_back(startPoint);
         this->marker.points.push_back(endPoint);

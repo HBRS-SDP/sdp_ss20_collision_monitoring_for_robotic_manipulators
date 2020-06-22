@@ -31,13 +31,6 @@ int main(int argc, char **argv)
     Eigen::Vector3d startArrow(0.1, 0, 0); 
     Eigen::Vector3d endArrow(0.1, 0, 0.5);
 
-    MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "0", 0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
-    mPublisherArrow.setRadius(0.005);
-    mPublisherArrow.setLength(0.005);
-    mPublisherArrow.setPoints(startArrow, endArrow);
-    mPublisherArrow.Publish();
-    mPublisherArrow.Publish();
-    mPublisherArrow.Publish();
 
     while(ros::ok() && !exit) {
         int mode;
@@ -97,9 +90,6 @@ int main(int argc, char **argv)
                         // mPublisherArrow.setRadius(radius / 5);
                         // mPublisherArrow.setLength(radius * 10);
 
-                        endArrow = Eigen::Vector3d({positionX, positionY, positionZ});
-                        mPublisherArrow.setPoints(startArrow, endArrow);
-                        mPublisherArrow.Publish();
                         mPublisher.Publish();
                         // mPublisherArrow.Publish();
                         
