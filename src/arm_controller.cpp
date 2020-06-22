@@ -57,6 +57,7 @@ void ArmController::goalCallback(const geometry_msgs::Point::ConstPtr& msg) {
 Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPosition, 
                                         Eigen::Vector3d velocity) {
     Eigen::Vector3d potentialField = Eigen::Vector3d({0, 0, 0});
+    double angle = 3.1415/2;
     
     for(int i = 0; i < monitor->obstacles.size(); i++) {
         
@@ -64,7 +65,32 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         monitor->arm->links.back()->getShortestDirection(direction, 
                                             monitor->obstacles[i]);
         // Rotation matrix
-        Eigen::MatrixXd rotation = direction * velocity.transpose();
+        Eigen::Vector3d rotvec = direction.cross(velocity);
+        rotvec.normalized();
+
+        double ct = cos(angle);
+        double st = sin(angle);
+        double vt = 1-ct;
+        double m_vt_0=vt*rotvec(0);
+        double m_vt_1=vt*rotvec(1);
+        double m_vt_2=vt*rotvec(2);
+        double m_st_0=rotvec(0)*st;
+        double m_st_1=rotvec(1)*st;
+        double m_st_2=rotvec(2)*st;
+        double m_vt_0_1=m_vt_0*rotvec(1);
+        double m_vt_0_2=m_vt_0*rotvec(2);
+        double m_vt_1_2=m_vt_1*rotvec(2);
+
+        Eigen::Matrix3d rotation;
+        rotation << ct      + m_vt_0*rotvec(0), 
+                    -m_st_2 +  m_vt_0_1,
+                    m_st_1  +  m_vt_0_2,
+                    m_st_2  +  m_vt_0_1,
+                    ct      +  m_v  t_1*rotvec(1),
+                    -m_st_0 +  m_vt_1_2,
+                    -m_st_1 +  m_vt_0_2,
+                    m_st_0  +  m_vt_1_2,
+                    ct      +  m_vt_2*rotvec(2);
 
         // Phi
         // φ = cos ((o − x) v/(|o − x| · |v|))
