@@ -162,11 +162,13 @@ add_subdirectory(collision_monitoring)
 add_executable(KinovaCollisionMonitoring
   src/arm_controller.cpp
   src/kinova_CM_node.cpp
+  src/marker_publisher.cpp
 )
 
 add_executable(DualKinovaCollisionMonitoring
   src/arm_controller.cpp
   src/dual_kinova_CM_node.cpp
+  src/marker_publisher.cpp
 )
 
 add_executable(KinovaSimulator
