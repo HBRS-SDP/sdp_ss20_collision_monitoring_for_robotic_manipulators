@@ -24,6 +24,10 @@ class MarkerPublisher {
 
         void setLength(double length);
 
+        void setPosition(double positionX, double positionY, double positionZ);
+
+        void setOrientation(double orientationX, double orientationY, double orientationZ, double orientationW);
+
         void Publish();
 };
 

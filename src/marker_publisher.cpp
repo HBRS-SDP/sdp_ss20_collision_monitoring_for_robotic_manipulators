@@ -54,6 +54,19 @@ void MarkerPublisher::setLength(double length){
     }
 }
 
+void MarkerPublisher::setPosition(double positionX, double positionY, double positionZ){
+    this->marker.pose.position.x = positionX;
+    this->marker.pose.position.y = positionY;
+    this->marker.pose.position.z = positionZ;
+}
+
+void MarkerPublisher::setOrientation(double orientationX, double orientationY, double orientationZ, double orientationW){
+    this->marker.pose.orientation.x = orientationX;
+    this->marker.pose.orientation.y = orientationY;
+    this->marker.pose.orientation.z = orientationZ;
+    this->marker.pose.orientation.w = orientationW;
+}
+
 void MarkerPublisher::Publish(){
     this->marker.header.stamp = ros::Time();
     ownPublisher.publish(this->marker);
