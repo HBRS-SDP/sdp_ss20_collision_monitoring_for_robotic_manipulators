@@ -180,17 +180,6 @@ int main(int argc, char **argv)
             case 0:
                 exit = true;
                 break;
-            case 3:{
-                MarkerPublisher mPublisherArrow2(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "0", 0, 0.1, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
-                Eigen::Vector3d a = Eigen::Vector3d({0.2, 0, 0});
-                Eigen::Vector3d b = Eigen::Vector3d({0.2, 0, .4});
-                mPublisherArrow2.setRadius(0.05 / 5);
-                mPublisherArrow2.setLength(0.05 / 5);
-                mPublisherArrow2.setPoints(a, b);
-                
-                mPublisherArrow2.Publish();
-                break;
-            }
             default:
                     std::cout << "Incorrect input, please try again.\n";
                     

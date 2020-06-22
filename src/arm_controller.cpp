@@ -8,6 +8,9 @@ ArmController::ArmController(Monitor* monitorObject, double k, double d,
     Eigen::Matrix4d currEndPose = monitor->arm->getPose();
     numJoints = monitor->arm->nJoints;
 
+    
+    this->obstaclePub = n.advertise<visualization_msgs::Marker>("kinova_controller/potential_field", 1000);
+
     origin << 0, 0, 0, 1;
 
     goal = (currEndPose * origin).head(3);
@@ -57,10 +60,15 @@ void ArmController::goalCallback(const geometry_msgs::Point::ConstPtr& msg) {
 Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPosition, 
                                         Eigen::Vector3d velocity) {
     Eigen::Vector3d potentialField = Eigen::Vector3d({0, 0, 0});
+
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector3d startArrow, endArrow;
+    
     double angle = 3.1415/2;
     
     for(int i = 0; i < monitor->obstacles.size(); i++) {
         
+
         Eigen::Vector3d direction; 
         monitor->arm->links.back()->getShortestDirection(direction, 
                                             monitor->obstacles[i]);
@@ -86,7 +94,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
                     -m_st_2 +  m_vt_0_1,
                     m_st_1  +  m_vt_0_2,
                     m_st_2  +  m_vt_0_1,
-                    ct      +  m_v  t_1*rotvec(1),
+                    ct      +  m_vt_1*rotvec(1),
                     -m_st_0 +  m_vt_1_2,
                     -m_st_1 +  m_vt_0_2,
                     m_st_0  +  m_vt_1_2,
@@ -102,7 +110,20 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         // R i vφ i exp(−βφ i )
         potentialField += (rotation * velocity) * phi * exp;
+
+
+        startArrow = (monitor->obstacles[i]->pose * origin).head(3);
+
+        std::cout << potentialField << std::endl;
+
+        MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, startArrow(0), startArrow(1), startArrow(2), 1.0, 0.0, 0.0, 1.0);
+        
+        mPublisherArrow.setRadius(0.005);
+        mPublisherArrow.setLength(0.005);
+        mPublisherArrow.setPoints(startArrow, potentialField);
+        mPublisherArrow.Publish();
     }
+
     return gamma * potentialField;
 }
 

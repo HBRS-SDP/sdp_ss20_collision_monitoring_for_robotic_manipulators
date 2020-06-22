@@ -23,6 +23,7 @@
 #include "sensor_msgs/JointState.h"
 #include "geometry_msgs/Point.h"
 #include "visualization_msgs/Marker.h"
+#include "marker_publisher.h"
 
 
 class RvizObstacle
@@ -102,6 +103,8 @@ class ArmController
         Eigen::Vector4d origin;
         std::vector<Primitive*> obstaclesAllocated;
         KDL::Twist twist;
+        ros::NodeHandle n;
+        ros::Publisher obstaclePub;
 
 };
 
