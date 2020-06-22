@@ -138,6 +138,9 @@ void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& 
             monitor->addObstacle(sphere);
         }
     }
+    else if(msg->type == visualization_msgs::Marker::ARROW){
+        std::cout << "arrow" << std::endl;
+    }
     else {
         ROS_ERROR("Wrong shape for obstacle");
     }
