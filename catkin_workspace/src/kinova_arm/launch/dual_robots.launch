@@ -34,6 +34,6 @@
   <param name="arm_controller/urdf_model" value="$(arg model)" />
 
   <node name="arm_controller" pkg="kinova_arm" type="DualKinovaCollisionMonitoring"/>
-  <node name="rviz" pkg="rviz" type="rviz" required="true"/>
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find kinova_arm)/rviz/kinova_dual.rviz"/>
 
 </launch>

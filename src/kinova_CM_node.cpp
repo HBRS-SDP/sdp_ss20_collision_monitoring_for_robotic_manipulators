@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     arm1.updatePose(initPose);
 
     // Create the armController class based off the first monitor
-    ArmController armController1(&monitor1, 1, 0, 100, 20/3.1425);
+    ArmController armController1(&monitor1, 0.1, 0, 1000, 20/3.1425);
 
     // Init ROS listener
     ros::Subscriber armSub = n.subscribe(jointStatesTopic, 1000, &ArmController::armCallback, &armController1);
