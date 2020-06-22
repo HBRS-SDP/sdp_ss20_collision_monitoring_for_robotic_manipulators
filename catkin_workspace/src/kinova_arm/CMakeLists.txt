@@ -175,6 +175,7 @@ add_executable(KinovaSimulator
 
 add_executable(KinovaInterface
   src/kinova_interfacer.cpp
+  src/marker_publisher.cpp
 )
 
 

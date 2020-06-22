@@ -8,73 +8,72 @@
 #include "geometry_msgs/Point.h"
 #include "Eigen/Geometry"
 #include "Eigen/Dense"
+#include "marker_publisher.h"
 
+// class MarkerPublisher {
+//     public:
+//         visualization_msgs::Marker marker;
+//         ros::Publisher ownPublisher;
 
+//         MarkerPublisher(ros::Publisher ownPublisher, int type, std::string frame_id, std::string ns, int id, double positionX, double positionY, double positionZ, double r, double g, double b) {
+//             this->ownPublisher = ownPublisher;
+//             this->marker.type = type;
+//             this->marker.action = visualization_msgs::Marker::ADD;
 
-class MarkerPublisher {
-    public:
-        visualization_msgs::Marker marker;
-        ros::Publisher ownPublisher;
+//             this->marker.header.frame_id = frame_id;
+//             this->marker.ns = ns;
+//             this->marker.id = id;
 
-        MarkerPublisher(ros::Publisher ownPublisher, int type, std::string frame_id, std::string ns, int id, double positionX, double positionY, double positionZ, double r, double g, double b) {
-            this->ownPublisher = ownPublisher;
-            this->marker.type = type;
-            this->marker.action = visualization_msgs::Marker::ADD;
+//             this->marker.pose.orientation.x = 0.0;
+//             this->marker.pose.orientation.y = 0.0;
+//             this->marker.pose.orientation.z = 0.0;
+//             this->marker.pose.orientation.w = 1.0;
 
-            this->marker.header.frame_id = frame_id;
-            this->marker.ns = ns;
-            this->marker.id = id;
+//             this->marker.pose.position.x = positionX;
+//             this->marker.pose.position.y = positionY;
+//             this->marker.pose.position.z = positionZ;
 
-            this->marker.pose.orientation.x = 0.0;
-            this->marker.pose.orientation.y = 0.0;
-            this->marker.pose.orientation.z = 0.0;
-            this->marker.pose.orientation.w = 1.0;
+//             this->marker.color.a = 1.0; 
+//             this->marker.color.r = r;
+//             this->marker.color.g = g;
+//             this->marker.color.b = b;
+//         }
 
-            this->marker.pose.position.x = positionX;
-            this->marker.pose.position.y = positionY;
-            this->marker.pose.position.z = positionZ;
+//         void setRadius(double radius){
+//             switch (this->marker.type)
+//             {
+//             case visualization_msgs::Marker::SPHERE:
+//                 this->marker.scale.x = 2 * radius;
+//                 this->marker.scale.y = 2 * radius;
+//                 this->marker.scale.z = 2 * radius;
+//                 break;
+//             case visualization_msgs::Marker::CYLINDER:
+//                 this->marker.scale.x = 2 * radius;
+//                 this->marker.scale.y = 2 * radius;
+//                 break;
+//             default:
+//                 break;
+//             }
+//         }
 
-            this->marker.color.a = 1.0; 
-            this->marker.color.r = r;
-            this->marker.color.g = g;
-            this->marker.color.b = b;
-        }
+//         void setLength(double length){
+//             switch (this->marker.type)
+//             {
+//             case visualization_msgs::Marker::SPHERE:
+//                 break;
+//             case visualization_msgs::Marker::CYLINDER:
+//                 this->marker.scale.z = length;
+//                 break;
+//             default:
+//                 break;
+//             }
+//         }
 
-        void setRadius(double radius){
-            switch (this->marker.type)
-            {
-            case visualization_msgs::Marker::SPHERE:
-                this->marker.scale.x = 2 * radius;
-                this->marker.scale.y = 2 * radius;
-                this->marker.scale.z = 2 * radius;
-                break;
-            case visualization_msgs::Marker::CYLINDER:
-                this->marker.scale.x = 2 * radius;
-                this->marker.scale.y = 2 * radius;
-                break;
-            default:
-                break;
-            }
-        }
-
-        void setLength(double length){
-            switch (this->marker.type)
-            {
-            case visualization_msgs::Marker::SPHERE:
-                break;
-            case visualization_msgs::Marker::CYLINDER:
-                this->marker.scale.z = length;
-                break;
-            default:
-                break;
-            }
-        }
-
-        void Publish(){
-            this->marker.header.stamp = ros::Time();
-            ownPublisher.publish(this->marker);
-        }
-};
+//         void Publish(){
+//             this->marker.header.stamp = ros::Time();
+//             ownPublisher.publish(this->marker);
+//         }
+// };
 
 int main(int argc, char **argv)
 {
