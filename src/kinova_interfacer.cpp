@@ -63,8 +63,8 @@ int main(int argc, char **argv)
                     case 1:
                     {
                         std::cout << "Sphere selected, please input the required values.\n";
-                        std::cout << "Frame_id: ";
-                        std::cin >> frame_id;
+                        // std::cout << "Frame_id: ";
+                        // std::cin >> frame_id;
                         std::cout << "NameSpace: ";
                         std::cin >> ns;
                         std::cout << "ID: ";
@@ -83,7 +83,7 @@ int main(int argc, char **argv)
                         g = (float) rand() / RAND_MAX;
                         b = (float) rand() / RAND_MAX;
 
-                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id, positionX, positionY, positionZ, r, g, b, 0.5);
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", ns, id, positionX, positionY, positionZ, r, g, b, 0.5);
                         mPublisher.setRadius(radius);
 
                         // MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, frame_id, ns, id + 1, positionX, positionY, positionZ, g, b, r, 1.0);
