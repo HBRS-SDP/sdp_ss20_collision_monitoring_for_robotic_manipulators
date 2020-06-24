@@ -1,5 +1,6 @@
 // A simple program that computes the square root of a number
 #include "arm_controller.h"
+#define PI 3.14159265
 // #define DEBUG
 
 ArmController::ArmController(Monitor* monitorObject, double k, double d,
@@ -191,28 +192,44 @@ KDL::Twist ArmController::controlLoop(void) {
     for(int i=0; i < monitor->arm->links.size(); i++){
         capsuleLink = dynamic_cast<Capsule*>(monitor->arm->links[i]);
         if(capsuleLink){
-            // double w = sqrt(1 + capsuleLink->pose(0,0)
-            //            + capsuleLink->pose(1,1) 
-            //            + capsuleLink->pose(2, 2))/2;
-            // double x = (capsuleLink->pose(2,1) - capsuleLink->pose(1, 2))/(4*w);
-            // double y = (capsuleLink->pose(0,2) - capsuleLink->pose(2, 0))/(4*w);
-            // double z = (capsuleLink->pose(1,0) - capsuleLink->pose(0, 1))/(4*w);
+            double an;
+            an = 80.0;
+            
+            Eigen::Matrix4d pose_1;
+            pose_1 << cos(an*PI/180), 0, sin(an*PI/180), 0,
+              0, 1, 0, 0,
+              -sin(an*PI/180), 0, cos(an*PI/180), 0,
+              0, 0, 0, 1;
 
-            // Eigen::Quaterniond quat(x, y, z, w);
 
             Eigen::Vector4d startPoint(0, 0, 0, 1);
             Eigen::Vector4d endPoint(0, 0, capsuleLink->getLength(), 1);
+
+            Eigen::Vector3d endQuat(0, 0, 1);
             startArrow = (capsuleLink->pose * startPoint).head(3);
             endArrow = (capsuleLink->pose * endPoint).head(3);
 
             double r = (float) rand() / RAND_MAX;
             double g = (float) rand() / RAND_MAX;
             double b = (float) rand() / RAND_MAX;
+
+            Eigen::Quaterniond quat = Eigen::Quaterniond::FromTwoVectors(endQuat, (endArrow - startArrow) / (endArrow - startArrow).norm());
+
+            Eigen::Vector4d midPoint(0, 0, capsuleLink->getLength() / 2, 1);
+            positionLink = (capsuleLink->pose * midPoint).head(3);
+            
+            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 1.0, 1.0, 1.0, 0.5);
+            mPublisherLink.setRadius(capsuleLink->getRadius());
+            mPublisherLink.setLength(capsuleLink->getLength());
+            mPublisherLink.setOrientation(quat.x(), quat.y(), quat.z(), quat.w());
+            mPublisherLink.Publish();
+            std::cout << quat.x() << " - " << quat.y() << " - " <<  quat.z()  << " - " <<  quat.w() << std::endl;
             
             // MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2),  r, g, b, 0.5);
             // mPublisherLink.setRadius(capsuleLink->getRadius());
             // mPublisherLink.setLength(capsuleLink->getLength());
-            // mPublisherLink.setOrientation(x, y, z, w);
+            // mPublisherLink.setPoints(startArrow, endArrow);
+
             // mPublisherLink.Publish();
 
             MarkerPublisher mPublisherPotentialField(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "links", 2  * i, 0.0, 0.0, 0.0, r, g, b, 1.0);
@@ -223,8 +240,8 @@ KDL::Twist ArmController::controlLoop(void) {
             mPublisherPotentialField.Publish();
 
 
-            // MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", i, startArrow(0), startArrow(1), startArrow(2), r, g, b, 0.5);
-            // mPublisher.setRadius(0.05);
+            // MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), r, g, b, 0.5);
+            // mPublisher.setRadius(capsuleLink->getRadius());
             // mPublisher.Publish();
         }
     }
