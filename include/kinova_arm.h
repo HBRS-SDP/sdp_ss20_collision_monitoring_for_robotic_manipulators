@@ -93,8 +93,6 @@ class KinovaArm: public Arm
         /// The KDL joint array to hold the joint velocities
         KDL::JntArray jointVels;
 
-
-        int nJoints;
         int nFrames;
         
 

@@ -32,6 +32,7 @@ class Arm
         std::vector<Primitive*> links;
         /// The number of joints in the chain
         int nLinks;
+        int nJoints;
 
 };
 
