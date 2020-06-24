@@ -20,11 +20,6 @@
 #include "arm.h"
 
 
-/*
-TODO:
-    - implement base position
-*/
-
 /**
  * An implementation of the Arm interface.
  * 
