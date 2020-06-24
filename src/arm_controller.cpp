@@ -89,9 +89,18 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
             mPublisherShortestDistance.setPoints(startArrow, startArrow + direction - (direction / direction.norm()) * endEffectorCapsule->getRadius() );
             mPublisherShortestDistance.Publish();
 
+            double w = sqrt(1 + endEffectorCapsule->pose(0,0)
+                       + endEffectorCapsule->pose(1,1) 
+                       + endEffectorCapsule->pose(2, 2))/2;
+            double x = (endEffectorCapsule->pose(2,1) - endEffectorCapsule->pose(1, 2))/(4*w);
+            double y = (endEffectorCapsule->pose(0,2) - endEffectorCapsule->pose(2, 0))/(4*w);
+            double z = (endEffectorCapsule->pose(1,0) - endEffectorCapsule->pose(0, 1))/(4*w);
+
             positionLink = (monitor->arm->links.back()->pose * origin).head(3);
-            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
-            mPublisherLink.setRadius(0.05);
+            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
+            mPublisherLink.setRadius(endEffectorCapsule->getRadius());
+            mPublisherLink.setLength(endEffectorCapsule->getLength());
+            mPublisherLink.setOrientation(x, y, z, w);
             mPublisherLink.Publish();
         }
 
@@ -160,8 +169,6 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         mPublisherPotentialField.setLength(0.005);
         mPublisherPotentialField.setPoints(startArrow, startArrow + (gamma * potentialField));
         mPublisherPotentialField.Publish();
-
-        
     }
    
     return gamma * potentialField;
