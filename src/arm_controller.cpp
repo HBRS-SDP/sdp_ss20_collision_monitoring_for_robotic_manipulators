@@ -49,12 +49,16 @@ void ArmController::armCallback(const sensor_msgs::JointState::ConstPtr& msg) {
 
 void ArmController::goalCallback(const geometry_msgs::Point::ConstPtr& msg) {
     //transform the message from its current type to Eigen::Vector3d and put in goal variable
+    #ifdef DEBUG
     std::cout << "goalCallback:\n\tCurrent goal: "<<this->goal<<std::endl;
     std::cout << "\tincoming goal: " << msg->x << ", " << msg->y << ", " << msg->z << std::endl;
+    #endif // DEBUG
     this->goal[0] = msg->x;
     this->goal[1] = msg->y;
     this->goal[2] = msg->z;
+    #ifdef DEBUG
     std::cout << "\tNew goal: "<<this->goal<<std::endl;
+    #endif // DEBUG
 }
 
 Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPosition, 
@@ -114,7 +118,9 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         startArrow = (monitor->obstacles[i]->pose * origin).head(3);
 
+        #ifdef DEBUG
         std::cout << potentialField << std::endl;
+        #endif // DEBUG
 
         MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
         
@@ -156,6 +162,7 @@ KDL::Twist ArmController::controlLoop(void) {
                                 + ArmController::obstaclePotentialField(currEndPoint, 
                                 currVelocity);
 
+    #ifdef DEBUG
     std::cout << newVelocity << std::endl;
 
     std::cout << "goal: " << goal << std::endl;
@@ -165,6 +172,7 @@ KDL::Twist ArmController::controlLoop(void) {
     std::cout << "newVelocity: \n" << newVelocity << std::endl;
     std::cout << "potential feild: \n" << ArmController::obstaclePotentialField(currEndPoint, 
                                 currVelocity) << std::endl;
+    #endif // DEBUG
 
     Eigen::Vector4d transformedVel = {newVelocity[0], newVelocity[1], newVelocity[2], 0.0};
     // transformedVel = monitor->arm->getPose() * transformedVel;
@@ -178,6 +186,9 @@ KDL::Twist ArmController::controlLoop(void) {
 }
 
 void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& msg) {
+    #ifdef DEBUG
+
+    #endif // DEBUG
     std::cout << "New obstacle of type: " << msg->type <<std::endl;
     if (msg->type == visualization_msgs::Marker::SPHERE) {
         bool newObstacle = true;
@@ -198,7 +209,9 @@ void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& 
         }
     }
     else if(msg->type == visualization_msgs::Marker::ARROW){
+        #ifdef DEBUG
         std::cout << "arrow" << std::endl;
+        #endif // DEBUG
     }
     else {
         ROS_ERROR("Wrong shape for obstacle");

@@ -1,6 +1,8 @@
 #include "kinova_arm.h"
 #define MAX_JOINT_VEL 10
 
+// #define DEBUG
+
 
 KinovaArm::KinovaArm(std::string urdf_filename){
 
@@ -23,6 +25,9 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     }
     #ifdef DEBUG
         std::cout << "\nnum_joints: " << nJoints << " " << localPoses.size() << std::endl;
+        std::cout << "tree: " << armTree.getNrOfSegments() << std::endl;
+        std::cout << "chain: " << armTree.getNrOfJoints() << std::endl;
+        for
     #endif //DEBUG
 
     // ---------------- initialise the arm to init point ------------- //
@@ -58,7 +63,9 @@ KinovaArm::KinovaArm(std::string urdf_filename){
         Capsule* link = new Capsule(pose, lengths[i], radii[i]);
         links.push_back(link);
     }
+    #ifdef DEBUG
     std::cout << links.size() << std::endl;
+    #endif
     // Mathematical constants, declared in constructor for speed
     this->baseTransform << 1, 0, 0, 0,
                            0, 1, 0, 0,
@@ -129,7 +136,9 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
         Capsule* link = new Capsule(pose, lengths[i], radii[i]);
         links.push_back(link);
     }
+    #ifdef DEBUG
     std::cout << links.size() << std::endl;
+    #endif
     // Mathematical constants, declared in constructor for speed
     this->origin << 0, 0, 0, 1;
     this->directionVect << 0, 0, 1;
