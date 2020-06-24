@@ -96,7 +96,11 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
             double y = (endEffectorCapsule->pose(0,2) - endEffectorCapsule->pose(2, 0))/(4*w);
             double z = (endEffectorCapsule->pose(1,0) - endEffectorCapsule->pose(0, 1))/(4*w);
 
-            positionLink = (monitor->arm->links.back()->pose * origin).head(3);
+            Eigen::Quaterniond quat(x, y, z, w);
+
+            Eigen::Vector4d basePoint(0, 0, endEffectorCapsule->getLength() / 2.0 , 1);
+            positionLink = (endEffectorCapsule->pose * basePoint).head(3);
+            
             MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
             mPublisherLink.setRadius(endEffectorCapsule->getRadius());
             mPublisherLink.setLength(endEffectorCapsule->getLength());
@@ -185,8 +189,8 @@ KDL::Twist ArmController::controlLoop(void) {
     objectDistances = monitor->distanceToObjects();
     armDistances = monitor->distanceBetweenArmLinks();
 
-    //v̇ = K(g−x) − Dv + p(x, v)
 
+    //v̇ = K(g−x) − Dv + p(x, v)
     Eigen::Vector3d currVelocity = {twist.vel.data[0], twist.vel.data[1], twist.vel.data[2]};
     Eigen::Vector3d newVelocity = K * (goal - currEndPoint) - D * currVelocity
                                 + ArmController::obstaclePotentialField(currEndPoint, 
