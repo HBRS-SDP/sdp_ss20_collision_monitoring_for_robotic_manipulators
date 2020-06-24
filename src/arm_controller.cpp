@@ -186,30 +186,48 @@ KDL::Twist ArmController::controlLoop(void) {
     armDistances = monitor->distanceBetweenArmLinks();
 
     //Show links as a cylinders
-    // Capsule *capsuleLink;
-    // Eigen::Vector3d positionLink;
-    // for(int i=0; i < monitor->arm->links.size(); i++){
-    //     capsuleLink = dynamic_cast<Capsule*>(monitor->arm->links[i]);
-    //     if(capsuleLink){
-    //         double w = sqrt(1 + capsuleLink->pose(0,0)
-    //                    + capsuleLink->pose(1,1) 
-    //                    + capsuleLink->pose(2, 2))/2;
-    //         double x = (capsuleLink->pose(2,1) - capsuleLink->pose(1, 2))/(4*w);
-    //         double y = (capsuleLink->pose(0,2) - capsuleLink->pose(2, 0))/(4*w);
-    //         double z = (capsuleLink->pose(1,0) - capsuleLink->pose(0, 1))/(4*w);
+    Capsule *capsuleLink;
+    Eigen::Vector3d positionLink, startArrow, endArrow;
+    for(int i=0; i < monitor->arm->links.size(); i++){
+        capsuleLink = dynamic_cast<Capsule*>(monitor->arm->links[i]);
+        if(capsuleLink){
+            // double w = sqrt(1 + capsuleLink->pose(0,0)
+            //            + capsuleLink->pose(1,1) 
+            //            + capsuleLink->pose(2, 2))/2;
+            // double x = (capsuleLink->pose(2,1) - capsuleLink->pose(1, 2))/(4*w);
+            // double y = (capsuleLink->pose(0,2) - capsuleLink->pose(2, 0))/(4*w);
+            // double z = (capsuleLink->pose(1,0) - capsuleLink->pose(0, 1))/(4*w);
 
-    //         Eigen::Quaterniond quat(x, y, z, w);
+            // Eigen::Quaterniond quat(x, y, z, w);
 
-    //         Eigen::Vector4d basePoint(0, 0, capsuleLink->getLength() / 2.0 , 1);
-    //         positionLink = (capsuleLink->pose * basePoint).head(3);
+            Eigen::Vector4d startPoint(0, 0, 0, 1);
+            Eigen::Vector4d endPoint(0, 0, capsuleLink->getLength(), 1);
+            startArrow = (capsuleLink->pose * startPoint).head(3);
+            endArrow = (capsuleLink->pose * endPoint).head(3);
+
+            double r = (float) rand() / RAND_MAX;
+            double g = (float) rand() / RAND_MAX;
+            double b = (float) rand() / RAND_MAX;
             
-    //         MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
-    //         mPublisherLink.setRadius(capsuleLink->getRadius());
-    //         mPublisherLink.setLength(capsuleLink->getLength());
-    //         mPublisherLink.setOrientation(x, y, z, w);
-    //         mPublisherLink.Publish();
-    //     }
-    // }
+            // MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2),  r, g, b, 0.5);
+            // mPublisherLink.setRadius(capsuleLink->getRadius());
+            // mPublisherLink.setLength(capsuleLink->getLength());
+            // mPublisherLink.setOrientation(x, y, z, w);
+            // mPublisherLink.Publish();
+
+            MarkerPublisher mPublisherPotentialField(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "links", 2  * i, 0.0, 0.0, 0.0, r, g, b, 1.0);
+        
+            mPublisherPotentialField.setRadius(0.005);
+            mPublisherPotentialField.setLength(0.005);
+            mPublisherPotentialField.setPoints(startArrow, endArrow);
+            mPublisherPotentialField.Publish();
+
+
+            // MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", i, startArrow(0), startArrow(1), startArrow(2), r, g, b, 0.5);
+            // mPublisher.setRadius(0.05);
+            // mPublisher.Publish();
+        }
+    }
 
     //v̇ = K(g−x) − Dv + p(x, v)
     Eigen::Vector3d currVelocity = {twist.vel.data[0], twist.vel.data[1], twist.vel.data[2]};
