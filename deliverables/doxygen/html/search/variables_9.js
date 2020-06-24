@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['nframes',['nFrames',['../class_kinova_arm.html#a354341c4c6150a604c0029d3ecd00cb7',1,'KinovaArm']]],
-  ['njoints',['nJoints',['../class_arm.html#ac3734a2ca38b0312fd42894ab6886bc9',1,'Arm']]],
-  ['nlinks',['nLinks',['../class_arm.html#a911ba9a8c719c090a305f88ab0ae7490',1,'Arm']]]
+  ['pose',['pose',['../class_primitive.html#ad8b2afbad412f6046783d155c88fe312',1,'Primitive::pose()'],['../class_rviz_obstacle.html#aa48c4d1a26938cb932aac1439373b60b',1,'RvizObstacle::pose()']]]
 ];

@@ -38,7 +38,7 @@ std\+::vector$<$ double $>$ \hyperlink{class_kinova_arm_a0a5a3bd128b420d58d92d24
 \item 
 Eigen\+::\+Matrix4d \hyperlink{class_kinova_arm_aea7c01f72eb70387ff71ca130db3bd3f}{get\+Pose} (void)
 \item 
-Eigen\+::\+Matrix4d \hyperlink{class_kinova_arm_a66f0535b3c926b692e05a97f82efd3b2}{get\+Pose} (int joint\+Number)
+Eigen\+::\+Matrix4d \hyperlink{class_kinova_arm_ae6b5c17c1b7b79bc3de00e8d38b80999}{get\+Pose} (int frame\+Number)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -48,10 +48,7 @@ K\+D\+L\+::\+Jnt\+Array \hyperlink{class_kinova_arm_a47ddba255203039c2d7d3ceb48b
 \begin{DoxyCompactList}\small\item\em The K\+DL joint array to hold the joint angles. \end{DoxyCompactList}\item 
 K\+D\+L\+::\+Jnt\+Array \hyperlink{class_kinova_arm_adeab92c27d6555029a30f5bcbba8bfab}{joint\+Vels}\hypertarget{class_kinova_arm_adeab92c27d6555029a30f5bcbba8bfab}{}\label{class_kinova_arm_adeab92c27d6555029a30f5bcbba8bfab}
 
-\begin{DoxyCompactList}\small\item\em The K\+DL joint array to hold the joint velocities. \end{DoxyCompactList}\item 
-int {\bfseries n\+Frames}\hypertarget{class_kinova_arm_a354341c4c6150a604c0029d3ecd00cb7}{}\label{class_kinova_arm_a354341c4c6150a604c0029d3ecd00cb7}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The K\+DL joint array to hold the joint velocities. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -59,7 +56,7 @@ An implementation of the \hyperlink{class_arm}{Arm} interface.
 
 This implementation is specifically for the K\+I\+N\+O\+VA arm in the H\+B\+RS robotics lab. 
 
-Definition at line 35 of file kinova\+\_\+arm.\+h.
+Definition at line 30 of file kinova\+\_\+arm.\+h.
 
 
 
@@ -107,7 +104,7 @@ An instance of \hyperlink{class_kinova_arm}{Kinova\+Arm} class
 \end{DoxyReturn}
 This is used to import the U\+R\+DF file 
 
-Definition at line 85 of file kinova\+\_\+arm.\+cpp.
+Definition at line 84 of file kinova\+\_\+arm.\+cpp.
 
 
 
@@ -126,24 +123,24 @@ The last joint pose
 \end{DoxyReturn}
 
 
-Implements \hyperlink{class_arm}{Arm}.
+Implements \hyperlink{class_arm_af89cd963a4321584dfb8f9715c02f5be}{Arm}.
 
 
 
-Definition at line 256 of file kinova\+\_\+arm.\+cpp.
+Definition at line 255 of file kinova\+\_\+arm.\+cpp.
 
 \index{Kinova\+Arm@{Kinova\+Arm}!get\+Pose@{get\+Pose}}
 \index{get\+Pose@{get\+Pose}!Kinova\+Arm@{Kinova\+Arm}}
-\subsubsection[{\texorpdfstring{get\+Pose(int joint\+Number)}{getPose(int jointNumber)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix4d Kinova\+Arm\+::get\+Pose (
+\subsubsection[{\texorpdfstring{get\+Pose(int frame\+Number)}{getPose(int frameNumber)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix4d Kinova\+Arm\+::get\+Pose (
 \begin{DoxyParamCaption}
-\item[{int}]{joint\+Number}
+\item[{int}]{frame\+Number}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_kinova_arm_a66f0535b3c926b692e05a97f82efd3b2}{}\label{class_kinova_arm_a66f0535b3c926b692e05a97f82efd3b2}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_kinova_arm_ae6b5c17c1b7b79bc3de00e8d38b80999}{}\label{class_kinova_arm_ae6b5c17c1b7b79bc3de00e8d38b80999}
 A function to find the joint pose of a given joint
 
 
 \begin{DoxyParams}{Parameters}
-{\em joint\+Number} & The joint number to solve for the pose of \\
+{\em frame\+Number} & The joint number to solve for the pose of \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -151,7 +148,7 @@ The last joint pose
 \end{DoxyReturn}
 
 
-Implements \hyperlink{class_arm}{Arm}.
+Implements \hyperlink{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}{Arm}.
 
 
 
@@ -176,7 +173,7 @@ A vector of joint velocities used to achieve the desired velocity
 \end{DoxyReturn}
 
 
-Definition at line 210 of file kinova\+\_\+arm.\+cpp.
+Definition at line 208 of file kinova\+\_\+arm.\+cpp.
 
 \index{Kinova\+Arm@{Kinova\+Arm}!update\+Pose@{update\+Pose}}
 \index{update\+Pose@{update\+Pose}!Kinova\+Arm@{Kinova\+Arm}}
@@ -197,15 +194,15 @@ The boolean true for a successful update, False otherwise
 \end{DoxyReturn}
 
 
-Reimplemented from \hyperlink{class_arm_abc38e64d0f6f3ea416626208baefa28d}{Arm}.
+Reimplemented from \hyperlink{class_arm_a9bfe3a3f230c8fa8a39f88cce2d6b597}{Arm}.
 
 
 
-Definition at line 167 of file kinova\+\_\+arm.\+cpp.
+Definition at line 165 of file kinova\+\_\+arm.\+cpp.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/include/kinova\+\_\+arm.\+h\item 
-/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/src/kinova\+\_\+arm.\+cpp\end{DoxyCompactItemize}
+include/kinova\+\_\+arm.\+h\item 
+src/kinova\+\_\+arm.\+cpp\end{DoxyCompactItemize}

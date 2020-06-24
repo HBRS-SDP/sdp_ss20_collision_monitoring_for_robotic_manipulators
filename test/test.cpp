@@ -310,14 +310,14 @@ TEST_CASE("Kinova_arm set position", "[arm]") {
     kinovaArm.updatePose(testPose);
     Eigen::Matrix4d link2Pose;
     Eigen::Matrix4d endLinkPose;
-    link2Pose << 0.43092, 0, 0.417668, -0.0026875,
-                   0.376225, 1, -0.276125, -0.00465583,
-                   -0.417668, 0, 0.43092, 0.28481,
+    link2Pose << 1, 0, 0.417668, -0.0026875,
+                 0, 1.15523,-0.276125, -0.00465583,
+                 0, 0, 0.865626, 0.28481,
                    0, 0, 0, 1;
-    endLinkPose << 0.565619, 0, 0.573497, 0.285814,
-                0.470212, 1, -0.620803, -0.251506,
-                -0.573497, 0, 0.565619, 0.763581,
-                0, 0, 0, 1;
+    endLinkPose <<  1, 0, 0.573497, 0.285814,
+                    0, 1.87086, -0.620803, -0.251506,
+                    0, 0, 0.534514, 0.763581,
+                    0, 0, 0, 1;
 
     REQUIRE( fabs((link2Pose - kinovaArm.links[2]->pose).norm()) < 0.1);
     REQUIRE( fabs((endLinkPose - kinovaArm.links[5]->pose).norm()) < 0.1);
@@ -325,8 +325,8 @@ TEST_CASE("Kinova_arm set position", "[arm]") {
 
 TEST_CASE("Kinova_arm test link positions", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
-    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
-                                    deg2rad(30), deg2rad(30), deg2rad(30)};
+    std::vector<double> testPose = {deg2rad(90), deg2rad(90), deg2rad(90), deg2rad(90),
+                                    deg2rad(90), deg2rad(90), deg2rad(90)};
     kinovaArm.updatePose(testPose);
 
     Eigen::Vector4d origin(0, 0, 0, 1);
@@ -347,8 +347,8 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
         Eigen::Vector3d endPointLine  = (pose * zDirectionObstacle).head(3);
 
         // compare using the two methods
-        REQUIRE( fabs((basePointLine - basePointLink).norm()) < 0.1);
-        REQUIRE( fabs((endPointLine - endPointLink).norm()) < 0.1);
+        REQUIRE( fabs((basePointLine - basePointLink).norm()) < 0.01);
+        REQUIRE( fabs((endPointLine - endPointLink).norm()) < 0.01);
     }
 }
 
@@ -364,17 +364,17 @@ TEST_CASE("Kinova_arm set position global move", "[arm]") {
     kinovaArm.updatePose(testPose);
     Eigen::Matrix4d link2Pose;
     Eigen::Matrix4d endLinkPose;
-    link2Pose << 0.43092, 0, 0.417668, -0.0026875,
-                   0.376225, 1, -0.276125, -0.00465583,
-                   -0.417668, 0, 0.43092, 0.28481,
-                   0, 0, 0, 1;
-    endLinkPose << 0.565619, 0, 0.573497, 0.285814,
-                0.470212, 1, -0.620803, -0.251506,
-                -0.573497, 0, 0.565619, 0.763581,
-                0, 0, 0, 1;
+    std::cout << "2:\n" << kinovaArm.links[2]->pose <<std::endl;
+    std::cout << "end:\n" <<kinovaArm.links[5]->pose <<std::endl;
+    link2Pose << 1,       0, 0.417668, 0.0973125,
+                 0, 1.15523,-0.276125,  0.195344,
+                 0,       0, 0.865626,   0.68481,
+                 0,       0,        0,         1;
 
-    link2Pose = basePosition * link2Pose;
-    endLinkPose = basePosition * endLinkPose;
+    endLinkPose <<  1,       0,  0.573497,   0.385814,
+                    0, 1.87086, -0.620803, -0.0515065,
+                    0,       0,  0.534514,    1.16358,
+                    0,       0,         0,          1;
 
     REQUIRE( fabs((link2Pose - kinovaArm.links[2]->pose).norm()) < 0.1);
     REQUIRE( fabs((endLinkPose - kinovaArm.links[5]->pose).norm()) < 0.1);
@@ -387,8 +387,8 @@ TEST_CASE("Kinova_arm test link positions global move", "[arm]") {
                     0, 0, 1, 0.4,
                     0, 0, 0, 1;
     KinovaArm kinovaArm(urdf_filename, basePosition);
-    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
-                                    deg2rad(30), deg2rad(30), deg2rad(30)};
+    std::vector<double> testPose = {deg2rad(90), deg2rad(90), deg2rad(90), deg2rad(90),
+                                    deg2rad(90), deg2rad(90), deg2rad(90)};
     kinovaArm.updatePose(testPose);
 
     Eigen::Vector4d origin(0, 0, 0, 1);

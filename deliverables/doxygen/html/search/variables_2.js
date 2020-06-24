@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pose',['pose',['../class_primitive.html#ad8b2afbad412f6046783d155c88fe312',1,'Primitive']]]
+  ['goal',['goal',['../class_arm_controller.html#a5246aa4a2072b1511d510717fc253f88',1,'ArmController']]]
 ];

@@ -20,11 +20,6 @@
 #include "arm.h"
 
 
-/*
-TODO:
-    - implement base position
-*/
-
 /**
  * An implementation of the Arm interface.
  * 
@@ -83,18 +78,15 @@ class KinovaArm: public Arm
         /**
          * A function to find the joint pose of a given joint
          * 
-         * @param jointNumber The joint number to solve for the pose of
+         * @param frameNumber The joint number to solve for the pose of
          * @return The last joint pose
          */
-        Eigen::Matrix4d  getPose(int jointNumber);
+        Eigen::Matrix4d  getPose(int frameNumber);
 
         /// The KDL joint array to hold the joint angles
         KDL::JntArray jointArray;
         /// The KDL joint array to hold the joint velocities
         KDL::JntArray jointVels;
-
-        int nFrames;
-        
 
 
 

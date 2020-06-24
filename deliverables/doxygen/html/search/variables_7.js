@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['length',['length',['../class_capsule.html#af62f20ecfc37b4c8ae88dd505ca1f196',1,'Capsule']]],
-  ['links',['links',['../class_arm.html#a427fb95641bb8d0886b2849f0bda36be',1,'Arm']]]
+  ['nframes',['nFrames',['../class_arm.html#ac7955a5e8e9c6681b55d0d80d7e31df7',1,'Arm']]],
+  ['njoints',['nJoints',['../class_arm.html#ac3734a2ca38b0312fd42894ab6886bc9',1,'Arm']]],
+  ['nlinks',['nLinks',['../class_arm.html#a911ba9a8c719c090a305f88ab0ae7490',1,'Arm']]]
 ];

@@ -113,6 +113,8 @@ $(document).ready(function(){initNavTree('class_arm.html','');});
 <div class="title">Arm Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="arm_8h_source.html">arm.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Arm:</div>
 <div class="dyncontent">
@@ -124,36 +126,47 @@ Inheritance diagram for Arm:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abc38e64d0f6f3ea416626208baefa28d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#abc38e64d0f6f3ea416626208baefa28d">updatePose</a> (std::vector&lt; double &gt;)</td></tr>
-<tr class="separator:abc38e64d0f6f3ea416626208baefa28d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bfe3a3f230c8fa8a39f88cce2d6b597"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#a9bfe3a3f230c8fa8a39f88cce2d6b597">updatePose</a> (std::vector&lt; double &gt; jointPositions)</td></tr>
+<tr class="separator:a9bfe3a3f230c8fa8a39f88cce2d6b597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af89cd963a4321584dfb8f9715c02f5be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af89cd963a4321584dfb8f9715c02f5be"></a>
-virtual Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><b>getPose</b> (void)=0</td></tr>
+virtual Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#af89cd963a4321584dfb8f9715c02f5be">getPose</a> (void)=0</td></tr>
+<tr class="memdesc:af89cd963a4321584dfb8f9715c02f5be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to get the endeffector frame of the manipulator. <br /></td></tr>
 <tr class="separator:af89cd963a4321584dfb8f9715c02f5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05162e055412fc6dc69ce74884f9fa6f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05162e055412fc6dc69ce74884f9fa6f"></a>
-virtual Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><b>getPose</b> (int jointNumber)=0</td></tr>
-<tr class="separator:a05162e055412fc6dc69ce74884f9fa6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a994d35ca0dae04725fe0921c4f7d7e38"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a994d35ca0dae04725fe0921c4f7d7e38"></a>
+virtual Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#a994d35ca0dae04725fe0921c4f7d7e38">getPose</a> (int frameNumber)=0</td></tr>
+<tr class="memdesc:a994d35ca0dae04725fe0921c4f7d7e38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to get the frame. <br /></td></tr>
+<tr class="separator:a994d35ca0dae04725fe0921c4f7d7e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ab568839905191e1e5abb83119a4a445d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab568839905191e1e5abb83119a4a445d"></a>
-Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><b>baseTransform</b></td></tr>
+Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#ab568839905191e1e5abb83119a4a445d">baseTransform</a></td></tr>
+<tr class="memdesc:ab568839905191e1e5abb83119a4a445d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The homogeneous transformation from the world to arm base frame. <br /></td></tr>
 <tr class="separator:ab568839905191e1e5abb83119a4a445d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a427fb95641bb8d0886b2849f0bda36be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a427fb95641bb8d0886b2849f0bda36be"></a>
-std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>links</b></td></tr>
+std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#a427fb95641bb8d0886b2849f0bda36be">links</a></td></tr>
+<tr class="memdesc:a427fb95641bb8d0886b2849f0bda36be"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of link primitives that represent the manipulator. <br /></td></tr>
 <tr class="separator:a427fb95641bb8d0886b2849f0bda36be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a911ba9a8c719c090a305f88ab0ae7490"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a911ba9a8c719c090a305f88ab0ae7490"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#a911ba9a8c719c090a305f88ab0ae7490">nLinks</a></td></tr>
-<tr class="memdesc:a911ba9a8c719c090a305f88ab0ae7490"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of joints in the chain. <br /></td></tr>
+<tr class="memdesc:a911ba9a8c719c090a305f88ab0ae7490"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of links in the chain. <br /></td></tr>
 <tr class="separator:a911ba9a8c719c090a305f88ab0ae7490"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3734a2ca38b0312fd42894ab6886bc9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3734a2ca38b0312fd42894ab6886bc9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nJoints</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#ac3734a2ca38b0312fd42894ab6886bc9">nJoints</a></td></tr>
+<tr class="memdesc:ac3734a2ca38b0312fd42894ab6886bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of joints in the chain. <br /></td></tr>
 <tr class="separator:ac3734a2ca38b0312fd42894ab6886bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7955a5e8e9c6681b55d0d80d7e31df7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7955a5e8e9c6681b55d0d80d7e31df7"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#ac7955a5e8e9c6681b55d0d80d7e31df7">nFrames</a></td></tr>
+<tr class="memdesc:ac7955a5e8e9c6681b55d0d80d7e31df7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of frames in the arm. <br /></td></tr>
+<tr class="separator:ac7955a5e8e9c6681b55d0d80d7e31df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="arm_8h_source.html#l00011">11</a> of file <a class="el" href="arm_8h_source.html">arm.h</a>.</p>
+<div class="textblock"><p>A pure virtual class that represents a robotic manipulator</p>
+<p>This class is an interface class and so the developer is to implement this class to suit the type of robotic manipulator used </p>
+
+<p>Definition at line <a class="el" href="arm_8h_source.html#l00016">16</a> of file <a class="el" href="arm_8h_source.html">arm.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="abc38e64d0f6f3ea416626208baefa28d"></a>
+<a class="anchor" id="a9bfe3a3f230c8fa8a39f88cce2d6b597"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -164,7 +177,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nJoints</b></td></tr>
           <td class="memname">bool Arm::updatePose </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; double &gt;&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>jointPositions</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

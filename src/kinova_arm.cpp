@@ -54,7 +54,6 @@ KinovaArm::KinovaArm(std::string urdf_filename){
         fksolver.JntToCart(jointArray, *localPoses[frameNum], frameNum);
     }
 
-    // TODO convert to config file
     // pass in the parameters for the link cylinder models
     radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
     lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593, 0.10593, 0.061525});
@@ -129,7 +128,6 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
         fksolver.JntToCart(jointArray, *localPoses[frameNum], frameNum);
     }
 
-    // TODO convert to config file
     // pass in the parameters for the link cylinder models
     radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
     lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593, 0.10593, 0.061525});
@@ -211,11 +209,11 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
 
     // vector to store output values
     std::vector<double> jointVelocitiesOut;
-    // std::cout << "Twist: " << twist << std::endl;
-    // std::cout << typeid(twist.vel.data[0]).name()<<std::endl;
 
     // inverse kinemetics solver
     KDL::ChainIkSolverVel_wdls ikSolver = KDL::ChainIkSolverVel_wdls(fkChain);
+
+    // Set the weights for singularity handling
     Eigen::MatrixXd weight_ts;
     weight_ts.resize(6, 6);
     weight_ts.setIdentity();
@@ -230,11 +228,11 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
     //solver for joint velocities
     ikSolver.CartToJnt(jointArray, twist, jointVels);
 
-    // std::cout << "ik joint vels, joint angles:" <<std::endl; 
     // push velocities onto the vector
     for (int i=0; i<jointVels.rows(); i++){
-        // std::cout <<  jointVels(i) << ", "<< jointArray(i) <<std::endl;
         double velocity;
+
+        // Keep the max velocity to the limit
         if(jointVels(i) > MAX_JOINT_VEL) {
             velocity = MAX_JOINT_VEL;
         }
@@ -245,6 +243,7 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
             velocity = jointVels(i);
         }
 
+        // Add the joint angles to the list
         jointVelocitiesOut.push_back(velocity);
     }
 
@@ -255,20 +254,21 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
 
 Eigen::Matrix4d KinovaArm::getPose(void)
 {
+    // Get the final pose from the list
     return frameToMatrix(*localPoses.back());
 }
 
-Eigen::Matrix4d KinovaArm::getPose(int jointNumber)
+Eigen::Matrix4d KinovaArm::getPose(int frameNumber)
 {
     // input sanitization
-    if(jointNumber >= localPoses.size() | jointNumber < 0){
+    if(frameNumber >= localPoses.size() | frameNumber < 0){
         std::cout << "Access joint number larger than array in getPose.\n"<<
                      "Returning endeffector Pose"<<std::endl;
         return frameToMatrix(*localPoses.back());
     }
 
     // return joint pose
-    return frameToMatrix(*localPoses[jointNumber]);
+    return frameToMatrix(*localPoses[frameNumber]);
 }
 
 
@@ -308,25 +308,16 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
     if(fabs((basePoint - endPoint).norm()) > 0.0001) {
         // Get the vector representing the line from the start to end point
         Eigen::Vector3d midLine = (endPoint - basePoint).head(3);
+        midLine = midLine.normalized();
         // Get the vector that is prependicular to the midline and z vector
-        Eigen::Vector3d v = directionVect.cross(midLine/midLine.norm());
         // matrix to store the rotaion matrix
         Eigen::Matrix3d r = i3;
         // Check to see if the midline is only in the z direction
         
-        if(!v.isZero()) {
-            // Build the rotation vector
-            double c = directionVect.dot(midLine);
-            double s = v.norm();
-            Eigen::Matrix3d k;
-            k << 0, -v(2), v(1),
-                v(2), 0, -v(0),
-                -v(1), v(2), 0;
-            r = i3 + k + (k*k)*((1-c)/(s*s));
-        }
-        else {
-            // no rotation required, return identity matrix
-            r = i3;
+        if(midLine(2) != 0) {
+            r << 1, 0,            midLine(0),
+                 0, 1/midLine(2), midLine(1),
+                 0, 0,            midLine(2);
         }
 
         // Construct the final matrix based off the start point and rotation Mat

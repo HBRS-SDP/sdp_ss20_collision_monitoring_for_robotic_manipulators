@@ -16,36 +16,34 @@ Collaboration diagram for Monitor\+:\nopagebreak
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ std\+::vector$<$ double $>$ $>$ \hyperlink{class_monitor_a1801675787693435342ae799975b1120}{distance\+To\+Objects} ()
+std\+::vector$<$ std\+::vector$<$ double $>$ $>$ \hyperlink{class_monitor_afefe8eeab13fd3f8f3c59ae53d25a00e}{distance\+To\+Objects} (void)
 \item 
 std\+::vector$<$ std\+::vector$<$ double $>$ $>$ \hyperlink{class_monitor_afe72152adc0d2d2faf8fb01563417033}{distance\+Between\+Arm\+Links} ()
 \item 
 void \hyperlink{class_monitor_a8c448bcff703af93489cc4f0847d4245}{add\+Obstacle} (\hyperlink{class_primitive}{Primitive} $\ast$obstacle)
 \item 
-void {\bfseries add\+Obstacle} (\hyperlink{class_sphere}{Sphere} $\ast$obstacle)\hypertarget{class_monitor_af5979d8f05c2d945ddc055e329fad5d2}{}\label{class_monitor_af5979d8f05c2d945ddc055e329fad5d2}
-
+void \hyperlink{class_monitor_af5979d8f05c2d945ddc055e329fad5d2}{add\+Obstacle} (\hyperlink{class_sphere}{Sphere} $\ast$obstacle)
 \item 
-void {\bfseries add\+Obstacle} (\hyperlink{class_capsule}{Capsule} $\ast$obstacle)\hypertarget{class_monitor_a192497730489ebcd6a6580875cfbeee3}{}\label{class_monitor_a192497730489ebcd6a6580875cfbeee3}
-
+void \hyperlink{class_monitor_a192497730489ebcd6a6580875cfbeee3}{add\+Obstacle} (\hyperlink{class_capsule}{Capsule} $\ast$obstacle)
 \item 
-void \hyperlink{class_monitor_a580dedf3090ffff7a452dbe32cc585f4}{add\+Obstacle} (\hyperlink{class_arm}{Arm} $\ast$arm)
+void \hyperlink{class_monitor_a580dedf3090ffff7a452dbe32cc585f4}{add\+Obstacle} (\hyperlink{class_arm}{Arm} $\ast$\hyperlink{class_monitor_a8b75571f6224f999a3dc05cf9a83fa68}{arm})
 \item 
-\hyperlink{class_monitor_adda7d547e1226e159836356dd8af14bb}{Monitor} (\hyperlink{class_arm}{Arm} $\ast$arm)
+\hyperlink{class_monitor_adda7d547e1226e159836356dd8af14bb}{Monitor} (\hyperlink{class_arm}{Arm} $\ast$\hyperlink{class_monitor_a8b75571f6224f999a3dc05cf9a83fa68}{arm})
 \item 
 \hyperlink{class_monitor_a64aba8195effc068092ddea5a71e8176}{$\sim$\+Monitor} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_arm}{Arm} $\ast$ {\bfseries arm}\hypertarget{class_monitor_a8b75571f6224f999a3dc05cf9a83fa68}{}\label{class_monitor_a8b75571f6224f999a3dc05cf9a83fa68}
+\hyperlink{class_arm}{Arm} $\ast$ \hyperlink{class_monitor_a8b75571f6224f999a3dc05cf9a83fa68}{arm}\hypertarget{class_monitor_a8b75571f6224f999a3dc05cf9a83fa68}{}\label{class_monitor_a8b75571f6224f999a3dc05cf9a83fa68}
 
-\item 
-std\+::vector$<$ \hyperlink{class_primitive}{Primitive} $\ast$ $>$ {\bfseries obstacles}\hypertarget{class_monitor_a05fd42482269ad65432d5400c8f0f9b5}{}\label{class_monitor_a05fd42482269ad65432d5400c8f0f9b5}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_arm}{Arm} for the monitor. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{class_primitive}{Primitive} $\ast$ $>$ \hyperlink{class_monitor_a05fd42482269ad65432d5400c8f0f9b5}{obstacles}\hypertarget{class_monitor_a05fd42482269ad65432d5400c8f0f9b5}{}\label{class_monitor_a05fd42482269ad65432d5400c8f0f9b5}
 
-\item 
-std\+::vector$<$ \hyperlink{class_primitive}{Primitive} $\ast$ $>$ {\bfseries obstacles\+To\+Delete}\hypertarget{class_monitor_a2207169c2b32b3bbf9925f3254064dee}{}\label{class_monitor_a2207169c2b32b3bbf9925f3254064dee}
+\begin{DoxyCompactList}\small\item\em Obstacles in the workspace. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{class_primitive}{Primitive} $\ast$ $>$ \hyperlink{class_monitor_a2207169c2b32b3bbf9925f3254064dee}{obstacles\+To\+Delete}\hypertarget{class_monitor_a2207169c2b32b3bbf9925f3254064dee}{}\label{class_monitor_a2207169c2b32b3bbf9925f3254064dee}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Obstacles to delete in destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -112,6 +110,42 @@ Definition at line 23 of file monitor.\+cpp.
 
 \index{Monitor@{Monitor}!add\+Obstacle@{add\+Obstacle}}
 \index{add\+Obstacle@{add\+Obstacle}!Monitor@{Monitor}}
+\subsubsection[{\texorpdfstring{add\+Obstacle(\+Sphere $\ast$obstacle)}{addObstacle(Sphere *obstacle)}}]{\setlength{\rightskip}{0pt plus 5cm}void Monitor\+::add\+Obstacle (
+\begin{DoxyParamCaption}
+\item[{{\bf Sphere} $\ast$}]{obstacle}
+\end{DoxyParamCaption}
+)}\hypertarget{class_monitor_af5979d8f05c2d945ddc055e329fad5d2}{}\label{class_monitor_af5979d8f05c2d945ddc055e329fad5d2}
+Adds primitive to list of obstacles
+
+Adds a primitive to the list of obstacles. 
+\begin{DoxyParams}{Parameters}
+{\em obstacle} & address of the obstacle to be added. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 39 of file monitor.\+cpp.
+
+\index{Monitor@{Monitor}!add\+Obstacle@{add\+Obstacle}}
+\index{add\+Obstacle@{add\+Obstacle}!Monitor@{Monitor}}
+\subsubsection[{\texorpdfstring{add\+Obstacle(\+Capsule $\ast$obstacle)}{addObstacle(Capsule *obstacle)}}]{\setlength{\rightskip}{0pt plus 5cm}void Monitor\+::add\+Obstacle (
+\begin{DoxyParamCaption}
+\item[{{\bf Capsule} $\ast$}]{obstacle}
+\end{DoxyParamCaption}
+)}\hypertarget{class_monitor_a192497730489ebcd6a6580875cfbeee3}{}\label{class_monitor_a192497730489ebcd6a6580875cfbeee3}
+Adds primitive to list of obstacles
+
+Adds a primitive to the list of obstacles. 
+\begin{DoxyParams}{Parameters}
+{\em obstacle} & address of the obstacle to be added. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file monitor.\+cpp.
+
+\index{Monitor@{Monitor}!add\+Obstacle@{add\+Obstacle}}
+\index{add\+Obstacle@{add\+Obstacle}!Monitor@{Monitor}}
 \subsubsection[{\texorpdfstring{add\+Obstacle(\+Arm $\ast$arm)}{addObstacle(Arm *arm)}}]{\setlength{\rightskip}{0pt plus 5cm}void Monitor\+::add\+Obstacle (
 \begin{DoxyParamCaption}
 \item[{{\bf Arm} $\ast$}]{arm}
@@ -150,11 +184,11 @@ Definition at line 108 of file monitor.\+cpp.
 
 \index{Monitor@{Monitor}!distance\+To\+Objects@{distance\+To\+Objects}}
 \index{distance\+To\+Objects@{distance\+To\+Objects}!Monitor@{Monitor}}
-\subsubsection[{\texorpdfstring{distance\+To\+Objects()}{distanceToObjects()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::vector$<$ double $>$ $>$ Monitor\+::distance\+To\+Objects (
+\subsubsection[{\texorpdfstring{distance\+To\+Objects(void)}{distanceToObjects(void)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::vector$<$ double $>$ $>$ Monitor\+::distance\+To\+Objects (
 \begin{DoxyParamCaption}
-{}
+\item[{void}]{}
 \end{DoxyParamCaption}
-)}\hypertarget{class_monitor_a1801675787693435342ae799975b1120}{}\label{class_monitor_a1801675787693435342ae799975b1120}
+)}\hypertarget{class_monitor_afefe8eeab13fd3f8f3c59ae53d25a00e}{}\label{class_monitor_afefe8eeab13fd3f8f3c59ae53d25a00e}
 Collision monitoring with obstacles.
 
 This methods monitors the distance from one link of the arm to obstacles in the workspace.

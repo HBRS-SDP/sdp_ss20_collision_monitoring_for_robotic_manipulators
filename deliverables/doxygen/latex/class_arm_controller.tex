@@ -2,6 +2,10 @@
 \label{class_arm_controller}\index{Arm\+Controller@{Arm\+Controller}}
 
 
+{\ttfamily \#include $<$arm\+\_\+controller.\+h$>$}
+
+
+
 Collaboration diagram for Arm\+Controller\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -23,29 +27,30 @@ void \hyperlink{class_arm_controller_acbd85ddee96c8d6fd76728c68fb12d3c}{goal\+Ca
 \item 
 K\+D\+L\+::\+Twist \hyperlink{class_arm_controller_ad7e00a70c968a23087415b1bd0ac8bf1}{control\+Loop} (void)
 \item 
-Eigen\+::\+Vector3d {\bfseries obstacle\+Potential\+Field} (Eigen\+::\+Vector3d current\+Position, Eigen\+::\+Vector3d velocity)\hypertarget{class_arm_controller_ad0b1f28333e2a3be76258153a745803d}{}\label{class_arm_controller_ad0b1f28333e2a3be76258153a745803d}
-
+Eigen\+::\+Vector3d \hyperlink{class_arm_controller_ad0b1f28333e2a3be76258153a745803d}{obstacle\+Potential\+Field} (Eigen\+::\+Vector3d current\+Position, Eigen\+::\+Vector3d velocity)
 \item 
 void \hyperlink{class_arm_controller_a17d05bd19286dc4e04355e3d4f6bb372}{update\+Obstacles} (const visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr \&msg)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_monitor}{Monitor} $\ast$ {\bfseries monitor}\hypertarget{class_arm_controller_a939747279bba6db315f80092a74c2629}{}\label{class_arm_controller_a939747279bba6db315f80092a74c2629}
+\hyperlink{class_monitor}{Monitor} $\ast$ \hyperlink{class_arm_controller_a939747279bba6db315f80092a74c2629}{monitor}\hypertarget{class_arm_controller_a939747279bba6db315f80092a74c2629}{}\label{class_arm_controller_a939747279bba6db315f80092a74c2629}
 
-\item 
-Eigen\+::\+Vector3d {\bfseries goal}\hypertarget{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}{}\label{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}
+\begin{DoxyCompactList}\small\item\em The monitor class used to perform collision monitoring. \end{DoxyCompactList}\item 
+Eigen\+::\+Vector3d \hyperlink{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}{goal}\hypertarget{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}{}\label{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}
 
-\item 
-std\+::vector$<$ \hyperlink{class_rviz_obstacle}{Rviz\+Obstacle} $\ast$ $>$ {\bfseries rviz\+Obstacles}\hypertarget{class_arm_controller_ab94a1abce40096f6476404d49d00860f}{}\label{class_arm_controller_ab94a1abce40096f6476404d49d00860f}
+\begin{DoxyCompactList}\small\item\em The goal point of the endeffector. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{class_rviz_obstacle}{Rviz\+Obstacle} $\ast$ $>$ \hyperlink{class_arm_controller_ab94a1abce40096f6476404d49d00860f}{rviz\+Obstacles}\hypertarget{class_arm_controller_ab94a1abce40096f6476404d49d00860f}{}\label{class_arm_controller_ab94a1abce40096f6476404d49d00860f}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A list of obstacles that are displayed in rviz. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
+\hyperlink{class_arm}{Arm} controller class to demonstate the use of the Collision monitoring library.
 
+The class uses the monitor class from the custom library to control a 7\+D\+OF kinova arm implementing the paper\+: \mbox{[}1\mbox{]}H. Hoffmann, P. Pastor, D.-\/H. Park, and S. Schaal, “\+Biologically-\/inspired dynamical systems for movement generation\+: Automatic real-\/time goal adaptation and obstacle avoidance,” in 2009 I\+E\+EE International Conference on Robotics and Automation, Kobe, May 2009, pp. 2587–2592, doi\+: 10.\+1109/\+R\+O\+B\+OT.2009.\+5152423. 
 
-Definition at line 41 of file arm\+\_\+controller.\+h.
+Definition at line 83 of file arm\+\_\+controller.\+h.
 
 
 
@@ -66,6 +71,14 @@ Definition at line 41 of file arm\+\_\+controller.\+h.
 
 \begin{DoxyParams}{Parameters}
 {\em monitor\+Object} & The monitor instance used to get the distance from the arm to any obstacles \\
+\hline
+{\em k} & Costant for the obstacle avoidance algorithim \\
+\hline
+{\em d} & Costant for the obstacle avoidance algorithim \\
+\hline
+{\em gamma} & Costant for the obstacle avoidance algorithim \\
+\hline
+{\em beta} & Costant for the obstacle avoidance algorithim \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -94,7 +107,7 @@ Callback function updating the arm positions
 \end{DoxyParams}
 
 
-Definition at line 46 of file arm\+\_\+controller.\+cpp.
+Definition at line 52 of file arm\+\_\+controller.\+cpp.
 
 \index{Arm\+Controller@{Arm\+Controller}!control\+Loop@{control\+Loop}}
 \index{control\+Loop@{control\+Loop}!Arm\+Controller@{Arm\+Controller}}
@@ -103,9 +116,11 @@ Definition at line 46 of file arm\+\_\+controller.\+cpp.
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\hypertarget{class_arm_controller_ad7e00a70c968a23087415b1bd0ac8bf1}{}\label{class_arm_controller_ad7e00a70c968a23087415b1bd0ac8bf1}
-Function that uses internal parameters to send instructions to arm 
+Function that uses internal parameters to send instructions to arm
 
-Definition at line 163 of file arm\+\_\+controller.\+cpp.
+This is where the obstacle avoidance is implemented and is based off of the paper\+: 
+
+Definition at line 180 of file arm\+\_\+controller.\+cpp.
 
 \index{Arm\+Controller@{Arm\+Controller}!goal\+Callback@{goal\+Callback}}
 \index{goal\+Callback@{goal\+Callback}!Arm\+Controller@{Arm\+Controller}}
@@ -123,7 +138,31 @@ Callback function updating goal position of the arms endeffector
 \end{DoxyParams}
 
 
-Definition at line 51 of file arm\+\_\+controller.\+cpp.
+Definition at line 59 of file arm\+\_\+controller.\+cpp.
+
+\index{Arm\+Controller@{Arm\+Controller}!obstacle\+Potential\+Field@{obstacle\+Potential\+Field}}
+\index{obstacle\+Potential\+Field@{obstacle\+Potential\+Field}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{obstacle\+Potential\+Field(\+Eigen\+::\+Vector3d current\+Position, Eigen\+::\+Vector3d velocity)}{obstaclePotentialField(Eigen::Vector3d currentPosition, Eigen::Vector3d velocity)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Arm\+Controller\+::obstacle\+Potential\+Field (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d}]{current\+Position, }
+\item[{Eigen\+::\+Vector3d}]{velocity}
+\end{DoxyParamCaption}
+)}\hypertarget{class_arm_controller_ad0b1f28333e2a3be76258153a745803d}{}\label{class_arm_controller_ad0b1f28333e2a3be76258153a745803d}
+Creates the obstacle potential feild value used in the control loop \mbox{[}1\mbox{]}
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Position} & The current position of the endeffector \\
+\hline
+{\em velocity} & The current velocity of the endeffector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The potential feild vector produced from the obstacles 
+\end{DoxyReturn}
+
+
+Definition at line 77 of file arm\+\_\+controller.\+cpp.
 
 \index{Arm\+Controller@{Arm\+Controller}!update\+Obstacles@{update\+Obstacles}}
 \index{update\+Obstacles@{update\+Obstacles}!Arm\+Controller@{Arm\+Controller}}
@@ -132,13 +171,20 @@ Definition at line 51 of file arm\+\_\+controller.\+cpp.
 \item[{const visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr \&}]{msg}
 \end{DoxyParamCaption}
 )}\hypertarget{class_arm_controller_a17d05bd19286dc4e04355e3d4f6bb372}{}\label{class_arm_controller_a17d05bd19286dc4e04355e3d4f6bb372}
-A function that updates the obstacle poses or adds one if it doesn\textquotesingle{}t exist 
+A callback function that updates or adds obstacles
 
-Definition at line 227 of file arm\+\_\+controller.\+cpp.
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & the ros marker message with the object parameters \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 243 of file arm\+\_\+controller.\+cpp.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/include/arm\+\_\+controller.\+h\item 
-/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/src/arm\+\_\+controller.\+cpp\end{DoxyCompactItemize}
+include/arm\+\_\+controller.\+h\item 
+src/arm\+\_\+controller.\+cpp\end{DoxyCompactItemize}
