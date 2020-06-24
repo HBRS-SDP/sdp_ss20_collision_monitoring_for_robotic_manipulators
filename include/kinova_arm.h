@@ -81,15 +81,12 @@ class KinovaArm: public Arm
          * @param jointNumber The joint number to solve for the pose of
          * @return The last joint pose
          */
-        Eigen::Matrix4d  getPose(int jointNumber);
+        Eigen::Matrix4d  getPose(int frameNumber);
 
         /// The KDL joint array to hold the joint angles
         KDL::JntArray jointArray;
         /// The KDL joint array to hold the joint velocities
         KDL::JntArray jointVels;
-
-        int nFrames;
-        
 
 
 

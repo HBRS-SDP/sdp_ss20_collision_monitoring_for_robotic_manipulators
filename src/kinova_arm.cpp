@@ -258,17 +258,17 @@ Eigen::Matrix4d KinovaArm::getPose(void)
     return frameToMatrix(*localPoses.back());
 }
 
-Eigen::Matrix4d KinovaArm::getPose(int jointNumber)
+Eigen::Matrix4d KinovaArm::getPose(int frameNumber)
 {
     // input sanitization
-    if(jointNumber >= localPoses.size() | jointNumber < 0){
+    if(frameNumber >= localPoses.size() | frameNumber < 0){
         std::cout << "Access joint number larger than array in getPose.\n"<<
                      "Returning endeffector Pose"<<std::endl;
         return frameToMatrix(*localPoses.back());
     }
 
     // return joint pose
-    return frameToMatrix(*localPoses[jointNumber]);
+    return frameToMatrix(*localPoses[frameNumber]);
 }
 
 
