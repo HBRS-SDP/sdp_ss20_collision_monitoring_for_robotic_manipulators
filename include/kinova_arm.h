@@ -94,6 +94,11 @@ class KinovaArm: public Arm
         KDL::JntArray jointVels;
 
 
+        int nJoints;
+        int nFrames;
+        
+
+
 
     private:
 
