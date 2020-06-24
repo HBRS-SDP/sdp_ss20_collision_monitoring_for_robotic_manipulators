@@ -1,0 +1,62 @@
+.TH "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/src/dual_kinova_CM_node.cpp" 3 "Wed Jun 24 2020" "Collision monitoring for robotic manipulators" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/src/dual_kinova_CM_node.cpp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cmath>\fP
+.br
+\fC#include <cstdlib>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <kdl/chain\&.hpp>\fP
+.br
+\fC#include <ros/ros\&.h>\fP
+.br
+\fC#include <tf2_ros/static_transform_broadcaster\&.h>\fP
+.br
+\fC#include <geometry_msgs/TransformStamped\&.h>\fP
+.br
+\fC#include <cstdio>\fP
+.br
+\fC#include <tf2/LinearMath/Quaternion\&.h>\fP
+.br
+\fC#include 'std_msgs/Float64\&.h'\fP
+.br
+\fC#include 'sensor_msgs/JointState\&.h'\fP
+.br
+\fC#include 'visualization_msgs/Marker\&.h'\fP
+.br
+\fC#include 'primitives\&.h'\fP
+.br
+\fC#include 'arm_controller\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "geometry_msgs::TransformStamped \fBgenerateTF\fP (Eigen::Matrix4d baseTransform, std::string base_name)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "geometry_msgs::TransformStamped generateTF (Eigen::Matrix4d baseTransform, std::string base_name)"
+
+.PP
+Definition at line 19 of file dual_kinova_CM_node\&.cpp\&.
+.SS "int main (int argc, char ** argv)"
+
+.PP
+Definition at line 42 of file dual_kinova_CM_node\&.cpp\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Collision monitoring for robotic manipulators from the source code\&.

@@ -19,7 +19,9 @@ This library is an implementation of the following papers:
 
 ## Building
 In the root folder create a build folder:
-``` ...\sdp_ss20_collision_monitoring_for_robotic_manipulators> mkdir build```
+```
+...\sdp_ss20_collision_monitoring_for_robotic_manipulators> mkdir build
+```
 CD into the build folder and run cmake for the first time to configure the build environment:
 ```
     ...\sdp_ss20_collision_monitoring_for_robotic_manipulators$ cd build

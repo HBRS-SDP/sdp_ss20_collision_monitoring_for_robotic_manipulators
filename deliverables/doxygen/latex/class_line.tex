@@ -1,0 +1,189 @@
+\hypertarget{class_line}{}\section{Line Class Reference}
+\label{class_line}\index{Line@{Line}}
+
+
+{\ttfamily \#include $<$primitives.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_line_acb2738366446296860a14644c11a93cd}{Line} (Eigen\+::\+Vector3d base\+Point, Eigen\+::\+Vector3d end\+Point)
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_line_a649b65b3ddb9702ad3800a76ad8ca274}{get\+Base\+Point} ()
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_line_a227b3d61216a37b32b856a56be6761a7}{get\+End\+Point} ()
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_line_a920e0d93c96f3fcf85acb301d920063e}{get\+Closest\+Point\+To\+Point} (Eigen\+::\+Vector3d point)
+\item 
+void \hyperlink{class_line_a61228b3629e0f8b204c60a6d337bb546}{get\+Closest\+Points\+Between\+Lines} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_line}{Line} line)
+\item 
+double \hyperlink{class_line_af874e592b4b8a7db37b0a6d8feb5cf3f}{get\+Shortest\+Distance\+To\+Point} (Eigen\+::\+Vector3d point)
+\item 
+double \hyperlink{class_line_a4097eed5d653a46fe18b760c67a53a37}{get\+Shortest\+Distance\+To\+Line} (\hyperlink{class_line}{Line} line)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to help calculate the closest distance between primitives.
+
+This class describes a line using two points (represented as Eigen\textquotesingle{}s Vector3D) 
+
+Definition at line 116 of file primitives.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Line@{Line}!Line@{Line}}
+\index{Line@{Line}!Line@{Line}}
+\subsubsection[{\texorpdfstring{Line(\+Eigen\+::\+Vector3d base\+Point, Eigen\+::\+Vector3d end\+Point)}{Line(Eigen::Vector3d basePoint, Eigen::Vector3d endPoint)}}]{\setlength{\rightskip}{0pt plus 5cm}Line\+::\+Line (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d}]{base\+Point, }
+\item[{Eigen\+::\+Vector3d}]{end\+Point}
+\end{DoxyParamCaption}
+)}\hypertarget{class_line_acb2738366446296860a14644c11a93cd}{}\label{class_line_acb2738366446296860a14644c11a93cd}
+Constructor of the \hyperlink{class_line}{Line} class
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Point} & start point of the line represented with a Vector3d. \\
+\hline
+{\em end\+Point} & end point of the line represented with a Vector3d. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 6 of file primitives.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Line@{Line}!get\+Base\+Point@{get\+Base\+Point}}
+\index{get\+Base\+Point@{get\+Base\+Point}!Line@{Line}}
+\subsubsection[{\texorpdfstring{get\+Base\+Point()}{getBasePoint()}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Line\+::get\+Base\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_line_a649b65b3ddb9702ad3800a76ad8ca274}{}\label{class_line_a649b65b3ddb9702ad3800a76ad8ca274}
+Getter of the base point
+
+\begin{DoxyReturn}{Returns}
+A vector3d object with the base point. 
+\end{DoxyReturn}
+
+
+Definition at line 15 of file primitives.\+cpp.
+
+\index{Line@{Line}!get\+Closest\+Points\+Between\+Lines@{get\+Closest\+Points\+Between\+Lines}}
+\index{get\+Closest\+Points\+Between\+Lines@{get\+Closest\+Points\+Between\+Lines}!Line@{Line}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points\+Between\+Lines(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Line line)}{getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line line)}}]{\setlength{\rightskip}{0pt plus 5cm}void Line\+::get\+Closest\+Points\+Between\+Lines (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Line}}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{class_line_a61228b3629e0f8b204c60a6d337bb546}{}\label{class_line_a61228b3629e0f8b204c60a6d337bb546}
+Finds the closest points on this \hyperlink{class_line}{Line} and on another \hyperlink{class_line}{Line}
+
+This method takes a point and returns the closest point on this \hyperlink{class_line}{Line} and the given line. returns a Vector3d.
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & a line represented with a Vector3d\textbackslash{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closests points on this line and on line 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file primitives.\+cpp.
+
+\index{Line@{Line}!get\+Closest\+Point\+To\+Point@{get\+Closest\+Point\+To\+Point}}
+\index{get\+Closest\+Point\+To\+Point@{get\+Closest\+Point\+To\+Point}!Line@{Line}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Point\+To\+Point(\+Eigen\+::\+Vector3d point)}{getClosestPointToPoint(Eigen::Vector3d point)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Line\+::get\+Closest\+Point\+To\+Point (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d}]{point}
+\end{DoxyParamCaption}
+)}\hypertarget{class_line_a920e0d93c96f3fcf85acb301d920063e}{}\label{class_line_a920e0d93c96f3fcf85acb301d920063e}
+Finds the closest point on this \hyperlink{class_line}{Line} to a point
+
+This method takes a point and returns the closest point on this \hyperlink{class_line}{Line} and the given point. returns a Vector3d.
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & a point space represented with a Vector3d\textbackslash{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest point on this \hyperlink{class_line}{Line} to point 
+\end{DoxyReturn}
+
+
+Definition at line 35 of file primitives.\+cpp.
+
+\index{Line@{Line}!get\+End\+Point@{get\+End\+Point}}
+\index{get\+End\+Point@{get\+End\+Point}!Line@{Line}}
+\subsubsection[{\texorpdfstring{get\+End\+Point()}{getEndPoint()}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Line\+::get\+End\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_line_a227b3d61216a37b32b856a56be6761a7}{}\label{class_line_a227b3d61216a37b32b856a56be6761a7}
+Getter of the end point
+
+\begin{DoxyReturn}{Returns}
+A vector3d object with the end point. 
+\end{DoxyReturn}
+
+
+Definition at line 19 of file primitives.\+cpp.
+
+\index{Line@{Line}!get\+Shortest\+Distance\+To\+Line@{get\+Shortest\+Distance\+To\+Line}}
+\index{get\+Shortest\+Distance\+To\+Line@{get\+Shortest\+Distance\+To\+Line}!Line@{Line}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Distance\+To\+Line(\+Line line)}{getShortestDistanceToLine(Line line)}}]{\setlength{\rightskip}{0pt plus 5cm}double Line\+::get\+Shortest\+Distance\+To\+Line (
+\begin{DoxyParamCaption}
+\item[{{\bf Line}}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{class_line_a4097eed5d653a46fe18b760c67a53a37}{}\label{class_line_a4097eed5d653a46fe18b760c67a53a37}
+Finds the shortest distance between this \hyperlink{class_line}{Line} and another \hyperlink{class_line}{Line}
+
+This method takes a \hyperlink{class_line}{Line} and returns the closest distance between this \hyperlink{class_line}{Line} and the given line. returns a double value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & a line represented with a Vector3d\textbackslash{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest distance between the \hyperlink{class_line}{Line} and line 
+\end{DoxyReturn}
+
+
+Definition at line 103 of file primitives.\+cpp.
+
+\index{Line@{Line}!get\+Shortest\+Distance\+To\+Point@{get\+Shortest\+Distance\+To\+Point}}
+\index{get\+Shortest\+Distance\+To\+Point@{get\+Shortest\+Distance\+To\+Point}!Line@{Line}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Distance\+To\+Point(\+Eigen\+::\+Vector3d point)}{getShortestDistanceToPoint(Eigen::Vector3d point)}}]{\setlength{\rightskip}{0pt plus 5cm}double Line\+::get\+Shortest\+Distance\+To\+Point (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d}]{point}
+\end{DoxyParamCaption}
+)}\hypertarget{class_line_af874e592b4b8a7db37b0a6d8feb5cf3f}{}\label{class_line_af874e592b4b8a7db37b0a6d8feb5cf3f}
+Finds the shortest distance between this \hyperlink{class_line}{Line} and a point
+
+This method takes a point and returns the closest distance between this \hyperlink{class_line}{Line} and the given point. returns a double value.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em point} & a point space represented with a Vector3d\textbackslash{} \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest distance between the \hyperlink{class_line}{Line} and point \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file primitives.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/collision\+\_\+monitoring/include/primitives.\+h\item 
+/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/collision\+\_\+monitoring/src/primitives.\+cpp\end{DoxyCompactItemize}

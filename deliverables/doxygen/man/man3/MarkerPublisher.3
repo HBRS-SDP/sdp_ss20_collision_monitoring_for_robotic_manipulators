@@ -1,0 +1,62 @@
+.TH "MarkerPublisher" 3 "Wed Jun 24 2020" "Collision monitoring for robotic manipulators" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MarkerPublisher \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMarkerPublisher\fP (ros::Publisher ownPublisher, int type, std::string frame_id, std::string ns, int id, double positionX, double positionY, double positionZ, double r, double g, double b, double alpha)"
+.br
+.ti -1c
+.RI "void \fBsetRadius\fP (double radius)"
+.br
+.ti -1c
+.RI "void \fBsetLength\fP (double length)"
+.br
+.ti -1c
+.RI "void \fBsetPosition\fP (double positionX, double positionY, double positionZ)"
+.br
+.ti -1c
+.RI "void \fBsetOrientation\fP (double orientationX, double orientationY, double orientationZ, double orientationW)"
+.br
+.ti -1c
+.RI "void \fBsetPoints\fP (Eigen::Vector3d start, Eigen::Vector3d end)"
+.br
+.ti -1c
+.RI "void \fBPublish\fP ()"
+.br
+.ti -1c
+.RI "\fBMarkerPublisher\fP (ros::Publisher ownPublisher, int type, std::string frame_id, std::string ns, int id, double positionX, double positionY, double positionZ, double r, double g, double b)"
+.br
+.ti -1c
+.RI "void \fBsetRadius\fP (double radius)"
+.br
+.ti -1c
+.RI "void \fBsetLength\fP (double length)"
+.br
+.ti -1c
+.RI "void \fBPublish\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "visualization_msgs::Marker \fBmarker\fP"
+.br
+.ti -1c
+.RI "ros::Publisher \fBownPublisher\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 14 of file marker_publisher\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Collision monitoring for robotic manipulators from the source code\&.
