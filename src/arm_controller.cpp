@@ -1,6 +1,6 @@
 // A simple program that computes the square root of a number
 #include "arm_controller.h"
-#define DEBUG
+// #define DEBUG
 
 ArmController::ArmController(Monitor* monitorObject, double k, double d,
                                                     double gamma, double beta) {
@@ -70,7 +70,11 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
     Eigen::Vector3d startArrow, positionLink;
     
     double angle = 3.1415/2;
-    
+
+    if (velocity.norm() < 1.0e-2) {
+        return potentialField;
+    }
+
     for(int i = 0; i < monitor->obstacles.size(); i++) {
         
         Eigen::Vector3d direction; 
@@ -103,7 +107,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
                     -m_st_1 +  m_vt_0_2,
                     m_st_0  +  m_vt_1_2,
                     ct      +  m_vt_2*rotvec(2);
-
+        rotation.normalize();
         // Phi
         // φ = cos ((o − x) v/(|o − x| · |v|))
         double phi_denominator = velocity.norm()*direction.norm();
@@ -119,7 +123,16 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         startArrow = (monitor->obstacles[i]->pose * origin).head(3);
 
         #ifdef DEBUG
-        std::cout << potentialField << std::endl;
+        std::cout << "direction: " << direction << std::endl;
+        std::cout << "velocity: " << velocity << std::endl;
+        std::cout << "rotvec: " << rotvec << std::endl;
+        std::cout << "rotation: " << rotation << std::endl;
+        std::cout << "phi_denominator" << phi_denominator << std::endl;
+        std::cout << "phi_numerator" << phi_numerator << std::endl;
+        std::cout << "phi" << phi << std::endl;
+        std::cout << "exp" << exp << std::endl;
+
+        std::cout << "potential field: " << potentialField << std::endl;
         #endif // DEBUG
 
         MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
@@ -164,8 +177,6 @@ KDL::Twist ArmController::controlLoop(void) {
                                 currVelocity);
 
     #ifdef DEBUG
-    std::cout << newVelocity << std::endl;
-    std::cout << K << " " <<  D << " " <<  gamma << " " << beta << std::endl;
     std::cout << "[ArmController] goal: " << goal << std::endl;
     std::cout << "[ArmController] currEndPoint: \n" << currEndPoint << std::endl;
     std::cout << "[ArmController] point to goal: \n" << goal - currEndPoint << std::endl;

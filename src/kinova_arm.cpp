@@ -143,7 +143,7 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
         links.push_back(link);
     }
     #ifdef DEBUG
-    std::cout << links.size() << std::endl;
+    std::cout << "# links: " << links.size() << std::endl;
     #endif
     // Mathematical constants, declared in constructor for speed
     this->origin << 0, 0, 0, 1;

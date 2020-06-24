@@ -89,7 +89,7 @@ int main(int argc, char **argv)
         }
 
         #ifdef DEBUG
-            std::cout<<std::endl;
+            std::cout<< std::endl;
             std::cout<< arm1.getPose() << std::endl;
         #endif //DEBUG
         armPub.publish(jointStates);
