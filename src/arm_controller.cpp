@@ -1,5 +1,6 @@
 // A simple program that computes the square root of a number
 #include "arm_controller.h"
+#define DEBUG
 
 ArmController::ArmController(Monitor* monitorObject, double k, double d,
                                                     double gamma, double beta) {
@@ -72,7 +73,6 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
     
     for(int i = 0; i < monitor->obstacles.size(); i++) {
         
-        std::cout << "potential field: " << potentialField << std::endl;
         Eigen::Vector3d direction; 
         monitor->arm->links.back()->getShortestDirection(direction, 
                                             monitor->obstacles[i]);
@@ -147,7 +147,8 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
 KDL::Twist ArmController::controlLoop(void) {
     // Variable for storing the resulting joint velocities
-    double x, y, z, alpha, beta, gamma;
+    double x, y, z;
+    // double alpha, beta, gamma;
     // Update the current state to match real arm state
     this->monitor->arm->updatePose(this->jointAngles);
     Eigen::Matrix4d currEndPose = monitor->arm->getPose();
@@ -164,13 +165,13 @@ KDL::Twist ArmController::controlLoop(void) {
 
     #ifdef DEBUG
     std::cout << newVelocity << std::endl;
-
+    std::cout << K << " " <<  D << " " <<  gamma << " " << beta << std::endl;
     std::cout << "[ArmController] goal: " << goal << std::endl;
     std::cout << "[ArmController] currEndPoint: \n" << currEndPoint << std::endl;
     std::cout << "[ArmController] point to goal: \n" << goal - currEndPoint << std::endl;
     std::cout << "[ArmController] currVelocity: \n" << currVelocity << std::endl;
     std::cout << "[ArmController] newVelocity: \n" << newVelocity << std::endl;
-    std::cout << "[ArmController] potential feild: \n" << ArmController::obstaclePotentialField(currEndPoint, 
+    std::cout << "[ArmController] potential field: \n" << ArmController::obstaclePotentialField(currEndPoint, 
                                 currVelocity) << std::endl;
     #endif // DEBUG
 

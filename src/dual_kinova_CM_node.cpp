@@ -62,6 +62,14 @@ int main(int argc, char **argv)
     n1.param<std::string>("/set_arm_1_namespace", armNameSpace1, "/kinova_1");
     n1.param<std::string>("/set_arm_2_namespace", armNameSpace2, "/kinova_2");
 
+    double K;
+    double D;
+    double gamma;
+    double beta;
+    n1.param<double>("/K", K, 0.1);
+    n1.param<double>("/D", D, 0);
+    n1.param<double>("/gamma", gamma, 100);
+    n1.param<double>("/beta", beta, 20/3.1425);
 
     std::string model = modelPath;
     Eigen::Matrix4d baseTransform1;
@@ -87,8 +95,8 @@ int main(int argc, char **argv)
     monitor2.addObstacle(&arm1);
 
     // Create the armController class based off the first monitor
-    ArmController armController1(&monitor1, 1, 0, 100, 20/3.1425);
-    ArmController armController2(&monitor2, 1, 0, 100, 20/3.1425);
+    ArmController armController1(&monitor1, K, D, gamma, beta);
+    ArmController armController2(&monitor2, K, D, gamma, beta);
 
     // Init ROS listeners for first arm
     ros::Subscriber armSub1 = n1.subscribe(armNameSpace1+jointStatesTopic, 1000, &ArmController::armCallback, &armController1);
