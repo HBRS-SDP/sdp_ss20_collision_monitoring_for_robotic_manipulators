@@ -3,7 +3,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 
 // the debug var to turn verbose on and off
-#define DEBUG
+// #define DEBUG
 
 #include "catch.hpp"
 #include <vector>
@@ -247,37 +247,6 @@ TEST_CASE( "4th test case sphere", "[Sphere - Capsule]" ) {
 }
 
 
-TEST_CASE("Kinova_arm distance to obstacle", "[monitor]") {
-
-    /*
-    * THIS IS AN INCOMPLETE TEST CASE 
-    */
-
-    KinovaArm kinovaArm(urdf_filename);
-    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
-                                    deg2rad(30), deg2rad(30), deg2rad(30)};
-    kinovaArm.updatePose(testPose);
-
-    double radius_1 = 10;
-    double length_1 = 70.710678118654755;
-
-    Eigen::Matrix4d pose_1;
-    pose_1 << 0.89455844, -0.14058875,  0.42426407,  0,
-                -0.14058875,  0.81254834,  0.56568542,  0,
-                -0.42426407, -0.56568542,  0.70710678,  0,
-                0,          0,          0,          1;
-
-    Capsule Link_1(pose_1, length_1, radius_1);
-
-    Monitor monitor(&kinovaArm);
-    monitor.addObstacle(&Link_1);
-
-    std::vector<std::vector<double>> distancesToObstacles = monitor.distanceToObjects();
-    std::vector<std::vector<double>> distancesToLinks = monitor.distanceBetweenArmLinks();
-
-    REQUIRE( 10 > 0.1 );    
-}
-
 TEST_CASE("Kinova_arm init", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
 }
@@ -309,7 +278,7 @@ TEST_CASE("Kinova_arm base transform destructor", "[arm]") {
 TEST_CASE("Kinova_arm set position", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
     std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
-                                    deg2rad(30), deg2rad(30), deg2rad(30)};
+                                   deg2rad(30), deg2rad(30), deg2rad(30)};
     kinovaArm.updatePose(testPose);
     Eigen::Matrix4d link2Pose;
     Eigen::Matrix4d endLinkPose;
@@ -447,4 +416,35 @@ TEST_CASE("Kinova_arm test inverse kinematics", "[arm]") {
         difference += fabs(output[i]- outputPose[i]);
     }
     REQUIRE( difference < 0.001);
+}
+
+TEST_CASE("Kinova_arm distance to obstacle", "[monitor]") {
+
+    /*
+    * THIS IS AN INCOMPLETE TEST CASE 
+    */
+
+    KinovaArm kinovaArm(urdf_filename);
+    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
+                                    deg2rad(30), deg2rad(30), deg2rad(30)};
+    kinovaArm.updatePose(testPose);
+
+    double radius_1 = 10;
+    double length_1 = 70.710678118654755;
+
+    Eigen::Matrix4d pose_1;
+    pose_1 << 0.89455844, -0.14058875,  0.42426407,  0,
+                -0.14058875,  0.81254834,  0.56568542,  0,
+                -0.42426407, -0.56568542,  0.70710678,  0,
+                0,          0,          0,          1;
+
+    Capsule Link_1(pose_1, length_1, radius_1);
+
+    Monitor monitor(&kinovaArm);
+    monitor.addObstacle(&Link_1);
+
+    std::vector<std::vector<double>> distancesToObstacles = monitor.distanceToObjects();
+    std::vector<std::vector<double>> distancesToLinks = monitor.distanceBetweenArmLinks();
+
+    REQUIRE( 10 > 0.1 );    
 }

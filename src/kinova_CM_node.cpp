@@ -16,7 +16,9 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "kinova_controller");
     std::string nodeName = ros::this_node::getName();
-    std::cout << "nodeName: " << nodeName << std::endl;
+    #ifdef DEBUG
+        std::cout << "nodeName: " << nodeName << std::endl;
+    #endif //DEBUG
     ros::NodeHandle n;
     std::string modelPath;
     std::string jointStatesTopic;
@@ -62,17 +64,25 @@ int main(int argc, char **argv)
 
     while(ros::ok()) {
         endeffectorVelocity = armController1.controlLoop();
-        std::cout << "end vel: "<<endeffectorVelocity <<std::endl;
         jointVelocities = arm1.ikVelocitySolver(endeffectorVelocity);
+
+        #ifdef DEBUG
+        std::cout << "end vel: "<<endeffectorVelocity <<std::endl;
         std::cout << "joint Vels: ";
+        #endif //DEBUG
 
         for(int i=0; i<arm1.nJoints; i++){
-            std::cout << jointVelocities[i] << " ";
+            #ifdef DEBUG
+                std::cout << jointVelocities[i] << " ";
+            #endif // DEBUG
             jointStates.velocity[i] = jointVelocities[i];
             jointStates.position[i] = arm1.jointArray(i);
         }
-        std::cout<<std::endl;
-        std::cout<< arm1.getPose() << std::endl;
+
+        #ifdef DEBUG
+            std::cout<<std::endl;
+            std::cout<< arm1.getPose() << std::endl;
+        #endif //DEBUG
         armPub.publish(jointStates);
         for(int i=0; i<armController1.rvizObstacles.size(); i++){
             markersPub.publish(armController1.rvizObstacles[i]->marker);

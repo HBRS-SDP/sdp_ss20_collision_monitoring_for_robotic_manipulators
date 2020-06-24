@@ -31,6 +31,7 @@ class Arm
         Eigen::Matrix4d baseTransform;
         std::vector<Primitive*> links;
         /// The number of joints in the chain
+        int nLinks;
         int nJoints;
 
 };

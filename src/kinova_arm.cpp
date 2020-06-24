@@ -1,6 +1,8 @@
 #include "kinova_arm.h"
 #define MAX_JOINT_VEL 10
 
+// #define DEBUG
+
 
 KinovaArm::KinovaArm(std::string urdf_filename){
 
@@ -15,14 +17,21 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     // Convert the tree to a chain and get the number of joints
     armTree.getChain("base_link", "EndEffector_Link", fkChain);
     nJoints = fkChain.getNrOfJoints();
+    nLinks = fkChain.getNrOfSegments();
+    nFrames = nLinks+1;
 
     // init frames for all the joints
-    for(int i = 0; i < nJoints; i++)
+    for(int i = 0; i < nFrames; i++)
     {
         localPoses.push_back(new KDL::Frame());
     }
     #ifdef DEBUG
         std::cout << "\nnum_joints: " << nJoints << " " << localPoses.size() << std::endl;
+        std::cout << "fkChain.getNrOfSegments(): " << fkChain.getNrOfSegments() << std::endl;
+        std::cout << "fkChain.getNrOfJoints(): " << fkChain.getNrOfJoints() << std::endl;
+        for(int i =0; i < nLinks ; i++) {
+            std::cout << fkChain.getSegment(i).getName()<< ":\n"<<fkChain.getSegment(i).getFrameToTip() << std::endl;
+        }
     #endif //DEBUG
 
     // ---------------- initialise the arm to init point ------------- //
@@ -40,25 +49,27 @@ KinovaArm::KinovaArm(std::string urdf_filename){
     }
 
     // solve for the frame at the "link" of the chain for the given joint positions
-    for(int link_num = 0; link_num < nJoints; link_num++)
+    for(int frameNum = 0; frameNum < nFrames; frameNum++)
     {
-        fksolver.JntToCart(jointArray, *localPoses[link_num], link_num);
+        fksolver.JntToCart(jointArray, *localPoses[frameNum], frameNum);
     }
 
     // TODO convert to config file
     // pass in the parameters for the link cylinder models
-    radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
-    lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593});
+    radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
+    lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593, 0.10593, 0.061525});
 
     // Create the new link objects in default position and 
     // add them to the links vector
-    for(int i = 0; i < nJoints-1; i++)
+    for(int linkNum = 0; linkNum < nLinks; linkNum++)
     {
-        Eigen::Matrix4d pose = linkFramesToPose(*localPoses[i], *localPoses[i+1]);
-        Capsule* link = new Capsule(pose, lengths[i], radii[i]);
+        Eigen::Matrix4d pose = linkFramesToPose(*localPoses[linkNum], *localPoses[linkNum+1]);
+        Capsule* link = new Capsule(pose, lengths[linkNum], radii[linkNum]);
         links.push_back(link);
     }
-    std::cout << "[KinovaArm] Links in arm:" << links.size() << std::endl;
+    #ifdef DEBUG
+    std::cout << "links.size(): " << links.size() << std::endl;
+    #endif
     // Mathematical constants, declared in constructor for speed
     this->baseTransform << 1, 0, 0, 0,
                            0, 1, 0, 0,
@@ -86,9 +97,11 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
     // Convert the tree to a chain and get the number of joints
     armTree.getChain("base_link", "EndEffector_Link", fkChain);
     nJoints = fkChain.getNrOfJoints();
+    nLinks = fkChain.getNrOfSegments();
+    nFrames = nLinks+1;
 
     // init frames for all the joints
-    for(int i = 0; i < nJoints; i++)
+    for(int i = 0; i < nFrames; i++)
     {
         localPoses.push_back(new KDL::Frame());
     }
@@ -111,25 +124,27 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
     }
 
     // solve for the frame at the "link" of the chain for the given joint positions
-    for(int link_num = 0; link_num < nJoints; link_num++)
+    for(int frameNum = 0; frameNum < nFrames; frameNum++)
     {
-        fksolver.JntToCart(jointArray, *localPoses[link_num], link_num);
+        fksolver.JntToCart(jointArray, *localPoses[frameNum], frameNum);
     }
 
     // TODO convert to config file
     // pass in the parameters for the link cylinder models
-    radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
-    lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593});
+    radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
+    lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593, 0.10593, 0.061525});
 
     // Create the new link objects in default position and 
     // add them to the links vector
-    for(int i = 0; i < nJoints-1; i++)
+    for(int linkNum = 0; linkNum < nLinks; linkNum++)
     {
-        Eigen::Matrix4d pose = linkFramesToPose(*localPoses[i], *localPoses[i+1]);
-        Capsule* link = new Capsule(pose, lengths[i], radii[i]);
+        Eigen::Matrix4d pose = linkFramesToPose(*localPoses[linkNum], *localPoses[linkNum+1]);
+        Capsule* link = new Capsule(pose, lengths[linkNum], radii[linkNum]);
         links.push_back(link);
     }
-    std::cout << "[KinovaArm] Links in arm:" << links.size() << std::endl;
+    #ifdef DEBUG
+    std::cout << links.size() << std::endl;
+    #endif
     // Mathematical constants, declared in constructor for speed
     this->origin << 0, 0, 0, 1;
     this->directionVect << 0, 0, 1;
@@ -162,14 +177,14 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
     
 
     // solve for the frame at the "link" of the chain for the given joint positions
-    for(int link_num = 0; link_num < nJoints; link_num++)
+    for(int frameNum = 0; frameNum < nFrames; frameNum++)
     {
-        if(fksolver.JntToCart(jointArray, *localPoses[link_num], link_num) >= 0)
+        if(fksolver.JntToCart(jointArray, *localPoses[frameNum], frameNum) >= 0)
         {
             #ifdef DEBUG
             // print the resulting link calculations
-            std::cout << "[KinovaArm] Calculations to link number: " << link_num << std::endl 
-                      << *localPoses[link_num] << std::endl
+            std::cout << "Calculations to link number: " << frameNum << std::endl 
+                      << *localPoses[frameNum] << std::endl
                       << "Success" << std::endl;
             #endif //DEBUG
         }
@@ -180,10 +195,10 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
             return false;
         }
 
-        // For all the link objects (nJoints-1) update the pose.
-        if(link_num != 0)
+        // For all the link objects (nFrames-1) update the pose.
+        if(frameNum != 0)
         {
-            links[link_num-1]->pose = linkFramesToPose(*localPoses[link_num-1], *localPoses[link_num]);
+            links[frameNum-1]->pose = linkFramesToPose(*localPoses[frameNum-1], *localPoses[frameNum]);
         }
     }
 
@@ -247,7 +262,8 @@ Eigen::Matrix4d KinovaArm::getPose(int jointNumber)
 {
     // input sanitization
     if(jointNumber >= localPoses.size() | jointNumber < 0){
-        std::cout << "[KinovaArm] Access joint number larger than array in getPose";
+        std::cout << "Access joint number larger than array in getPose.\n"<<
+                     "Returning endeffector Pose"<<std::endl;
         return frameToMatrix(*localPoses.back());
     }
 
