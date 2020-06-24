@@ -242,7 +242,7 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *s
     
     sphereCenter = (sphere->pose * origin).head(3);
     closestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(sphereCenter);
-    shortestDirection = closestPoint - sphereCenter;
+    shortestDirection = sphereCenter - closestPoint;
 }
 
 double Capsule::getShortestDistance(Primitive *primitive){
