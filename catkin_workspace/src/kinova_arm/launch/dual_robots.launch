@@ -24,9 +24,9 @@
   <param name="arm_controller/urdf_model" value="$(arg model)" />
   <param name="publish_frequency" value="100" />
 
-  <param name="K" value="0.14"/>
+  <param name="K" value="0.1"/>
   <param name="D" value="0"/>
-  <param name="gamma" value="1000"/>
+  <param name="gamma" value="100"/>
   <param name="beta" value="6.366385485"/>
 
 
@@ -37,8 +37,8 @@
   <param name="/set_arm_2_namespace" value="/kinova_2" />
   <param name="/obstacle_topic" value="/obstacles_update" />
   <param name="arm_controller/urdf_model" value="$(arg model)" />
-<!-- 
-  <node name="arm_controller" pkg="kinova_arm" type="DualKinovaCollisionMonitoring"/> -->
+
+  <node name="arm_controller" pkg="kinova_arm" type="DualKinovaCollisionMonitoring"/>
   <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find kinova_arm)/rviz/kinova_dual.rviz"/>
 
 </launch>

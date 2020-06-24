@@ -141,11 +141,8 @@ int main(int argc, char **argv)
 
     while(ros::ok()) {
         endeffectorVelocity1 = armController1.controlLoop();
-        std::cout << "---" << std::endl;
         jointVelocities1 = arm1.ikVelocitySolver(endeffectorVelocity1);
-        std::cout << "+++" << std::endl;
         endeffectorVelocity2 = armController2.controlLoop();
-        std::cout << "===" << std::endl;
         jointVelocities2 = arm2.ikVelocitySolver(endeffectorVelocity2);
 
         for(int i=0; i<arm1.nJoints; i++){
@@ -156,8 +153,10 @@ int main(int argc, char **argv)
             jointStates2.position[i] = arm2.jointArray(i);
         }
 
-        std::cout << "[dual] joint states 1" << jointStates1 << std::endl;
-        std::cout << "[dual] joint states 2" << jointStates2 << std::endl;
+        #ifdef DEBUG
+            std::cout << "[dual] joint states 1" << jointStates1 << std::endl;
+            std::cout << "[dual] joint states 2" << jointStates2 << std::endl;
+        #endif //DEBUG
 
         armPub1.publish(jointStates1);
         armPub2.publish(jointStates2);
