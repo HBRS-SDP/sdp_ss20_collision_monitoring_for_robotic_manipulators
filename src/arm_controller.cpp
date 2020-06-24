@@ -92,8 +92,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         if (velocity.norm() < 1.0e-2) {
             return potentialField;
-        }
-        
+        }        
         
         // Rotation matrix
         Eigen::Vector3d rotvec = direction.cross(velocity);
@@ -147,7 +146,6 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         std::cout << "potential field: " << potentialField << std::endl;
         #endif // DEBUG
-
 
         MarkerPublisher mPublisherPotentialField(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
         
@@ -251,6 +249,25 @@ void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& 
         #ifdef DEBUG
         std::cout << "arrow" << std::endl;
         #endif // DEBUG
+    }
+    else if(msg->type == visualization_msgs::Marker::CYLINDER){
+        bool newObstacle = true;
+        for(int i=0; i<rvizObstacles.size();i++){
+            if(rvizObstacles[i]->marker.id == msg->id) {
+                newObstacle = false;
+                int index = rvizObstacles[i]->idx;
+                monitor->obstacles[index]->pose = rvizObstacles[i]->updatePose(msg);
+            }
+        }
+
+        if(newObstacle) {
+            RvizObstacle* rvizObstacle = new RvizObstacle(msg, rvizObstacles.size());
+            rvizObstacles.push_back(rvizObstacle);
+            rvizObstacle->pose(2, 3) -= (rvizObstacle->marker.scale.z / 2.0);
+            Capsule* capsule = new Capsule(rvizObstacle->pose, rvizObstacle->marker.scale.z, rvizObstacle->marker.scale.x);
+            obstaclesAllocated.push_back(capsule);
+            monitor->addObstacle(capsule);
+        }
     }
     else {
         ROS_ERROR("Wrong shape for obstacle");
