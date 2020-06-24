@@ -221,7 +221,8 @@ Public Member Functions</h2></td></tr>
 <p>This method takes a point and returns the closest point on this <a class="el" href="class_line.html">Line</a> and the given line. returns a Vector3d.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">line</td><td>a line represented with a Vector3d\ </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">line</td><td>a line represented with a Vector3d. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">closestPoints</td><td>the closest distance between the <a class="el" href="class_line.html">Line</a> and point </td></tr>
   </table>
   </dd>
 </dl>
@@ -321,11 +322,11 @@ Public Member Functions</h2></td></tr>
 <p>This method takes a point and returns the closest distance between this <a class="el" href="class_line.html">Line</a> and the given point. returns a double value.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">point</td><td>a point space represented with a Vector3d\ </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">closestPoints</td><td>the closest distance between the <a class="el" href="class_line.html">Line</a> and point </td></tr>
+    <tr><td class="paramname">point</td><td>a point space represented with a Vector3d. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>The shortest distance from the point to the obstacle </dd></dl>
 
 <p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00092">92</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 

@@ -86,8 +86,10 @@ Finds the closest points on this \hyperlink{class_line}{Line} and on another \hy
 This method takes a point and returns the closest point on this \hyperlink{class_line}{Line} and the given line. returns a Vector3d.
 
 
-\begin{DoxyParams}{Parameters}
-{\em line} & a line represented with a Vector3d\textbackslash{} \\
+\begin{DoxyParams}[1]{Parameters}
+ & {\em line} & a line represented with a Vector3d. \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest distance between the \hyperlink{class_line}{Line} and point \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -171,12 +173,13 @@ Finds the shortest distance between this \hyperlink{class_line}{Line} and a poin
 This method takes a point and returns the closest distance between this \hyperlink{class_line}{Line} and the given point. returns a double value.
 
 
-\begin{DoxyParams}[1]{Parameters}
- & {\em point} & a point space represented with a Vector3d\textbackslash{} \\
-\hline
-\mbox{\tt out}  & {\em closest\+Points} & the closest distance between the \hyperlink{class_line}{Line} and point \\
+\begin{DoxyParams}{Parameters}
+{\em point} & a point space represented with a Vector3d. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The shortest distance from the point to the obstacle 
+\end{DoxyReturn}
 
 
 Definition at line 92 of file primitives.\+cpp.

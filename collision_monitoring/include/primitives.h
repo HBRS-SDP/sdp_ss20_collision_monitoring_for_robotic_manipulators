@@ -168,7 +168,8 @@ class Line{
         * This method takes a point and returns the closest point
         * on this Line and the given line. returns a Vector3d.
         * 
-        * @param    line    a line represented with a Vector3d\
+        * @param line    a line represented with a Vector3d.
+        * @param[out]   closestPoints   the closest distance between the Line and point
         * @return   the closests points on this line and on line
         */
         void getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line line);
@@ -178,8 +179,8 @@ class Line{
         * This method takes a point and returns the closest distance
         * between this Line and the given point. returns a double value.
         * 
-        * @param        point           a point space represented with a Vector3d\
-        * @param[out]   closestPoints   the closest distance between the Line and point
+        * @param     point           a point space represented with a Vector3d.
+        * @return The shortest distance from the point to the obstacle
         */
         double getShortestDistanceToPoint(Eigen::Vector3d point);
 
@@ -203,17 +204,24 @@ class Line{
  */
 class Capsule: public Primitive{
     protected:
-        float length; /* length of the capsule */
-        float radius; /* radius of the capsule */
+        /// length of the capsule
+        float length;
+        /// radius of the capsule
+        float radius;
         
     public:
         /** Constructor of Capsule class
         * 
         * @param pose start point of the line represented with a Matrix4d.
-        * @param    length  length of the capsule
-        * @param    radius  radius of the capsule
+        * @param length  length of the capsule
+        * @param radius  radius of the capsule
         */
         Capsule(Eigen::Matrix4d pose, double length, double radius);
+
+        /** Copy onstructor of Capsule class
+        * 
+        * @param capsule the capsule instance to copy
+        */
         Capsule(Capsule* capsule);
         /* Destructor of the class Capsule */
         ~Capsule();
@@ -265,6 +273,11 @@ class Sphere: public Primitive{
         * @param    radius  radius of the sphere
         */
         Sphere(Eigen::Matrix4d pose, double radius);
+
+        /** Copy costructor of capsule class
+         * 
+         * @param sphere The Sphere instance to copy
+         */
         Sphere(Sphere* sphere);
 
         /* Destructor of the class Sphere */

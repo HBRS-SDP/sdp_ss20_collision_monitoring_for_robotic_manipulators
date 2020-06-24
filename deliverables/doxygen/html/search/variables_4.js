@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['links',['links',['../class_arm.html#a427fb95641bb8d0886b2849f0bda36be',1,'Arm']]]
+  ['jointarray',['jointArray',['../class_kinova_arm.html#a47ddba255203039c2d7d3ceb48b2c4ac',1,'KinovaArm']]],
+  ['jointvels',['jointVels',['../class_kinova_arm.html#adeab92c27d6555029a30f5bcbba8bfab',1,'KinovaArm']]]
 ];

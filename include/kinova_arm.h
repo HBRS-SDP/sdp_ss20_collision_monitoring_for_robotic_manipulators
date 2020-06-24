@@ -78,7 +78,7 @@ class KinovaArm: public Arm
         /**
          * A function to find the joint pose of a given joint
          * 
-         * @param jointNumber The joint number to solve for the pose of
+         * @param frameNumber The joint number to solve for the pose of
          * @return The last joint pose
          */
         Eigen::Matrix4d  getPose(int frameNumber);
