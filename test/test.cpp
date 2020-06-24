@@ -325,8 +325,8 @@ TEST_CASE("Kinova_arm set position", "[arm]") {
 
 TEST_CASE("Kinova_arm test link positions", "[arm]") {
     KinovaArm kinovaArm(urdf_filename);
-    std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
-                                    deg2rad(30), deg2rad(30), deg2rad(30)};
+    std::vector<double> testPose = {deg2rad(90), deg2rad(90), deg2rad(90), deg2rad(90),
+                                    deg2rad(90), deg2rad(90), deg2rad(90)};
     kinovaArm.updatePose(testPose);
 
     Eigen::Vector4d origin(0, 0, 0, 1);
