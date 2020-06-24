@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rvizobstacle',['RvizObstacle',['../class_rviz_obstacle.html',1,'']]]
+  ['obstaclepotentialfield',['obstaclePotentialField',['../class_arm_controller.html#ad0b1f28333e2a3be76258153a745803d',1,'ArmController']]]
 ];

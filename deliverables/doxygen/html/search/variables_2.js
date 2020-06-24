@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pose',['pose',['../class_primitive.html#ad8b2afbad412f6046783d155c88fe312',1,'Primitive']]]
+  ['idx',['idx',['../class_rviz_obstacle.html#aac6f99fde043e8d9c0e9d0bab32fd375',1,'RvizObstacle']]]
 ];

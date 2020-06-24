@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['goal',['goal',['../class_arm_controller.html#a5246aa4a2072b1511d510717fc253f88',1,'ArmController']]]
+  ['links',['links',['../class_arm.html#a427fb95641bb8d0886b2849f0bda36be',1,'Arm']]]
 ];

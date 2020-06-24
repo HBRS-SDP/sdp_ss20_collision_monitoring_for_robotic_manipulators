@@ -27,7 +27,7 @@ class Arm
          *     in order of the joint in radians
          * @return The boolean true for a successful update, False otherwise
          */
-        virtual bool updatePose(std::vector<double>);
+        virtual bool updatePose(std::vector<double> jointPositions);
 
         /// Used to get the endeffector frame of the manipulator
         virtual Eigen::Matrix4d getPose(void) = 0;

@@ -2,6 +2,10 @@
 \label{class_arm}\index{Arm@{Arm}}
 
 
+{\ttfamily \#include $<$arm.\+h$>$}
+
+
+
 Inheritance diagram for Arm\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -12,46 +16,51 @@ Inheritance diagram for Arm\+:\nopagebreak
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \hyperlink{class_arm_abc38e64d0f6f3ea416626208baefa28d}{update\+Pose} (std\+::vector$<$ double $>$)
+virtual bool \hyperlink{class_arm_a9bfe3a3f230c8fa8a39f88cce2d6b597}{update\+Pose} (std\+::vector$<$ double $>$ joint\+Positions)
 \item 
-virtual Eigen\+::\+Matrix4d {\bfseries get\+Pose} (void)=0\hypertarget{class_arm_af89cd963a4321584dfb8f9715c02f5be}{}\label{class_arm_af89cd963a4321584dfb8f9715c02f5be}
+virtual Eigen\+::\+Matrix4d \hyperlink{class_arm_af89cd963a4321584dfb8f9715c02f5be}{get\+Pose} (void)=0\hypertarget{class_arm_af89cd963a4321584dfb8f9715c02f5be}{}\label{class_arm_af89cd963a4321584dfb8f9715c02f5be}
 
-\item 
-virtual Eigen\+::\+Matrix4d {\bfseries get\+Pose} (int joint\+Number)=0\hypertarget{class_arm_a05162e055412fc6dc69ce74884f9fa6f}{}\label{class_arm_a05162e055412fc6dc69ce74884f9fa6f}
+\begin{DoxyCompactList}\small\item\em Used to get the endeffector frame of the manipulator. \end{DoxyCompactList}\item 
+virtual Eigen\+::\+Matrix4d \hyperlink{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}{get\+Pose} (int frame\+Number)=0\hypertarget{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}{}\label{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Used to get the frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Eigen\+::\+Matrix4d {\bfseries base\+Transform}\hypertarget{class_arm_ab568839905191e1e5abb83119a4a445d}{}\label{class_arm_ab568839905191e1e5abb83119a4a445d}
+Eigen\+::\+Matrix4d \hyperlink{class_arm_ab568839905191e1e5abb83119a4a445d}{base\+Transform}\hypertarget{class_arm_ab568839905191e1e5abb83119a4a445d}{}\label{class_arm_ab568839905191e1e5abb83119a4a445d}
 
-\item 
-std\+::vector$<$ \hyperlink{class_primitive}{Primitive} $\ast$ $>$ {\bfseries links}\hypertarget{class_arm_a427fb95641bb8d0886b2849f0bda36be}{}\label{class_arm_a427fb95641bb8d0886b2849f0bda36be}
+\begin{DoxyCompactList}\small\item\em The homogeneous transformation from the world to arm base frame. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{class_primitive}{Primitive} $\ast$ $>$ \hyperlink{class_arm_a427fb95641bb8d0886b2849f0bda36be}{links}\hypertarget{class_arm_a427fb95641bb8d0886b2849f0bda36be}{}\label{class_arm_a427fb95641bb8d0886b2849f0bda36be}
 
-\item 
+\begin{DoxyCompactList}\small\item\em The list of link primitives that represent the manipulator. \end{DoxyCompactList}\item 
 int \hyperlink{class_arm_a911ba9a8c719c090a305f88ab0ae7490}{n\+Links}\hypertarget{class_arm_a911ba9a8c719c090a305f88ab0ae7490}{}\label{class_arm_a911ba9a8c719c090a305f88ab0ae7490}
 
-\begin{DoxyCompactList}\small\item\em The number of joints in the chain. \end{DoxyCompactList}\item 
-int {\bfseries n\+Joints}\hypertarget{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}{}\label{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}
+\begin{DoxyCompactList}\small\item\em The number of links in the chain. \end{DoxyCompactList}\item 
+int \hyperlink{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}{n\+Joints}\hypertarget{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}{}\label{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The number of joints in the chain. \end{DoxyCompactList}\item 
+int \hyperlink{class_arm_ac7955a5e8e9c6681b55d0d80d7e31df7}{n\+Frames}\hypertarget{class_arm_ac7955a5e8e9c6681b55d0d80d7e31df7}{}\label{class_arm_ac7955a5e8e9c6681b55d0d80d7e31df7}
+
+\begin{DoxyCompactList}\small\item\em The number of frames in the arm. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
+A pure virtual class that represents a robotic manipulator
 
+This class is an interface class and so the developer is to implement this class to suit the type of robotic manipulator used 
 
-Definition at line 11 of file arm.\+h.
+Definition at line 16 of file arm.\+h.
 
 
 
 \subsection{Member Function Documentation}
 \index{Arm@{Arm}!update\+Pose@{update\+Pose}}
 \index{update\+Pose@{update\+Pose}!Arm@{Arm}}
-\subsubsection[{\texorpdfstring{update\+Pose(std\+::vector$<$ double $>$)}{updatePose(std::vector< double >)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Arm\+::update\+Pose (
+\subsubsection[{\texorpdfstring{update\+Pose(std\+::vector$<$ double $>$ joint\+Positions)}{updatePose(std::vector< double > jointPositions)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Arm\+::update\+Pose (
 \begin{DoxyParamCaption}
-\item[{std\+::vector$<$ double $>$}]{}
+\item[{std\+::vector$<$ double $>$}]{joint\+Positions}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_arm_abc38e64d0f6f3ea416626208baefa28d}{}\label{class_arm_abc38e64d0f6f3ea416626208baefa28d}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_arm_a9bfe3a3f230c8fa8a39f88cce2d6b597}{}\label{class_arm_a9bfe3a3f230c8fa8a39f88cce2d6b597}
 A function to update the current virtual representation of the arm
 
 

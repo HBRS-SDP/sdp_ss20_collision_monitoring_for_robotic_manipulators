@@ -148,8 +148,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0a5a3bd128b420d58d92d242c075db92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea7c01f72eb70387ff71ca130db3bd3f"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kinova_arm.html#aea7c01f72eb70387ff71ca130db3bd3f">getPose</a> (void)</td></tr>
 <tr class="separator:aea7c01f72eb70387ff71ca130db3bd3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66f0535b3c926b692e05a97f82efd3b2"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kinova_arm.html#a66f0535b3c926b692e05a97f82efd3b2">getPose</a> (int jointNumber)</td></tr>
-<tr class="separator:a66f0535b3c926b692e05a97f82efd3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6b5c17c1b7b79bc3de00e8d38b80999"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kinova_arm.html#ae6b5c17c1b7b79bc3de00e8d38b80999">getPose</a> (int frameNumber)</td></tr>
+<tr class="separator:ae6b5c17c1b7b79bc3de00e8d38b80999"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -161,29 +161,33 @@ KDL::JntArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 KDL::JntArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kinova_arm.html#adeab92c27d6555029a30f5bcbba8bfab">jointVels</a></td></tr>
 <tr class="memdesc:adeab92c27d6555029a30f5bcbba8bfab"><td class="mdescLeft">&#160;</td><td class="mdescRight">The KDL joint array to hold the joint velocities. <br /></td></tr>
 <tr class="separator:adeab92c27d6555029a30f5bcbba8bfab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a354341c4c6150a604c0029d3ecd00cb7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a354341c4c6150a604c0029d3ecd00cb7"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nFrames</b></td></tr>
-<tr class="separator:a354341c4c6150a604c0029d3ecd00cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_arm"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_arm')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_arm.html">Arm</a></td></tr>
 <tr class="memitem:ab568839905191e1e5abb83119a4a445d inherit pub_attribs_class_arm"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab568839905191e1e5abb83119a4a445d"></a>
-Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><b>baseTransform</b></td></tr>
+Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#ab568839905191e1e5abb83119a4a445d">baseTransform</a></td></tr>
+<tr class="memdesc:ab568839905191e1e5abb83119a4a445d inherit pub_attribs_class_arm"><td class="mdescLeft">&#160;</td><td class="mdescRight">The homogeneous transformation from the world to arm base frame. <br /></td></tr>
 <tr class="separator:ab568839905191e1e5abb83119a4a445d inherit pub_attribs_class_arm"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a427fb95641bb8d0886b2849f0bda36be inherit pub_attribs_class_arm"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a427fb95641bb8d0886b2849f0bda36be"></a>
-std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>links</b></td></tr>
+std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#a427fb95641bb8d0886b2849f0bda36be">links</a></td></tr>
+<tr class="memdesc:a427fb95641bb8d0886b2849f0bda36be inherit pub_attribs_class_arm"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of link primitives that represent the manipulator. <br /></td></tr>
 <tr class="separator:a427fb95641bb8d0886b2849f0bda36be inherit pub_attribs_class_arm"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a911ba9a8c719c090a305f88ab0ae7490 inherit pub_attribs_class_arm"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a911ba9a8c719c090a305f88ab0ae7490"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#a911ba9a8c719c090a305f88ab0ae7490">nLinks</a></td></tr>
-<tr class="memdesc:a911ba9a8c719c090a305f88ab0ae7490 inherit pub_attribs_class_arm"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of joints in the chain. <br /></td></tr>
+<tr class="memdesc:a911ba9a8c719c090a305f88ab0ae7490 inherit pub_attribs_class_arm"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of links in the chain. <br /></td></tr>
 <tr class="separator:a911ba9a8c719c090a305f88ab0ae7490 inherit pub_attribs_class_arm"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3734a2ca38b0312fd42894ab6886bc9 inherit pub_attribs_class_arm"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3734a2ca38b0312fd42894ab6886bc9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nJoints</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#ac3734a2ca38b0312fd42894ab6886bc9">nJoints</a></td></tr>
+<tr class="memdesc:ac3734a2ca38b0312fd42894ab6886bc9 inherit pub_attribs_class_arm"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of joints in the chain. <br /></td></tr>
 <tr class="separator:ac3734a2ca38b0312fd42894ab6886bc9 inherit pub_attribs_class_arm"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7955a5e8e9c6681b55d0d80d7e31df7 inherit pub_attribs_class_arm"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7955a5e8e9c6681b55d0d80d7e31df7"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm.html#ac7955a5e8e9c6681b55d0d80d7e31df7">nFrames</a></td></tr>
+<tr class="memdesc:ac7955a5e8e9c6681b55d0d80d7e31df7 inherit pub_attribs_class_arm"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of frames in the arm. <br /></td></tr>
+<tr class="separator:ac7955a5e8e9c6681b55d0d80d7e31df7 inherit pub_attribs_class_arm"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An implementation of the <a class="el" href="class_arm.html">Arm</a> interface.</p>
 <p>This implementation is specifically for the KINOVA arm in the HBRS robotics lab. </p>
 
-<p>Definition at line <a class="el" href="kinova__arm_8h_source.html#l00035">35</a> of file <a class="el" href="kinova__arm_8h_source.html">kinova_arm.h</a>.</p>
+<p>Definition at line <a class="el" href="kinova__arm_8h_source.html#l00030">30</a> of file <a class="el" href="kinova__arm_8h_source.html">kinova_arm.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="abbbe90c0d43bf6665d62bdf6c1ef398f"></a>
 <div class="memitem">
@@ -246,7 +250,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nJoints</b></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="class_kinova_arm.html">KinovaArm</a> class </dd></dl>
 <p>This is used to import the URDF file </p>
 
-<p>Definition at line <a class="el" href="kinova__arm_8cpp_source.html#l00085">85</a> of file <a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a>.</p>
+<p>Definition at line <a class="el" href="kinova__arm_8cpp_source.html#l00084">84</a> of file <a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a>.</p>
 
 </div>
 </div>
@@ -275,13 +279,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nJoints</b></td></tr>
 <p>A function to find the final joint pose</p>
 <dl class="section return"><dt>Returns</dt><dd>The last joint pose </dd></dl>
 
-<p>Implements <a class="el" href="class_arm.html">Arm</a>.</p>
+<p>Implements <a class="el" href="class_arm.html#af89cd963a4321584dfb8f9715c02f5be">Arm</a>.</p>
 
-<p>Definition at line <a class="el" href="kinova__arm_8cpp_source.html#l00256">256</a> of file <a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a>.</p>
+<p>Definition at line <a class="el" href="kinova__arm_8cpp_source.html#l00255">255</a> of file <a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a66f0535b3c926b692e05a97f82efd3b2"></a>
+<a class="anchor" id="ae6b5c17c1b7b79bc3de00e8d38b80999"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -292,7 +296,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nJoints</b></td></tr>
           <td class="memname">Eigen::Matrix4d KinovaArm::getPose </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>jointNumber</em></td><td>)</td>
+          <td class="paramname"><em>frameNumber</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -311,7 +315,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nJoints</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The last joint pose </dd></dl>
 
-<p>Implements <a class="el" href="class_arm.html">Arm</a>.</p>
+<p>Implements <a class="el" href="class_arm.html#a994d35ca0dae04725fe0921c4f7d7e38">Arm</a>.</p>
 
 <p>Definition at line <a class="el" href="kinova__arm_8cpp_source.html#l00261">261</a> of file <a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a>.</p>
 
@@ -339,7 +343,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nJoints</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A vector of joint velocities used to achieve the desired velocity </dd></dl>
 
-<p>Definition at line <a class="el" href="kinova__arm_8cpp_source.html#l00210">210</a> of file <a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a>.</p>
+<p>Definition at line <a class="el" href="kinova__arm_8cpp_source.html#l00208">208</a> of file <a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a>.</p>
 
 </div>
 </div>
@@ -373,15 +377,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nJoints</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The boolean true for a successful update, False otherwise </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_arm.html#abc38e64d0f6f3ea416626208baefa28d">Arm</a>.</p>
+<p>Reimplemented from <a class="el" href="class_arm.html#a9bfe3a3f230c8fa8a39f88cce2d6b597">Arm</a>.</p>
 
-<p>Definition at line <a class="el" href="kinova__arm_8cpp_source.html#l00167">167</a> of file <a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a>.</p>
+<p>Definition at line <a class="el" href="kinova__arm_8cpp_source.html#l00165">165</a> of file <a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/include/<a class="el" href="kinova__arm_8h_source.html">kinova_arm.h</a></li>
-<li>/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/src/<a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a></li>
+<li>include/<a class="el" href="kinova__arm_8h_source.html">kinova_arm.h</a></li>
+<li>src/<a class="el" href="kinova__arm_8cpp_source.html">kinova_arm.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
