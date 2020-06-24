@@ -347,8 +347,8 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
         Eigen::Vector3d endPointLine  = (pose * zDirectionObstacle).head(3);
 
         // compare using the two methods
-        REQUIRE( fabs((basePointLine - basePointLink).norm()) < 0.1);
-        REQUIRE( fabs((endPointLine - endPointLink).norm()) < 0.1);
+        REQUIRE( fabs((basePointLine - basePointLink).norm()) < 0.01);
+        REQUIRE( fabs((endPointLine - endPointLink).norm()) < 0.01);
     }
 }
 
