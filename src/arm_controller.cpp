@@ -88,24 +88,6 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
             mPublisherShortestDistance.setLength(0.005);
             mPublisherShortestDistance.setPoints(startArrow, startArrow + direction - (direction / direction.norm()) * endEffectorCapsule->getRadius() );
             mPublisherShortestDistance.Publish();
-
-            double w = sqrt(1 + endEffectorCapsule->pose(0,0)
-                       + endEffectorCapsule->pose(1,1) 
-                       + endEffectorCapsule->pose(2, 2))/2;
-            double x = (endEffectorCapsule->pose(2,1) - endEffectorCapsule->pose(1, 2))/(4*w);
-            double y = (endEffectorCapsule->pose(0,2) - endEffectorCapsule->pose(2, 0))/(4*w);
-            double z = (endEffectorCapsule->pose(1,0) - endEffectorCapsule->pose(0, 1))/(4*w);
-
-            Eigen::Quaterniond quat(x, y, z, w);
-
-            Eigen::Vector4d basePoint(0, 0, endEffectorCapsule->getLength() / 2.0 , 1);
-            positionLink = (endEffectorCapsule->pose * basePoint).head(3);
-            
-            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
-            mPublisherLink.setRadius(endEffectorCapsule->getRadius());
-            mPublisherLink.setLength(endEffectorCapsule->getLength());
-            mPublisherLink.setOrientation(x, y, z, w);
-            mPublisherLink.Publish();
         }
 
         if (velocity.norm() < 1.0e-2) {
@@ -189,6 +171,31 @@ KDL::Twist ArmController::controlLoop(void) {
     objectDistances = monitor->distanceToObjects();
     armDistances = monitor->distanceBetweenArmLinks();
 
+    //Show links as a cylinders
+    Capsule *capsuleLink;
+    Eigen::Vector3d positionLink;
+    for(int i=0; i < monitor->arm->links.size(); i++){
+        capsuleLink = dynamic_cast<Capsule*>(monitor->arm->links[i]);
+        if(capsuleLink){
+            double w = sqrt(1 + capsuleLink->pose(0,0)
+                       + capsuleLink->pose(1,1) 
+                       + capsuleLink->pose(2, 2))/2;
+            double x = (capsuleLink->pose(2,1) - capsuleLink->pose(1, 2))/(4*w);
+            double y = (capsuleLink->pose(0,2) - capsuleLink->pose(2, 0))/(4*w);
+            double z = (capsuleLink->pose(1,0) - capsuleLink->pose(0, 1))/(4*w);
+
+            Eigen::Quaterniond quat(x, y, z, w);
+
+            Eigen::Vector4d basePoint(0, 0, capsuleLink->getLength() / 2.0 , 1);
+            positionLink = (capsuleLink->pose * basePoint).head(3);
+            
+            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
+            mPublisherLink.setRadius(capsuleLink->getRadius());
+            mPublisherLink.setLength(capsuleLink->getLength());
+            mPublisherLink.setOrientation(x, y, z, w);
+            mPublisherLink.Publish();
+        }
+    }
 
     //v̇ = K(g−x) − Dv + p(x, v)
     Eigen::Vector3d currVelocity = {twist.vel.data[0], twist.vel.data[1], twist.vel.data[2]};
