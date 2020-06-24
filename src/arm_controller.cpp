@@ -90,7 +90,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         double m_vt_1_2=m_vt_1*rotvec(2);
 
         Eigen::Matrix3d rotation;
-        rotation << ct      + m_vt_0*rotvec(0), 
+        rotation << ct + m_vt_0*rotvec(0), 
                     -m_st_2 +  m_vt_0_1,
                     m_st_1  +  m_vt_0_2,
                     m_st_2  +  m_vt_0_1,
