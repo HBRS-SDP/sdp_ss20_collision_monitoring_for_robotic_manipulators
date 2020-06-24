@@ -68,16 +68,25 @@ void Line::getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line lin
     endPointProjected = this->projectionPoint( line.getEndPoint() );
     midPoint =  (this->endPoint + this->basePoint) / 2;
 
-    Line projectedLine(basePointProjected, endPointProjected);
+    if( (basePointProjected - endPointProjected).norm() == 0 ){
+        //Parallel lines
+        Line projectedLine(basePointProjected, endPointProjected);
     
-    obstacleProjectedClosestPoint = projectedLine.getClosestPointToPoint(midPoint);
+        obstacleProjectedClosestPoint = basePointProjected;
 
-    ratio = (obstacleProjectedClosestPoint - basePointProjected).norm() / (endPointProjected - basePointProjected).norm();
-    obstacleClosestPoint = (line.getEndPoint() - line.getBasePoint()) * ratio + line.getBasePoint();
-    ownClosestPoint = this->getClosestPointToPoint(obstacleClosestPoint);
+        ownClosestPoint = midPoint;
+        obstacleClosestPoint = (line.endPoint + line.basePoint) / 2;
+    }else{
+        Line projectedLine(basePointProjected, endPointProjected);
+        obstacleProjectedClosestPoint = projectedLine.getClosestPointToPoint(midPoint);
+
+        ratio = (obstacleProjectedClosestPoint - basePointProjected).norm() / (endPointProjected - basePointProjected).norm();
+        obstacleClosestPoint = (line.getEndPoint() - line.getBasePoint()) * ratio + line.getBasePoint();
+        ownClosestPoint = this->getClosestPointToPoint(obstacleClosestPoint);
+    }
 
     closestPoints.row(0) = ownClosestPoint;
-    closestPoints.row(1) = obstacleClosestPoint;
+    closestPoints.row(1) = obstacleClosestPoint;    
 }
 
 double Line::getShortestDistanceToPoint(Eigen::Vector3d point){
@@ -184,6 +193,8 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *
     if(lambdaM1 >= 0 && lambdaM1 <= 1){
         if(lambdaM2 >=0 && lambdaM2 <= 1){
             //m1 and m2 inside
+            std::cout << "L1 : " << lambdaM1 << std::endl;
+            std::cout << "L2 : " << lambdaM2 << std::endl;
             axisOfSymmetryOwn.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryObstacle);
             ownClosestPoint = closestPoints.row(0);
             obstacleClosestPoint = closestPoints.row(1);

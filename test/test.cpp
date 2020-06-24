@@ -26,6 +26,38 @@ double deg2rad(double v) {
 
 std::string urdf_filename = "../urdf/GEN3_URDF_V12.urdf";
 
+TEST_CASE( "Parallel capsules", "[Capsule - Capsule]" ) {
+    Eigen::Vector3d shortestDirection;
+    double radius_1 = 10;
+    double length_1 = 15;
+    Eigen::Matrix4d pose_1;
+    pose_1 << 1, 0, 0, 0,
+              0, 1, 0, 0,
+              0, 0, 1, 0,
+              0, 0, 0, 1;
+
+    double radius_2 = 10;
+    double length_2 = 15;
+    Eigen::Matrix4d pose_2;
+    pose_2 << 1, 0, 0, 40,
+              0, 1, 0, 0,
+              0, 0, 1, 0,
+              0, 0, 0, 1;
+
+    Primitive *Link_1 = new Capsule(pose_1, length_1, radius_1);
+    Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
+
+    std::cout << "Result L1: " << Link_1->getShortestDistance(Link_2) << std::endl;
+    std::cout << "Result L2: " << Link_2->getShortestDistance(Link_1) << std::endl;
+
+
+    REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(20).margin(0.001) );
+    REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(20).margin(0.001) );
+
+    delete Link_1;
+    delete Link_2;
+}
+
 TEST_CASE( "1st test case", "[Capsule - Capsule]" ) {
     Eigen::Vector3d shortestDirection;
     double radius_1 = 10;
