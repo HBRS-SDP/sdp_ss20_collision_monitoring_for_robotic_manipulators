@@ -1,0 +1,78 @@
+\hypertarget{class_arm}{}\section{Arm Class Reference}
+\label{class_arm}\index{Arm@{Arm}}
+
+
+Inheritance diagram for Arm\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=145pt]{class_arm__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{class_arm_abc38e64d0f6f3ea416626208baefa28d}{update\+Pose} (std\+::vector$<$ double $>$)
+\item 
+virtual Eigen\+::\+Matrix4d {\bfseries get\+Pose} (void)=0\hypertarget{class_arm_af89cd963a4321584dfb8f9715c02f5be}{}\label{class_arm_af89cd963a4321584dfb8f9715c02f5be}
+
+\item 
+virtual Eigen\+::\+Matrix4d {\bfseries get\+Pose} (int joint\+Number)=0\hypertarget{class_arm_a05162e055412fc6dc69ce74884f9fa6f}{}\label{class_arm_a05162e055412fc6dc69ce74884f9fa6f}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\+::\+Matrix4d {\bfseries base\+Transform}\hypertarget{class_arm_ab568839905191e1e5abb83119a4a445d}{}\label{class_arm_ab568839905191e1e5abb83119a4a445d}
+
+\item 
+std\+::vector$<$ \hyperlink{class_primitive}{Primitive} $\ast$ $>$ {\bfseries links}\hypertarget{class_arm_a427fb95641bb8d0886b2849f0bda36be}{}\label{class_arm_a427fb95641bb8d0886b2849f0bda36be}
+
+\item 
+int \hyperlink{class_arm_a911ba9a8c719c090a305f88ab0ae7490}{n\+Links}\hypertarget{class_arm_a911ba9a8c719c090a305f88ab0ae7490}{}\label{class_arm_a911ba9a8c719c090a305f88ab0ae7490}
+
+\begin{DoxyCompactList}\small\item\em The number of joints in the chain. \end{DoxyCompactList}\item 
+int {\bfseries n\+Joints}\hypertarget{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}{}\label{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 11 of file arm.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Arm@{Arm}!update\+Pose@{update\+Pose}}
+\index{update\+Pose@{update\+Pose}!Arm@{Arm}}
+\subsubsection[{\texorpdfstring{update\+Pose(std\+::vector$<$ double $>$)}{updatePose(std::vector< double >)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Arm\+::update\+Pose (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_arm_abc38e64d0f6f3ea416626208baefa28d}{}\label{class_arm_abc38e64d0f6f3ea416626208baefa28d}
+A function to update the current virtual representation of the arm
+
+
+\begin{DoxyParams}{Parameters}
+{\em joint\+Positions} & The angular positions of the arm joints in order of the joint in radians \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The boolean true for a successful update, False otherwise 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_kinova_arm_a3374988c7b3d9ae8773bc63f950629f7}{Kinova\+Arm}.
+
+
+
+Definition at line 6 of file arm.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/collision\+\_\+monitoring/include/arm.\+h\item 
+/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/collision\+\_\+monitoring/src/arm.\+cpp\end{DoxyCompactItemize}

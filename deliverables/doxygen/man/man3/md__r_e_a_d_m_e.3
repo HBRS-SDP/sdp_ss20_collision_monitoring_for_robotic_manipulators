@@ -1,0 +1,67 @@
+.TH "md__r_e_a_d_m_e" 3 "Wed Jun 24 2020" "Collision monitoring for robotic manipulators" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__r_e_a_d_m_e \- sdp_ss20_collision_monitoring_for_robotic_manipulators 
+
+.SS "Members:"
+.PP
+.IP "\(bu" 2
+Alan Gomez
+.IP "\(bu" 2
+Samuel Parra
+.IP "\(bu" 2
+Brennan Penfold
+.PP
+.PP
+.SS "References"
+.PP
+This library is an implementation of the following papers:
+.PP
+.IP "\(bu" 2
+Real-Time Obstacle Avoidance for Manipulators and Mobile Robots, Oussama Khatib, 1986\&.
+.IP "\(bu" 2
+Biologically-inspired dynamical systems for movement generation: automatic real-time goal adaptation and obstacle avoidance, H\&. Hoffmann et al\&., 2019\&.
+.PP
+.PP
+.SS "Requirements:"
+.PP
+.IP "\(bu" 2
+KDL (https://www.orocos.org/kdl/installation-manual)
+.IP "\(bu" 2
+Eigen (http://eigen.tuxfamily.org)
+.IP "\(bu" 2
+CMAKE V3\&.5
+.PP
+.PP
+.SS "Building"
+.PP
+In the root folder create a build folder: 
+.PP
+.nf
+1 \&.\&.\&.\sdp_ss20_collision_monitoring_for_robotic_manipulators> mkdir build
+
+.fi
+.PP
+ CD into the build folder and run cmake for the first time to configure the build environment: 
+.PP
+.nf
+1 \&.\&.\&.\sdp_ss20_collision_monitoring_for_robotic_manipulators$ cd build
+2 \&.\&.\&.\sdp_ss20_collision_monitoring_for_robotic_manipulators\build$ cmake \&.\&.
+
+.fi
+.PP
+ If VS Code is being used the CMAKE Tools extension is helpful as it allows the library to be built by pressing F7\&.
+.PP
+Otherwise the following commands need to be run from the build folder: 
+.PP
+.nf
+1 \&.\&.\&.\sdp_ss20_collision_monitoring_for_robotic_manipulators\build$ cmake \&.\&.
+2 \&.\&.\&.\sdp_ss20_collision_monitoring_for_robotic_manipulators\build$ cmake --build \&.
+
+.fi
+.PP
+.PP
+.SS "Execution"
+.PP
+The executable file compiles as /build/collision_monitoring 

@@ -1,0 +1,135 @@
+.TH "Monitor" 3 "Wed Jun 24 2020" "Collision monitoring for robotic manipulators" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Monitor \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <monitor\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::vector< std::vector< double > > \fBdistanceToObjects\fP ()"
+.br
+.ti -1c
+.RI "std::vector< std::vector< double > > \fBdistanceBetweenArmLinks\fP ()"
+.br
+.ti -1c
+.RI "void \fBaddObstacle\fP (\fBPrimitive\fP *obstacle)"
+.br
+.ti -1c
+.RI "void \fBaddObstacle\fP (\fBSphere\fP *obstacle)"
+.br
+.ti -1c
+.RI "void \fBaddObstacle\fP (\fBCapsule\fP *obstacle)"
+.br
+.ti -1c
+.RI "void \fBaddObstacle\fP (\fBArm\fP *arm)"
+.br
+.ti -1c
+.RI "\fBMonitor\fP (\fBArm\fP *arm)"
+.br
+.ti -1c
+.RI "\fB~Monitor\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBArm\fP * \fBarm\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBPrimitive\fP * > \fBobstacles\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBPrimitive\fP * > \fBobstaclesToDelete\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A collision monitor to determine the distance to obstacles and other links
+.PP
+The \fBMonitor\fP class is a collision monitor which stores the address of an instance of the class \fBArm\fP and maintains a list of obstacles\&. It can perform collision monitoring with obstacles by determining the distance to obstacles in the workspace, or collision monitoring with the arm itself by monitoring the distance between the links\&. 
+.PP
+Definition at line 18 of file monitor\&.h\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Monitor::Monitor (\fBArm\fP * arm)"
+Constructor of \fBMonitor\fP
+.PP
+This is the constructor for the monitor class, it takes as paramter the arm to be monitored\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarm\fP arm to monitor collision\&. 
+.RE
+.PP
+
+.PP
+Definition at line 6 of file monitor\&.cpp\&.
+.SS "Monitor::~Monitor ()"
+Destructor for the monitor class 
+.PP
+Definition at line 13 of file monitor\&.cpp\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Monitor::addObstacle (\fBPrimitive\fP * obstacle)"
+Adds primitive to list of obstacles
+.PP
+Adds a primitive to the list of obstacles\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIobstacle\fP address of the obstacle to be added\&. 
+.RE
+.PP
+
+.PP
+Definition at line 23 of file monitor\&.cpp\&.
+.SS "void Monitor::addObstacle (\fBArm\fP * arm)"
+Adds arm to list of obstacles
+.PP
+This method decomposes an arm into its primitives to add it into the vector of obstacles\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarm\fP address of the arm to be treated as an obstacle\&. 
+.RE
+.PP
+
+.PP
+Definition at line 58 of file monitor\&.cpp\&.
+.SS "std::vector< std::vector< double > > Monitor::distanceBetweenArmLinks ()"
+Collision monitoring with the arm itself\&.
+.PP
+This methods monitors the distance from one link of the arm to other links\&.
+.PP
+\fBReturns:\fP
+.RS 4
+a matrix with the distance of each link to the other links\&. 
+.RE
+.PP
+
+.PP
+Definition at line 108 of file monitor\&.cpp\&.
+.SS "std::vector< std::vector< double > > Monitor::distanceToObjects ()"
+Collision monitoring with obstacles\&.
+.PP
+This methods monitors the distance from one link of the arm to obstacles in the workspace\&.
+.PP
+\fBReturns:\fP
+.RS 4
+a matrix with the distance of each link to the other obstacles\&. 
+.RE
+.PP
+
+.PP
+Definition at line 75 of file monitor\&.cpp\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Collision monitoring for robotic manipulators from the source code\&.

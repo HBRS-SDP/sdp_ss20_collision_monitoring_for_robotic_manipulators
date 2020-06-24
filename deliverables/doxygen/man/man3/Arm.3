@@ -1,0 +1,67 @@
+.TH "Arm" 3 "Wed Jun 24 2020" "Collision monitoring for robotic manipulators" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Arm \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBKinovaArm\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual bool \fBupdatePose\fP (std::vector< double >)"
+.br
+.ti -1c
+.RI "virtual Eigen::Matrix4d \fBgetPose\fP (void)=0"
+.br
+.ti -1c
+.RI "virtual Eigen::Matrix4d \fBgetPose\fP (int jointNumber)=0"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "Eigen::Matrix4d \fBbaseTransform\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBPrimitive\fP * > \fBlinks\fP"
+.br
+.ti -1c
+.RI "int \fBnLinks\fP"
+.br
+.RI "\fIThe number of joints in the chain\&. \fP"
+.ti -1c
+.RI "int \fBnJoints\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 11 of file arm\&.h\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "bool Arm::updatePose (std::vector< double >)\fC [virtual]\fP"
+A function to update the current virtual representation of the arm
+.PP
+\fBParameters:\fP
+.RS 4
+\fIjointPositions\fP The angular positions of the arm joints in order of the joint in radians 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The boolean true for a successful update, False otherwise 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBKinovaArm\fP\&.
+.PP
+Definition at line 6 of file arm\&.cpp\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Collision monitoring for robotic manipulators from the source code\&.
