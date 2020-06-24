@@ -69,6 +69,8 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
     Eigen::Vector4d origin(0, 0, 0, 1);
     Eigen::Vector3d startArrow, positionLink;
     
+    Capsule *endEffectorCapsule;
+    
     double angle = 3.1415/2;
     
     for(int i = 0; i < monitor->obstacles.size(); i++) {
@@ -76,6 +78,8 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         Eigen::Vector3d direction; 
         monitor->arm->links.back()->getShortestDirection(direction, 
                                             monitor->obstacles[i]);
+    
+        endEffectorCapsule = dynamic_cast<Capsule*>(monitor->arm->links.back());
         // Rotation matrix
         Eigen::Vector3d rotvec = direction.cross(velocity);
         rotvec.normalized();
@@ -119,29 +123,37 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         startArrow = (monitor->obstacles[i]->pose * origin).head(3);
 
         #ifdef DEBUG
-        std::cout << potentialField << std::endl;
+            std::cout << potentialField << std::endl;
         #endif // DEBUG
 
-        MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
+        //Shortest distance arrow (for visualization)
+        MarkerPublisher mPublisherShortestDistance(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
         
-        mPublisherArrow.setRadius(0.005);
-        mPublisherArrow.setLength(0.005);
-        mPublisherArrow.setPoints(startArrow, startArrow + direction);
-        mPublisherArrow.Publish();
+        mPublisherShortestDistance.setRadius(0.005);
+        mPublisherShortestDistance.setLength(0.005);
+        std::cout << "Hell" << std::endl;
+        std::cout << direction.norm() << std::endl;
+        //std::cout << "H:" << std::endl << direction.normalize() << std::endl;
+        std::cout << "ra: " << endEffectorCapsule->getRadius() << std::endl;
+        //std::cout << "mul: " << std::endl << direction.normalize() * endEffectorCapsule->getRadius() << std::endl;
+        mPublisherShortestDistance.setPoints(startArrow, startArrow + direction); // 
+        mPublisherShortestDistance.Publish();
 
         positionLink = (monitor->arm->links.back()->pose * origin).head(3);
         MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
         mPublisherLink.setRadius(0.05);
         mPublisherLink.Publish();
 
-        MarkerPublisher mPublisherArrow2(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
+        MarkerPublisher mPublisherPotentialField(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
         
-        mPublisherArrow2.setRadius(0.005);
-        mPublisherArrow2.setLength(0.005);
-        mPublisherArrow2.setPoints(startArrow, startArrow + (gamma * potentialField));
-        mPublisherArrow2.Publish();
-    }
+        mPublisherPotentialField.setRadius(0.005);
+        mPublisherPotentialField.setLength(0.005);
+        mPublisherPotentialField.setPoints(startArrow, startArrow + (gamma * potentialField));
+        mPublisherPotentialField.Publish();
 
+        
+    }
+   
     return gamma * potentialField;
 }
 
