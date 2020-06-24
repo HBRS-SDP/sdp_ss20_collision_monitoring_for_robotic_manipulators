@@ -12,7 +12,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 
     // Import the tree from urdf
     if (!kdl_parser::treeFromFile(urdf_filename, armTree)){
-        std::cout << "Failed to construct kdl tree" << std::endl;
+        std::cout << "[KinovaArm] Failed to construct kdl tree" << std::endl;
     }
     // Convert the tree to a chain and get the number of joints
     armTree.getChain("base_link", "EndEffector_Link", fkChain);
@@ -91,7 +91,7 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
 
     // Import the tree from urdf
     if (!kdl_parser::treeFromFile(urdf_filename, armTree)){
-        std::cout << "Failed to construct kdl tree" << std::endl;
+        std::cout << "[KinovaArm] Failed to construct kdl tree" << std::endl;
     }
     // Convert the tree to a chain and get the number of joints
     armTree.getChain("base_link", "EndEffector_Link", fkChain);
@@ -105,7 +105,7 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
         localPoses.push_back(new KDL::Frame());
     }
     #ifdef DEBUG
-        std::cout << "\nnum_joints: " << nJoints << " " << localPoses.size() << std::endl;
+        std::cout << "[KinovaArm] num_joints: " << nJoints << " " << localPoses.size() << std::endl;
     #endif //DEBUG
 
     // ---------------- initialise the arm to init point ------------- //
@@ -141,7 +141,7 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
         links.push_back(link);
     }
     #ifdef DEBUG
-    std::cout << links.size() << std::endl;
+    std::cout << "# links: " << links.size() << std::endl;
     #endif
     // Mathematical constants, declared in constructor for speed
     this->origin << 0, 0, 0, 1;
@@ -172,7 +172,7 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
     {
         jointArray(i) = jointPositions[i];
     }
-
+    
 
     // solve for the frame at the "link" of the chain for the given joint positions
     for(int frameNum = 0; frameNum < nFrames; frameNum++)

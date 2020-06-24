@@ -30,6 +30,15 @@ int main(int argc, char **argv)
     n.param<std::string>(ros::this_node::getName()+"/goal_topic", goalTopic, ros::this_node::getName()+"/goal");
     n.param<std::string>(ros::this_node::getName()+"/velocity_topic", jointVelocityTopic, "joint_command");
 
+    double K;
+    double D;
+    double gamma;
+    double beta;
+    n.param<double>("/K", K, 0.1);
+    n.param<double>("/D", D, 0);
+    n.param<double>("/gamma", gamma, 100);
+    n.param<double>("/beta", beta, 20/3.1425);
+
 
     std::string model = modelPath;
     KinovaArm arm1(model);
@@ -38,7 +47,7 @@ int main(int argc, char **argv)
     arm1.updatePose(initPose);
 
     // Create the armController class based off the first monitor
-    ArmController armController1(&monitor1, 0.1, 0, 1000, 20/3.1425);
+    ArmController armController1(&monitor1, K, D, gamma, beta);
 
     // Init ROS listener
     ros::Subscriber armSub = n.subscribe(jointStatesTopic, 1000, &ArmController::armCallback, &armController1);
@@ -80,7 +89,7 @@ int main(int argc, char **argv)
         }
 
         #ifdef DEBUG
-            std::cout<<std::endl;
+            std::cout<< std::endl;
             std::cout<< arm1.getPose() << std::endl;
         #endif //DEBUG
         armPub.publish(jointStates);

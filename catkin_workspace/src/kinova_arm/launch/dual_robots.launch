@@ -24,6 +24,11 @@
   <param name="arm_controller/urdf_model" value="$(arg model)" />
   <param name="publish_frequency" value="100" />
 
+  <param name="K" value="0.1"/>
+  <param name="D" value="0"/>
+  <param name="gamma" value="25"/>
+  <param name="beta" value="6.366385485"/>
+
 
   <param name="arm_controller/joint_state_topic" value="/joint_states" />
   <param name="arm_controller/velocity_topic" value="/joint_command" />

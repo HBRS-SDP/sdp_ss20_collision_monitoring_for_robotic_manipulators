@@ -1,0 +1,188 @@
+.TH "Sphere" 3 "Wed Jun 24 2020" "Collision monitoring for robotic manipulators" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Sphere \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBPrimitive\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSphere\fP (Eigen::Matrix4d \fBpose\fP, double radius)"
+.br
+.ti -1c
+.RI "\fBSphere\fP (\fBSphere\fP *sphere)"
+.br
+.ti -1c
+.RI "float \fBgetRadius\fP ()"
+.br
+.ti -1c
+.RI "void \fBgetShortestDirection\fP (Eigen::Vector3d &shortestDirection, \fBPrimitive\fP *primitive)"
+.br
+.ti -1c
+.RI "void \fBgetShortestDirection\fP (Eigen::Vector3d &shortestDirection, \fBCapsule\fP *capsule)"
+.br
+.ti -1c
+.RI "void \fBgetShortestDirection\fP (Eigen::Vector3d &shortestDirection, \fBSphere\fP *sphere)"
+.br
+.ti -1c
+.RI "double \fBgetShortestDistance\fP (\fBPrimitive\fP *primitive)"
+.br
+.ti -1c
+.RI "double \fBgetShortestDistance\fP (\fBCapsule\fP *capsule)"
+.br
+.ti -1c
+.RI "double \fBgetShortestDistance\fP (\fBSphere\fP *sphere)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Definition at line 257 of file primitives\&.h\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Sphere::Sphere (Eigen::Matrix4d pose, double radius)"
+Constructor of \fBCapsule\fP class
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpose\fP center point of the line represented with a Matrix4d\&. 
+.br
+\fIradius\fP radius of the sphere 
+.RE
+.PP
+
+.PP
+Definition at line 283 of file primitives\&.cpp\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "float Sphere::getRadius ()"
+Getter of radius
+.PP
+\fBReturns:\fP
+.RS 4
+the radius of the sphere 
+.RE
+.PP
+
+.PP
+Definition at line 297 of file primitives\&.cpp\&.
+.SS "void Sphere::getShortestDirection (Eigen::Vector3d & shortestDirection, \fBPrimitive\fP * primitive)\fC [virtual]\fP"
+Performs a dynamic cast to overload the direction functions
+.PP
+This method takes an object that inherits from primitive and performs a dynamic cast to call the correct getShortestDirection method depending on the class of the shape\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIprimitive\fP address of the primitive object\&. 
+.br
+\fIshortestDirection\fP a vector in 3D that represents the closes direction between this and the second primitive\&. 
+.RE
+.PP
+
+.PP
+Implements \fBPrimitive\fP\&.
+.PP
+Definition at line 301 of file primitives\&.cpp\&.
+.SS "void Sphere::getShortestDirection (Eigen::Vector3d & shortestDirection, \fBCapsule\fP * capsule)\fC [virtual]\fP"
+Finds the shortest distance between this primitive and a \fBCapsule\fP primitive
+.PP
+This method takes a capsule object and returns the closest direction between this primitive and a capsule object\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcapsule\fP address of the primitive object 
+.br
+\fIshortestDirection\fP a vector in 3D that represents the closes direction between the primitive and capsule 
+.RE
+.PP
+
+.PP
+Implements \fBPrimitive\fP\&.
+.PP
+Definition at line 315 of file primitives\&.cpp\&.
+.SS "void Sphere::getShortestDirection (Eigen::Vector3d & shortestDirection, \fBSphere\fP * sphere)\fC [virtual]\fP"
+Finds the shortest distance between this primitive and a \fBSphere\fP primitive
+.PP
+This method takes a capsule object and returns the closest direction between this primitive and a sphere object\&. returns a Vector3d\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsphere\fP address of the primitive object 
+.br
+\fIshortestDirection\fP a vector in 3D that represents the closes direction between the primitive and sphere 
+.RE
+.PP
+
+.PP
+Implements \fBPrimitive\fP\&.
+.PP
+Definition at line 331 of file primitives\&.cpp\&.
+.SS "double Sphere::getShortestDistance (\fBPrimitive\fP * primitive)\fC [virtual]\fP"
+Performs a dynamic cast to overload the distance functions
+.PP
+This method takes an object that inherits from primitive and performs a dynamic cast to call the correct getShortestDistance method depending on the class of the shape\&. returns a double value\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIprimitive\fP address of the primitive object\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the closest distance between this and the second primitive\&. 
+.RE
+.PP
+
+.PP
+Implements \fBPrimitive\fP\&.
+.PP
+Definition at line 341 of file primitives\&.cpp\&.
+.SS "double Sphere::getShortestDistance (\fBCapsule\fP * capsule)\fC [virtual]\fP"
+Finds the shortest distance between this primitive and a \fBCapsule\fP primitive
+.PP
+This method takes a capsule object and returns the closest distance between this primitive and a capsule object\&. returns a double value\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcapsule\fP address of the primitive object 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the closest distance between the primitive and capsule 
+.RE
+.PP
+
+.PP
+Implements \fBPrimitive\fP\&.
+.PP
+Definition at line 355 of file primitives\&.cpp\&.
+.SS "double Sphere::getShortestDistance (\fBSphere\fP * sphere)\fC [virtual]\fP"
+Finds the shortest distance between this primitive and a \fBSphere\fP primitive
+.PP
+This method takes a capsule object and returns the closest distance between this primitive and a sphere object\&. returns a double value\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsphere\fP address of the primitive object 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the closest distance between the primitive and sphere 
+.RE
+.PP
+
+.PP
+Implements \fBPrimitive\fP\&.
+.PP
+Definition at line 365 of file primitives\&.cpp\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Collision monitoring for robotic manipulators from the source code\&.

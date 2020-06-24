@@ -1,7 +1,6 @@
 #include "marker_publisher.h"
 
 MarkerPublisher::MarkerPublisher(ros::Publisher ownPublisher, int type, std::string frame_id, std::string ns, int id, double positionX, double positionY, double positionZ, double r, double g, double b, double alpha) {
-    std::cout << "0" << std::endl;
     this->ownPublisher = ownPublisher;
     this->marker.type = type;
     this->marker.action = visualization_msgs::Marker::ADD;
@@ -23,7 +22,6 @@ MarkerPublisher::MarkerPublisher(ros::Publisher ownPublisher, int type, std::str
     this->marker.color.r = r;
     this->marker.color.g = g;
     this->marker.color.b = b;
-    std::cout << "1" << std::endl;
 }
 
 void MarkerPublisher::setRadius(double radius){

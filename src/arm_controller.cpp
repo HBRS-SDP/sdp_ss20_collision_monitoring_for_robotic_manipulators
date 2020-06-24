@@ -1,5 +1,6 @@
 // A simple program that computes the square root of a number
 #include "arm_controller.h"
+// #define DEBUG
 
 ArmController::ArmController(Monitor* monitorObject, double k, double d,
                                                     double gamma, double beta) {
@@ -80,15 +81,33 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
     Eigen::Vector3d potentialField = Eigen::Vector3d({0, 0, 0});
     Eigen::Vector4d origin(0, 0, 0, 1);
     Eigen::Vector3d startArrow, positionLink;
-    double angle = M_PI/2;
+    
+    Capsule *endEffectorCapsule;
+    
+    double angle = 3.1415/2;
 
-    // Iterate through all the obstacles
     for(int i = 0; i < monitor->obstacles.size(); i++) {
-        
-
         Eigen::Vector3d direction; 
         monitor->arm->links.back()->getShortestDirection(direction, 
                                             monitor->obstacles[i]);
+
+        endEffectorCapsule = dynamic_cast<Capsule*>(monitor->arm->links.back());
+        if(endEffectorCapsule){
+            startArrow = (monitor->obstacles[i]->pose * origin).head(3);
+            //Shortest distance arrow (for visualization)
+            MarkerPublisher mPublisherShortestDistance(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
+            
+            mPublisherShortestDistance.setRadius(0.005);
+            mPublisherShortestDistance.setLength(0.005);
+            mPublisherShortestDistance.setPoints(startArrow, startArrow + direction - (direction / direction.norm()) * endEffectorCapsule->getRadius() );
+            mPublisherShortestDistance.Publish();
+        }
+
+        if (velocity.norm() < 1.0e-2) {
+            return potentialField;
+        }
+        
+        
         // Rotation matrix
         Eigen::Vector3d rotvec = direction.cross(velocity);
         rotvec.normalized();
@@ -119,7 +138,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
                     ct      +  m_vt_2*rotvec(2);
 
         //Perform the related maths from [1]
-
+        rotation.normalize();
         // Phi
         // φ = cos ((o − x) v/(|o − x| · |v|))
         double phi_denominator = velocity.norm()*direction.norm();
@@ -134,37 +153,33 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         // Publish the markers for potential feild visualization 
         #ifdef DEBUG
-        std::cout << potentialField << std::endl;
+        std::cout << "direction: " << direction << std::endl;
+        std::cout << "velocity: " << velocity << std::endl;
+        std::cout << "rotvec: " << rotvec << std::endl;
+        std::cout << "rotation: " << rotation << std::endl;
+        std::cout << "phi_denominator" << phi_denominator << std::endl;
+        std::cout << "phi_numerator" << phi_numerator << std::endl;
+        std::cout << "phi" << phi << std::endl;
+        std::cout << "exp" << exp << std::endl;
+
+        std::cout << "potential field: " << potentialField << std::endl;
         #endif // DEBUG
 
-        startArrow = (monitor->obstacles[i]->pose * origin).head(3);
-        MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
-        
-        mPublisherArrow.setRadius(0.005);
-        mPublisherArrow.setLength(0.005);
-        mPublisherArrow.setPoints(startArrow, startArrow + direction);
-        mPublisherArrow.Publish();
 
-        positionLink = (monitor->arm->links.back()->pose * origin).head(3);
-        MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
-        mPublisherLink.setRadius(0.05);
-        mPublisherLink.Publish();
-
-        MarkerPublisher mPublisherArrow2(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
+        MarkerPublisher mPublisherPotentialField(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
         
-        mPublisherArrow2.setRadius(0.005);
-        mPublisherArrow2.setLength(0.005);
-        mPublisherArrow2.setPoints(startArrow, startArrow + (gamma * potentialField));
-        mPublisherArrow2.Publish();
+        mPublisherPotentialField.setRadius(0.005);
+        mPublisherPotentialField.setLength(0.005);
+        mPublisherPotentialField.setPoints(startArrow, startArrow + (gamma * potentialField));
+        mPublisherPotentialField.Publish();
     }
-
+   
     return gamma * potentialField;
 }
 
 KDL::Twist ArmController::controlLoop(void) {
     // Variable for storing the resulting joint velocities
-    double x, y, z, alpha, beta, gamma;
-    
+    double x, y, z;
     // Update the current state to match real arm state
     this->monitor->arm->updatePose(this->jointAngles);
     Eigen::Matrix4d currEndPose = monitor->arm->getPose();
@@ -172,22 +187,45 @@ KDL::Twist ArmController::controlLoop(void) {
     objectDistances = monitor->distanceToObjects();
     armDistances = monitor->distanceBetweenArmLinks();
 
-    //v̇ = K(g−x) − Dv + p(x, v)
+    //Show links as a cylinders
+    Capsule *capsuleLink;
+    Eigen::Vector3d positionLink;
+    for(int i=0; i < monitor->arm->links.size(); i++){
+        capsuleLink = dynamic_cast<Capsule*>(monitor->arm->links[i]);
+        if(capsuleLink){
+            double w = sqrt(1 + capsuleLink->pose(0,0)
+                       + capsuleLink->pose(1,1) 
+                       + capsuleLink->pose(2, 2))/2;
+            double x = (capsuleLink->pose(2,1) - capsuleLink->pose(1, 2))/(4*w);
+            double y = (capsuleLink->pose(0,2) - capsuleLink->pose(2, 0))/(4*w);
+            double z = (capsuleLink->pose(1,0) - capsuleLink->pose(0, 1))/(4*w);
 
+            Eigen::Quaterniond quat(x, y, z, w);
+
+            Eigen::Vector4d basePoint(0, 0, capsuleLink->getLength() / 2.0 , 1);
+            positionLink = (capsuleLink->pose * basePoint).head(3);
+            
+            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
+            mPublisherLink.setRadius(capsuleLink->getRadius());
+            mPublisherLink.setLength(capsuleLink->getLength());
+            mPublisherLink.setOrientation(x, y, z, w);
+            mPublisherLink.Publish();
+        }
+    }
+
+    //v̇ = K(g−x) − Dv + p(x, v)
     Eigen::Vector3d currVelocity = {twist.vel.data[0], twist.vel.data[1], twist.vel.data[2]};
     Eigen::Vector3d newVelocity = K * (goal - currEndPoint) - D * currVelocity
                                 + ArmController::obstaclePotentialField(currEndPoint, 
                                 currVelocity);
 
     #ifdef DEBUG
-    std::cout << newVelocity << std::endl;
-
-    std::cout << "goal: " << goal << std::endl;
-    std::cout << "currEndPoint: \n" << currEndPoint << std::endl;
-    std::cout << "point to goal: \n" << goal - currEndPoint << std::endl;
-    std::cout << "currVelocity: \n" << currVelocity << std::endl;
-    std::cout << "newVelocity: \n" << newVelocity << std::endl;
-    std::cout << "potential feild: \n" << ArmController::obstaclePotentialField(currEndPoint, 
+    std::cout << "[ArmController] goal: " << goal << std::endl;
+    std::cout << "[ArmController] currEndPoint: \n" << currEndPoint << std::endl;
+    std::cout << "[ArmController] point to goal: \n" << goal - currEndPoint << std::endl;
+    std::cout << "[ArmController] currVelocity: \n" << currVelocity << std::endl;
+    std::cout << "[ArmController] newVelocity: \n" << newVelocity << std::endl;
+    std::cout << "[ArmController] potential field: \n" << ArmController::obstaclePotentialField(currEndPoint, 
                                 currVelocity) << std::endl;
     #endif // DEBUG
 

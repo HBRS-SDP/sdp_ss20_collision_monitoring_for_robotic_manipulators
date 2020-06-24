@@ -1,0 +1,144 @@
+\hypertarget{class_arm_controller}{}\section{Arm\+Controller Class Reference}
+\label{class_arm_controller}\index{Arm\+Controller@{Arm\+Controller}}
+
+
+Collaboration diagram for Arm\+Controller\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{class_arm_controller__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_arm_controller_a27a8d755210b8e3bd96217ea8080b327}{Arm\+Controller} (\hyperlink{class_monitor}{Monitor} $\ast$monitor\+Object, double k, double d, double gamma, double beta)
+\item 
+\hyperlink{class_arm_controller_ad2b44ab21366148d89980e942b26d232}{$\sim$\+Arm\+Controller} ()\hypertarget{class_arm_controller_ad2b44ab21366148d89980e942b26d232}{}\label{class_arm_controller_ad2b44ab21366148d89980e942b26d232}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_kinova_arm}{Kinova\+Arm} Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_arm_controller_a29defeb3894d62016523a99b63320a22}{arm\+Callback} (const sensor\+\_\+msgs\+::\+Joint\+State\+::\+Const\+Ptr \&msg)
+\item 
+void \hyperlink{class_arm_controller_acbd85ddee96c8d6fd76728c68fb12d3c}{goal\+Callback} (const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&msg)
+\item 
+K\+D\+L\+::\+Twist \hyperlink{class_arm_controller_ad7e00a70c968a23087415b1bd0ac8bf1}{control\+Loop} (void)
+\item 
+Eigen\+::\+Vector3d {\bfseries obstacle\+Potential\+Field} (Eigen\+::\+Vector3d current\+Position, Eigen\+::\+Vector3d velocity)\hypertarget{class_arm_controller_ad0b1f28333e2a3be76258153a745803d}{}\label{class_arm_controller_ad0b1f28333e2a3be76258153a745803d}
+
+\item 
+void \hyperlink{class_arm_controller_a17d05bd19286dc4e04355e3d4f6bb372}{update\+Obstacles} (const visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr \&msg)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_monitor}{Monitor} $\ast$ {\bfseries monitor}\hypertarget{class_arm_controller_a939747279bba6db315f80092a74c2629}{}\label{class_arm_controller_a939747279bba6db315f80092a74c2629}
+
+\item 
+Eigen\+::\+Vector3d {\bfseries goal}\hypertarget{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}{}\label{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}
+
+\item 
+std\+::vector$<$ \hyperlink{class_rviz_obstacle}{Rviz\+Obstacle} $\ast$ $>$ {\bfseries rviz\+Obstacles}\hypertarget{class_arm_controller_ab94a1abce40096f6476404d49d00860f}{}\label{class_arm_controller_ab94a1abce40096f6476404d49d00860f}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 41 of file arm\+\_\+controller.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Arm\+Controller@{Arm\+Controller}!Arm\+Controller@{Arm\+Controller}}
+\index{Arm\+Controller@{Arm\+Controller}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{Arm\+Controller(\+Monitor $\ast$monitor\+Object, double k, double d, double gamma, double beta)}{ArmController(Monitor *monitorObject, double k, double d, double gamma, double beta)}}]{\setlength{\rightskip}{0pt plus 5cm}Arm\+Controller\+::\+Arm\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf Monitor} $\ast$}]{monitor\+Object, }
+\item[{double}]{k, }
+\item[{double}]{d, }
+\item[{double}]{gamma, }
+\item[{double}]{beta}
+\end{DoxyParamCaption}
+)}\hypertarget{class_arm_controller_a27a8d755210b8e3bd96217ea8080b327}{}\label{class_arm_controller_a27a8d755210b8e3bd96217ea8080b327}
+\hyperlink{class_kinova_arm}{Kinova\+Arm} constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em monitor\+Object} & The monitor instance used to get the distance from the arm to any obstacles \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An instance of Collision\+Monitor class 
+\end{DoxyReturn}
+
+
+Definition at line 5 of file arm\+\_\+controller.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Arm\+Controller@{Arm\+Controller}!arm\+Callback@{arm\+Callback}}
+\index{arm\+Callback@{arm\+Callback}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{arm\+Callback(const sensor\+\_\+msgs\+::\+Joint\+State\+::\+Const\+Ptr \&msg)}{armCallback(const sensor_msgs::JointState::ConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Arm\+Controller\+::arm\+Callback (
+\begin{DoxyParamCaption}
+\item[{const sensor\+\_\+msgs\+::\+Joint\+State\+::\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{class_arm_controller_a29defeb3894d62016523a99b63320a22}{}\label{class_arm_controller_a29defeb3894d62016523a99b63320a22}
+Callback function updating the arm positions
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The ros sensor messsage containing the joint angles \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 46 of file arm\+\_\+controller.\+cpp.
+
+\index{Arm\+Controller@{Arm\+Controller}!control\+Loop@{control\+Loop}}
+\index{control\+Loop@{control\+Loop}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{control\+Loop(void)}{controlLoop(void)}}]{\setlength{\rightskip}{0pt plus 5cm}K\+D\+L\+::\+Twist Arm\+Controller\+::control\+Loop (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_arm_controller_ad7e00a70c968a23087415b1bd0ac8bf1}{}\label{class_arm_controller_ad7e00a70c968a23087415b1bd0ac8bf1}
+Function that uses internal parameters to send instructions to arm 
+
+Definition at line 163 of file arm\+\_\+controller.\+cpp.
+
+\index{Arm\+Controller@{Arm\+Controller}!goal\+Callback@{goal\+Callback}}
+\index{goal\+Callback@{goal\+Callback}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{goal\+Callback(const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&msg)}{goalCallback(const geometry_msgs::Point::ConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Arm\+Controller\+::goal\+Callback (
+\begin{DoxyParamCaption}
+\item[{const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{class_arm_controller_acbd85ddee96c8d6fd76728c68fb12d3c}{}\label{class_arm_controller_acbd85ddee96c8d6fd76728c68fb12d3c}
+Callback function updating goal position of the arms endeffector
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The ros sensor messsage containing the goal position \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 51 of file arm\+\_\+controller.\+cpp.
+
+\index{Arm\+Controller@{Arm\+Controller}!update\+Obstacles@{update\+Obstacles}}
+\index{update\+Obstacles@{update\+Obstacles}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{update\+Obstacles(const visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr \&msg)}{updateObstacles(const visualization_msgs::Marker::ConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Arm\+Controller\+::update\+Obstacles (
+\begin{DoxyParamCaption}
+\item[{const visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{class_arm_controller_a17d05bd19286dc4e04355e3d4f6bb372}{}\label{class_arm_controller_a17d05bd19286dc4e04355e3d4f6bb372}
+A function that updates the obstacle poses or adds one if it doesn\textquotesingle{}t exist 
+
+Definition at line 227 of file arm\+\_\+controller.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/include/arm\+\_\+controller.\+h\item 
+/home/brennan/\+S\+D\+P/sdp\+\_\+ss20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+robotic\+\_\+manipulators/src/arm\+\_\+controller.\+cpp\end{DoxyCompactItemize}

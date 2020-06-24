@@ -82,12 +82,7 @@ int main(int argc, char **argv)
                         MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "obstacles", id, positionX, positionY, positionZ, r, g, b, 0.5);
                         mPublisher.setRadius(radius);
 
-                        // MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, frame_id, ns, id + 1, positionX, positionY, positionZ, g, b, r, 1.0);
-                        // mPublisherArrow.setRadius(radius / 5);
-                        // mPublisherArrow.setLength(radius * 10);
-
                         mPublisher.Publish();
-                        // mPublisherArrow.Publish();
                         
                         break;
                     }
