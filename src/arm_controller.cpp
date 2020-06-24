@@ -8,6 +8,9 @@ ArmController::ArmController(Monitor* monitorObject, double k, double d,
     Eigen::Matrix4d currEndPose = monitor->arm->getPose();
     numJoints = monitor->arm->nJoints;
 
+    
+    this->obstaclePub = n.advertise<visualization_msgs::Marker>("kinova_controller/potential_field", 1000);
+
     origin << 0, 0, 0, 1;
 
     goal = (currEndPose * origin).head(3);
@@ -57,10 +60,15 @@ void ArmController::goalCallback(const geometry_msgs::Point::ConstPtr& msg) {
 Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPosition, 
                                         Eigen::Vector3d velocity) {
     Eigen::Vector3d potentialField = Eigen::Vector3d({0, 0, 0});
+
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector3d startArrow, positionLink;
+    
     double angle = 3.1415/2;
     
     for(int i = 0; i < monitor->obstacles.size(); i++) {
         
+
         Eigen::Vector3d direction; 
         monitor->arm->links.back()->getShortestDirection(direction, 
                                             monitor->obstacles[i]);
@@ -102,7 +110,32 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         // R i vφ i exp(−βφ i )
         potentialField += (rotation * velocity) * phi * exp;
+
+
+        startArrow = (monitor->obstacles[i]->pose * origin).head(3);
+
+        std::cout << potentialField << std::endl;
+
+        MarkerPublisher mPublisherArrow(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
+        
+        mPublisherArrow.setRadius(0.005);
+        mPublisherArrow.setLength(0.005);
+        mPublisherArrow.setPoints(startArrow, startArrow + direction);
+        mPublisherArrow.Publish();
+
+        positionLink = (monitor->arm->links.back()->pose * origin).head(3);
+        MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
+        mPublisherLink.setRadius(0.05);
+        mPublisherLink.Publish();
+
+        MarkerPublisher mPublisherArrow2(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
+        
+        mPublisherArrow2.setRadius(0.005);
+        mPublisherArrow2.setLength(0.005);
+        mPublisherArrow2.setPoints(startArrow, startArrow + (gamma * potentialField));
+        mPublisherArrow2.Publish();
     }
+
     return gamma * potentialField;
 }
 
@@ -163,6 +196,9 @@ void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& 
             obstaclesAllocated.push_back(sphere);
             monitor->addObstacle(sphere);
         }
+    }
+    else if(msg->type == visualization_msgs::Marker::ARROW){
+        std::cout << "arrow" << std::endl;
     }
     else {
         ROS_ERROR("Wrong shape for obstacle");
