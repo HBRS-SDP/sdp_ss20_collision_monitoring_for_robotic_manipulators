@@ -54,7 +54,6 @@ KinovaArm::KinovaArm(std::string urdf_filename){
         fksolver.JntToCart(jointArray, *localPoses[frameNum], frameNum);
     }
 
-    // TODO convert to config file
     // pass in the parameters for the link cylinder models
     radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
     lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593, 0.10593, 0.061525});
@@ -129,7 +128,6 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
         fksolver.JntToCart(jointArray, *localPoses[frameNum], frameNum);
     }
 
-    // TODO convert to config file
     // pass in the parameters for the link cylinder models
     radii.assign({0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04});
     lengths.assign({0.15643, 0.12838, 0.21038, 0.21038, 0.20843, 0.10593, 0.10593, 0.061525});
@@ -211,11 +209,11 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
 
     // vector to store output values
     std::vector<double> jointVelocitiesOut;
-    // std::cout << "Twist: " << twist << std::endl;
-    // std::cout << typeid(twist.vel.data[0]).name()<<std::endl;
 
     // inverse kinemetics solver
     KDL::ChainIkSolverVel_wdls ikSolver = KDL::ChainIkSolverVel_wdls(fkChain);
+
+    // Set the weights for singularity handling
     Eigen::MatrixXd weight_ts;
     weight_ts.resize(6, 6);
     weight_ts.setIdentity();
@@ -230,11 +228,11 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
     //solver for joint velocities
     ikSolver.CartToJnt(jointArray, twist, jointVels);
 
-    // std::cout << "ik joint vels, joint angles:" <<std::endl; 
     // push velocities onto the vector
     for (int i=0; i<jointVels.rows(); i++){
-        // std::cout <<  jointVels(i) << ", "<< jointArray(i) <<std::endl;
         double velocity;
+
+        // Keep the max velocity to the limit
         if(jointVels(i) > MAX_JOINT_VEL) {
             velocity = MAX_JOINT_VEL;
         }
@@ -245,6 +243,7 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
             velocity = jointVels(i);
         }
 
+        // Add the joint angles to the list
         jointVelocitiesOut.push_back(velocity);
     }
 
@@ -255,6 +254,7 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
 
 Eigen::Matrix4d KinovaArm::getPose(void)
 {
+    // Get the final pose from the list
     return frameToMatrix(*localPoses.back());
 }
 
