@@ -47,10 +47,6 @@ TEST_CASE( "Parallel capsules", "[Capsule - Capsule]" ) {
     Primitive *Link_1 = new Capsule(pose_1, length_1, radius_1);
     Primitive *Link_2 = new Capsule(pose_2, length_2, radius_2);
 
-    std::cout << "Result L1: " << Link_1->getShortestDistance(Link_2) << std::endl;
-    std::cout << "Result L2: " << Link_2->getShortestDistance(Link_1) << std::endl;
-
-
     REQUIRE( Link_1->getShortestDistance(Link_2) == Approx(20).margin(0.001) );
     REQUIRE( Link_2->getShortestDistance(Link_1) == Approx(20).margin(0.001) );
 

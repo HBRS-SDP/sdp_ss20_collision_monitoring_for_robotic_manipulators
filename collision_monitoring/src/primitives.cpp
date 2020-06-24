@@ -193,8 +193,6 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *
     if(lambdaM1 >= 0 && lambdaM1 <= 1){
         if(lambdaM2 >=0 && lambdaM2 <= 1){
             //m1 and m2 inside
-            std::cout << "L1 : " << lambdaM1 << std::endl;
-            std::cout << "L2 : " << lambdaM2 << std::endl;
             axisOfSymmetryOwn.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryObstacle);
             ownClosestPoint = closestPoints.row(0);
             obstacleClosestPoint = closestPoints.row(1);
