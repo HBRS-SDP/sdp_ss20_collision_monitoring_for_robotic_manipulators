@@ -10,7 +10,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
 
     // Import the tree from urdf
     if (!kdl_parser::treeFromFile(urdf_filename, armTree)){
-        std::cout << "Failed to construct kdl tree" << std::endl;
+        std::cout << "[KinovaArm] Failed to construct kdl tree" << std::endl;
     }
     // Convert the tree to a chain and get the number of joints
     armTree.getChain("base_link", "EndEffector_Link", fkChain);
@@ -58,7 +58,7 @@ KinovaArm::KinovaArm(std::string urdf_filename){
         Capsule* link = new Capsule(pose, lengths[i], radii[i]);
         links.push_back(link);
     }
-    std::cout << links.size() << std::endl;
+    std::cout << "[KinovaArm] Links in arm:" << links.size() << std::endl;
     // Mathematical constants, declared in constructor for speed
     this->baseTransform << 1, 0, 0, 0,
                            0, 1, 0, 0,
@@ -81,7 +81,7 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
 
     // Import the tree from urdf
     if (!kdl_parser::treeFromFile(urdf_filename, armTree)){
-        std::cout << "Failed to construct kdl tree" << std::endl;
+        std::cout << "[KinovaArm] Failed to construct kdl tree" << std::endl;
     }
     // Convert the tree to a chain and get the number of joints
     armTree.getChain("base_link", "EndEffector_Link", fkChain);
@@ -93,7 +93,7 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
         localPoses.push_back(new KDL::Frame());
     }
     #ifdef DEBUG
-        std::cout << "\nnum_joints: " << nJoints << " " << localPoses.size() << std::endl;
+        std::cout << "[KinovaArm] num_joints: " << nJoints << " " << localPoses.size() << std::endl;
     #endif //DEBUG
 
     // ---------------- initialise the arm to init point ------------- //
@@ -129,7 +129,7 @@ KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransfo
         Capsule* link = new Capsule(pose, lengths[i], radii[i]);
         links.push_back(link);
     }
-    std::cout << links.size() << std::endl;
+    std::cout << "[KinovaArm] Links in arm:" << links.size() << std::endl;
     // Mathematical constants, declared in constructor for speed
     this->origin << 0, 0, 0, 1;
     this->directionVect << 0, 0, 1;
@@ -159,7 +159,7 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
     {
         jointArray(i) = jointPositions[i];
     }
-
+    
 
     // solve for the frame at the "link" of the chain for the given joint positions
     for(int link_num = 0; link_num < nJoints; link_num++)
@@ -168,7 +168,7 @@ bool KinovaArm::updatePose(std::vector<double> jointPositions){
         {
             #ifdef DEBUG
             // print the resulting link calculations
-            std::cout << "Calculations to link number: " << link_num << std::endl 
+            std::cout << "[KinovaArm] Calculations to link number: " << link_num << std::endl 
                       << *localPoses[link_num] << std::endl
                       << "Success" << std::endl;
             #endif //DEBUG
@@ -247,7 +247,7 @@ Eigen::Matrix4d KinovaArm::getPose(int jointNumber)
 {
     // input sanitization
     if(jointNumber >= localPoses.size() | jointNumber < 0){
-        std::cout << "Access joint number larger than array in getPose";
+        std::cout << "[KinovaArm] Access joint number larger than array in getPose";
         return frameToMatrix(*localPoses.back());
     }
 

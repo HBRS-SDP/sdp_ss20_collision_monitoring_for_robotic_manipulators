@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "kinova_controller");
     std::string nodeName = ros::this_node::getName();
-    std::cout << "nodeName: " << nodeName << std::endl;
+    std::cout << "[DualKinovaCMnode] nodeName: " << nodeName << std::endl;
     ros::NodeHandle n1;
     ros::NodeHandle n2;
     std::string modelPath;
@@ -76,14 +76,15 @@ int main(int argc, char **argv)
                       0, 0, 1, 0,
                       0, 0, 0, 1;
 
+    std::vector<double> initPose = {0, 0, 0, 0, 0, 0, 0};
     KinovaArm arm1(model, baseTransform1);
     KinovaArm arm2(model, baseTransform2);
     Monitor monitor1(&arm1);
     Monitor monitor2(&arm2);
+    arm1.updatePose(initPose);
+    arm2.updatePose(initPose);
     monitor1.addObstacle(&arm2);
     monitor2.addObstacle(&arm1);
-    std::vector<double> initPose = {0, 0, 0, 0, 0, 0, 0};
-    arm1.updatePose(initPose);
 
     // Create the armController class based off the first monitor
     ArmController armController1(&monitor1, 1, 0, 100, 20/3.1425);
@@ -132,9 +133,11 @@ int main(int argc, char **argv)
 
     while(ros::ok()) {
         endeffectorVelocity1 = armController1.controlLoop();
+        std::cout << "---" << std::endl;
         jointVelocities1 = arm1.ikVelocitySolver(endeffectorVelocity1);
-
+        std::cout << "+++" << std::endl;
         endeffectorVelocity2 = armController2.controlLoop();
+        std::cout << "===" << std::endl;
         jointVelocities2 = arm2.ikVelocitySolver(endeffectorVelocity2);
 
         for(int i=0; i<arm1.nJoints; i++){
@@ -145,6 +148,8 @@ int main(int argc, char **argv)
             jointStates2.position[i] = arm2.jointArray(i);
         }
 
+        std::cout << "[dual] joint states 1" << jointStates1 << std::endl;
+        std::cout << "[dual] joint states 2" << jointStates2 << std::endl;
 
         armPub1.publish(jointStates1);
         armPub2.publish(jointStates2);

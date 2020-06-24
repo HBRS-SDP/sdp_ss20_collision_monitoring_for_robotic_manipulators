@@ -1,12 +1,14 @@
 #include "monitor.h"
 #include <vector>
+#include <typeinfo>
 
 Monitor::Monitor(Arm* arm){
+    std::cout << "Monitor have arm with " << arm->links.size() << "links" << std::endl;
     this->arm = arm;
 }
 
 Monitor::~Monitor(){
-    std::cout << "###" << this->obstacles.size() << std::endl;
+    std::cout << "Monitor had:" << this->obstacles.size() << "obstacles before destruction" << std::endl;
     for( int i=0; i < this->obstaclesToDelete.size(); i++){
         delete obstaclesToDelete[i];
         obstaclesToDelete[i] = NULL;
@@ -14,6 +16,7 @@ Monitor::~Monitor(){
 }
 
 void Monitor::addObstacle(Primitive* obstacle) {
+    std::cout << "[Monitor] obstacle root method, received obstacle" << std::endl;
     Capsule *capsule = dynamic_cast<Capsule*>(obstacle);
     if(capsule){
         this->addObstacle(capsule);
@@ -27,24 +30,30 @@ void Monitor::addObstacle(Primitive* obstacle) {
 }
 
 void Monitor::addObstacle(Sphere* obstacle) {
+    std::cout << "[Monitor] obstacle sphere method" << std::endl;
     Sphere* obstacleCopy = new Sphere(obstacle);
     obstaclesToDelete.push_back(obstacleCopy);
     obstacles.push_back(obstacleCopy);
 }
 
 void Monitor::addObstacle(Capsule* obstacle) {
+    std::cout << "[Monitor] obstacle capsule method" << std::endl;
     Capsule* obstacleCopy = new Capsule(obstacle);
     obstaclesToDelete.push_back(obstacleCopy);
     obstacles.push_back(obstacleCopy);
 }
 
 
-void Monitor::addObstacle(Arm* arm) {
+void Monitor::addObstacle(Arm* arm_obstacle) {
+    std::cout << "[Monitor] obstacle arm method" << std::endl;
     // Adds every link of the arm (a primitive) to the obstacles vector.
-    for (int i = 0; i < arm->links.size(); i++) {
+    for (int i = 0; i < arm_obstacle->links.size(); i++) {
         // this->obstacles.push_back(arm->links[i]);
-        obstacles.push_back(arm->links[i]);
+        std::cout << "link ["<< i << "]\n" << arm_obstacle->links[i]->pose << std::endl;
+        obstacles.push_back(arm_obstacle->links[i]);
     }
+    std::cout << "[Monitor] new obstacle length: " << obstacles.size() << std::endl;
+    distanceToObjects();
 }
 
 std::vector<std::vector<double>> Monitor::distanceToObjects(){
@@ -57,6 +66,7 @@ std::vector<std::vector<double>> Monitor::distanceToObjects(){
         std::vector<double> distances;
 
         for (int j = 0; j < this->arm->links.size(); j++) {
+            
             distances.push_back(this->arm->links[j]->getShortestDistance( 
                 this->obstacles[i] ));
         }
@@ -64,7 +74,7 @@ std::vector<std::vector<double>> Monitor::distanceToObjects(){
         distanceToObjects.push_back(distances);
     }
 
-    #ifdef DEBUG
+    // #ifdef DEBUG
     // prints the distances calculated
     for (int i = 0; i < distanceToObjects.size(); i++) {
         std::cout << "distances to obstacle [" << i << "]:";
@@ -74,7 +84,7 @@ std::vector<std::vector<double>> Monitor::distanceToObjects(){
         }
         std::cout << std::endl;
     }
-    #endif //DEBUG
+    // #endif //DEBUG
 
     return distanceToObjects;
 }
