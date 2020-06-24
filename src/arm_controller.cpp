@@ -192,16 +192,6 @@ KDL::Twist ArmController::controlLoop(void) {
     for(int i=0; i < monitor->arm->links.size(); i++){
         capsuleLink = dynamic_cast<Capsule*>(monitor->arm->links[i]);
         if(capsuleLink){
-            double an;
-            an = 80.0;
-            
-            Eigen::Matrix4d pose_1;
-            pose_1 << cos(an*PI/180), 0, sin(an*PI/180), 0,
-              0, 1, 0, 0,
-              -sin(an*PI/180), 0, cos(an*PI/180), 0,
-              0, 0, 0, 1;
-
-
             Eigen::Vector4d startPoint(0, 0, 0, 1);
             Eigen::Vector4d endPoint(0, 0, capsuleLink->getLength(), 1);
 
@@ -209,40 +199,26 @@ KDL::Twist ArmController::controlLoop(void) {
             startArrow = (capsuleLink->pose * startPoint).head(3);
             endArrow = (capsuleLink->pose * endPoint).head(3);
 
-            double r = (float) rand() / RAND_MAX;
-            double g = (float) rand() / RAND_MAX;
-            double b = (float) rand() / RAND_MAX;
-
             Eigen::Quaterniond quat = Eigen::Quaterniond::FromTwoVectors(endQuat, (endArrow - startArrow) / (endArrow - startArrow).norm());
 
             Eigen::Vector4d midPoint(0, 0, capsuleLink->getLength() / 2, 1);
             positionLink = (capsuleLink->pose * midPoint).head(3);
             
-            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 1.0, 1.0, 1.0, 0.5);
+            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 1.0, 1.0, 1.0, 1.0);
             mPublisherLink.setRadius(capsuleLink->getRadius());
             mPublisherLink.setLength(capsuleLink->getLength());
             mPublisherLink.setOrientation(quat.x(), quat.y(), quat.z(), quat.w());
             mPublisherLink.Publish();
-            std::cout << quat.x() << " - " << quat.y() << " - " <<  quat.z()  << " - " <<  quat.w() << std::endl;
             
-            // MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2),  r, g, b, 0.5);
-            // mPublisherLink.setRadius(capsuleLink->getRadius());
-            // mPublisherLink.setLength(capsuleLink->getLength());
-            // mPublisherLink.setPoints(startArrow, endArrow);
-
-            // mPublisherLink.Publish();
-
-            MarkerPublisher mPublisherPotentialField(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "links", 2  * i, 0.0, 0.0, 0.0, r, g, b, 1.0);
-        
-            mPublisherPotentialField.setRadius(0.005);
-            mPublisherPotentialField.setLength(0.005);
-            mPublisherPotentialField.setPoints(startArrow, endArrow);
-            mPublisherPotentialField.Publish();
-
-
-            // MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), r, g, b, 0.5);
-            // mPublisher.setRadius(capsuleLink->getRadius());
-            // mPublisher.Publish();
+            
+            MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", 2 * i, startArrow(0), startArrow(1), startArrow(2), 1.0, 1.0, 1.0, 1.0);
+            mPublisher.setRadius(capsuleLink->getRadius());
+            mPublisher.Publish();
+            if( i == monitor->arm->links.size() - 1){
+                MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", 2 * i + 1, endArrow(0), endArrow(1), endArrow(2), 1.0, 1.0, 1.0, 1.0);
+                mPublisher.setRadius(capsuleLink->getRadius());
+                mPublisher.Publish();
+            }
         }
     }
 
