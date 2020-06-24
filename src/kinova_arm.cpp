@@ -308,42 +308,16 @@ Eigen::Matrix4d KinovaArm::linkFramesToPose(KDL::Frame startLink, KDL::Frame end
     if(fabs((basePoint - endPoint).norm()) > 0.0001) {
         // Get the vector representing the line from the start to end point
         Eigen::Vector3d midLine = (endPoint - basePoint).head(3);
+        midLine = midLine.normalized();
         // Get the vector that is prependicular to the midline and z vector
-        Eigen::Vector3d rotvec = directionVect.cross(midLine/midLine.norm());
         // matrix to store the rotaion matrix
         Eigen::Matrix3d r = i3;
         // Check to see if the midline is only in the z direction
         
-        if(!rotvec.isZero()) {
-            rotvec.normalized();
-
-            double angle_denominator = directionVect.norm()*midLine.norm();
-            double angle_numerator = directionVect.transpose()*midLine;
-            double angle = std::acos(angle_numerator/angle_denominator);
-
-            // Build the rotation matrix from the rodreges vector
-            double ct = cos(angle);
-            double st = sin(angle);
-            double vt = 1-ct;
-            double m_vt_0=vt*rotvec(0);
-            double m_vt_1=vt*rotvec(1);
-            double m_vt_2=vt*rotvec(2);
-            double m_st_0=rotvec(0)*st;
-            double m_st_1=rotvec(1)*st;
-            double m_st_2=rotvec(2)*st;
-            double m_vt_0_1=m_vt_0*rotvec(1);
-            double m_vt_0_2=m_vt_0*rotvec(2);
-            double m_vt_1_2=m_vt_1*rotvec(2);
-
-            r << ct + m_vt_0*rotvec(0), 
-                        -m_st_2 +  m_vt_0_1,
-                        m_st_1  +  m_vt_0_2,
-                        m_st_2  +  m_vt_0_1,
-                        ct      +  m_vt_1*rotvec(1),
-                        -m_st_0 +  m_vt_1_2,
-                        -m_st_1 +  m_vt_0_2,
-                        m_st_0  +  m_vt_1_2,
-                        ct      +  m_vt_2*rotvec(2);
+        if(midLine(2) != 0) {
+            r << 1, 0,            midLine(0),
+                 0, 1/midLine(2), midLine(1),
+                 0, 0,            midLine(2);
         }
 
         // Construct the final matrix based off the start point and rotation Mat
