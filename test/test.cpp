@@ -448,10 +448,6 @@ TEST_CASE("Kinova_arm test inverse kinematics", "[arm]") {
 
 TEST_CASE("Kinova_arm distance to obstacle", "[monitor]") {
 
-    /*
-    * THIS IS AN INCOMPLETE TEST CASE 
-    */
-
     KinovaArm kinovaArm(urdf_filename);
     std::vector<double> testPose = {deg2rad(30), deg2rad(30), deg2rad(30), deg2rad(30),
                                     deg2rad(30), deg2rad(30), deg2rad(30)};
@@ -471,8 +467,37 @@ TEST_CASE("Kinova_arm distance to obstacle", "[monitor]") {
     Monitor monitor(&kinovaArm);
     monitor.addObstacle(&Link_1);
 
-    std::vector<std::vector<double>> distancesToObstacles = monitor.distanceToObjects();
-    std::vector<std::vector<double>> distancesToLinks = monitor.distanceBetweenArmLinks();
+    std::vector<std::vector<double>> ToObstacles = monitor.distanceToObjects();
+    std::vector<std::vector<double>> ToLinks = monitor.distanceBetweenArmLinks();
 
-    REQUIRE( 10 > 0.1 );    
+
+    std::vector<std::vector<double>>  ObstaclesResult{
+        {-10.04, -9.92939, -9.83483, -9.69385, -9.53986, -9.36271, -9.26948, -9.17337 }
+    };
+    std::vector<std::vector<double>>  LinksResult{
+        {0,-0.08,0.0484925,0.248115,0.456469,0.636643,0.73324,0.805921},
+        {-0.08,0,-0.0798875,0.130574,0.341038,0.531145,0.631666,0.710244},
+        {0.0484925,-0.0798875,0,-0.0799034,0.130573,0.324834,0.427848,0.512702},
+        {0.248115,0.130574,-0.0799034,0,-0.0799034,0.128611,0.234511,0.330082},
+        {0.456469,0.341038,0.130573,-0.0799034,0,-0.0799025,0.0260276,0.124736},
+        {0.636643,0.531145,0.324834,0.128611,-0.0799025,0,-0.0799999,0.0259303},
+        {0.73324,0.631666,0.427848,0.234511,0.0260276,-0.0799999,0,-0.0799999},
+        {0.805921,0.710244,0.512702,0.330082,0.124736,0.0259303,-0.0799999,0}
+    };
+
+    for(int i=0; i < ToObstacles.size(); i++ ) {
+        double norm = 0;
+        for(int j=0; j< ToObstacles[i].size(); j++){
+            norm += std::pow(fabs(ToObstacles[i][j]-ObstaclesResult[i][j]), 2);
+        }
+        REQUIRE(norm < 0.1);
+    }
+            
+    for(int i=0; i < ToLinks.size(); i++ ) {
+        double norm = 0;
+        for(int j=0; j< ToLinks[i].size(); j++){
+            norm += std::pow(fabs(ToLinks[i][j]-LinksResult[i][j]), 2);
+        }
+        REQUIRE(norm < 0.1);
+    }
 }
