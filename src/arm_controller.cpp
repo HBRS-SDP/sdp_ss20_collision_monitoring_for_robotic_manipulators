@@ -1,5 +1,6 @@
 // A simple program that computes the square root of a number
 #include "arm_controller.h"
+#define PI 3.14159265
 // #define DEBUG
 
 ArmController::ArmController(Monitor* monitorObject, double k, double d,
@@ -99,14 +100,13 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
             
             mPublisherShortestDistance.setRadius(0.005);
             mPublisherShortestDistance.setLength(0.005);
-            mPublisherShortestDistance.setPoints(startArrow, startArrow + direction - (direction / direction.norm()) * endEffectorCapsule->getRadius() );
+            mPublisherShortestDistance.setPoints(startArrow, startArrow - direction + (direction / direction.norm()) * endEffectorCapsule->getRadius() );
             mPublisherShortestDistance.Publish();
         }
 
         if (velocity.norm() < 1.0e-2) {
             return potentialField;
-        }
-        
+        }        
         
         // Rotation matrix
         Eigen::Vector3d rotvec = direction.cross(velocity);
@@ -165,7 +165,6 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         std::cout << "potential field: " << potentialField << std::endl;
         #endif // DEBUG
 
-
         MarkerPublisher mPublisherPotentialField(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
         
         mPublisherPotentialField.setRadius(0.005);
@@ -189,27 +188,37 @@ KDL::Twist ArmController::controlLoop(void) {
 
     //Show links as a cylinders
     Capsule *capsuleLink;
-    Eigen::Vector3d positionLink;
+    Eigen::Vector3d positionLink, startArrow, endArrow;
     for(int i=0; i < monitor->arm->links.size(); i++){
         capsuleLink = dynamic_cast<Capsule*>(monitor->arm->links[i]);
         if(capsuleLink){
-            double w = sqrt(1 + capsuleLink->pose(0,0)
-                       + capsuleLink->pose(1,1) 
-                       + capsuleLink->pose(2, 2))/2;
-            double x = (capsuleLink->pose(2,1) - capsuleLink->pose(1, 2))/(4*w);
-            double y = (capsuleLink->pose(0,2) - capsuleLink->pose(2, 0))/(4*w);
-            double z = (capsuleLink->pose(1,0) - capsuleLink->pose(0, 1))/(4*w);
+            Eigen::Vector4d startPoint(0, 0, 0, 1);
+            Eigen::Vector4d endPoint(0, 0, capsuleLink->getLength(), 1);
 
-            Eigen::Quaterniond quat(x, y, z, w);
+            Eigen::Vector3d endQuat(0, 0, 1);
+            startArrow = (capsuleLink->pose * startPoint).head(3);
+            endArrow = (capsuleLink->pose * endPoint).head(3);
 
-            Eigen::Vector4d basePoint(0, 0, capsuleLink->getLength() / 2.0 , 1);
-            positionLink = (capsuleLink->pose * basePoint).head(3);
+            Eigen::Quaterniond quat = Eigen::Quaterniond::FromTwoVectors(endQuat, (endArrow - startArrow) / (endArrow - startArrow).norm());
+
+            Eigen::Vector4d midPoint(0, 0, capsuleLink->getLength() / 2, 1);
+            positionLink = (capsuleLink->pose * midPoint).head(3);
             
-            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 1.0, 0.0, 0.5);
+            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 1.0, 1.0, 1.0, 1.0);
             mPublisherLink.setRadius(capsuleLink->getRadius());
             mPublisherLink.setLength(capsuleLink->getLength());
-            mPublisherLink.setOrientation(x, y, z, w);
+            mPublisherLink.setOrientation(quat.x(), quat.y(), quat.z(), quat.w());
             mPublisherLink.Publish();
+            
+            
+            MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", 2 * i, startArrow(0), startArrow(1), startArrow(2), 1.0, 1.0, 1.0, 1.0);
+            mPublisher.setRadius(capsuleLink->getRadius());
+            mPublisher.Publish();
+            if( i == monitor->arm->links.size() - 1){
+                MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", 2 * i + 1, endArrow(0), endArrow(1), endArrow(2), 1.0, 1.0, 1.0, 1.0);
+                mPublisher.setRadius(capsuleLink->getRadius());
+                mPublisher.Publish();
+            }
         }
     }
 
@@ -267,6 +276,25 @@ void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& 
         #ifdef DEBUG
         std::cout << "arrow" << std::endl;
         #endif // DEBUG
+    }
+    else if(msg->type == visualization_msgs::Marker::CYLINDER){
+        bool newObstacle = true;
+        for(int i=0; i<rvizObstacles.size();i++){
+            if(rvizObstacles[i]->marker.id == msg->id) {
+                newObstacle = false;
+                int index = rvizObstacles[i]->idx;
+                monitor->obstacles[index]->pose = rvizObstacles[i]->updatePose(msg);
+            }
+        }
+
+        if(newObstacle) {
+            RvizObstacle* rvizObstacle = new RvizObstacle(msg, rvizObstacles.size());
+            rvizObstacles.push_back(rvizObstacle);
+            rvizObstacle->pose(2, 3) -= (rvizObstacle->marker.scale.z / 2.0);
+            Capsule* capsule = new Capsule(rvizObstacle->pose, rvizObstacle->marker.scale.z, rvizObstacle->marker.scale.x);
+            obstaclesAllocated.push_back(capsule);
+            monitor->addObstacle(capsule);
+        }
     }
     else {
         ROS_ERROR("Wrong shape for obstacle");

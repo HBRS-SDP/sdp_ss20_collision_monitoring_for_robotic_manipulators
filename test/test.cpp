@@ -331,7 +331,7 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
 
     Eigen::Vector4d origin(0, 0, 0, 1);
 
-    for(int i=0; i < kinovaArm.nJoints-1; i++) {
+    for(int i=0; i < kinovaArm.nLinks; i++) {
         // get endpoints from the frames calculation
         Eigen::Matrix4d baseMatLink = kinovaArm.frameToMatrix(*kinovaArm.localPoses[i]);
         Eigen::Matrix4d endMatLink = kinovaArm.frameToMatrix(*kinovaArm.localPoses[i+1]);
@@ -341,10 +341,12 @@ TEST_CASE("Kinova_arm test link positions", "[arm]") {
         // Get the pose from these points using the same method in kinovaArm
         Eigen::Matrix4d pose = kinovaArm.linkFramesToPose(*kinovaArm.localPoses[i], *kinovaArm.localPoses[i+1]);
 
+
         // get endpoints from the pose calculation
         Eigen::Vector4d zDirectionObstacle(0, 0, kinovaArm.lengths[i], 1);
         Eigen::Vector3d basePointLine = (pose * origin).head(3);
         Eigen::Vector3d endPointLine  = (pose * zDirectionObstacle).head(3);
+
 
         // compare using the two methods
         REQUIRE( fabs((basePointLine - basePointLink).norm()) < 0.01);
@@ -364,8 +366,6 @@ TEST_CASE("Kinova_arm set position global move", "[arm]") {
     kinovaArm.updatePose(testPose);
     Eigen::Matrix4d link2Pose;
     Eigen::Matrix4d endLinkPose;
-    std::cout << "2:\n" << kinovaArm.links[2]->pose <<std::endl;
-    std::cout << "end:\n" <<kinovaArm.links[5]->pose <<std::endl;
     link2Pose << 1,       0, 0.417668, 0.0973125,
                  0, 1.15523,-0.276125,  0.195344,
                  0,       0, 0.865626,   0.68481,

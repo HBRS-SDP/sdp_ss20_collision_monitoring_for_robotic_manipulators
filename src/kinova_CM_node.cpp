@@ -59,7 +59,7 @@ int main(int argc, char **argv)
     ros::Publisher markersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/markers", 1000);
 
     
-    ros::Rate loop_rate(100); 
+    ros::Rate loop_rate(10); 
 
 
     KDL::Twist endeffectorVelocity;

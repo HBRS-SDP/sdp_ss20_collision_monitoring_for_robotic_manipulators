@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 
     ros::Publisher goalPub = n.advertise<geometry_msgs::Point>(goalTopic, 1000);
     ros::Publisher obstaclePub = n.advertise<visualization_msgs::Marker>("kinova_controller/obstacles", 1000);
+    ros::Publisher obstaclePubExtra = n.advertise<visualization_msgs::Marker>("kinova_controller/obstacles_extra", 1000);
     
     ros::Rate loop_rate(10);
 
@@ -147,10 +148,10 @@ int main(int argc, char **argv)
                         Eigen::Vector3d sphereBase = quat * base;
                         Eigen::Vector3d sphereEnd = quat * end;
 
-                        MarkerPublisher mPublisherBase(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id + 1, sphereBase[0], sphereBase[1], sphereBase[2], r, g, b, 1.0);
+                        MarkerPublisher mPublisherBase(obstaclePubExtra, visualization_msgs::Marker::SPHERE, "base_link", "obstacles_extra", id + 1, sphereBase[0], sphereBase[1], sphereBase[2], r, g, b, 1.0);
                         mPublisherBase.setRadius(radius);
 
-                        MarkerPublisher mPublisherEnd(obstaclePub, visualization_msgs::Marker::SPHERE, frame_id, ns, id + 2, sphereEnd[0], sphereEnd[1], sphereEnd[2], r, g, b, 1.0);
+                        MarkerPublisher mPublisherEnd(obstaclePubExtra, visualization_msgs::Marker::SPHERE, "base_link", "obstacles_extra", id + 2, sphereEnd[0], sphereEnd[1], sphereEnd[2], r, g, b, 1.0);
                         mPublisherEnd.setRadius(radius);
 
                         mPublisher.Publish();
