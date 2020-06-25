@@ -84,9 +84,9 @@ void Line::getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line lin
         obstacleClosestPoint = (line.getEndPoint() - line.getBasePoint()) * ratio + line.getBasePoint();
         ownClosestPoint = this->getClosestPointToPoint(obstacleClosestPoint);
     }
-
+    
     closestPoints.row(0) = ownClosestPoint;
-    closestPoints.row(1) = obstacleClosestPoint;    
+    closestPoints.row(1) = obstacleClosestPoint;   
 }
 
 double Line::getShortestDistanceToPoint(Eigen::Vector3d point){
@@ -155,30 +155,7 @@ void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primit
 }
 
 void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule){
-
-}
-
-void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
-
-}
-
-void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
-    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
-    if(capsule){
-        this->getShortestDirection(shortestDirection, capsule);
-    }else{
-        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
-        if(sphere){
-            this->getShortestDirection(shortestDirection, sphere);
-        }else{
-
-        }
-    }
-}
-
-void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule){
     Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
-    Eigen::MatrixXd closestPoints(2, 3);
     
     double lambdaM1, lambdaM2;
     Eigen::Vector3d basePointObstacle, endPointObstacle, basePointOwn, endPointOwn;
@@ -216,37 +193,55 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *
         if(lambdaM2 >=0 && lambdaM2 <= 1){
             //m1 and m2 inside
             axisOfSymmetryOwn.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryObstacle);
-            ownClosestPoint = closestPoints.row(0);
-            obstacleClosestPoint = closestPoints.row(1);
         }else{
             //m1 inside
             if( axisOfSymmetryOwn.getShortestDistanceToPoint(basePointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToPoint(endPointOwn) ){
                 axisOfSymmetryOwn.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryObstacle);
-                ownClosestPoint = closestPoints.row(0);
-                obstacleClosestPoint = closestPoints.row(1);
             }else{
                 axisOfSymmetryObstacle.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryOwn);
-                obstacleClosestPoint = closestPoints.row(0);
-                ownClosestPoint = closestPoints.row(1);
+                closestPoints.row(0).swap(closestPoints.row(1));
             }
         }   
     }else if(lambdaM2 >=0 && lambdaM2 <= 1){
         //m2 inside
         if( axisOfSymmetryOwn.getShortestDistanceToPoint(endPointObstacle) < axisOfSymmetryObstacle.getShortestDistanceToPoint(basePointOwn) ){
             axisOfSymmetryOwn.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryObstacle);
-            ownClosestPoint = closestPoints.row(0);
-            obstacleClosestPoint = closestPoints.row(1);
         }else{
             axisOfSymmetryObstacle.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryOwn);
-            obstacleClosestPoint = closestPoints.row(0);
-            ownClosestPoint = closestPoints.row(1);
+            closestPoints.row(0).swap(closestPoints.row(1));
         }
     }else{
         //m1 and m2 outside
         axisOfSymmetryObstacle.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryOwn);
-        obstacleClosestPoint = closestPoints.row(0);
-        ownClosestPoint = closestPoints.row(1);
+        closestPoints.row(0).swap(closestPoints.row(1));
     }
+}
+
+void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
+
+}
+
+void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
+    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
+    if(capsule){
+        this->getShortestDirection(shortestDirection, capsule);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            this->getShortestDirection(shortestDirection, sphere);
+        }else{
+
+        }
+    }
+}
+
+void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule){
+    Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
+    Eigen::MatrixXd closestPoints(2, 3);
+    
+    this->getClosestPoints(closestPoints, capsule);
+    ownClosestPoint = closestPoints.row(0);
+    obstacleClosestPoint = closestPoints.row(1);
     
     shortestDirection = ownClosestPoint - obstacleClosestPoint;
 }
