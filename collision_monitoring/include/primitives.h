@@ -33,6 +33,38 @@ class Primitive
         /** Performs a dynamic cast to overload the direction functions
         * 
         * This method takes an object that inherits from primitive and
+        * performs a dynamic cast to call the correct getClosestPoints
+        * method depending on the class of the shape.
+        *
+        * @param        primitive       address of the primitive object.
+        * @param[out]   closestPoints   the closest points in this primitive and primitive
+        */
+        virtual void getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive) = 0;
+
+        /** Finds the shortest distance between this primitive and a Capsule primitive
+        * 
+        * This method takes a capsule object and returns the closest points
+        * in this primitive and in a capsule object.
+        *
+        * @param        capsule         address of the primitive object
+        * @param[out]   closestPoints   the closest points in this primitive and capsule
+        */
+
+        virtual void getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule) = 0;
+        
+        /** Finds the shortest distance between this primitive and a Sphere primitive
+        * 
+        * This method takes a capsule object and returns the closest points
+        * in this primitive and in a sphere object.
+        *
+        * @param        sphere          address of the primitive object
+        * @param[out]   closestPoints   the closest points in this primitive and sphere
+        */
+        virtual void getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere) = 0;
+
+        /** Performs a dynamic cast to overload the direction functions
+        * 
+        * This method takes an object that inherits from primitive and
         * performs a dynamic cast to call the correct getShortestDirection
         * method depending on the class of the shape.
         *
@@ -55,7 +87,7 @@ class Primitive
         /** Finds the shortest distance between this primitive and a Sphere primitive
         * 
         * This method takes a capsule object and returns the closest direction
-        * between this primitive and a sphere object. returns a Vector3d.
+        * between this primitive and a sphere object.
         *
         * @param        sphere              address of the primitive object
         * @param[out]   shortestDirection   a vector in 3D that represents the closes direction between the primitive and sphere
@@ -168,9 +200,8 @@ class Line{
         * This method takes a point and returns the closest point
         * on this Line and the given line. returns a Vector3d.
         * 
-        * @param line    a line represented with a Vector3d.
-        * @param[out]   closestPoints   the closest distance between the Line and point
-        * @return   the closests points on this line and on line
+        * @param        line            a line represented with a Vector3d.
+        * @param[out]   closestPoints   the closests points on this line and on line
         */
         void getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line line);
 
