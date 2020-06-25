@@ -52,7 +52,6 @@ Eigen::Vector3d Line::getClosestPointToPoint(Eigen::Vector3d point){
         closestPoint = Eigen::Vector3d(x, y, z);
     }
 
-
     return closestPoint;
 }
 
@@ -68,20 +67,19 @@ void Line::getClosestPointsBetweenLines(Eigen::MatrixXd &closestPoints, Line lin
     endPointProjected = this->projectionPoint( line.getEndPoint() );
     midPoint =  (this->endPoint + this->basePoint) / 2;
 
+    Line projectedLine(basePointProjected, endPointProjected);
+
     if( (basePointProjected - endPointProjected).norm() == 0 ){
-        //Parallel lines
-        Line projectedLine(basePointProjected, endPointProjected);
-    
+        //Parallel lines    
         obstacleProjectedClosestPoint = basePointProjected;
 
         ownClosestPoint = midPoint;
         obstacleClosestPoint = (line.endPoint + line.basePoint) / 2;
     }else{
-        Line projectedLine(basePointProjected, endPointProjected);
         obstacleProjectedClosestPoint = projectedLine.getClosestPointToPoint(midPoint);
 
         ratio = (obstacleProjectedClosestPoint - basePointProjected).norm() / (endPointProjected - basePointProjected).norm();
-        obstacleClosestPoint = (line.getEndPoint() - line.getBasePoint()) * ratio + line.getBasePoint();
+        obstacleClosestPoint = (line.getEndPoint() - line.getBasePoint()) * ratio +  line.getBasePoint();
         ownClosestPoint = this->getClosestPointToPoint(obstacleClosestPoint);
     }
     
@@ -212,8 +210,14 @@ void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule)
         }
     }else{
         //m1 and m2 outside
-        axisOfSymmetryObstacle.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryOwn);
-        closestPoints.row(0).swap(closestPoints.row(1));
+        // axisOfSymmetryObstacle.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryOwn);
+        // closestPoints.row(0).swap(closestPoints.row(1));
+        if( axisOfSymmetryOwn.getShortestDistanceToPoint(endPointObstacle) < axisOfSymmetryOwn.getShortestDistanceToPoint(basePointObstacle) ){
+            axisOfSymmetryOwn.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryObstacle);
+        }else{
+            axisOfSymmetryObstacle.getClosestPointsBetweenLines(closestPoints, axisOfSymmetryOwn);
+            closestPoints.row(0).swap(closestPoints.row(1));
+        }
     }
 }
 
@@ -254,8 +258,8 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *
     Eigen::MatrixXd closestPoints(2, 3);
     
     this->getClosestPoints(closestPoints, capsule);
-    ownClosestPoint = closestPoints.row(0);
-    obstacleClosestPoint = closestPoints.row(1);
+    ownClosestPoint = closestPoints.row(1);
+    obstacleClosestPoint = closestPoints.row(0);
     
     shortestDirection = obstacleClosestPoint - ownClosestPoint;
 }

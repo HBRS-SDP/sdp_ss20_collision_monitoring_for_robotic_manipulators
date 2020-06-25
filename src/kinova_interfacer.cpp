@@ -109,7 +109,7 @@ int main(int argc, char **argv)
                         g = (float) rand() / RAND_MAX;
                         b = (float) rand() / RAND_MAX;
 
-                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "obstacles", id, positionX, positionY, positionZ, r, g, b, 1.0);
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "obstacles", id, positionX, positionY, positionZ, r, g, b, 0.5);
                         mPublisher.setRadius(radius);
                         mPublisher.setLength(length);
 
@@ -137,7 +137,7 @@ int main(int argc, char **argv)
                         g = (float) rand() / RAND_MAX;
                         b = (float) rand() / RAND_MAX;
 
-                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "obstacles", id, positionX, positionY, positionZ, r, g, b, 1.0);
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "obstacles", id, positionX, positionY, positionZ, r, g, b, 0.5);
                         mPublisher.setRadius(radius);
                         mPublisher.setLength(length);
 
@@ -148,10 +148,10 @@ int main(int argc, char **argv)
                         Eigen::Vector3d sphereBase = quat * base;
                         Eigen::Vector3d sphereEnd = quat * end;
 
-                        MarkerPublisher mPublisherBase(obstaclePubExtra, visualization_msgs::Marker::SPHERE, "base_link", "obstacles_extra", id + 1, sphereBase[0], sphereBase[1], sphereBase[2], r, g, b, 1.0);
+                        MarkerPublisher mPublisherBase(obstaclePubExtra, visualization_msgs::Marker::SPHERE, "base_link", "obstacles_extra", id + 1, sphereBase[0], sphereBase[1], sphereBase[2], r, g, b, 0.5);
                         mPublisherBase.setRadius(radius);
 
-                        MarkerPublisher mPublisherEnd(obstaclePubExtra, visualization_msgs::Marker::SPHERE, "base_link", "obstacles_extra", id + 2, sphereEnd[0], sphereEnd[1], sphereEnd[2], r, g, b, 1.0);
+                        MarkerPublisher mPublisherEnd(obstaclePubExtra, visualization_msgs::Marker::SPHERE, "base_link", "obstacles_extra", id + 2, sphereEnd[0], sphereEnd[1], sphereEnd[2], r, g, b, 0.5);
                         mPublisherEnd.setRadius(radius);
 
                         mPublisher.Publish();
