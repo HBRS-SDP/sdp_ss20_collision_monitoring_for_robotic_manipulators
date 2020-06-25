@@ -140,6 +140,18 @@ float Capsule::getRadius(){
     return this->radius;
 }
 
+void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive){
+
+}
+
+void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule){
+
+}
+
+void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
+
+}
+
 void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
     Capsule *capsule = dynamic_cast<Capsule*>(primitive);
     if(capsule){
@@ -279,6 +291,17 @@ double Capsule::getShortestDistance(Sphere *sphere){
     return shortestDistance;
 }
 
+void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive){
+
+}
+
+void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule){
+
+}
+
+void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
+    
+}
 
 Sphere::Sphere(Eigen::Matrix4d pose, double radius){
     this->pose = pose;

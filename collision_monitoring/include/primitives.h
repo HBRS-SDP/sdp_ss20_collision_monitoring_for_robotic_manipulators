@@ -268,6 +268,10 @@ class Capsule: public Primitive{
         * @return the radius of the capsule
         */
         float getRadius();
+
+        void getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive);
+        void getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule);
+        void getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere);
         
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
@@ -309,6 +313,10 @@ class Sphere: public Primitive{
         * @return the radius of the sphere
         */
         float getRadius();
+
+        void getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive);
+        void getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule);
+        void getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere);
 
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
