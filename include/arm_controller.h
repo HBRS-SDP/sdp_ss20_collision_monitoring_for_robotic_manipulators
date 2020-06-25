@@ -166,7 +166,7 @@ class ArmController
         std::vector<Primitive*> obstaclesAllocated;
         KDL::Twist twist;
         ros::NodeHandle n;
-        ros::Publisher obstaclePub;
+        ros::Publisher arrowsPub, linksCylindersPub, linksSpheresPub;
 
 };
 
