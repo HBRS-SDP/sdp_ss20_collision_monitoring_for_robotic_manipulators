@@ -139,6 +139,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a564eb09ed988535e33c2b2e701d80581"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a330dd34c7c7b6dfff106c4c71ec80028"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sphere.html#a330dd34c7c7b6dfff106c4c71ec80028">getRadius</a> ()</td></tr>
 <tr class="separator:a330dd34c7c7b6dfff106c4c71ec80028"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9290773136dacf81a9f147343a7a0486"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sphere.html#a9290773136dacf81a9f147343a7a0486">getClosestPoints</a> (Eigen::MatrixXd &amp;closestPoints, <a class="el" href="class_primitive.html">Primitive</a> *primitive)</td></tr>
+<tr class="separator:a9290773136dacf81a9f147343a7a0486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a903c1c7a459e0c048b6f36a4f1376256"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sphere.html#a903c1c7a459e0c048b6f36a4f1376256">getClosestPoints</a> (Eigen::MatrixXd &amp;closestPoints, <a class="el" href="class_capsule.html">Capsule</a> *capsule)</td></tr>
+<tr class="separator:a903c1c7a459e0c048b6f36a4f1376256"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2584cb5fb1d066a9527f8c95435093b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sphere.html#ac2584cb5fb1d066a9527f8c95435093b">getClosestPoints</a> (Eigen::MatrixXd &amp;closestPoints, <a class="el" href="class_sphere.html">Sphere</a> *sphere)</td></tr>
+<tr class="separator:ac2584cb5fb1d066a9527f8c95435093b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a707fc14e03a6ff67ac012a18b2a8cb28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sphere.html#a707fc14e03a6ff67ac012a18b2a8cb28">getShortestDirection</a> (Eigen::Vector3d &amp;shortestDirection, <a class="el" href="class_primitive.html">Primitive</a> *primitive)</td></tr>
 <tr class="separator:a707fc14e03a6ff67ac012a18b2a8cb28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7ff30023363261cf118d1fb80c745a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sphere.html#af7ff30023363261cf118d1fb80c745a7">getShortestDirection</a> (Eigen::Vector3d &amp;shortestDirection, <a class="el" href="class_capsule.html">Capsule</a> *capsule)</td></tr>
@@ -162,7 +168,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>The <a class="el" href="class_sphere.html">Sphere</a> class</p>
 <p>This class is a shape that inherits from primitive. </p>
 
-<p>Definition at line <a class="el" href="primitives_8h_source.html#l00255">255</a> of file <a class="el" href="primitives_8h_source.html">primitives.h</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8h_source.html#l00290">290</a> of file <a class="el" href="primitives_8h_source.html">primitives.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a7a9a9cfc01f619bb8cda60ae907d6372"></a>
 <div class="memitem">
@@ -196,7 +202,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00283">283</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00311">311</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -221,11 +227,152 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00288">288</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00316">316</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9290773136dacf81a9f147343a7a0486"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sphere::getClosestPoints </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>closestPoints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_primitive.html">Primitive</a> *&#160;</td>
+          <td class="paramname"><em>primitive</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Performs a dynamic cast to overload the direction functions</p>
+<p>This method takes an object that inherits from primitive and performs a dynamic cast to call the correct getClosestPoints method depending on the class of the shape.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">primitive</td><td>address of the primitive object. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">closestPoints</td><td>the closest points in this primitive and primitive </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_primitive.html#ae838e4e129f05642994da59f08f85f56">Primitive</a>.</p>
+
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00329">329</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a903c1c7a459e0c048b6f36a4f1376256"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sphere::getClosestPoints </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>closestPoints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_capsule.html">Capsule</a> *&#160;</td>
+          <td class="paramname"><em>capsule</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Finds the shortest distance between this primitive and a <a class="el" href="class_capsule.html">Capsule</a> primitive</p>
+<p>This method takes a capsule object and returns the closest points in this primitive and in a capsule object.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">capsule</td><td>address of the primitive object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">closestPoints</td><td>the closest points in this primitive and capsule </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_primitive.html#a2b8b8dea111d9eda31f72e06b47e9aa9">Primitive</a>.</p>
+
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00343">343</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac2584cb5fb1d066a9527f8c95435093b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sphere::getClosestPoints </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>closestPoints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_sphere.html">Sphere</a> *&#160;</td>
+          <td class="paramname"><em>sphere</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Finds the shortest distance between this primitive and a <a class="el" href="class_sphere.html">Sphere</a> primitive</p>
+<p>This method takes a capsule object and returns the closest points in this primitive and in a sphere object.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">sphere</td><td>address of the primitive object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">closestPoints</td><td>the closest points in this primitive and sphere </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_primitive.html#ac86ef47d59c21448ce78c91490c7dbd4">Primitive</a>.</p>
+
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00361">361</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a330dd34c7c7b6dfff106c4c71ec80028"></a>
 <div class="memitem">
 <div class="memproto">
@@ -241,7 +388,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Getter of radius</p>
 <dl class="section return"><dt>Returns</dt><dd>the radius of the sphere </dd></dl>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00297">297</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00325">325</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -288,7 +435,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#ae37bbdf5271bf278b19888e0428579a8">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00301">301</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00372">372</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -335,7 +482,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#af9bd724a6618bd76e41e5682caa25023">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00315">315</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00386">386</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -371,7 +518,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Finds the shortest distance between this primitive and a <a class="el" href="class_sphere.html">Sphere</a> primitive</p>
-<p>This method takes a capsule object and returns the closest direction between this primitive and a sphere object. returns a Vector3d.</p>
+<p>This method takes a capsule object and returns the closest direction between this primitive and a sphere object.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">sphere</td><td>address of the primitive object </td></tr>
@@ -382,7 +529,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#a3f1bc91de29fa904657c1ba4c40eee53">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00331">331</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00397">397</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -419,7 +566,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#a340b3e5540b910480ada939383985d66">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00341">341</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00408">408</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -456,7 +603,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#a46e60acfe4c005c0ec94e1e8b82d36db">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00355">355</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00422">422</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -493,7 +640,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#adaac4fc4fedf9cd76d4eb9c77e9ae560">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00365">365</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00432">432</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
