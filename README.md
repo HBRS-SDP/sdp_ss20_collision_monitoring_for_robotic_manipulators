@@ -23,12 +23,12 @@ used for demonstration. The following links list the core functionalities of
 this repository.
 
 ### Contents
-- [Collision Monitoring Library](https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/collision_monitoring/README.md):
+- [Collision Monitoring Library](http://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/collision_monitoring/README.md):
     The base library designed to be highly portable and used for any manipulator type
-- [Kinova Arm Package](https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/kinova_arm_README.md):
+- [Kinova Arm Package](http://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/src/README.md):
     The test implementation of the Collision monitoring library designed for a
     Kinova gen3 7DOF manipulator.
-- [Collision Avoidance ROS Package](https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/README.md):
+- [Collision Avoidance ROS Package](http://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/README.md):
     The implementation of the obstacle avoidance and tracing algorithm that the
     base library is designed to suit.
 - Documentation & other related works: 
