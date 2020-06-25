@@ -5,7 +5,7 @@
 - Brennan Penfold
 
 ## Client
-- Djordje
+- Djordje Vukcevic
 
 ## Description
 This repository is a group submission for MAS Software Development Project. The
@@ -14,8 +14,6 @@ paper, while communicating with a client to add desired features. The paper
 implemented is a method of obstacle avoidance for robotic manipulators and 
 at the request of the client a combination of 2 papers was implemented and can
 be found in the reference section \[1\]\[2\]
-
-
 
 ## Structure
 This repository is structured to contain multiple implementations/libraries and
@@ -28,7 +26,7 @@ this repository.
 - Collision Monitoring Library:
 - Kinova Arm Package:
 - Collision Avoidance ROS Package:
-- 
+- Documentation & other related works:
 
 
 ### Folder layout
@@ -64,38 +62,6 @@ structure (note: symbolic links are used to for easy modification and tracking):
     -/test/                     Contains the test source files for kinova_arm
     -/urdf/                     Contains the URDF file used for kinematic calcs
 
-
-## Requirements:
-- KDL (https://www.orocos.org/kdl/installation-manual)
-- Eigen (http://eigen.tuxfamily.org)
-- CMAKE V3.5
-
-
-## Building
-In the root folder of the repository create a build folder:
-```
-...$ mkdir build
-```
-cd into the build folder and run cmake for the first time to configure the build environment:
-```
-    ...$ cd build
-    ...\build$ cmake ..
-```
-If VS Code is being used the CMAKE Tools extension is helpful as it allows the library to be
-built by pressing F7.
-
-Otherwise the following commands need to be run from the build folder:
-```
-    ...\build$ cmake ..
-    ...\build$ cmake --build .
-```
-
-## Testing
-The test files are built in build/tests and need to be run from the build directory
-because of a relative file reference. These can be run using the following commands:
-```
-    ...\build$ ./test/tests
-```
 
 ## References
 This library is an implementation of the following papers:
