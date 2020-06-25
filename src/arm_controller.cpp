@@ -109,7 +109,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
             
             mPublisherShortestDistance.setRadius(0.005);
             mPublisherShortestDistance.setLength(0.005);
-            mPublisherShortestDistance.setPoints(startArrow, startArrow + direction);// + (direction / direction.norm()) * endEffectorCapsule->getRadius() );
+            mPublisherShortestDistance.setPoints(obstacleClosestPoint, ownClosestPoint);// + (direction / direction.norm()) * endEffectorCapsule->getRadius() );
             mPublisherShortestDistance.Publish();
         }
 
