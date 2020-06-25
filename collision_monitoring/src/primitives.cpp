@@ -218,7 +218,21 @@ void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule)
 }
 
 void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
+    Eigen::Vector3d basePoint, endPoint, ownClosestPoint, obstacleClosestPoint;
 
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector4d zDirectionCapsule(0, 0, this->length, 1);
+
+    basePoint = (this->pose * origin).head(3);
+    endPoint  = (this->pose * zDirectionCapsule).head(3);
+
+    Line axisOfSymmetryCapsule(basePoint, endPoint);
+    
+    obstacleClosestPoint = (sphere->pose * origin).head(3);
+    ownClosestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(obstacleClosestPoint);
+
+    closestPoints.row(0) = ownClosestPoint;
+    closestPoints.row(1) = obstacleClosestPoint;
 }
 
 void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
@@ -247,19 +261,30 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *
 }
 
 void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere){
-    Eigen::Vector3d basePoint, endPoint, sphereCenter, closestPoint;
+    // Eigen::Vector3d basePoint, endPoint, obstacleClosestPoint, ownClosestPoint;
 
-    Eigen::Vector4d origin(0, 0, 0, 1);
-    Eigen::Vector4d zDirectionCapsule(0, 0, this->length, 1);
+    // Eigen::MatrixXd closestPoints(2, 3);
 
-    basePoint = (this->pose * origin).head(3);
-    endPoint  = (this->pose * zDirectionCapsule).head(3);
+    // Eigen::Vector4d origin(0, 0, 0, 1);
+    // Eigen::Vector4d zDirectionCapsule(0, 0, this->length, 1);
 
-    Line axisOfSymmetryCapsule(basePoint, endPoint);
+    // basePoint = (this->pose * origin).head(3);
+    // endPoint  = (this->pose * zDirectionCapsule).head(3);
+
+    // Line axisOfSymmetryCapsule(basePoint, endPoint);
     
-    sphereCenter = (sphere->pose * origin).head(3);
-    closestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(sphereCenter);
-    shortestDirection = sphereCenter - closestPoint;
+    // sphereCenter = (sphere->pose * origin).head(3);
+    // closestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(sphereCenter);
+    // shortestDirection = sphereCenter - closestPoint;
+
+    Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
+    Eigen::MatrixXd closestPoints(2, 3);
+    
+    this->getClosestPoints(closestPoints, sphere);
+    ownClosestPoint = closestPoints.row(0);
+    obstacleClosestPoint = closestPoints.row(1);
+    
+    shortestDirection = ownClosestPoint - obstacleClosestPoint;
 }
 
 double Capsule::getShortestDistance(Primitive *primitive){
