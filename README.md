@@ -23,12 +23,21 @@ used for demonstration. The following links list the core functionalities of
 this repository.
 
 ### Contents
+<<<<<<< HEAD
 - [Collision Monitoring Library](http://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/collision_monitoring/README.md):
     The base library designed to be highly portable and used for any manipulator type
 - [Kinova Arm Package](http://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/src/README.md):
     The test implementation of the Collision monitoring library designed for a
     Kinova gen3 7DOF manipulator.
 - [Collision Avoidance ROS Package](http://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/README.md):
+=======
+- [Collision Monitoring Library](collision_monitoring/README.md):
+    The base library designed to be highly portable and used for any manipulator type
+- [Kinova Arm Package](src/kinova_arm_README.md):
+    The test implementation of the Collision monitoring library designed for a
+    Kinova gen3 7DOF manipulator.
+- [Collision Avoidance ROS Package](catkin_workspace/README.md):
+>>>>>>> cbc5df1428c4c539137522ebec2db2b12fc830ff
     The implementation of the obstacle avoidance and tracing algorithm that the
     base library is designed to suit.
 - Documentation & other related works: 
@@ -41,35 +50,36 @@ this repository.
 Here is the basic layout of the folder
 structure (note: symbolic links are used to for easy modification and tracking):
 
-    /Repository/
-
-        -/build/                    Where the KinovaArm package is to be built
-
-            -/test/tests            The test file based off catch
-
-        -/catkin_workspace/         The ros catkin workspace (run catkin_make here)
-
-            -/docs/                 Contains UML diagrams associated with the ROS pkg
-            -/src/kinova_arm/       The ROS package used for testing and demonstration
-
-        -/collision_monitoring/     The base library built for the project
-
-            -/docs/                 Contains associated UML diagrams
-            -/include/              The library header files
-            -/src/                  The libraries source files
-
-        -/deliverables/             Contains other non-code submittable documents
-
-            -/doxygen/              Contains the html API docs and files to make them
-            -/latex/                Contains the latex files for the research paper
-            -/presentation/         Contains the final presentation
-
-        -/docs/                     Contains the UML files for the kinova_arm package
-        -/include/                  Contains the header files for kinova_arm and ROS
-        -/src/                      Contains the source files for kinova_arm and ROS
-        -/test/                     Contains the test source files for kinova_arm
-        -/urdf/                     Contains the URDF file used for kinematic calcs
-
+```
+Repository
+│
+└─── build/                    Where the KinovaArm package is to be built
+│
+└─── test/tests                The test file based off catch
+|
+└─── catkin_workspace/         The ros catkin workspace (run catkin_make here)
+|
+└─── docs/                     Contains UML diagrams associated with the ROS pkg
+└─── src/kinova_arm/           The ROS package used for testing and demonstration
+|
+└─── collision_monitoring/     The base library built for the project
+|   |
+|   └─── docs/                 Contains associated UML diagrams
+|   └─── include/              The library header files
+|   └─── src/                  The libraries source files
+|
+└─── deliverables/             Contains other non-code submittable documents
+|   |
+|   └─── doxygen/              Contains the html API docs and files to make them
+|   └─── latex/                Contains the latex files for the research paper
+|   └─── presentation/         Contains the final presentation
+|
+└─── docs/                     Contains the UML files for the kinova_arm package
+└─── include/                  Contains the header files for kinova_arm and ROS
+└─── src/                      Contains the source files for kinova_arm and ROS
+└─── test/                     Contains the test source files for kinova_arm
+└─── urdf/                     Contains the URDF file used for kinematic calcs
+```
 
 ## References
 This library is an implementation of the following papers:
