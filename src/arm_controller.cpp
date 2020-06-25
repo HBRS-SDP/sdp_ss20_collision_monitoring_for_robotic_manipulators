@@ -29,7 +29,9 @@ ArmController::ArmController(Monitor* monitorObject, double k, double d,
     }
 
     // Setup publisher for potential fields
-    this->obstaclePub = n.advertise<visualization_msgs::Marker>("kinova_controller/potential_field", 1000);
+    this->arrowsPub = n.advertise<visualization_msgs::Marker>("kinova_controller/distance_field", 1000);
+    this->linksCylindersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/links_cylinders", 1000);
+    this->linksSpheresPub = n.advertise<visualization_msgs::Marker>("kinova_controller/links_spheres", 1000);
 
     // Init the controller to the current arm state
     origin << 0, 0, 0, 1;
@@ -96,7 +98,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         if(endEffectorCapsule){
             startArrow = (monitor->obstacles[i]->pose * origin).head(3);
             //Shortest distance arrow (for visualization)
-            MarkerPublisher mPublisherShortestDistance(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
+            MarkerPublisher mPublisherShortestDistance(arrowsPub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
             
             mPublisherShortestDistance.setRadius(0.005);
             mPublisherShortestDistance.setLength(0.005);
@@ -165,7 +167,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         std::cout << "potential field: " << potentialField << std::endl;
         #endif // DEBUG
 
-        MarkerPublisher mPublisherPotentialField(obstaclePub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
+        MarkerPublisher mPublisherPotentialField(arrowsPub, visualization_msgs::Marker::ARROW, "base_link", "potential_field", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
         
         mPublisherPotentialField.setRadius(0.005);
         mPublisherPotentialField.setLength(0.005);
@@ -204,18 +206,18 @@ KDL::Twist ArmController::controlLoop(void) {
             Eigen::Vector4d midPoint(0, 0, capsuleLink->getLength() / 2, 1);
             positionLink = (capsuleLink->pose * midPoint).head(3);
             
-            MarkerPublisher mPublisherLink(obstaclePub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 1.0, 1.0, 1.0, 1.0);
+            MarkerPublisher mPublisherLink(linksCylindersPub, visualization_msgs::Marker::CYLINDER, "base_link", "links", i, positionLink(0), positionLink(1), positionLink(2), 0.0, 0.0, 1.0, 0.5);
             mPublisherLink.setRadius(capsuleLink->getRadius());
             mPublisherLink.setLength(capsuleLink->getLength());
             mPublisherLink.setOrientation(quat.x(), quat.y(), quat.z(), quat.w());
             mPublisherLink.Publish();
             
             
-            MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", 2 * i, startArrow(0), startArrow(1), startArrow(2), 1.0, 1.0, 1.0, 1.0);
+            MarkerPublisher mPublisher(linksSpheresPub, visualization_msgs::Marker::SPHERE, "base_link", "links", 2 * i, startArrow(0), startArrow(1), startArrow(2), 0.0, 0.0, 1.0, 0.5);
             mPublisher.setRadius(capsuleLink->getRadius());
             mPublisher.Publish();
             if( i == monitor->arm->links.size() - 1){
-                MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::SPHERE, "base_link", "links", 2 * i + 1, endArrow(0), endArrow(1), endArrow(2), 1.0, 1.0, 1.0, 1.0);
+                MarkerPublisher mPublisher(linksSpheresPub, visualization_msgs::Marker::SPHERE, "base_link", "links", 2 * i + 1, endArrow(0), endArrow(1), endArrow(2), 0.0, 0.0, 1.0, 0.5);
                 mPublisher.setRadius(capsuleLink->getRadius());
                 mPublisher.Publish();
             }
