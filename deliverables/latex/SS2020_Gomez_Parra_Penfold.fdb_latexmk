@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1593115506 "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.tex" "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf" "SS2020_Gomez_Parra_Penfold" 1593115506
+["pdflatex"] 1593120110 "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.tex" "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf" "SS2020_Gomez_Parra_Penfold" 1593120110
   "/etc/texmf/web2c/texmf.cnf" 1593099153 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux" 1593115506 8 a94a2480d3289e625eea47cd1b285758 ""
-  "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.tex" 1593115505 4183 f9d092d1fdfd6c9383921d2b8a0570d3 ""
+  "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux" 1593120110 1325 3bec59e6316686fa5c39136a2c96420c ""
+  "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.tex" 1593120109 6231 39daca324009bca57c36ccc285c195f4 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1480098689 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -28,12 +28,12 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1527251517 32752 ce45b90d2fda49befaa367e6f5986072 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1593099182 2731305 b5d02be72c22274ced76c0ba798abaa6 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1593099207 4227594 12420472feb6e7dbe95570ca0da258c1 ""
-  "SS2020_Gomez_Parra_Penfold.aux" 0 -1 0 ""
-  "SS2020_Gomez_Parra_Penfold.tex" 1593115505 4183 f9d092d1fdfd6c9383921d2b8a0570d3 ""
+  "SS2020_Gomez_Parra_Penfold.aux" 1593120110 1325 3bec59e6316686fa5c39136a2c96420c ""
+  "SS2020_Gomez_Parra_Penfold.tex" 1593120109 6231 39daca324009bca57c36ccc285c195f4 ""
   "ieeeconf.cls" 1593027465 202167 7b37f8353df61c9733ed46143eff807a ""
   (generated)
-  "SS2020_Gomez_Parra_Penfold.log"
   "SS2020_Gomez_Parra_Penfold.aux"
-  "SS2020_Gomez_Parra_Penfold.pdf"
-  "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf"
+  "SS2020_Gomez_Parra_Penfold.log"
   "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.log"
+  "/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf"
+  "SS2020_Gomez_Parra_Penfold.pdf"

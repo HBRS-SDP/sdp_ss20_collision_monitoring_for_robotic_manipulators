@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2020.6.25)  25 JUN 2020 22:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2020.6.25)  25 JUN 2020 23:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -92,70 +92,37 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
 (/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux)
 \openout1 = `SS2020_Gomez_Parra_Penfold.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
+[]\OT1/ptm/m/n/8 S. Adee, \Dean Ka-men's `Luke Arm' Pros-the-sis Read-ies
+ []
 
 
-/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.tex:111: Package inputenc Error: Unicode character � (U+FFFD)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.111 \bibitem{c1} G. O. Young, �
-                                   Synthetic structure of industrial plastic...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
+\OT1/ptm/m/n/8 for Clin-i-cal Tri-als - IEEE Spec-trum," IEEE Spec-trum:
+ []
 
 
-/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.tex:111: Package inputenc Error: Unicode character � (U+FFFD)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.111 ...ok style with paper title and editor),�
-                                                   	in Plastics, 2nd ed. vol...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+Underfull \hbox (badness 4291) in paragraph at lines 127--128
+\OT1/ptm/m/n/8 Tech-nol-ogy, En-gi-neer-ing, and Sci-ence News, Feb. 01, 2008.
+ []
 
 
-/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.tex:111: Package inputenc Error: Unicode character � (U+FFFD)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.111 ....  New York: McGraw-Hill, 1964, pp. 15�
-                                                  64.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.tex:112: Package inputenc Error: Unicode character � (U+FFFD)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.112 ...	Belmont, CA: Wadsworth, 1993, pp. 123�
-                                                  135.
-You may provide a definition with
-\DeclareUnicodeCharacter 
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
+\OT1/ptm/m/n/8 https://spectrum.ieee.org/biomedical/bionics/dean-kamens-luke-arm-
+ []
 
 
 ** Conference Paper **
@@ -175,21 +142,17 @@ Overfull \vbox (336.63313pt too high) has occurred while \output is active []
 
 
 
-] (/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+] (/home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux) ) 
 Here is how much of TeX's memory you used:
- 790 strings out of 492648
- 14336 string characters out of 6132015
- 75419 words of memory out of 5000000
- 4747 multiletter control sequences out of 15000+600000
+ 792 strings out of 492648
+ 14337 string characters out of 6132015
+ 78363 words of memory out of 5000000
+ 4749 multiletter control sequences out of 15000+600000
  33036 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 26i,8n,19p,366b,283s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 26i,8n,19p,466b,283s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf (1 page, 45581 bytes).
+Output written on /home/brennan/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf (1 page, 47706 bytes).
 PDF statistics:
  25 PDF objects out of 1000 (max. 8388607)
  17 compressed objects within 1 object stream
