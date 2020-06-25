@@ -141,7 +141,17 @@ float Capsule::getRadius(){
 }
 
 void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive){
+    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
+    if(capsule){
+        this->getClosestPoints(closestPoints, capsule);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            this->getClosestPoints(closestPoints, sphere);
+        }else{
 
+        }
+    }
 }
 
 void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule){
@@ -291,18 +301,6 @@ double Capsule::getShortestDistance(Sphere *sphere){
     return shortestDistance;
 }
 
-void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive){
-
-}
-
-void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule){
-
-}
-
-void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
-    
-}
-
 Sphere::Sphere(Eigen::Matrix4d pose, double radius){
     this->pose = pose;
     this->radius = radius;
@@ -319,6 +317,28 @@ Sphere::~Sphere(){
 
 float Sphere::getRadius(){
     return this->radius;
+}
+
+void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive){
+    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
+    if(capsule){
+        this->getClosestPoints(closestPoints, capsule);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            this->getClosestPoints(closestPoints, sphere);
+        }else{
+
+        }
+    }
+}
+
+void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule){
+
+}
+
+void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
+    
 }
 
 void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
