@@ -1,8 +1,6 @@
 # Collision monitoring 
 
-A framework independent c++ library for monitoring the distance from any manipulator to obstacles,
-including other manipulators in the workspace. It implement concepts from these
-publications:
+A framework independent c++ library for monitoring the distance from any manipulator to obstacles, including other manipulators in the workspace. It implement concepts from these publications:
 
 * Real-Time Obstacle Avoidance for Manipulators and Mobile Robots, Oussama Khatib, 1986.
 * Biologically-inspired dynamical systems for movement generation: automatic real-time goal adaptation and obstacle avoidance, H. Hoffmann et al., 2019.
@@ -50,6 +48,7 @@ After implementing the arm you can build your project and use the monitor class.
 mkdir build
 cd build
 cmake ..
+make
 ```
 
 ## Running the tests
@@ -57,7 +56,7 @@ cmake ..
 After building you may run the test located in the build directory by running the command:
 
 ```
-./build/collision_monitoring/test/test
+./build/test/tests
 ```
 
 ## Built With
