@@ -120,9 +120,9 @@ $(document).ready(function(){initNavTree('md__home_brennan_SDP_sdp_ss20_collisio
 <p>First, in CMakeList.txt add the subdirectory and include the header files in <code>include_directories</code> alongside the dependencies:</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;add_subdirectory(collision_monitoring)</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;include_directories(</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    ...</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    collision_monitoring/include</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    /usr/include/eigen3</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    ${Eigen_INCLUDE_DIRS}</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    ${Boost_INCLUDE_DIR}</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    ${orocos_kdl_INCLUDE_DIRS}</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    ...</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;)</div></div><!-- fragment --><p>Second, for every type of manipulator you would like to monitor you must implement the <a class="el" href="class_arm.html">Arm</a> interface. This ensure that the geometric descriptions used to monitor the distances suit your manipulator. Please refer to the documentation on how to do so.</p>
 <p>After implementing the arm you can build your project and use the monitor class. If you have not done so, create a build directory. Then change directories to the build directory and build using cmake:</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;mkdir build</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;cd build</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;cmake ..</div></div><!-- fragment --><h2>Running the tests</h2>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;mkdir build</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;cd build</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;cmake ..</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;make</div></div><!-- fragment --><h2>Running the tests</h2>
 <p>After building you may run the test located in the build directory by running the command:</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;./build/collision_monitoring/test/test</div></div><!-- fragment --><h2>Built With</h2>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;./build/test/tests</div></div><!-- fragment --><h2>Built With</h2>
 <ul>
 <li><a href="https://cmake.org/download/">CMAKE V3.5</a> - Compiler</li>
 <li><a href="http://eigen.tuxfamily.org">Eigen 3.3.7</a> - Library for linear algebra</li>
@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('md__home_brennan_SDP_sdp_ss20_collisio
 <li><b>Brennan Penfold</b> - <a href="https://github.com/broccan">broccan</a></li>
 </ul>
 <h2>License</h2>
-<p>This project is licensed under the MIT License - see the LICENSE.md file for details</p>
+<p>This project is licensed under the MIT License - see the <a class="el" href="md_LICENSE.html">LICENSE.md</a> file for details</p>
 <h2>Acknowledgments</h2>
 <ul>
 <li>We would like to thank our coach Djordje Vukcevic who supported us throughout the development of this library. </li>

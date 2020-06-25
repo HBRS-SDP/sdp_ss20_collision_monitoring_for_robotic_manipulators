@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kinova_5farm_20package',['kinova_arm package',['../md_src_README.html',1,'']]]
+  ['kinova_20arm',['Kinova arm',['../md_src_README.html',1,'']]]
 ];

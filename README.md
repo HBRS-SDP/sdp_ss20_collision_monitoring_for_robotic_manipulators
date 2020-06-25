@@ -25,7 +25,7 @@ this repository.
 ### Contents
 - [Collision Monitoring Library](collision_monitoring/README.md):
     The base library designed to be highly portable and used for any manipulator type
-- [Kinova Arm Package](src/kinova_arm_README.md):
+- [Kinova Arm Package](src/README.md):
     The test implementation of the Collision monitoring library designed for a
     Kinova gen3 7DOF manipulator.
 - [Collision Avoidance ROS Package](catkin_workspace/README.md):
@@ -71,6 +71,13 @@ Repository
 └─── test/                     Contains the test source files for kinova_arm
 └─── urdf/                     Contains the URDF file used for kinematic calcs
 ```
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+* We would like to thank our coach Djordje Vukcevic who supported us throughout
+the development of this library.
 
 ## References
 This library is an implementation of the following papers:

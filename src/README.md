@@ -1,4 +1,4 @@
-# kinova_arm package
+# Kinova arm
 The package that implements the Collision monitoring library for the Kinova gen3
 7DOF arm. This not only is done for testing but also gives an example of how
 the Arm interface can be implemented.

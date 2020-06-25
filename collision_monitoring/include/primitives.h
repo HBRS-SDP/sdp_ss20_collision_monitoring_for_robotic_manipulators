@@ -247,21 +247,11 @@ class Capsule: public Primitive{
         double getShortestDistance(Sphere *sphere);
 };
 
-// class Cylinder: public Primitive{
-//     protected:
-//         float length;
-//         float radius;
-
-//     public:
-//         Cylinder(Eigen::Matrix4d pose, double length, double radius);
-//         ~Cylinder();
-
-//         double getShortestDistance(Primitive *primitive);
-//         double getShortestDistance(Capsule *capsule);
-//         double getShortestDistance(Cylinder *cylinder);
-//         double getShortestDistance(Sphere *sphere);
-// };
-
+/**
+ * The Sphere class
+ * 
+ * This class is a shape that inherits from primitive.
+ */
 class Sphere: public Primitive{
     private:
         float radius;
