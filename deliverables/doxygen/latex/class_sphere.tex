@@ -31,6 +31,12 @@ Collaboration diagram for Sphere\+:\nopagebreak
 \item 
 float \hyperlink{class_sphere_a330dd34c7c7b6dfff106c4c71ec80028}{get\+Radius} ()
 \item 
+void \hyperlink{class_sphere_a9290773136dacf81a9f147343a7a0486}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_primitive}{Primitive} $\ast$primitive)
+\item 
+void \hyperlink{class_sphere_a903c1c7a459e0c048b6f36a4f1376256}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_capsule}{Capsule} $\ast$capsule)
+\item 
+void \hyperlink{class_sphere_ac2584cb5fb1d066a9527f8c95435093b}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_sphere}{Sphere} $\ast$sphere)
+\item 
 void \hyperlink{class_sphere_a707fc14e03a6ff67ac012a18b2a8cb28}{get\+Shortest\+Direction} (Eigen\+::\+Vector3d \&shortest\+Direction, \hyperlink{class_primitive}{Primitive} $\ast$primitive)
 \item 
 void \hyperlink{class_sphere_af7ff30023363261cf118d1fb80c745a7}{get\+Shortest\+Direction} (Eigen\+::\+Vector3d \&shortest\+Direction, \hyperlink{class_capsule}{Capsule} $\ast$capsule)
@@ -51,7 +57,7 @@ The \hyperlink{class_sphere}{Sphere} class
 
 This class is a shape that inherits from primitive. 
 
-Definition at line 255 of file primitives.\+h.
+Definition at line 290 of file primitives.\+h.
 
 
 
@@ -75,7 +81,7 @@ Constructor of \hyperlink{class_capsule}{Capsule} class
 \end{DoxyParams}
 
 
-Definition at line 283 of file primitives.\+cpp.
+Definition at line 311 of file primitives.\+cpp.
 
 \index{Sphere@{Sphere}!Sphere@{Sphere}}
 \index{Sphere@{Sphere}!Sphere@{Sphere}}
@@ -93,11 +99,92 @@ Copy costructor of capsule class
 \end{DoxyParams}
 
 
-Definition at line 288 of file primitives.\+cpp.
+Definition at line 316 of file primitives.\+cpp.
 
 
 
 \subsection{Member Function Documentation}
+\index{Sphere@{Sphere}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Sphere@{Sphere}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Primitive $\ast$primitive)}{getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Primitive} $\ast$}]{primitive}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_sphere_a9290773136dacf81a9f147343a7a0486}{}\label{class_sphere_a9290773136dacf81a9f147343a7a0486}
+Performs a dynamic cast to overload the direction functions
+
+This method takes an object that inherits from primitive and performs a dynamic cast to call the correct get\+Closest\+Points method depending on the class of the shape.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em primitive} & address of the primitive object. \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and primitive \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_primitive_ae838e4e129f05642994da59f08f85f56}{Primitive}.
+
+
+
+Definition at line 329 of file primitives.\+cpp.
+
+\index{Sphere@{Sphere}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Sphere@{Sphere}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Capsule $\ast$capsule)}{getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Capsule} $\ast$}]{capsule}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_sphere_a903c1c7a459e0c048b6f36a4f1376256}{}\label{class_sphere_a903c1c7a459e0c048b6f36a4f1376256}
+Finds the shortest distance between this primitive and a \hyperlink{class_capsule}{Capsule} primitive
+
+This method takes a capsule object and returns the closest points in this primitive and in a capsule object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em capsule} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and capsule \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_primitive_a2b8b8dea111d9eda31f72e06b47e9aa9}{Primitive}.
+
+
+
+Definition at line 343 of file primitives.\+cpp.
+
+\index{Sphere@{Sphere}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Sphere@{Sphere}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Sphere $\ast$sphere)}{getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Sphere} $\ast$}]{sphere}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_sphere_ac2584cb5fb1d066a9527f8c95435093b}{}\label{class_sphere_ac2584cb5fb1d066a9527f8c95435093b}
+Finds the shortest distance between this primitive and a \hyperlink{class_sphere}{Sphere} primitive
+
+This method takes a capsule object and returns the closest points in this primitive and in a sphere object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em sphere} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and sphere \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_primitive_ac86ef47d59c21448ce78c91490c7dbd4}{Primitive}.
+
+
+
+Definition at line 361 of file primitives.\+cpp.
+
 \index{Sphere@{Sphere}!get\+Radius@{get\+Radius}}
 \index{get\+Radius@{get\+Radius}!Sphere@{Sphere}}
 \subsubsection[{\texorpdfstring{get\+Radius()}{getRadius()}}]{\setlength{\rightskip}{0pt plus 5cm}float Sphere\+::get\+Radius (
@@ -112,7 +199,7 @@ the radius of the sphere
 \end{DoxyReturn}
 
 
-Definition at line 297 of file primitives.\+cpp.
+Definition at line 325 of file primitives.\+cpp.
 
 \index{Sphere@{Sphere}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
 \index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Sphere@{Sphere}}
@@ -139,7 +226,7 @@ Implements \hyperlink{class_primitive_ae37bbdf5271bf278b19888e0428579a8}{Primiti
 
 
 
-Definition at line 301 of file primitives.\+cpp.
+Definition at line 372 of file primitives.\+cpp.
 
 \index{Sphere@{Sphere}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
 \index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Sphere@{Sphere}}
@@ -166,7 +253,7 @@ Implements \hyperlink{class_primitive_af9bd724a6618bd76e41e5682caa25023}{Primiti
 
 
 
-Definition at line 315 of file primitives.\+cpp.
+Definition at line 386 of file primitives.\+cpp.
 
 \index{Sphere@{Sphere}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
 \index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Sphere@{Sphere}}
@@ -178,7 +265,7 @@ Definition at line 315 of file primitives.\+cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_sphere_a719592bc6a8307060f49f289da631310}{}\label{class_sphere_a719592bc6a8307060f49f289da631310}
 Finds the shortest distance between this primitive and a \hyperlink{class_sphere}{Sphere} primitive
 
-This method takes a capsule object and returns the closest direction between this primitive and a sphere object. returns a Vector3d.
+This method takes a capsule object and returns the closest direction between this primitive and a sphere object.
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -193,7 +280,7 @@ Implements \hyperlink{class_primitive_a3f1bc91de29fa904657c1ba4c40eee53}{Primiti
 
 
 
-Definition at line 331 of file primitives.\+cpp.
+Definition at line 397 of file primitives.\+cpp.
 
 \index{Sphere@{Sphere}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
 \index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Sphere@{Sphere}}
@@ -220,7 +307,7 @@ Implements \hyperlink{class_primitive_a340b3e5540b910480ada939383985d66}{Primiti
 
 
 
-Definition at line 341 of file primitives.\+cpp.
+Definition at line 408 of file primitives.\+cpp.
 
 \index{Sphere@{Sphere}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
 \index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Sphere@{Sphere}}
@@ -247,7 +334,7 @@ Implements \hyperlink{class_primitive_a46e60acfe4c005c0ec94e1e8b82d36db}{Primiti
 
 
 
-Definition at line 355 of file primitives.\+cpp.
+Definition at line 422 of file primitives.\+cpp.
 
 \index{Sphere@{Sphere}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
 \index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Sphere@{Sphere}}
@@ -274,7 +361,7 @@ Implements \hyperlink{class_primitive_adaac4fc4fedf9cd76d4eb9c77e9ae560}{Primiti
 
 
 
-Definition at line 365 of file primitives.\+cpp.
+Definition at line 432 of file primitives.\+cpp.
 
 
 
