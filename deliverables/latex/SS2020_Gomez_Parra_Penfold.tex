@@ -23,12 +23,13 @@
 % on the last page of the document
 
 % The following packages can be found on http:\\www.ctan.org
-%\usepackage{graphics} % for pdf, bitmapped graphics files
-%\usepackage{epsfig} % for postscript graphics files
-%\usepackage{mathptmx} % assumes new font selection scheme installed
-%\usepackage{times} % assumes new font selection scheme installed
-%\usepackage{amsmath} % assumes amsmath package installed
-%\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{float}
 
 \title{\LARGE \bf Implementation of biologically-inspired dynamical systems for movement generation: automatic real-time goal adaptation and obstacle avoidance}
 
@@ -75,6 +76,19 @@ Our two papers \cite{1,2}
 \section{Approach}
 
 \subsection{Distance to objects} %Alan
+1) Sphere - Sphere: 
+To compute the closest distance between two spheres, one can easily calculate the distance between two spheres 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.1]{images/sphere-sphere.png}
+    \caption{A-DRZ architecture system.}
+    \label{fig:sphere_sphere}
+\end{figure}
+
+2) Sphere - Capsule:
+
+3) Capsule - Capsule:
 \subsection{Collision monitoring} %Sam
 \subsection{Potential field} %Sam
 \subsection{Controller} %Sam
