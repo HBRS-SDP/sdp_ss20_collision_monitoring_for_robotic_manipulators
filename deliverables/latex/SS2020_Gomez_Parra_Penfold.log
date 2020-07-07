@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.16)  7 JUL 2020 18:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.16)  7 JUL 2020 19:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -333,6 +333,7 @@ Missing character: There is no ù in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ì in font ptmr7t!
+ [2 </home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/images/steering_angle.png (PNG copy)>]
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ú in font ptmr7t!
@@ -355,22 +356,22 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ù in font ptmr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--242
+Underfull \hbox (badness 10000) in paragraph at lines 251--252
 []\OT1/ptm/m/n/8 S. Adee, Dean Ka-mens Luke Arm Pros-the-sis Read-ies
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--242
+Underfull \hbox (badness 10000) in paragraph at lines 251--252
 \OT1/ptm/m/n/8 for Clin-i-cal Tri-als - IEEE Spec-trum, IEEE Spec-trum:
  []
 
 
-Underfull \hbox (badness 4291) in paragraph at lines 241--242
+Underfull \hbox (badness 4291) in paragraph at lines 251--252
 \OT1/ptm/m/n/8 Tech-nol-ogy, En-gi-neer-ing, and Sci-ence News, Feb. 01, 2008.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--242
+Underfull \hbox (badness 10000) in paragraph at lines 251--252
 \OT1/ptm/m/n/8 https://spectrum.ieee.org/biomedical/bionics/dean-kamens-luke-arm-
  []
 
@@ -393,7 +394,7 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ì in font ptmr7t!
 
-Underfull \hbox (badness 6493) in paragraph at lines 244--245
+Underfull \hbox (badness 6493) in paragraph at lines 254--255
 \OT1/ptm/m/n/8 A Wol-fram Web Re-source, cre-ated by Eric W. Weis-stein.
  []
 
@@ -408,7 +409,9 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[2 </home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/images/steering_angle.png (PNG copy)>] (/home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux) ) 
+[3
+
+] (/home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux) ) 
 Here is how much of TeX's memory you used:
  3125 strings out of 493029
  45995 string characters out of 6136233
@@ -418,10 +421,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  38i,8n,26p,718b,283s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf (2 pages, 298615 bytes).
+Output written on /home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf (3 pages, 299599 bytes).
 PDF statistics:
- 52 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 55 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -201,9 +201,19 @@ The manipulator is controlled with a control loop that is executed at a specifie
 \section{Use case}
 
 \subsection{Single arm} %Alan
-The library presentes in this paper can be used 
+The library presented in this paper can be used with a single manipulator to avoid the collision of its end-effector with objects in the environment.
+The user can use the Arm interface to provide the necessary information about the manipulator.
+The user can then also add different obstacles that are present in the environment.
+The pose of the manipulator and the obstacles need to be updated using the methods given by the library.
 \subsection{Dual arm} %Alan
+One can also use the library with two manipulators by creating two instances of the implementation of the Arm interface and adding the links of 
+the opposite manipulator as obstacles represented by capsules.
+This will prevent the collision of the end-effector of both robots with the opposite manipulator
+\subsection{Multiple arms}
+In the same way, as one can use the library with two manipulators, one can add as many manipulators as the computational resources allow it.
 \subsection{Self collision} %Alan
+Finally, one can also use this library to prevent the collision of the end-effector of the manipulator with its other links.
+This can be done by implementing the Arm interface and adding each link of the robot as an obstacle represented by a capsule.
 
 \section{Conclusion} %Alan
 The computation of the distances between different kinds of objects is not easy, one needs to take into consideration different scenarios, 
