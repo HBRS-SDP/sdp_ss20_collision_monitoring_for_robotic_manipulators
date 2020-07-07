@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.16)  7 JUL 2020 18:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.11.16)  7 JUL 2020 18:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -227,18 +227,18 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 ) (/home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux)
 \openout1 = `SS2020_Gomez_Parra_Penfold.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count105
@@ -288,31 +288,42 @@ Package grfext Info: Graphics extension search list:
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 85.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 86.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 85.
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 86.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 85.
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 86.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 85.
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 86.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 85.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 86.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 85.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 86.
  <images/capsule-capsule.png, id=1, 1348.03625pt x 842.14626pt>
 File: images/capsule-capsule.png Graphic file (type png)
  <use images/capsule-capsule.png>
-Package pdftex.def Info: images/capsule-capsule.png used on input line 139.
+Package pdftex.def Info: images/capsule-capsule.png used on input line 140.
 (pdftex.def)             Requested size: 202.19672pt x 126.31648pt.
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+ </home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/images/capsule-capsule.png>] <images/steering_angle.png, id=17, 268.00125pt x 130.23656pt>
+File: images/steering_angle.png Graphic file (type png)
+ <use images/steering_angle.png>
+Package pdftex.def Info: images/steering_angle.png used on input line 161.
+(pdftex.def)             Requested size: 268.00058pt x 130.23624pt.
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ú in font ptmr7t!
@@ -322,16 +333,6 @@ Missing character: There is no ù in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ì in font ptmr7t!
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \vbox (336.63313pt too high) has occurred while \output is active []
-
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-
- </home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/images/capsule-capsule.png>]
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ú in font ptmr7t!
@@ -354,22 +355,22 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ù in font ptmr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--195
+Underfull \hbox (badness 10000) in paragraph at lines 239--240
 []\OT1/ptm/m/n/8 S. Adee, Dean Ka-mens Luke Arm Pros-the-sis Read-ies
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--195
+Underfull \hbox (badness 10000) in paragraph at lines 239--240
 \OT1/ptm/m/n/8 for Clin-i-cal Tri-als - IEEE Spec-trum, IEEE Spec-trum:
  []
 
 
-Underfull \hbox (badness 4291) in paragraph at lines 194--195
+Underfull \hbox (badness 4291) in paragraph at lines 239--240
 \OT1/ptm/m/n/8 Tech-nol-ogy, En-gi-neer-ing, and Sci-ence News, Feb. 01, 2008.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--195
+Underfull \hbox (badness 10000) in paragraph at lines 239--240
 \OT1/ptm/m/n/8 https://spectrum.ieee.org/biomedical/bionics/dean-kamens-luke-arm-
  []
 
@@ -392,6 +393,11 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ì in font ptmr7t!
 
+Underfull \hbox (badness 6493) in paragraph at lines 242--243
+\OT1/ptm/m/n/8 A Wol-fram Web Re-source, cre-ated by Eric W. Weis-stein.
+ []
+
+
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
 
@@ -402,20 +408,20 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[2] (/home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux) ) 
+[2 </home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/images/steering_angle.png (PNG copy)>] (/home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.aux) ) 
 Here is how much of TeX's memory you used:
- 3114 strings out of 493029
- 45809 string characters out of 6136233
- 114189 words of memory out of 5000000
- 6589 multiletter control sequences out of 15000+600000
- 47889 words of font info for 98 fonts, out of 8000000 for 9000
+ 3125 strings out of 493029
+ 45995 string characters out of 6136233
+ 114216 words of memory out of 5000000
+ 6597 multiletter control sequences out of 15000+600000
+ 48443 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,8n,26p,482b,285s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf (2 pages, 278793 bytes).
+ 38i,8n,26p,718b,283s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /home/alan/Documents/MAS/SS20/SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators/deliverables/latex/SS2020_Gomez_Parra_Penfold.pdf (2 pages, 298387 bytes).
 PDF statistics:
- 47 PDF objects out of 1000 (max. 8388607)
- 32 compressed objects within 1 object stream
+ 52 PDF objects out of 1000 (max. 8388607)
+ 35 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
