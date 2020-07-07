@@ -76,19 +76,72 @@ Our two papers \cite{1,2}
 \section{Approach}
 
 \subsection{Distance to objects} %Alan
+To compute the closest distance between two objects we first obtain the closest points between the objects and then the distance between these two points.
+
 1) Sphere - Sphere: 
-To compute the closest distance between two spheres, one can easily calculate the distance between two spheres 
+To compute the closest distance between two spheres, one can easily calculate the distance between the center of both spheres and subtract the radius of both spheres.
+
+2) Sphere - Capsule:
+To compute the closest distance between a capsule $C$ and a sphere $S$, one can compute the distance between the center of $S$ = $p_S$ and the axis of symmetry of $C$ = $l_C$
+and then subtract the radius of the sphere and the capsule. 
+
+The closest point, on $l_C$, to $p_S$ is given by \eqref{eq:capsule_point},
+
+\begin{equation}       
+    \begin{matrix} 
+        x = x_1 + \lambda(x_2 - x_1) \\
+        y = y_1 + \lambda(y_2 - y_1) \\
+        z = z_1 + \lambda(z_2 - z_1) \label{eq:capsule_point}
+    \end{matrix}
+\end{equation}
+
+where the start point of $l_C$ is $m1(x_1, y_1, z_1)$, the end point is $m2(x_2, y_2, z_2)$, and $\lambda$ is given by \eqref{eq:lambda}.
+
+\begin{equation}       
+    \begin{matrix} 
+        \lambda = \frac{(c - m_1) \cdot (m_2 - m_1 )}{l^2} \label{eq:lambda}
+    \end{matrix}
+\end{equation}
+
+3) Capsule - Capsule:
+To compute the closest distance between two capsules (capsule $A$ and capsule $B$), with axis of symmetry $l_A = \overline{m1_A m2_A}$ and $l_B = \overline{m1_B m2_B}$, 
+where $A$ is the longest capsule, one can consider four different cases:
+\begin{enumerate}
+    \item $m1_B$ and $m2_B$ can be perpendicularly projected onto $l_A$
+    \item $m1_B$ and $m2_B$ cannot be perpendicularly projected onto $l_A$
+    \item only $m1_B$ can be perpendicularly projected onto $l_A$
+    \item only $m2_B$ can be perpendicularly projected onto $l_A$
+\end{enumerate} 
+
+Depending on these cases, the following steps are going to be calculated with different objects.
+
+In case 1, capsule $M$ will be capsule $A$, and capsule $O$ will be capsule $B$.
+
+In case 2, if $m1_B$ is closer to $l_A$ than $m2_A$ is to $l_B$, then capsule $M$ will be capsule $A$, and capsule $O$ will be capsule $B$.
+Else capsule $M$ will be capsule $B$, and capsule $O$ will be capsule $A$.
+
+In case 3, if $m2_B$ is closer to $l_A$ than $m1_A$ is to $l_B$, then capsule $M$ will be capsule $A$, and capsule $O$ will be capsule $B$.
+Else capsule $M$ will be capsule $B$, and capsule $O$ will be capsule $A$.
+
+In case 4, if if $m1_B$ is closer to $l_A$ than $m2_B$ is to $l_A$, then capsule $M$ will be capsule $A$, and capsule $O$ will be capsule $B$.
+Else capsule $M$ will be capsule $B$, and capsule $O$ will be capsule $A$.
+
+With capsule $M$ and capsule $P$, one can follow the next steps.
+The first step is to place the reference frame of $M$ in its center of mass, with the Z-axis in the direction of $l_M$. 
+The second step is to project $l_O$ onto the XY-plane given by the reference frame of $M$ (Figure \ref{fig:capsule_capsule}),
+the result of this projection would be the line $l_P$.
+The third step is to calculate the closest point on $l_P$ to the origin of the reference frame of $P$ by using \eqref{eq:capsule_point}. 
+The final step is to compute the distance and subtract the radius of the capsule and the sphere.
+If the true closest points on the original axis of symmetry of the capsules are needed, one can project back the obtained points.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.1]{images/sphere-sphere.png}
-    \caption{A-DRZ architecture system.}
-    \label{fig:sphere_sphere}
+    \includegraphics[scale=0.15]{images/capsule-capsule.png}
+    \caption{Capsule - capsule}
+    \label{fig:capsule_capsule}
 \end{figure}
 
-2) Sphere - Capsule:
 
-3) Capsule - Capsule:
 \subsection{Collision monitoring} %Sam
 \subsection{Potential field} %Sam
 \subsection{Controller} %Sam
