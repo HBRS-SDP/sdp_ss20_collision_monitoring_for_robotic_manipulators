@@ -6,41 +6,47 @@
 
 
 
-Inheritance diagram for Arm\+:\nopagebreak
+Inheritance diagram for Arm\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=145pt]{class_arm__inherit__graph}
+\includegraphics[width=182pt]{class_arm__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Arm\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{class_arm__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+virtual \hyperlink{class_arm_ae1bcf12831b42e93d431efe3b7910b5e}{$\sim$\+Arm} ()
+\item 
 virtual bool \hyperlink{class_arm_a9bfe3a3f230c8fa8a39f88cce2d6b597}{update\+Pose} (std\+::vector$<$ double $>$ joint\+Positions)
 \item 
-virtual Eigen\+::\+Matrix4d \hyperlink{class_arm_af89cd963a4321584dfb8f9715c02f5be}{get\+Pose} (void)=0\hypertarget{class_arm_af89cd963a4321584dfb8f9715c02f5be}{}\label{class_arm_af89cd963a4321584dfb8f9715c02f5be}
-
+virtual Eigen\+::\+Matrix4d \hyperlink{class_arm_af89cd963a4321584dfb8f9715c02f5be}{get\+Pose} (void)=0
 \begin{DoxyCompactList}\small\item\em Used to get the endeffector frame of the manipulator. \end{DoxyCompactList}\item 
-virtual Eigen\+::\+Matrix4d \hyperlink{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}{get\+Pose} (int frame\+Number)=0\hypertarget{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}{}\label{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}
-
+virtual Eigen\+::\+Matrix4d \hyperlink{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}{get\+Pose} (int frame\+Number)=0
 \begin{DoxyCompactList}\small\item\em Used to get the frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Eigen\+::\+Matrix4d \hyperlink{class_arm_ab568839905191e1e5abb83119a4a445d}{base\+Transform}\hypertarget{class_arm_ab568839905191e1e5abb83119a4a445d}{}\label{class_arm_ab568839905191e1e5abb83119a4a445d}
-
+Eigen\+::\+Matrix4d \hyperlink{class_arm_ab568839905191e1e5abb83119a4a445d}{base\+Transform}
 \begin{DoxyCompactList}\small\item\em The homogeneous transformation from the world to arm base frame. \end{DoxyCompactList}\item 
-std\+::vector$<$ \hyperlink{class_primitive}{Primitive} $\ast$ $>$ \hyperlink{class_arm_a427fb95641bb8d0886b2849f0bda36be}{links}\hypertarget{class_arm_a427fb95641bb8d0886b2849f0bda36be}{}\label{class_arm_a427fb95641bb8d0886b2849f0bda36be}
-
+std\+::vector$<$ \hyperlink{class_primitive}{Primitive} $\ast$ $>$ \hyperlink{class_arm_a427fb95641bb8d0886b2849f0bda36be}{links}
 \begin{DoxyCompactList}\small\item\em The list of link primitives that represent the manipulator. \end{DoxyCompactList}\item 
-int \hyperlink{class_arm_a911ba9a8c719c090a305f88ab0ae7490}{n\+Links}\hypertarget{class_arm_a911ba9a8c719c090a305f88ab0ae7490}{}\label{class_arm_a911ba9a8c719c090a305f88ab0ae7490}
-
+int \hyperlink{class_arm_a911ba9a8c719c090a305f88ab0ae7490}{n\+Links}
 \begin{DoxyCompactList}\small\item\em The number of links in the chain. \end{DoxyCompactList}\item 
-int \hyperlink{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}{n\+Joints}\hypertarget{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}{}\label{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}
-
+int \hyperlink{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}{n\+Joints}
 \begin{DoxyCompactList}\small\item\em The number of joints in the chain. \end{DoxyCompactList}\item 
-int \hyperlink{class_arm_ac7955a5e8e9c6681b55d0d80d7e31df7}{n\+Frames}\hypertarget{class_arm_ac7955a5e8e9c6681b55d0d80d7e31df7}{}\label{class_arm_ac7955a5e8e9c6681b55d0d80d7e31df7}
-
+int \hyperlink{class_arm_ac7955a5e8e9c6681b55d0d80d7e31df7}{n\+Frames}
 \begin{DoxyCompactList}\small\item\em The number of frames in the arm. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -53,7 +59,51 @@ Definition at line 16 of file arm.\+h.
 
 
 
+\subsection{Constructor \& Destructor Documentation}
+\index{Arm@{Arm}!````~Arm@{$\sim$\+Arm}}
+\index{````~Arm@{$\sim$\+Arm}!Arm@{Arm}}
+\subsubsection[{\texorpdfstring{$\sim$\+Arm()}{~Arm()}}]{\setlength{\rightskip}{0pt plus 5cm}Arm\+::$\sim$\+Arm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_arm_ae1bcf12831b42e93d431efe3b7910b5e}{}\label{class_arm_ae1bcf12831b42e93d431efe3b7910b5e}
+
+
+Definition at line 5 of file arm.\+cpp.
+
+
+
 \subsection{Member Function Documentation}
+\index{Arm@{Arm}!get\+Pose@{get\+Pose}}
+\index{get\+Pose@{get\+Pose}!Arm@{Arm}}
+\subsubsection[{\texorpdfstring{get\+Pose(void)=0}{getPose(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Eigen\+::\+Matrix4d Arm\+::get\+Pose (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_arm_af89cd963a4321584dfb8f9715c02f5be}{}\label{class_arm_af89cd963a4321584dfb8f9715c02f5be}
+
+
+Used to get the endeffector frame of the manipulator. 
+
+
+
+Implemented in \hyperlink{class_kinova_arm_aea7c01f72eb70387ff71ca130db3bd3f}{Kinova\+Arm}.
+
+\index{Arm@{Arm}!get\+Pose@{get\+Pose}}
+\index{get\+Pose@{get\+Pose}!Arm@{Arm}}
+\subsubsection[{\texorpdfstring{get\+Pose(int frame\+Number)=0}{getPose(int frameNumber)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Eigen\+::\+Matrix4d Arm\+::get\+Pose (
+\begin{DoxyParamCaption}
+\item[{int}]{frame\+Number}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}{}\label{class_arm_a994d35ca0dae04725fe0921c4f7d7e38}
+
+
+Used to get the frame. 
+
+
+
+Implemented in \hyperlink{class_kinova_arm_ae6b5c17c1b7b79bc3de00e8d38b80999}{Kinova\+Arm}.
+
 \index{Arm@{Arm}!update\+Pose@{update\+Pose}}
 \index{update\+Pose@{update\+Pose}!Arm@{Arm}}
 \subsubsection[{\texorpdfstring{update\+Pose(std\+::vector$<$ double $>$ joint\+Positions)}{updatePose(std::vector< double > jointPositions)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Arm\+::update\+Pose (
@@ -81,7 +131,65 @@ Definition at line 6 of file arm.\+cpp.
 
 
 
+\subsection{Member Data Documentation}
+\index{Arm@{Arm}!base\+Transform@{base\+Transform}}
+\index{base\+Transform@{base\+Transform}!Arm@{Arm}}
+\subsubsection[{\texorpdfstring{base\+Transform}{baseTransform}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix4d Arm\+::base\+Transform}\hypertarget{class_arm_ab568839905191e1e5abb83119a4a445d}{}\label{class_arm_ab568839905191e1e5abb83119a4a445d}
+
+
+The homogeneous transformation from the world to arm base frame. 
+
+
+
+Definition at line 38 of file arm.\+h.
+
+\index{Arm@{Arm}!links@{links}}
+\index{links@{links}!Arm@{Arm}}
+\subsubsection[{\texorpdfstring{links}{links}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Primitive}$\ast$$>$ Arm\+::links}\hypertarget{class_arm_a427fb95641bb8d0886b2849f0bda36be}{}\label{class_arm_a427fb95641bb8d0886b2849f0bda36be}
+
+
+The list of link primitives that represent the manipulator. 
+
+
+
+Definition at line 41 of file arm.\+h.
+
+\index{Arm@{Arm}!n\+Frames@{n\+Frames}}
+\index{n\+Frames@{n\+Frames}!Arm@{Arm}}
+\subsubsection[{\texorpdfstring{n\+Frames}{nFrames}}]{\setlength{\rightskip}{0pt plus 5cm}int Arm\+::n\+Frames}\hypertarget{class_arm_ac7955a5e8e9c6681b55d0d80d7e31df7}{}\label{class_arm_ac7955a5e8e9c6681b55d0d80d7e31df7}
+
+
+The number of frames in the arm. 
+
+
+
+Definition at line 47 of file arm.\+h.
+
+\index{Arm@{Arm}!n\+Joints@{n\+Joints}}
+\index{n\+Joints@{n\+Joints}!Arm@{Arm}}
+\subsubsection[{\texorpdfstring{n\+Joints}{nJoints}}]{\setlength{\rightskip}{0pt plus 5cm}int Arm\+::n\+Joints}\hypertarget{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}{}\label{class_arm_ac3734a2ca38b0312fd42894ab6886bc9}
+
+
+The number of joints in the chain. 
+
+
+
+Definition at line 45 of file arm.\+h.
+
+\index{Arm@{Arm}!n\+Links@{n\+Links}}
+\index{n\+Links@{n\+Links}!Arm@{Arm}}
+\subsubsection[{\texorpdfstring{n\+Links}{nLinks}}]{\setlength{\rightskip}{0pt plus 5cm}int Arm\+::n\+Links}\hypertarget{class_arm_a911ba9a8c719c090a305f88ab0ae7490}{}\label{class_arm_a911ba9a8c719c090a305f88ab0ae7490}
+
+
+The number of links in the chain. 
+
+
+
+Definition at line 43 of file arm.\+h.
+
+
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-arm.\+h\item 
-arm.\+cpp\end{DoxyCompactItemize}
+\hyperlink{arm_8h}{arm.\+h}\item 
+\hyperlink{arm_8cpp}{arm.\+cpp}\end{DoxyCompactItemize}

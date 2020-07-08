@@ -120,9 +120,9 @@ Collaboration diagram for Monitor:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_monitor__coll__graph.png" border="0" usemap="#_monitor_coll__map" alt="Collaboration graph"/></div>
 <map name="_monitor_coll__map" id="_monitor_coll__map">
-<area shape="rect" id="node2" href="class_arm.html" title="Arm" alt="" coords="15,5,61,32"/>
+<area shape="rect" id="node2" href="class_arm.html" title="{Arm\n|+ baseTransform\l+ links\l+ nLinks\l+ nJoints\l+ nFrames\l|+ ~Arm()\l+ updatePose()\l+ getPose()\l+ getPose()\l}" alt="" coords="43,5,165,185"/>
 </map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -145,17 +145,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a8b75571f6224f999a3dc05cf9a83fa68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b75571f6224f999a3dc05cf9a83fa68"></a>
-<a class="el" href="class_arm.html">Arm</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a8b75571f6224f999a3dc05cf9a83fa68">arm</a></td></tr>
-<tr class="memdesc:a8b75571f6224f999a3dc05cf9a83fa68"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_arm.html">Arm</a> for the monitor. <br /></td></tr>
+<tr class="memitem:a8b75571f6224f999a3dc05cf9a83fa68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_arm.html">Arm</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a8b75571f6224f999a3dc05cf9a83fa68">arm</a></td></tr>
+<tr class="memdesc:a8b75571f6224f999a3dc05cf9a83fa68"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_arm.html">Arm</a> for the monitor.  <a href="#a8b75571f6224f999a3dc05cf9a83fa68">More...</a><br /></td></tr>
 <tr class="separator:a8b75571f6224f999a3dc05cf9a83fa68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05fd42482269ad65432d5400c8f0f9b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05fd42482269ad65432d5400c8f0f9b5"></a>
-std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a05fd42482269ad65432d5400c8f0f9b5">obstacles</a></td></tr>
-<tr class="memdesc:a05fd42482269ad65432d5400c8f0f9b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obstacles in the workspace. <br /></td></tr>
+<tr class="memitem:a05fd42482269ad65432d5400c8f0f9b5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a05fd42482269ad65432d5400c8f0f9b5">obstacles</a></td></tr>
+<tr class="memdesc:a05fd42482269ad65432d5400c8f0f9b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obstacles in the workspace.  <a href="#a05fd42482269ad65432d5400c8f0f9b5">More...</a><br /></td></tr>
 <tr class="separator:a05fd42482269ad65432d5400c8f0f9b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2207169c2b32b3bbf9925f3254064dee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2207169c2b32b3bbf9925f3254064dee"></a>
-std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a2207169c2b32b3bbf9925f3254064dee">obstaclesToDelete</a></td></tr>
-<tr class="memdesc:a2207169c2b32b3bbf9925f3254064dee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obstacles to delete in destructor. <br /></td></tr>
+<tr class="memitem:a2207169c2b32b3bbf9925f3254064dee"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a2207169c2b32b3bbf9925f3254064dee">obstaclesToDelete</a></td></tr>
+<tr class="memdesc:a2207169c2b32b3bbf9925f3254064dee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obstacles to delete in destructor.  <a href="#a2207169c2b32b3bbf9925f3254064dee">More...</a><br /></td></tr>
 <tr class="separator:a2207169c2b32b3bbf9925f3254064dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -348,6 +345,55 @@ std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#
 <dl class="section return"><dt>Returns</dt><dd>a matrix with the distance of each link to the other obstacles. </dd></dl>
 
 <p>Definition at line <a class="el" href="monitor_8cpp_source.html#l00075">75</a> of file <a class="el" href="monitor_8cpp_source.html">monitor.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a8b75571f6224f999a3dc05cf9a83fa68"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_arm.html">Arm</a>* Monitor::arm</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_arm.html">Arm</a> for the monitor. </p>
+
+<p>Definition at line <a class="el" href="monitor_8h_source.html#l00024">24</a> of file <a class="el" href="monitor_8h_source.html">monitor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a05fd42482269ad65432d5400c8f0f9b5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_primitive.html">Primitive</a>*&gt; Monitor::obstacles</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obstacles in the workspace. </p>
+
+<p>Definition at line <a class="el" href="monitor_8h_source.html#l00027">27</a> of file <a class="el" href="monitor_8h_source.html">monitor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2207169c2b32b3bbf9925f3254064dee"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_primitive.html">Primitive</a>*&gt; Monitor::obstaclesToDelete</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obstacles to delete in destructor. </p>
+
+<p>Definition at line <a class="el" href="monitor_8h_source.html#l00029">29</a> of file <a class="el" href="monitor_8h_source.html">monitor.h</a>.</p>
 
 </div>
 </div>

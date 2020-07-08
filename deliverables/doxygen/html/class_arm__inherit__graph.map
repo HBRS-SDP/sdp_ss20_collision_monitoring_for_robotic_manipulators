@@ -1,3 +1,3 @@
 <map id="Arm" name="Arm">
-<area shape="rect" id="node2" href="$class_kinova_arm.html" title="KinovaArm" alt="" coords="5,80,92,107"/>
+<area shape="rect" id="node2" href="$class_kinova_arm.html" title="{KinovaArm\n|+ jointArray\l+ jointVels\l|+ KinovaArm()\l+ KinovaArm()\l+ ~KinovaArm()\l+ updatePose()\l+ ikVelocitySolver()\l+ getPose()\l+ getPose()\l}" alt="" coords="5,233,141,413"/>
 </map>

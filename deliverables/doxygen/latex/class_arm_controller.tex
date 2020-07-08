@@ -6,11 +6,12 @@
 
 
 
-Collaboration diagram for Arm\+Controller\+:\nopagebreak
+Collaboration diagram for Arm\+Controller\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=157pt]{class_arm_controller__coll__graph}
+\includegraphics[height=550pt]{class_arm_controller__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -18,8 +19,7 @@ Collaboration diagram for Arm\+Controller\+:\nopagebreak
 \item 
 \hyperlink{class_arm_controller_a27a8d755210b8e3bd96217ea8080b327}{Arm\+Controller} (\hyperlink{class_monitor}{Monitor} $\ast$monitor\+Object, double k, double d, double gamma, double beta)
 \item 
-\hyperlink{class_arm_controller_ad2b44ab21366148d89980e942b26d232}{$\sim$\+Arm\+Controller} ()\hypertarget{class_arm_controller_ad2b44ab21366148d89980e942b26d232}{}\label{class_arm_controller_ad2b44ab21366148d89980e942b26d232}
-
+\hyperlink{class_arm_controller_ad2b44ab21366148d89980e942b26d232}{$\sim$\+Arm\+Controller} ()
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_kinova_arm}{Kinova\+Arm} Destructor. \end{DoxyCompactList}\item 
 void \hyperlink{class_arm_controller_a29defeb3894d62016523a99b63320a22}{arm\+Callback} (const sensor\+\_\+msgs\+::\+Joint\+State\+::\+Const\+Ptr \&msg)
 \item 
@@ -34,14 +34,11 @@ void \hyperlink{class_arm_controller_a17d05bd19286dc4e04355e3d4f6bb372}{update\+
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_monitor}{Monitor} $\ast$ \hyperlink{class_arm_controller_a939747279bba6db315f80092a74c2629}{monitor}\hypertarget{class_arm_controller_a939747279bba6db315f80092a74c2629}{}\label{class_arm_controller_a939747279bba6db315f80092a74c2629}
-
+\hyperlink{class_monitor}{Monitor} $\ast$ \hyperlink{class_arm_controller_a939747279bba6db315f80092a74c2629}{monitor}
 \begin{DoxyCompactList}\small\item\em The monitor class used to perform collision monitoring. \end{DoxyCompactList}\item 
-Eigen\+::\+Vector3d \hyperlink{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}{goal}\hypertarget{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}{}\label{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}
-
+Eigen\+::\+Vector3d \hyperlink{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}{goal}
 \begin{DoxyCompactList}\small\item\em The goal point of the endeffector. \end{DoxyCompactList}\item 
-std\+::vector$<$ \hyperlink{class_rviz_obstacle}{Rviz\+Obstacle} $\ast$ $>$ \hyperlink{class_arm_controller_ab94a1abce40096f6476404d49d00860f}{rviz\+Obstacles}\hypertarget{class_arm_controller_ab94a1abce40096f6476404d49d00860f}{}\label{class_arm_controller_ab94a1abce40096f6476404d49d00860f}
-
+std\+::vector$<$ \hyperlink{class_rviz_obstacle}{Rviz\+Obstacle} $\ast$ $>$ \hyperlink{class_arm_controller_ab94a1abce40096f6476404d49d00860f}{rviz\+Obstacles}
 \begin{DoxyCompactList}\small\item\em A list of obstacles that are displayed in rviz. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -87,6 +84,21 @@ An instance of Collision\+Monitor class
 
 
 Definition at line 6 of file arm\+\_\+controller.\+cpp.
+
+\index{Arm\+Controller@{Arm\+Controller}!````~Arm\+Controller@{$\sim$\+Arm\+Controller}}
+\index{````~Arm\+Controller@{$\sim$\+Arm\+Controller}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{$\sim$\+Arm\+Controller()}{~ArmController()}}]{\setlength{\rightskip}{0pt plus 5cm}Arm\+Controller\+::$\sim$\+Arm\+Controller (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_arm_controller_ad2b44ab21366148d89980e942b26d232}{}\label{class_arm_controller_ad2b44ab21366148d89980e942b26d232}
+
+
+\hyperlink{class_kinova_arm}{Kinova\+Arm} Destructor. 
+
+
+
+Definition at line 43 of file arm\+\_\+controller.\+cpp.
 
 
 
@@ -184,7 +196,43 @@ Definition at line 261 of file arm\+\_\+controller.\+cpp.
 
 
 
+\subsection{Member Data Documentation}
+\index{Arm\+Controller@{Arm\+Controller}!goal@{goal}}
+\index{goal@{goal}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{goal}{goal}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Arm\+Controller\+::goal}\hypertarget{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}{}\label{class_arm_controller_a5246aa4a2072b1511d510717fc253f88}
+
+
+The goal point of the endeffector. 
+
+
+
+Definition at line 106 of file arm\+\_\+controller.\+h.
+
+\index{Arm\+Controller@{Arm\+Controller}!monitor@{monitor}}
+\index{monitor@{monitor}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{monitor}{monitor}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Monitor}$\ast$ Arm\+Controller\+::monitor}\hypertarget{class_arm_controller_a939747279bba6db315f80092a74c2629}{}\label{class_arm_controller_a939747279bba6db315f80092a74c2629}
+
+
+The monitor class used to perform collision monitoring. 
+
+
+
+Definition at line 103 of file arm\+\_\+controller.\+h.
+
+\index{Arm\+Controller@{Arm\+Controller}!rviz\+Obstacles@{rviz\+Obstacles}}
+\index{rviz\+Obstacles@{rviz\+Obstacles}!Arm\+Controller@{Arm\+Controller}}
+\subsubsection[{\texorpdfstring{rviz\+Obstacles}{rvizObstacles}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Rviz\+Obstacle}$\ast$$>$ Arm\+Controller\+::rviz\+Obstacles}\hypertarget{class_arm_controller_ab94a1abce40096f6476404d49d00860f}{}\label{class_arm_controller_ab94a1abce40096f6476404d49d00860f}
+
+
+A list of obstacles that are displayed in rviz. 
+
+
+
+Definition at line 148 of file arm\+\_\+controller.\+h.
+
+
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-arm\+\_\+controller.\+h\item 
-arm\+\_\+controller.\+cpp\end{DoxyCompactItemize}
+\hyperlink{arm__controller_8h}{arm\+\_\+controller.\+h}\item 
+\hyperlink{arm__controller_8cpp}{arm\+\_\+controller.\+cpp}\end{DoxyCompactItemize}
