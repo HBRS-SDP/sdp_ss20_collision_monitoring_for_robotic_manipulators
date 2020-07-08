@@ -58,20 +58,26 @@
 % Background, motivation and state of the art
 
 %Background ---------------
+Humanoid robots and arm like manipulators have a great many current, and potential, useful applications. Currently robotic manipulators are used in a range of manufacturing processes like painting and spot welding \cite{Fadalil}. Another great application of humanoid robotics is to help people who cannot help themselves, as a separate system, or as a prosthetic. Currently there are prosthetics available, like Dean Kamen's Luke Arm \cite{Adee}, but the control of such device is limited. In human applications the control system used in areas like manufacturing cannot be just dropped into place there are many considerations that are required from a software and hardware perspective. In manufacturing applications the manipulators typically use precomputed trajectories for robustness and efficiency, but this is unsuitable in a human environment where obstacles and goals are constantly on the move \cite{Hoffmann}. The current approach is to use a human controller to solve this problem by adding a controller in a shoe \cite{Adee} or another such interface. While this addresses the issue is can be quite taxing for the user, requiring a lot of concentration just to perform basic tasks.
+
+A solution to the control problem is to use dynamic movement principles which can be generated during the movement itself, allowing for real-time obastacle avoidance and goal changes. Previous approaches \cite{Janabi-Sharif} used were initially not able to handle moving goals, but improvements made by H. Hoffmann et al. \cite{Hoffmann} by applying a potential field method to the process overcame this limitation. The use of dynamic movement primitives in the potential field method overcame the local minimum problem that is typically inherent with using potential fields. Hence this paper is the basis of the project.
+
+%State of the art -----------
+% This paper only considers the end-effector 
+% Paper considers the velocity direction and obstacle direction
+% Does not consider distance 
+
+For the objects to be avoided first they must be located relative to the manipulator, and that is the core concept of the library built for this project. Biologically-inspired dynamical systems for movement generation \cite{Hoffmann} does not tackle the problem of distances between objects, instead a precursor paper was used, Real-Time Obstacle Avoidance for Manipulators and Mobile Robots \cite{Khatib}. This paper goes into details on how to find the distance between two obstacles, which was modified to find the vector, allowing for it to be applied to the dynamic movements primitives control algorithm discussed in Biologically-inspired dynamical systems for movement generation \cite{Hoffmann}.
 %Robotic assistants
 %Set trajectories
-Our two papers \cite{1,2}
+Our two papers \cite{Hoffmann,Khatib}
 %Use Human feedback S.Adee,“Dean Kamen’s‘LukeArm’prosthesis readies for clinical trials,”2008. [Online].Available:http://www.spectrum.ieee.org/feb08/5957[5] M. Velliste, S. Perel, M. C. Spalding, A. S. Whitford, and A. B.Schwartz, “Cortical control of a prosthetic arm for self-feeding,”Nature, vol. 453, pp. 1098–1101, 2008.
 % Dynamic movement primitives
 % Obstacle avoidance
 % Distance between objects
 % Different shapes
 
-%State of the art -----------
-% This paper only considers the end-effector 
-% Paper considers the velocity direction and obstacle direction
-% Tackles local minima problem
-% Does not consider distance 
+
 %F. Janabi-Sharifi and D. Vinke, “Integration of the artificial potential field approach with simulated annealing for robot path planning,” Proceedings of the IEEE International Symposium on Intelligent Control, pp. 536–541, Aug 1993.
 
 \section{Approach}
@@ -246,11 +252,14 @@ otherwise, the main algorithm might fail. Further work on this area could be add
 
 \begin{thebibliography}{99}
 
-\bibitem{1} H. Hoffmann, P. Pastor, D.-H. Park, and S. Schaal, “Biologically-inspired dynamical systems for movement generation: Automatic real-time goal adaptation and obstacle avoidance,” in 2009 IEEE International Conference on Robotics and Automation, Kobe, May 2009, pp. 2587–2592, doi: 10.1109/ROBOT.2009.5152423.
-\bibitem{2} M. Velliste, S. Perel, M. C. Spalding, A. S. Whitford, and A. B. Schwartz, “Cortical control of a prosthetic arm for self-feeding,” Nature, vol. 453, no. 7198, Art. no. 7198, Jun. 2008, doi: 10.1038/nature06996.
-\bibitem{3} S. Adee, “Dean Kamen’s ‘Luke Arm’ Prosthesis Readies for Clinical Trials - IEEE Spectrum,” IEEE Spectrum: Technology, Engineering, and Science News, Feb. 01, 2008. https://spectrum.ieee.org/biomedical/bionics/dean-kamens-luke-arm-prosthesis-readies-for-clinical-trials (accessed Jun. 25, 2020).
-\bibitem{4} F. Janabi-Sharifi and D. Vinke, “Integration of the artificial potential field approach with simulated annealing for robot path planning,” in Proceedings of 8th IEEE International Symposium on Intelligent Control, Aug. 1993, pp. 536–541, doi: 10.1109/ISIC.1993.397640.
-\bibitem{5} O. Khatib, “Real-Time Obstacle Avoidance for Manipulators and Mobile Robots,” The International Journal of Robotics Research, vol. 5, no. 1, pp. 90–98, Mar. 1986, doi: 10.1177/027836498600500106.
+\bibitem{Fadalil} M. S. Fadali and A. Visioli, “Introduction to Digital Control,” in Digital Control Engineering, Elsevier, 2013, pp. 1–8.
+
+
+\bibitem{Hoffmann} H. Hoffmann, P. Pastor, D.-H. Park, and S. Schaal, “Biologically-inspired dynamical systems for movement generation: Automatic real-time goal adaptation and obstacle avoidance,” in 2009 IEEE International Conference on Robotics and Automation, Kobe, May 2009, pp. 2587–2592, doi: 10.1109/ROBOT.2009.5152423.
+\bibitem{Velliste} M. Velliste, S. Perel, M. C. Spalding, A. S. Whitford, and A. B. Schwartz, “Cortical control of a prosthetic arm for self-feeding,” Nature, vol. 453, no. 7198, Art. no. 7198, Jun. 2008, doi: 10.1038/nature06996.
+\bibitem{Adee} S. Adee, “Dean Kamen’s ‘Luke Arm’ Prosthesis Readies for Clinical Trials - IEEE Spectrum,” IEEE Spectrum: Technology, Engineering, and Science News, Feb. 01, 2008. https://spectrum.ieee.org/biomedical/bionics/dean-kamens-luke-arm-prosthesis-readies-for-clinical-trials (accessed Jun. 25, 2020).
+\bibitem{Janabi-Sharif} F. Janabi-Sharifi and D. Vinke, “Integration of the artificial potential field approach with simulated annealing for robot path planning,” in Proceedings of 8th IEEE International Symposium on Intelligent Control, Aug. 1993, pp. 536–541, doi: 10.1109/ISIC.1993.397640.
+\bibitem{Khatib} O. Khatib, “Real-Time Obstacle Avoidance for Manipulators and Mobile Robots” The International Journal of Robotics Research, vol. 5, no. 1, pp. 90–98, Mar. 1986, doi: 10.1177/027836498600500106.
 \bibitem{rodrigues}  Belongie, Serge. "Rodrigues' Rotation Formula." From MathWorld--A Wolfram Web Resource, created by Eric W. Weisstein. https://mathworld.wolfram.com/RodriguesRotationFormula.html 
 
 
