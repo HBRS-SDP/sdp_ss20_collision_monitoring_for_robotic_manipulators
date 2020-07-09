@@ -80,7 +80,7 @@ int main(int argc, char **argv)
                       0, 0, 0, 1;
 
     baseTransform2 << 1, 0, 0, 0,
-                      0, 1, 0, 0.3,
+                      0, 1, 0, 1,
                       0, 0, 1, 0,
                       0, 0, 0, 1;
 
