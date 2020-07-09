@@ -58,16 +58,11 @@
 % Background, motivation and state of the art
 
 %Background ---------------
-Humanoid robots and arm like manipulators have a great many current, and potential, useful applications. Currently robotic manipulators are used in a range of manufacturing processes like painting and spot welding \cite{Fadalil}. Another great application of humanoid robotics is to help people who cannot help themselves, as a separate system, or as a prosthetic. Currently there are prosthetics available, like Dean Kamen's Luke Arm \cite{Adee}, but the control of such device is limited. In human applications the control system used in areas like manufacturing cannot be just dropped into place there are many considerations that are required from a software and hardware perspective. In manufacturing applications the manipulators typically use precomputed trajectories for robustness and efficiency, but this is unsuitable in a human environment where obstacles and goals are constantly on the move \cite{Hoffmann}. The current approach is to use a human controller to solve this problem by adding a controller in a shoe \cite{Adee} or another such interface. While this addresses the issue is can be quite taxing for the user, requiring a lot of concentration just to perform basic tasks.
+Humanoid robots and arm like manipulators have a great many, current, and potential, useful applications. Currently robotic manipulators are used in a range of manufacturing processes like painting and spot welding \cite{Fadalil}. Another great application of humanoid robotics is to help people who cannot help themselves, as a separate system, or as a prosthetic. Robotic prosthetics have been implemented previously, like Dean Kamen's Luke Arm \cite{Adee}, but the control of such device is limited. In human applications the control system used in areas like manufacturing cannot be just dropped into place, there are many considerations that are required from a software and hardware perspective. In manufacturing applications the manipulators typically use precomputed trajectories for robustness and efficiency, but this is unsuitable in a human environment, where obstacles and goals are constantly on the move \cite{Hoffmann}. The current approach in prosthetics is to use a human controller to solve this problem, by adding a joystick in a shoe \cite{Adee} or another such interface, the operator can directly control the movement of the arm. While this addresses the adaptable control issue, it can be quite taxing for the user, requiring a lot of concentration just to perform basic tasks. This solution is also not very viable for stand-alone assistant robots, the cost of training an operator would far outweigh the benefit of using a robot and operator instead of a single human nurse.
 
-A solution to the control problem is to use dynamic movement principles which can be generated during the movement itself, allowing for real-time obstacle avoidance and goal changes. Previous approaches \cite{Janabi-Sharif} used were initially not able to handle moving goals, but improvements made by H. Hoffmann et al. \cite{Hoffmann} by applying a potential field method to the process overcame this limitation. The use of dynamic movement primitives in the potential field method overcame the local minimum problem that is typically inherent with using potential fields. Hence this paper is the basis of the project.
+A solution to the control problem is to use dynamic movement primitives, which can be generated during the movement itself, allowing for real-time obstacle avoidance and goal changes. Previous approaches \cite{Janabi-Sharif} used were initially not able to handle moving goals, but improvements made by H. Hoffmann et al. \cite{Hoffmann} by applying a potential field method to the process overcame this limitation. The use of dynamic movement primitives in the potential field method also overcame the local minimum problem, that is typically inherent with potential fields. Hence this paper is the basis of the project. There are some limitations to this method and that is in the representation of the obstacles and manipulator. The method presented by H. Hoffman et al.\cite{Hoffmann} only considers points in cartesian space, where other methods, like those discussed by O. Khatib \cite{Khatib}, represent objects as basic primitives with given volume and shape.
 
-%State of the art -----------
-% This paper only considers the end-effector 
-% Paper considers the velocity direction and obstacle direction
-% Does not consider distance 
-
-For the objects to be avoided first they must be located relative to the manipulator, and that is the core concept of the library built for this project. Biologically-inspired dynamical systems for movement generation \cite{Hoffmann} does not tackle the problem of distances between objects, instead a precursor paper was used, Real-Time Obstacle Avoidance for Manipulators and Mobile Robots \cite{Khatib}. This paper goes into details on how to find the distance between two obstacles, which was modified to find the vector, allowing for it to be applied to the dynamic movements primitives control algorithm discussed in Biologically-inspired dynamical systems for movement generation \cite{Hoffmann}.
+For objects to be avoided first they must be located relative to the manipulator, and that is the core concept of the library built for this project. Biologically-inspired dynamical systems for movement generation \cite{Hoffmann} does not tackle the problem of distances between objects, instead a precursor paper was used, Real-Time Obstacle Avoidance for Manipulators and Mobile Robots \cite{Khatib}. This paper goes into details on how to find the distance between two obstacles, which was modified to find the vector, allowing for it to be applied to the dynamic movements primitives control algorithm discussed in Biologically-inspired dynamical systems for movement generation \cite{Hoffmann}. The combination of these two techniques, along with the addition of distance monitoring with all links, produces a safer algorithm. The combination of the two techniques means that both the volume of the object is considered,and the trajectory planning can occur online allowing it to be adapted to any changes in a fast, efficient manner. These properties along with the addition of obstacle distances relative to all links means that humanoid robots and manipulators are more robust and safer to use in dynamic, human environments.
 %Robotic assistants
 
 \section{Approach}
@@ -175,16 +170,23 @@ Where $\gamma$ and $\beta$ are constants, and R is a rotation matrix which rotat
 \dot{v} = K ( g - x ) - D v + p(x, v)
 \end{equation}
 
+\begin{figure*}[t]
+	\centering
+	\includegraphics[scale=0.25]{images/rosgraph_single.png}
+	\caption{ROS node graph for single arm}
+	\label{fig:rosgraph_single}
+\end{figure*}
+
 \subsection{Collision monitoring library} %Sam
 
 Our library was designed to be platform and framework independent. To achieve this, the library user must implement the Arm interface. This provides the flexibility of choosing how to describe mathematically the manipulator and update its position. Consider the case of two developers, one wants to use KDL for the forward and backwards kinematics, while the other one wants to derive the equations manually for a closed form solution. Both developers are supported by this library. 
 
 In order to monitor the distances from the links of the arm to the obstacles in the workspace we represent the geometry of the links with the use of capsules. This representation enables us to calculate the distances between the links themselves in order to monitor self-collisions along with regular obstacles. This requires that the developer updates the geometric representation alongside the arm’s movement in the Arm implementation. 
 
-
 \subsection{Controller} %Sam
 
 The manipulator is controlled with a control loop that is executed at a specified rate. This loop is responsible for updating the geometric representation to match the real life manipulator and calculate the new velocity with the collision avoidance algorithm. In the loop the developer must keep the current position, velocity, positions of obstacles, and goal updated for the algorithm to produce an accurate output. 
+ 
  
 \section{Implementation} %Brennan
 The final product that combines all the obstacle monitoring and avoidance techniques was implemented using the Robotic operating system (ROS) framework, specifically ROS Kinetic. ROS has a few advantages in this area, the first and foremost being the Kinova Kortex library\cite{kortex}, which is a high and low level control API for Kinova robotic manipulators, including the one chosen for demonstration. This library has a lot of useful features from the MoveIt control algorithm to the fully fledged gazebo simulation of the arm. The final software produced does actually rely on any of the Kortex libraries, but was instrumental in testing and development.
@@ -199,40 +201,37 @@ While rudimentary, as it doesn't consider inertia or any other complex parameter
 
 The basic ROS node graph can be seen in \ref{fig:rosgraph_single} where the interfacer is a basic terminal interface to send goals to the arm controller and the visualisation is performed by the built-in robot\_state\_publisher node and Rviz.
 
-\begin{figure*}[t]
-	\centering
-	\includegraphics[scale=0.25]{images/rosgraph_single.png}
-	\caption{ROS node graph for single arm}
-	\label{fig:rosgraph_single}
-\end{figure*}
 
 \section{Experiments}
 
 \subsection{Collision Monitoring} %Brennan
 The collision monitoring library has no real room for errors, the distance between objects was confirmed using Geogebra models, and the rest of the software relies on those calculations. The core performance measure of the collision monitoring library can be considered speed, hence the use of C++ instead of a higher level interpreted language like python. The performance test was performed on an Ubuntu 16.04 machine with a Intel Core i5-7200U 2.5GHz CPU. The following operations were timed using the C++ chrono library:
 \begin{itemize}
-	\item The joint initialisation of one kinova\_arm and monitor class
-	\item The combiniation of intitialising a sphere and adding it to the monitor class
-	\item The distance\_to\_object function, calculating the distance from each of the manipulators links to the obstacle
-	\item The distance\_to\_links funstion, measureing the distance from each of the links to the other links in the same manipulator
+	\item The joint initialisation of one KinovaArm and Monitor class.
+	\item The combination of initialising a Sphere and adding it to the Monitor class.
+	\item The updatePose function, which updates the internal kinematic representation of the arm.
+	\item The distanceToObjects function, calculating the distance from each of the manipulators links to the obstacle.
+	\item The distanceBetweenArmLinks function, measuring the distance from each of the links to the other links in the same manipulator.
 \end{itemize}
 
 \subsubsection{Results}
 Each operation was performed 100 times and the average result given in table \ref{table:Function Times} below.
 
-\begin{table}[]
+\begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|}
 		\hline
-		& Time (seconds) \\ \hline
-		Init arm and monitor   & 0.00064447     \\ \hline
-		Init and add object    & 0.00000204     \\ \hline
-		Distance to obstacle   & 0.00009953     \\ \hline
-		Distance to self links & 0.00155911     \\ \hline
+		Operation & Time (seconds) \\ \hline
+		Init arm and monitor   & 0.00103831     \\ \hline
+		Init and add object    & 0.00000276     \\ \hline
+		Update the arm position& 0.00012871     \\ \hline
+		Distance to obstacle   & 0.00026022     \\ \hline
+		Distance to self links & 0.00199209     \\ \hline
 	\end{tabular}
+	\caption{Execution times for collision monitoring tasks}
 	\label{table:Function Times}
 \end{table}
-
+From a cursory glance it is clear that the functions are quite fast all operations take less than two milliseconds to complete, but some of the operations are not as fast as desired. The initialisation operations are not that important when is comes to overall speed, since they tend to only be run at the start of the program, and potentially at random intervals the program for the obstacle initialisation. The distance to obstacles and between arm links along with the update function are the main operations to be concerned with, these run every loop and determine the final update rate of the software. The update rate of the arm is very quick, and the distance to obstacles only taking twice as much. It is important to note though that the time for distance to obstacles to execute relies on the number of obstacles, as the number of obstacles increases so does the time to calculate, in a linear fashion. This means that with 40 obstacles the software will be restricted to ~10Hz. Assuming only one obstacle the other large impact to overall performance in the distance to self links operation, taking up over four times the time used by the other two core functions combined. This was somewhat expected, if not to this extent, since the software was designed for portability in mind, which limits the possible optimisations available, still further investigation into the limiting factors to should be performed.
 
 
 
@@ -259,8 +258,8 @@ Finally, one can also use this library to prevent the collision of the end-effec
 This can be done by implementing the Arm interface and adding each link of the robot as an obstacle represented by a capsule.
 
 \section{Conclusion} %Alan
-The computation of the distances between different kinds of objects is not easy, one needs to take into consideration different scenarios, 
-otherwise, the main algorithm might fail. Further work on this area could be adding other kinds of shapes.
+For robots and robotic manipulators to be used in a human environment they first need to be able to adapt to a constantly changing, dynamic environment. This can be done in a robust and safe manner using a combination of two different methods discussed by H. Hoffmann et al.\cite{Hoffmann} and O. Khatib \cite{Khatib}. by implementing the obstacle monitoring by O. Khatib \cite{Khatib} and the collision avoidance by H. Hoffmann et al.\cite{Hoffmann}, along with monitoring collisions for all links, robotic manipulators are more resilient to changes in obstacle and goal placement. While there is improvement the final algorithm is by no means complete 
+The computation of the distances between different kinds of objects is not easy, one needs to take into consideration different scenarios, otherwise, the main algorithm might fail. Further work on this area could be adding other kinds of shapes.
 
 
 \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
