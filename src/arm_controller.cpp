@@ -91,7 +91,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
     double angle = 3.1415/2;
 
     std::vector<Primitive*> obstacles;
-    obstacles.reserve(monitor->obstacles.size() + monitor->arm->links.size() -1);
+    obstacles.reserve(monitor->obstacles.size() + monitor->arm->links.size());
     obstacles.insert(obstacles.end(), monitor->obstacles.begin(), monitor->obstacles.end());
     obstacles.insert(obstacles.end(), monitor->arm->links.begin(), monitor->arm->links.end());
     obstacles.pop_back();
@@ -103,12 +103,12 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         endEffectorCapsule = dynamic_cast<Capsule*>(monitor->arm->links.back());
         if(endEffectorCapsule){
-            
+
             //startArrow = (obstacles[i]->pose * origin).head(3);
 
             Eigen::MatrixXd closestPoints(2, 3);
             
-            endEffectorCapsule->getClosestPoints(closestPoints, monitor->obstacles[i]);
+            endEffectorCapsule->getClosestPoints(closestPoints, obstacles[i]);
             ownClosestPoint = closestPoints.row(0);
             obstacleClosestPoint = closestPoints.row(1);
 
