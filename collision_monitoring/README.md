@@ -73,6 +73,11 @@ the command:
 * [Eigen 3.3.7](http://eigen.tuxfamily.org) - Library for linear algebra
 * [KDL](https://www.orocos.org/kdl/installation-manual) - Kinematics and dynamics library
 
+## UML diagram
+
+![UML Diagram](https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/collision_monitoring/docs/Collision_Monitoring_UML_simplified.png)
+\image html Collision_Monitoring_UML_simplified.png
+
 ## Authors
 * **Alan Gomez** - [alanorlando95](https://github.com/alanorlando95)
 * **Samuel Parra** - [samuelpg](https://github.com/samuelpg)

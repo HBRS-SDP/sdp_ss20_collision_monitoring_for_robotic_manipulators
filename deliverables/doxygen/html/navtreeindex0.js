@@ -127,7 +127,7 @@ var NAVTREEINDEX0 =
 "kinova__arm_8h_source.html":[6,0,5],
 "md_LICENSE.html":[2],
 "md_README.html":[3],
-"md__home_alan_Documents_MAS_SS20_SDP_sdp_ss20_collision_monitoring_for_robotic_manipulators_collision_monitoring_README.html":[1],
+"md__home_brennan_SDP_sdp_ss20_collision_monitoring_for_robotic_manipulators_collision_monitoring_README.html":[1],
 "md_catkin_workspace_README.html":[0],
 "md_src_README.html":[4],
 "monitor_8cpp.html":[6,0,6],

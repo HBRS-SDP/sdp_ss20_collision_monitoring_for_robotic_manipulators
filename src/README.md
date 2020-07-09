@@ -51,5 +51,4 @@ information on the ROS implementation see the ROS_Package_README.md.
 
 ![UML Diagram](https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/docs/Kinova_arm_UML.png)
 
-(\image html Kinova_arm_UML.png)
-
+\image html Kinova_arm_UML.png
