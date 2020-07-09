@@ -46,3 +46,9 @@ information on the ROS implementation see the ROS_Package_README.md.
 
 - kinova_arm.cpp
 - kinova_arm.h
+
+## UML diagram
+
+![UML Diagram](https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/docs/Kinova_arm_UML.png)
+
+\image html Kinova_arm_UML.png

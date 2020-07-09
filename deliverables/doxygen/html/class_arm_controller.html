@@ -120,18 +120,17 @@ Collaboration diagram for ArmController:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_arm_controller__coll__graph.png" border="0" usemap="#_arm_controller_coll__map" alt="Collaboration graph"/></div>
 <map name="_arm_controller_coll__map" id="_arm_controller_coll__map">
-<area shape="rect" id="node2" href="class_monitor.html" title="Monitor" alt="" coords="24,95,89,121"/>
-<area shape="rect" id="node3" href="class_arm.html" title="Arm" alt="" coords="33,5,80,32"/>
+<area shape="rect" id="node2" href="class_monitor.html" title="{Monitor\n|+ obstacles\l+ obstaclesToDelete\l|+ distanceToObjects()\l+ distanceBetweenArmLinks()\l+ addObstacle()\l+ addObstacle()\l+ addObstacle()\l+ addObstacle()\l+ Monitor()\l+ ~Monitor()\l}" alt="" coords="5,248,203,443"/>
+<area shape="rect" id="node3" href="class_arm.html" title="{Arm\n|+ baseTransform\l+ links\l+ nLinks\l+ nJoints\l+ nFrames\l|+ ~Arm()\l+ updatePose()\l+ getPose()\l+ getPose()\l}" alt="" coords="43,5,165,185"/>
 </map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a27a8d755210b8e3bd96217ea8080b327"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#a27a8d755210b8e3bd96217ea8080b327">ArmController</a> (<a class="el" href="class_monitor.html">Monitor</a> *monitorObject, double k, double d, double gamma, double beta)</td></tr>
 <tr class="separator:a27a8d755210b8e3bd96217ea8080b327"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2b44ab21366148d89980e942b26d232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2b44ab21366148d89980e942b26d232"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#ad2b44ab21366148d89980e942b26d232">~ArmController</a> ()</td></tr>
-<tr class="memdesc:ad2b44ab21366148d89980e942b26d232"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kinova_arm.html">KinovaArm</a> Destructor. <br /></td></tr>
+<tr class="memitem:ad2b44ab21366148d89980e942b26d232"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#ad2b44ab21366148d89980e942b26d232">~ArmController</a> ()</td></tr>
+<tr class="memdesc:ad2b44ab21366148d89980e942b26d232"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kinova_arm.html">KinovaArm</a> Destructor.  <a href="#ad2b44ab21366148d89980e942b26d232">More...</a><br /></td></tr>
 <tr class="separator:ad2b44ab21366148d89980e942b26d232"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29defeb3894d62016523a99b63320a22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#a29defeb3894d62016523a99b63320a22">armCallback</a> (const sensor_msgs::JointState::ConstPtr &amp;msg)</td></tr>
 <tr class="separator:a29defeb3894d62016523a99b63320a22"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,17 +145,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a939747279bba6db315f80092a74c2629"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a939747279bba6db315f80092a74c2629"></a>
-<a class="el" href="class_monitor.html">Monitor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#a939747279bba6db315f80092a74c2629">monitor</a></td></tr>
-<tr class="memdesc:a939747279bba6db315f80092a74c2629"><td class="mdescLeft">&#160;</td><td class="mdescRight">The monitor class used to perform collision monitoring. <br /></td></tr>
+<tr class="memitem:a939747279bba6db315f80092a74c2629"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_monitor.html">Monitor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#a939747279bba6db315f80092a74c2629">monitor</a></td></tr>
+<tr class="memdesc:a939747279bba6db315f80092a74c2629"><td class="mdescLeft">&#160;</td><td class="mdescRight">The monitor class used to perform collision monitoring.  <a href="#a939747279bba6db315f80092a74c2629">More...</a><br /></td></tr>
 <tr class="separator:a939747279bba6db315f80092a74c2629"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5246aa4a2072b1511d510717fc253f88"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5246aa4a2072b1511d510717fc253f88"></a>
-Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#a5246aa4a2072b1511d510717fc253f88">goal</a></td></tr>
-<tr class="memdesc:a5246aa4a2072b1511d510717fc253f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">The goal point of the endeffector. <br /></td></tr>
+<tr class="memitem:a5246aa4a2072b1511d510717fc253f88"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#a5246aa4a2072b1511d510717fc253f88">goal</a></td></tr>
+<tr class="memdesc:a5246aa4a2072b1511d510717fc253f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">The goal point of the endeffector.  <a href="#a5246aa4a2072b1511d510717fc253f88">More...</a><br /></td></tr>
 <tr class="separator:a5246aa4a2072b1511d510717fc253f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab94a1abce40096f6476404d49d00860f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab94a1abce40096f6476404d49d00860f"></a>
-std::vector&lt; <a class="el" href="class_rviz_obstacle.html">RvizObstacle</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#ab94a1abce40096f6476404d49d00860f">rvizObstacles</a></td></tr>
-<tr class="memdesc:ab94a1abce40096f6476404d49d00860f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of obstacles that are displayed in rviz. <br /></td></tr>
+<tr class="memitem:ab94a1abce40096f6476404d49d00860f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_rviz_obstacle.html">RvizObstacle</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arm_controller.html#ab94a1abce40096f6476404d49d00860f">rvizObstacles</a></td></tr>
+<tr class="memdesc:ab94a1abce40096f6476404d49d00860f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of obstacles that are displayed in rviz.  <a href="#ab94a1abce40096f6476404d49d00860f">More...</a><br /></td></tr>
 <tr class="separator:ab94a1abce40096f6476404d49d00860f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -219,7 +215,26 @@ std::vector&lt; <a class="el" href="class_rviz_obstacle.html">RvizObstacle</a> *
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An instance of CollisionMonitor class </dd></dl>
 
-<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00006">6</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00007">7</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad2b44ab21366148d89980e942b26d232"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ArmController::~ArmController </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_kinova_arm.html">KinovaArm</a> Destructor. </p>
+
+<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00044">44</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -245,7 +260,7 @@ std::vector&lt; <a class="el" href="class_rviz_obstacle.html">RvizObstacle</a> *
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00055">55</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00056">56</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +280,7 @@ std::vector&lt; <a class="el" href="class_rviz_obstacle.html">RvizObstacle</a> *
 <p>Function that uses internal parameters to send instructions to arm</p>
 <p>This is where the obstacle avoidance is implemented and is based off of the paper: </p>
 
-<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00188">188</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00198">198</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -290,7 +305,7 @@ std::vector&lt; <a class="el" href="class_rviz_obstacle.html">RvizObstacle</a> *
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00062">62</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00063">63</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -327,7 +342,7 @@ std::vector&lt; <a class="el" href="class_rviz_obstacle.html">RvizObstacle</a> *
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The potential feild vector produced from the obstacles </dd></dl>
 
-<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00080">80</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00081">81</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -352,7 +367,56 @@ std::vector&lt; <a class="el" href="class_rviz_obstacle.html">RvizObstacle</a> *
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00261">261</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00275">275</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a5246aa4a2072b1511d510717fc253f88"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Vector3d ArmController::goal</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The goal point of the endeffector. </p>
+
+<p>Definition at line <a class="el" href="arm__controller_8h_source.html#l00106">106</a> of file <a class="el" href="arm__controller_8h_source.html">arm_controller.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a939747279bba6db315f80092a74c2629"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_monitor.html">Monitor</a>* ArmController::monitor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The monitor class used to perform collision monitoring. </p>
+
+<p>Definition at line <a class="el" href="arm__controller_8h_source.html#l00103">103</a> of file <a class="el" href="arm__controller_8h_source.html">arm_controller.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab94a1abce40096f6476404d49d00860f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_rviz_obstacle.html">RvizObstacle</a>*&gt; ArmController::rvizObstacles</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A list of obstacles that are displayed in rviz. </p>
+
+<p>Definition at line <a class="el" href="arm__controller_8h_source.html#l00148">148</a> of file <a class="el" href="arm__controller_8h_source.html">arm_controller.h</a>.</p>
 
 </div>
 </div>

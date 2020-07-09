@@ -70,7 +70,6 @@ A solution to the control problem is to use dynamic movement principles which ca
 For the objects to be avoided first they must be located relative to the manipulator, and that is the core concept of the library built for this project. Biologically-inspired dynamical systems for movement generation \cite{Hoffmann} does not tackle the problem of distances between objects, instead a precursor paper was used, Real-Time Obstacle Avoidance for Manipulators and Mobile Robots \cite{Khatib}. This paper goes into details on how to find the distance between two obstacles, which was modified to find the vector, allowing for it to be applied to the dynamic movements primitives control algorithm discussed in Biologically-inspired dynamical systems for movement generation \cite{Hoffmann}.
 %Robotic assistants
 
-
 \section{Approach}
 
 \subsection{Distance to objects} %Alan
@@ -187,11 +186,7 @@ In order to monitor the distances from the links of the arm to the obstacles in 
 
 The manipulator is controlled with a control loop that is executed at a specified rate. This loop is responsible for updating the geometric representation to match the real life manipulator and calculate the new velocity with the collision avoidance algorithm. In the loop the developer must keep the current position, velocity, positions of obstacles, and goal updated for the algorithm to produce an accurate output. 
  
-
-\section{Experiments}
-
-\subsection{Testing} %Sam
-% Not sure on name something to do with implementation
+\section{Implementation} %Brennan
 \subsection{ROS} %Brennan
 %  Purpose of ROS Implementations
 % Layout of code
@@ -207,6 +202,16 @@ The manipulator is controlled with a control loop that is executed at a specifie
 % Features
 % Deficits
 % improvemnts/future works
+
+\section{Experiments}
+
+\subsection{Collision Monitoring} %Brennan
+
+\subsection{Single arm avoidance} %Sam
+
+\subsection{Dual arm avoidance} %Sam
+
+
 \section{Use case}
 
 \subsection{Single arm} %Alan

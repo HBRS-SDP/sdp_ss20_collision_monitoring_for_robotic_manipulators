@@ -10,6 +10,11 @@
   <param name="kinova_interfacer/goal_topic" value="/goal_point" />
   <param name="publish_frequency" value="100" />
 
+  <param name="K" value="0.1"/>
+  <param name="D" value="0.1"/>
+  <param name="gamma" value="10"/>
+  <param name="beta" value="6.366385485"/>
+
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
   <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
   <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>

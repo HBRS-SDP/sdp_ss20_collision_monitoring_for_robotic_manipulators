@@ -119,8 +119,30 @@ $(document).ready(function(){initNavTree('md_catkin_workspace_README.html','');}
 <h3>Single arm</h3>
 <p>First make sure that the correct setup.bash file is sourced. </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...\catkin_workspace$ source devel/setup.bash</div></div><!-- fragment --><p> Then launch the single arm simulation with: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ roslaunch kinova_arm single_manipulator.launch </div></div><!-- fragment --><p> This will bring up the rviz display where the kinova arm model can be seen. To interface with the model the single interfacer node needs to be opened, so in a new terminal source the setup file (if you didn't add it to your .bashrc) and then run: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ rosrun kinova_arm KinovaInterface </div></div><!-- fragment --><p> Where using basic keyboard commands you can set goals and add obstacles to the environment.</p>
 <h3>Dual arm</h3>
-<p>First make sure that the correct setup.bash file is sourced. </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...\catkin_workspace$ source devel/setup.bash</div></div><!-- fragment --><p> Then launch the dual arm simulation with: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ roslaunch kinova_arm dual_manipulators.launch  </div></div><!-- fragment --><p> This will bring up the rviz display where the kinova arm models can be seen. To interface with the model the dual interfacer node needs to be opened, so in a new terminal source the setup file (if you didn't add it to your .bashrc) and then run: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ rosrun kinova_arm DualArmKinovaInterface </div></div><!-- fragment --><p> Where using basic keyboard commands you can set goals and add obstacles to the environment. </p>
-</div></div><!-- contents -->
+<p>First make sure that the correct setup.bash file is sourced. </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...\catkin_workspace$ source devel/setup.bash</div></div><!-- fragment --><p> Then launch the dual arm simulation with: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ roslaunch kinova_arm dual_manipulators.launch  </div></div><!-- fragment --><p> This will bring up the rviz display where the kinova arm models can be seen. To interface with the model the dual interfacer node needs to be opened, so in a new terminal source the setup file (if you didn't add it to your .bashrc) and then run: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ rosrun kinova_arm DualArmKinovaInterface </div></div><!-- fragment --><p> Where using basic keyboard commands you can set goals and add obstacles to the environment.</p>
+<h2>UML diagram</h2>
+<div class="image">
+<img src="https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/docs/Kinova_Controller_UML.png"  alt="UML Diagram"/>
+</div>
+ <div class="image">
+<img src="Kinova_Controller_UML.png" alt="Kinova_Controller_UML.png"/>
+</div>
+<h2>ROS Node diagrams</h2>
+<h3>Single arm</h3>
+<div class="image">
+<img src="https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/docs/rosgraph_single.png"  alt="Single Arm"/>
+</div>
+ <div class="image">
+<img src="rosgraph_single.png" alt="rosgraph_single.png"/>
+</div>
+<h3>Dual arm</h3>
+<div class="image">
+<img src="https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/docs/rosgraph_dual.png"  alt="Dual Arm"/>
+</div>
+ <div class="image">
+<img src="rosgraph_dual.png" alt="rosgraph_dual.png"/>
+</div>
+ </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

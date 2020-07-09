@@ -76,3 +76,18 @@ then run:
 ```
 Where using basic keyboard commands you can set goals and add obstacles to the
 environment.
+
+## UML diagram
+
+![UML Diagram](https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/docs/Kinova_Controller_UML.png)
+\image html Kinova_Controller_UML.png
+
+## ROS Node diagrams
+
+### Single arm
+![Single Arm](https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/docs/rosgraph_single.png)
+\image html rosgraph_single.png
+
+### Dual arm
+![Dual Arm](https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/docs/rosgraph_dual.png)
+\image html rosgraph_dual.png
