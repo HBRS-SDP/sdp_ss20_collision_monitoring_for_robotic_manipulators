@@ -85,6 +85,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
     Eigen::Vector3d potentialField = Eigen::Vector3d({0, 0, 0});
     Eigen::Vector4d origin(0, 0, 0, 1);
     Eigen::Vector3d startArrow, positionLink;
+    Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
     
     Capsule *endEffectorCapsule;
     double angle = 3.1415/2;
@@ -102,13 +103,23 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
 
         endEffectorCapsule = dynamic_cast<Capsule*>(monitor->arm->links.back());
         if(endEffectorCapsule){
-            startArrow = (obstacles[i]->pose * origin).head(3);
+            
+            //startArrow = (obstacles[i]->pose * origin).head(3);
+
+            Eigen::MatrixXd closestPoints(2, 3);
+            
+            endEffectorCapsule->getClosestPoints(closestPoints, monitor->obstacles[i]);
+            ownClosestPoint = closestPoints.row(0);
+            obstacleClosestPoint = closestPoints.row(1);
+
+            startArrow = (endEffectorCapsule->pose * origin).head(3);
+
             //Shortest distance arrow (for visualization)
             MarkerPublisher mPublisherShortestDistance(arrowsPub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
             
             mPublisherShortestDistance.setRadius(0.005);
             mPublisherShortestDistance.setLength(0.005);
-            mPublisherShortestDistance.setPoints(startArrow, startArrow - direction + (direction / direction.norm()) * endEffectorCapsule->getRadius() );
+            mPublisherShortestDistance.setPoints(obstacleClosestPoint, ownClosestPoint);// + (direction / direction.norm()) * endEffectorCapsule->getRadius() );
             mPublisherShortestDistance.Publish();
         }
 
@@ -177,7 +188,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         
         mPublisherPotentialField.setRadius(0.005);
         mPublisherPotentialField.setLength(0.005);
-        mPublisherPotentialField.setPoints(startArrow, startArrow + (gamma * potentialField));
+        mPublisherPotentialField.setPoints(obstacleClosestPoint, obstacleClosestPoint + (gamma * potentialField));
         mPublisherPotentialField.Publish();
     }
    
@@ -303,7 +314,7 @@ void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& 
             RvizObstacle* rvizObstacle = new RvizObstacle(msg, rvizObstacles.size());
             rvizObstacles.push_back(rvizObstacle);
             rvizObstacle->pose(2, 3) -= (rvizObstacle->marker.scale.z / 2.0);
-            Capsule* capsule = new Capsule(rvizObstacle->pose, rvizObstacle->marker.scale.z, rvizObstacle->marker.scale.x);
+            Capsule* capsule = new Capsule(rvizObstacle->pose, rvizObstacle->marker.scale.z, rvizObstacle->marker.scale.x / 2);
             obstaclesAllocated.push_back(capsule);
             monitor->addObstacle(capsule);
         }

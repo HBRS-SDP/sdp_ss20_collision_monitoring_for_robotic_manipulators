@@ -23,45 +23,61 @@ used for demonstration. The following links list the core functionalities of
 this repository.
 
 ### Contents
-- Collision Monitoring Library:
-- Kinova Arm Package:
-- Collision Avoidance ROS Package:
-- Documentation & other related works:
+- [Collision Monitoring Library](collision_monitoring/README.md):
+    The base library designed to be highly portable and used for any manipulator type
+- [Kinova Arm Package](src/README.md):
+    The test implementation of the Collision monitoring library designed for a
+    Kinova gen3 7DOF manipulator.
+- [Collision Avoidance ROS Package](catkin_workspace/README.md):
+    The implementation of the obstacle avoidance and tracing algorithm that the
+    base library is designed to suit.
+- Documentation & other related works: 
+    The last section found in the /deliverables directory contains the paper,
+    presentation and API documentation which is submitted along with this code.
+
 
 
 ### Folder layout
 Here is the basic layout of the folder
 structure (note: symbolic links are used to for easy modification and tracking):
 
-/Repository/
+```
+Repository
+│
+└─── build/                    Where the KinovaArm package is to be built
+│
+└─── test/tests                The test file based off catch
+|
+└─── catkin_workspace/         The ros catkin workspace (run catkin_make here)
+|
+└─── docs/                     Contains UML diagrams associated with the ROS pkg
+└─── src/kinova_arm/           The ROS package used for testing and demonstration
+|
+└─── collision_monitoring/     The base library built for the project
+|   |
+|   └─── docs/                 Contains associated UML diagrams
+|   └─── include/              The library header files
+|   └─── src/                  The libraries source files
+|
+└─── deliverables/             Contains other non-code submittable documents
+|   |
+|   └─── doxygen/              Contains the html API docs and files to make them
+|   └─── latex/                Contains the latex files for the research paper
+|   └─── presentation/         Contains the final presentation
+|
+└─── docs/                     Contains the UML files for the kinova_arm package
+└─── include/                  Contains the header files for kinova_arm and ROS
+└─── src/                      Contains the source files for kinova_arm and ROS
+└─── test/                     Contains the test source files for kinova_arm
+└─── urdf/                     Contains the URDF file used for kinematic calcs
+```
 
-    -/build/                    Where the KinovaArm package is to be built
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-        -/test/tests            The test file based off catch
-
-    -/catkin_workspace/         The ros catkin workspace (run catkin_make here)
-
-        -/docs/                 Contains UML diagrams associated with the ROS pkg
-        -/src/kinova_arm/       The ROS package used for testing and demonstration
-
-    -/collision_monitoring/     The base library built for the project
-
-        -/docs/                 Contains associated UML diagrams
-        -/include/              The library header files
-        -/src/                  The libraries source files
-
-    -/deliverables/             Contains other non-code submittable documents
-
-        -/doxygen/              Contains the html API docs and files to make them
-        -/latex/                Contains the latex files for the research paper
-        -/presentation/         Contains the final presentation
-
-    -/docs/                     Contains the UML files for the kinova_arm package
-    -/include/                  Contains the header files for kinova_arm and ROS
-    -/src/                      Contains the source files for kinova_arm and ROS
-    -/test/                     Contains the test source files for kinova_arm
-    -/urdf/                     Contains the URDF file used for kinematic calcs
-
+## Acknowledgments
+* We would like to thank our coach Djordje Vukcevic who supported us throughout
+the development of this library.
 
 ## References
 This library is an implementation of the following papers:

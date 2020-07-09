@@ -34,7 +34,7 @@ int main(int argc, char **argv)
     double D;
     double gamma;
     double beta;
-    n.param<double>("/K", K, 0.1);
+    n.param<double>("/K", K, 0.5);
     n.param<double>("/D", D, 0);
     n.param<double>("/gamma", gamma, 100);
     n.param<double>("/beta", beta, 20/3.1425);

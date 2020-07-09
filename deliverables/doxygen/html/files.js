@@ -1,6 +1,13 @@
 var files =
 [
-    [ "collision_monitoring", "dir_cf93fe318ee5e9102d413c656879559c.html", "dir_cf93fe318ee5e9102d413c656879559c" ],
-    [ "include", "dir_cd214b56e1cb032e40c62794dd424a44.html", "dir_cd214b56e1cb032e40c62794dd424a44" ],
-    [ "src", "dir_cd2dda09000351e16662d421b0d3ab3e.html", "dir_cd2dda09000351e16662d421b0d3ab3e" ]
+    [ "arm.cpp", "arm_8cpp_source.html", null ],
+    [ "arm.h", "arm_8h_source.html", null ],
+    [ "arm_controller.cpp", "arm__controller_8cpp_source.html", null ],
+    [ "arm_controller.h", "arm__controller_8h_source.html", null ],
+    [ "kinova_arm.cpp", "kinova__arm_8cpp_source.html", null ],
+    [ "kinova_arm.h", "kinova__arm_8h_source.html", null ],
+    [ "monitor.cpp", "monitor_8cpp_source.html", null ],
+    [ "monitor.h", "monitor_8h_source.html", null ],
+    [ "primitives.cpp", "primitives_8cpp_source.html", null ],
+    [ "primitives.h", "primitives_8h_source.html", null ]
 ];
