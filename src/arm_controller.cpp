@@ -2,6 +2,7 @@
 #include "arm_controller.h"
 #define PI 3.14159265
 // #define DEBUG
+// #define PRINTDATA
 
 ArmController::ArmController(Monitor* monitorObject, double k, double d,
                                                     double gamma, double beta) {
@@ -87,23 +88,32 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
     Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
     
     Capsule *endEffectorCapsule;
-    
     double angle = 3.1415/2;
 
-    for(int i = 0; i < monitor->obstacles.size(); i++) {
+    std::vector<Primitive*> obstacles;
+    obstacles.reserve(monitor->obstacles.size() + monitor->arm->links.size());
+    obstacles.insert(obstacles.end(), monitor->obstacles.begin(), monitor->obstacles.end());
+    obstacles.insert(obstacles.end(), monitor->arm->links.begin(), monitor->arm->links.end());
+    obstacles.pop_back();
+
+    for(int i = 0; i < obstacles.size(); i++) {
         Eigen::Vector3d direction; 
         monitor->arm->links.back()->getShortestDirection(direction, 
-                                            monitor->obstacles[i]);
+                                            obstacles[i]);
 
         endEffectorCapsule = dynamic_cast<Capsule*>(monitor->arm->links.back());
         if(endEffectorCapsule){
+
+            //startArrow = (obstacles[i]->pose * origin).head(3);
+
             Eigen::MatrixXd closestPoints(2, 3);
             
-            endEffectorCapsule->getClosestPoints(closestPoints, monitor->obstacles[i]);
+            endEffectorCapsule->getClosestPoints(closestPoints, obstacles[i]);
             ownClosestPoint = closestPoints.row(0);
             obstacleClosestPoint = closestPoints.row(1);
 
             startArrow = (endEffectorCapsule->pose * origin).head(3);
+
             //Shortest distance arrow (for visualization)
             MarkerPublisher mPublisherShortestDistance(arrowsPub, visualization_msgs::Marker::ARROW, "base_link", "shortest_distance", i, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0);
             
@@ -246,6 +256,10 @@ KDL::Twist ArmController::controlLoop(void) {
     std::cout << "[ArmController] potential field: \n" << ArmController::obstaclePotentialField(currEndPoint, 
                                 currVelocity) << std::endl;
     #endif // DEBUG
+
+    // #ifdef PRINTDATA
+    // std::cout << << std::endl;
+    // #endif //PRINTDATA
 
     Eigen::Vector4d transformedVel = {newVelocity[0], newVelocity[1], newVelocity[2], 0.0};
     // transformedVel = monitor->arm->getPose() * transformedVel;
