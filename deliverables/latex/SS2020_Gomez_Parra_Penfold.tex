@@ -151,7 +151,7 @@ If the true closest points on the original axis of symmetry of the capsules are 
 
 \subsection{Potential field} %Sam
 
-To avoid collisions we decided to implement the method presented in \cite{1}. This method is based on dynamic movement primitives (DMP), which are used to generate a trajectory $x(t)$ with a velocity $v(t)$. These DMP are motivated from the dynamic of damped spring and can generate trajectories in many dimensions. These can be used to describe accelerations in 3D space that move towards a goal:
+To avoid collisions we decided to implement the method presented in \cite{Hoffmann}. This method is based on dynamic movement primitives (DMP), which are used to generate a trajectory $x(t)$ with a velocity $v(t)$. These DMP are motivated from the dynamic of damped spring and can generate trajectories in many dimensions. These can be used to describe accelerations in 3D space that move towards a goal:
 
 \begin{equation} \label{eq:1}
 	\dot{v} = K ( g - x ) - D v - K (g - x_0) s + K f(s) + p(x, v)
@@ -203,8 +203,25 @@ The manipulator is controlled with a control loop that is executed at a specifie
 \subsection{Collision Monitoring} %Brennan
 
 \subsection{Single arm avoidance} %Sam
+In order to visualize the obstacle avoidance we first simulated a single instance of the Kinova\textsuperscript{\tiny\textregistered} Gen3 robotic manipulator and placed obstacles in its workspace, as seen in Fig. \ref{fig:one_arm}. We then provided different commands to find tune the relevant parameters and assess the effectiveness of the algorithm. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{images/one_arm.png}
+	\caption{Two arms}
+	\label{fig:one_arm}
+\end{figure}
+
 
 \subsection{Dual arm avoidance} %Sam
+For this experiment we simulated two instances of the Kinova arm placed close to each other so their workspaces would overlap. Each arm is individually controlled, meaning we could place one arm on the path of the other to assess if the arms avoided collisions with each other, as observed in Fig \ref{fig:two_arms}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.15]{images/two_arms.jpeg}
+	\caption{Two arms}
+	\label{fig:two_arms}
+\end{figure}
 
 
 \section{Use case}

@@ -67,6 +67,11 @@ void ArmController::goalCallback(const geometry_msgs::Point::ConstPtr& msg) {
     std::cout << "\tincoming goal: " << msg->x << ", " << msg->y << ", " << msg->z << std::endl;
     #endif // DEBUG
 
+    #ifdef PRINTDATA
+    std::cout << "<<<<< New goal >>>>> " << std::endl;
+    std::cout << "x, y, z " << std::endl;
+    #endif
+
     //transform the message from its current type to Eigen::Vector3d and put in goal variable
     this->goal[0] = msg->x;
     this->goal[1] = msg->y;
@@ -191,7 +196,11 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         mPublisherPotentialField.setPoints(obstacleClosestPoint, obstacleClosestPoint + (gamma * potentialField));
         mPublisherPotentialField.Publish();
     }
-   
+    #ifdef PRINTDATA
+        Eigen::Vector3d x = potentialField * gamma;
+        std::cout << "1, " << x[0] << ", " << x[1] << ", " << x[2] << std::endl;
+    #endif
+
     return gamma * potentialField;
 }
 
@@ -257,9 +266,23 @@ KDL::Twist ArmController::controlLoop(void) {
                                 currVelocity) << std::endl;
     #endif // DEBUG
 
-    // #ifdef PRINTDATA
-    // std::cout << << std::endl;
-    // #endif //PRINTDATA
+    #ifdef PRINTDATA
+    // int arm_id = monitor->arm->getPose(0)(1, 3);
+
+    // if (arm_id == 0){
+    std::cout << "0, " << currEndPose(0, 3) << ", " << currEndPose(1, 3) << ", " << currEndPose(2, 3) << std::endl;
+    //     std::cout << arm_id << ", 1, " << newVelocity[0] << ", " << newVelocity[1] << ", " << newVelocity[2] << std::endl;
+    // }else{
+    //     std::cout << arm_id << ", 2, " << monitor->arm->getPose(0).col(3) << std::endl
+    //                                     << monitor->arm->getPose(1).col(3) << std::endl
+    //                                     << monitor->arm->getPose(2).col(3) << std::endl
+    //                                     << monitor->arm->getPose(3).col(3) << std::endl
+    //                                     << monitor->arm->getPose(4).col(3) << std::endl
+    //                                     << monitor->arm->getPose(5).col(3) << std::endl
+    //                                     << monitor->arm->getPose(6).col(3) << std::endl
+    //                                     << monitor->arm->getPose(7).col(3) << std::endl;
+    // }
+    #endif //PRINTDATA
 
     Eigen::Vector4d transformedVel = {newVelocity[0], newVelocity[1], newVelocity[2], 0.0};
     // transformedVel = monitor->arm->getPose() * transformedVel;

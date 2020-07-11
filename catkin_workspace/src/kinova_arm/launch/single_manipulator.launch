@@ -11,13 +11,13 @@
   <param name="publish_frequency" value="100" />
 
   <param name="K" value="0.1"/>
-  <param name="D" value="0.1"/>
-  <param name="gamma" value="10"/>
+  <param name="D" value="0.05"/>
+  <param name="gamma" value="35"/>
   <param name="beta" value="6.366385485"/>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-  <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
+  <!-- <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/> -->
   <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
-  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find kinova_arm)/rviz/kinova.rviz"/>
-
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find kinova_arm)/rviz/camera_1.rviz"/>
+  <node name="rviz2" pkg="rviz" type="rviz" required="true" args="-d $(find kinova_arm)/rviz/camera_2.rviz"/>
 </launch>
