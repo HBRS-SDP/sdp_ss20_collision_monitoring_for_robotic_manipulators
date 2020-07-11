@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.6.24)  11 JUL 2020 18:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.6.24)  11 JUL 2020 19:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -281,35 +281,350 @@ Package caption Info: float package is loaded.
 )
 \c@subfigure=\count105
 \c@subtable=\count106
-) (./SS2020_Gomez_Parra_Penfold.aux)
+) (/usr/share/texlive/texmf-dist/tex/latex/todonotes/todonotes.sty
+Package: todonotes 2015/07/09 .dtx Todonotes source and documentation.
+Package: todonotes 2012/07/25
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks23
+\XKV@tempa@toks=\toks24
+)
+\XKV@depth=\count107
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks25
+\pgfutil@tempdima=\dimen133
+\pgfutil@tempdimb=\dimen134
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box31
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks26
+\pgfkeys@temptoks=\toks27
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex
+\pgfkeys@tmptoks=\toks28
+))
+\pgf@x=\dimen135
+\pgf@y=\dimen136
+\pgf@xa=\dimen137
+\pgf@ya=\dimen138
+\pgf@xb=\dimen139
+\pgf@yb=\dimen140
+\pgf@xc=\dimen141
+\pgf@yc=\dimen142
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count108
+\c@pgf@countb=\count109
+\c@pgf@countc=\count110
+\c@pgf@countd=\count111
+\t@pgf@toka=\toks29
+\t@pgf@tokb=\toks30
+\t@pgf@tokc=\toks31
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count112
+\pgfsyssoftpath@bigbuffer@items=\count113
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen143
+\pgfmath@count=\count114
+\pgfmath@box=\box32
+\pgfmath@toks=\toks32
+\pgfmath@stack@operand=\toks33
+\pgfmath@stack@operation=\toks34
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count115
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen144
+\pgf@picmaxx=\dimen145
+\pgf@picminy=\dimen146
+\pgf@picmaxy=\dimen147
+\pgf@pathminx=\dimen148
+\pgf@pathmaxx=\dimen149
+\pgf@pathminy=\dimen150
+\pgf@pathmaxy=\dimen151
+\pgf@xx=\dimen152
+\pgf@xy=\dimen153
+\pgf@yx=\dimen154
+\pgf@yy=\dimen155
+\pgf@zx=\dimen156
+\pgf@zy=\dimen157
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen158
+\pgf@path@lasty=\dimen159
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen160
+\pgf@shorten@start@additional=\dimen161
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box33
+\pgf@hbox=\box34
+\pgf@layerbox@main=\box35
+\pgf@picture@serial@count=\count116
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen162
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen163
+\pgf@pt@y=\dimen164
+\pgf@pt@temp=\dimen165
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen166
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen167
+\pgf@sys@shading@range@num=\count117
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box36
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box37
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen168
+\pgf@nodesepend=\dimen169
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen170
+\pgffor@skip=\dimen171
+\pgffor@stack=\toks35
+\pgffor@toks=\toks36
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count118
+\pgfplotmarksize=\dimen172
+)
+\tikz@lastx=\dimen173
+\tikz@lasty=\dimen174
+\tikz@lastxsaved=\dimen175
+\tikz@lastysaved=\dimen176
+\tikzleveldistance=\dimen177
+\tikzsiblingdistance=\dimen178
+\tikz@figbox=\box38
+\tikz@figbox@bg=\box39
+\tikz@tempbox=\box40
+\tikz@tempbox@bg=\box41
+\tikztreelevel=\count119
+\tikznumberofchildren=\count120
+\tikznumberofcurrentchild=\count121
+\tikz@fig@count=\count122
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count123
+\pgfmatrixcurrentcolumn=\count124
+\pgf@matrix@numberofcolumns=\count125
+)
+\tikz@expandcount=\count126
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.1a (rcs-revision 1.7)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count127
+\calc@Bcount=\count128
+\calc@Adimen=\dimen179
+\calc@Bdimen=\dimen180
+\calc@Askip=\skip50
+\calc@Bskip=\skip51
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count129
+\calc@Cskip=\skip52
+)
+\c@@todonotes@numberoftodonotes=\count130
+)
+(./SS2020_Gomez_Parra_Penfold.aux)
 \openout1 = `SS2020_Gomez_Parra_Penfold.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count107
-\scratchdimen=\dimen133
-\scratchbox=\box31
-\nofMPsegments=\count108
-\nofMParguments=\count109
-\everyMPshowfont=\toks23
-\MPscratchCnt=\count110
-\MPscratchDim=\dimen134
-\MPnumerator=\count111
-\makeMPintoPDFobject=\count112
-\everyMPtoPDFconversion=\toks24
+\scratchcounter=\count131
+\scratchdimen=\dimen181
+\scratchbox=\box42
+\nofMPsegments=\count132
+\nofMParguments=\count133
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count134
+\MPscratchDim=\dimen182
+\MPnumerator=\count135
+\makeMPintoPDFobject=\count136
+\everyMPtoPDFconversion=\toks38
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -369,75 +684,556 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
-Underfull \hbox (badness 10000) in paragraph at lines 63--64
+ABD: EveryShipout initializing macros
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
 
-Underfull \hbox (badness 1460) in paragraph at lines 65--66
+Underfull \hbox (badness 1460) in paragraph at lines 66--67
 \OT1/ptm/m/n/10 and goal changes. Pre-vi-ous ap-proaches [[]] used were
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--66
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
 
  []
 
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 79
+
+Overfull \hbox (40.97922pt too wide) in paragraph at lines 68--68
+[][][][]\OT1/ptm/m/n/10 Biologically- 
+ []
+
+
+Overfull \hbox (20.41957pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 inspired 
+ []
+
+
+Overfull \hbox (1.52995pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 dy- 
+ []
+
+
+Overfull \hbox (8.74979pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 nam- 
+ []
+
+
+Overfull \hbox (4.30974pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 sys- 
+ []
+
+
+Overfull \hbox (7.08961pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tems 
+ []
+
+
+Overfull \hbox (13.44998pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 move- 
+ []
+
+
+Overfull \hbox (8.19972pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 ment 
+ []
+
+
+Overfull \hbox (5.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 gen- 
+ []
+
+
+Overfull \hbox (3.75978pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tion 
+ []
+
+
+Overfull \hbox (14.29971pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 peated 
+ []
+
+
+Overfull \hbox (9.85963pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 twice 
+ []
+
+
+Overfull \hbox (2.08961pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 last 
+ []
+
+
+Overfull \hbox (8.73979pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 para- 
+ []
+
+
+Overfull \hbox (10.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 graph 
+ []
+
+
+Overfull \hbox (2.6398pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tro- 
+ []
+
+
+Overfull \hbox (5.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 duc- 
+ []
+
+
+Overfull \hbox (3.75978pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tion  
+ []
+
+
+Overfull \hbox (40.97922pt too wide) in paragraph at lines 68--68
+[][][][]\OT1/ptm/m/n/10 Biologically- 
+ []
+
+
+Overfull \hbox (20.41957pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 inspired 
+ []
+
+
+Overfull \hbox (1.52995pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 dy- 
+ []
+
+
+Overfull \hbox (8.74979pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 nam- 
+ []
+
+
+Overfull \hbox (4.30974pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 sys- 
+ []
+
+
+Overfull \hbox (7.08961pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tems 
+ []
+
+
+Overfull \hbox (13.44998pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 move- 
+ []
+
+
+Overfull \hbox (8.19972pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 ment 
+ []
+
+
+Overfull \hbox (5.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 gen- 
+ []
+
+
+Overfull \hbox (3.75978pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tion 
+ []
+
+
+Overfull \hbox (14.29971pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 peated 
+ []
+
+
+Overfull \hbox (9.85963pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 twice 
+ []
+
+
+Overfull \hbox (2.08961pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 last 
+ []
+
+
+Overfull \hbox (8.73979pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 para- 
+ []
+
+
+Overfull \hbox (10.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 graph 
+ []
+
+
+Overfull \hbox (2.6398pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tro- 
+ []
+
+
+Overfull \hbox (5.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 duc- 
+ []
+
+
+Overfull \hbox (3.75978pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tion  
+ []
+
+
+Overfull \hbox (40.97922pt too wide) in paragraph at lines 68--68
+[][][][]\OT1/ptm/m/n/10 Biologically- 
+ []
+
+
+Overfull \hbox (20.41957pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 inspired 
+ []
+
+
+Overfull \hbox (1.52995pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 dy- 
+ []
+
+
+Overfull \hbox (8.74979pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 nam- 
+ []
+
+
+Overfull \hbox (4.30974pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 sys- 
+ []
+
+
+Overfull \hbox (7.08961pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tems 
+ []
+
+
+Overfull \hbox (13.44998pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 move- 
+ []
+
+
+Overfull \hbox (8.19972pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 ment 
+ []
+
+
+Overfull \hbox (5.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 gen- 
+ []
+
+
+Overfull \hbox (3.75978pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tion 
+ []
+
+
+Overfull \hbox (14.29971pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 peated 
+ []
+
+
+Overfull \hbox (9.85963pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 twice 
+ []
+
+
+Overfull \hbox (2.08961pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 last 
+ []
+
+
+Overfull \hbox (8.73979pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 para- 
+ []
+
+
+Overfull \hbox (10.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 graph 
+ []
+
+
+Overfull \hbox (2.6398pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tro- 
+ []
+
+
+Overfull \hbox (5.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 duc- 
+ []
+
+
+Overfull \hbox (3.75978pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tion  
+ []
+
+
+Overfull \hbox (40.97922pt too wide) in paragraph at lines 68--68
+[][][][]\OT1/ptm/m/n/10 Biologically- 
+ []
+
+
+Overfull \hbox (20.41957pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 inspired 
+ []
+
+
+Overfull \hbox (1.52995pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 dy- 
+ []
+
+
+Overfull \hbox (8.74979pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 nam- 
+ []
+
+
+Overfull \hbox (4.30974pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 sys- 
+ []
+
+
+Overfull \hbox (7.08961pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tems 
+ []
+
+
+Overfull \hbox (13.44998pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 move- 
+ []
+
+
+Overfull \hbox (8.19972pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 ment 
+ []
+
+
+Overfull \hbox (5.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 gen- 
+ []
+
+
+Overfull \hbox (3.75978pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tion 
+ []
+
+
+Overfull \hbox (14.29971pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 peated 
+ []
+
+
+Overfull \hbox (9.85963pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 twice 
+ []
+
+
+Overfull \hbox (2.08961pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 last 
+ []
+
+
+Overfull \hbox (8.73979pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 para- 
+ []
+
+
+Overfull \hbox (10.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 graph 
+ []
+
+
+Overfull \hbox (2.6398pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tro- 
+ []
+
+
+Overfull \hbox (5.9699pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 duc- 
+ []
+
+
+Overfull \hbox (3.75978pt too wide) in paragraph at lines 68--68
+\OT1/ptm/m/n/10 tion  
+ []
+
+
+Overfull \hbox (18.7498pt too wide) in paragraph at lines 78--78
+[][][][]\OT1/ptm/m/n/10 Change 
+ []
+
+
+Overfull \hbox (0.9699pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 be- 
+ []
+
+
+Overfull \hbox (12.07974pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 tween 
+ []
+
+
+Overfull \hbox (3.09987pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 two 
+ []
+
+
+Overfull \hbox (18.18962pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 spheres 
+ []
+
+
+Overfull \hbox (2.63994pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 and 
+ []
+
+
+Overfull \hbox (18.7498pt too wide) in paragraph at lines 78--78
+[][][][]\OT1/ptm/m/n/10 Change 
+ []
+
+
+Overfull \hbox (0.9699pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 be- 
+ []
+
+
+Overfull \hbox (12.07974pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 tween 
+ []
+
+
+Overfull \hbox (3.09987pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 two 
+ []
+
+
+Overfull \hbox (18.18962pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 spheres 
+ []
+
+
+Overfull \hbox (2.63994pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 and 
+ []
+
+
+Overfull \hbox (18.7498pt too wide) in paragraph at lines 78--78
+[][][][]\OT1/ptm/m/n/10 Change 
+ []
+
+
+Overfull \hbox (0.9699pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 be- 
+ []
+
+
+Overfull \hbox (12.07974pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 tween 
+ []
+
+
+Overfull \hbox (3.09987pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 two 
+ []
+
+
+Overfull \hbox (18.18962pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 spheres 
+ []
+
+
+Overfull \hbox (2.63994pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 and 
+ []
+
+
+Overfull \hbox (18.7498pt too wide) in paragraph at lines 78--78
+[][][][]\OT1/ptm/m/n/10 Change 
+ []
+
+
+Overfull \hbox (0.9699pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 be- 
+ []
+
+
+Overfull \hbox (12.07974pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 tween 
+ []
+
+
+Overfull \hbox (3.09987pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 two 
+ []
+
+
+Overfull \hbox (18.18962pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 spheres 
+ []
+
+
+Overfull \hbox (2.63994pt too wide) in paragraph at lines 78--78
+\OT1/ptm/m/n/10 and 
+ []
+
+
+LaTeX Warning: Marginpar on page 1 moved.
+
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 83
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 79
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 83
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 79
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 83
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 79
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 83
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 79.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 83.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 79.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 83.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-<images/capsule-capsule.png, id=14, 1348.03625pt x 842.14626pt>
+<images/capsule-capsule.png, id=17, 1348.03625pt x 842.14626pt>
 File: images/capsule-capsule.png Graphic file (type png)
 <use images/capsule-capsule.png>
-Package pdftex.def Info: images/capsule-capsule.png  used on input line 133.
+Package pdftex.def Info: images/capsule-capsule.png  used on input line 137.
 (pdftex.def)             Requested size: 202.19672pt x 126.31648pt.
-
-
-LaTeX Warning: Citation `1' on page 2 undefined on input line 141.
-
-<images/steering_angle.png, id=16, 268.00125pt x 130.23656pt>
+<images/steering_angle.png, id=19, 268.00125pt x 130.23656pt>
 File: images/steering_angle.png Graphic file (type png)
 <use images/steering_angle.png>
-Package pdftex.def Info: images/steering_angle.png  used on input line 154.
+Package pdftex.def Info: images/steering_angle.png  used on input line 158.
 (pdftex.def)             Requested size: 268.00058pt x 130.23624pt.
 
-LaTeX Warning: Citation `1' on page 2 undefined on input line 155.
+
+LaTeX Warning: Citation `1' on page 2 undefined on input line 159.
 
 
-LaTeX Warning: Citation `1' on page 2 undefined on input line 155.
+LaTeX Warning: Citation `1' on page 2 undefined on input line 159.
 
-<images/rosgraph_single.png, id=17, 1857.94125pt x 264.23718pt>
+<images/rosgraph_single.png, id=20, 1857.94125pt x 264.23718pt>
 File: images/rosgraph_single.png Graphic file (type png)
 <use images/rosgraph_single.png>
-Package pdftex.def Info: images/rosgraph_single.png  used on input line 177.
+Package pdftex.def Info: images/rosgraph_single.png  used on input line 181.
 (pdftex.def)             Requested size: 464.48418pt x 66.05913pt.
 [2 <./images/capsule-capsule.png> <./images/steering_angle.png (PNG copy)>]
 Missing character: There is no ‚ in font ptmr7t!
@@ -445,137 +1241,377 @@ Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
 
 [3 <./images/rosgraph_single.png>]
-
-Package caption Warning: \label without proper reference on input line 257.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:potential' on page 4 undefined on input line 242.
-
-
-<images/no_potential.png, id=27, 369.63094pt x 296.60812pt>
+<images/no_potential.png, id=30, 334.24875pt x 313.9228pt>
 File: images/no_potential.png Graphic file (type png)
 <use images/no_potential.png>
-Package pdftex.def Info: images/no_potential.png  used on input line 248.
-(pdftex.def)             Requested size: 110.89012pt x 88.98311pt.
-<images/yes_potential.png, id=28, 370.38374pt x 320.69812pt>
+Package pdftex.def Info: images/no_potential.png  used on input line 253.
+(pdftex.def)             Requested size: 116.9888pt x 109.87462pt.
+
+Overfull \hbox (15.81235pt too wide) in paragraph at lines 253--254
+ [][] 
+ []
+
+<images/yes_potential.png, id=31, 338.01282pt x 321.45094pt>
 File: images/yes_potential.png Graphic file (type png)
 <use images/yes_potential.png>
-Package pdftex.def Info: images/yes_potential.png  used on input line 254.
-(pdftex.def)             Requested size: 111.11597pt x 96.21017pt.
+Package pdftex.def Info: images/yes_potential.png  used on input line 259.
+(pdftex.def)             Requested size: 118.30624pt x 112.5095pt.
 
-Overfull \hbox (11.82678pt too wide) in paragraph at lines 246--258
- [][]  [] 
+Overfull \hbox (17.12979pt too wide) in paragraph at lines 259--260
+ [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<images/potential_field.png, id=29, 454.69875pt x 484.05844pt>
+<images/potential_field.png, id=32, 382.42876pt x 393.72093pt>
 File: images/potential_field.png Graphic file (type png)
 <use images/potential_field.png>
-Package pdftex.def Info: images/potential_field.png  used on input line 265.
-(pdftex.def)             Requested size: 90.93813pt x 96.80997pt.
-<images/potential_field_top.png, id=30, 385.44pt x 378.66469pt>
+Package pdftex.def Info: images/potential_field.png  used on input line 269.
+(pdftex.def)             Requested size: 114.7295pt x 118.11719pt.
+<images/potential_field_top.png, id=33, 394.47375pt x 389.20406pt>
 File: images/potential_field_top.png Graphic file (type png)
 <use images/potential_field_top.png>
-Package pdftex.def Info: images/potential_field_top.png  used on input line 266
+Package pdftex.def Info: images/potential_field_top.png  used on input line 270
 .
-(pdftex.def)             Requested size: 96.35976pt x 94.66594pt.
-<images/potential_field_side.png, id=31, 415.5525pt x 395.97937pt>
+(pdftex.def)             Requested size: 118.34303pt x 116.76212pt.
+<images/potential_field_side.png, id=34, 362.85562pt x 362.10281pt>
 File: images/potential_field_side.png Graphic file (type png)
 <use images/potential_field_side.png>
-Package pdftex.def Info: images/potential_field_side.png  used on input line 26
-7.
-(pdftex.def)             Requested size: 103.88786pt x 98.9946pt.
-<images/one_arm_three_obstacles.png, id=32, 384.6872pt x 301.8778pt>
+Package pdftex.def Info: images/potential_field_side.png  used on input line 27
+1.
+(pdftex.def)             Requested size: 108.85751pt x 108.63167pt.
+<images/one_arm_three_obstacles.png, id=35, 325.215pt x 285.31593pt>
 File: images/one_arm_three_obstacles.png Graphic file (type png)
 <use images/one_arm_three_obstacles.png>
 Package pdftex.def Info: images/one_arm_three_obstacles.png  used on input line
- 276.
-(pdftex.def)             Requested size: 96.17155pt x 75.46925pt.
-<images/one_arm_three_obstacles_top.png, id=33, 286.06876pt x 286.82156pt>
+ 280.
+(pdftex.def)             Requested size: 97.56525pt x 85.59543pt.
+<images/one_arm_three_obstacles_top.png, id=36, 296.60812pt x 308.65312pt>
 File: images/one_arm_three_obstacles_top.png Graphic file (type png)
 <use images/one_arm_three_obstacles_top.png>
 Package pdftex.def Info: images/one_arm_three_obstacles_top.png  used on input 
-line 277.
-(pdftex.def)             Requested size: 71.51701pt x 71.7052pt.
-<images/one_arm_three_obstacles_side.png, id=34, 324.46219pt x 249.18094pt>
+line 281.
+(pdftex.def)             Requested size: 88.98311pt x 92.59665pt.
+<images/one_arm_three_obstacles_side.png, id=37, 330.48468pt x 278.54062pt>
 File: images/one_arm_three_obstacles_side.png Graphic file (type png)
 <use images/one_arm_three_obstacles_side.png>
 Package pdftex.def Info: images/one_arm_three_obstacles_side.png  used on input
- line 278.
-(pdftex.def)             Requested size: 81.11534pt x 62.29507pt.
+ line 282.
+(pdftex.def)             Requested size: 99.14616pt x 83.56282pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4 <./images/no_potential.png (PNG copy)> <./images/yes_potential.png (PNG cop
-y)> <./images/potential_field.png> <./images/potential_field_top.png> <./images
-/potential_field_side.png>]
-<images/one_arm_three_obstacles_vector.png, id=38, 576.65437pt x 504.38437pt>
+y)> <./images/potential_field.png (PNG copy)> <./images/potential_field_top.png
+ (PNG copy)> <./images/potential_field_side.png (PNG copy)>]
+<images/one_arm_three_obstacles_vector.png, id=41, 393.72093pt x 343.2825pt>
 File: images/one_arm_three_obstacles_vector.png Graphic file (type png)
 <use images/one_arm_three_obstacles_vector.png>
 Package pdftex.def Info: images/one_arm_three_obstacles_vector.png  used on inp
-ut line 285.
-(pdftex.def)             Requested size: 115.32883pt x 100.87508pt.
-<images/one_arm_three_obstacles_top_vector.png, id=39, 432.11438pt x 459.21562p
+ut line 289.
+(pdftex.def)             Requested size: 118.11719pt x 102.98553pt.
+<images/one_arm_three_obstacles_top_vector.png, id=42, 374.90062pt x 353.82187p
 t>
 File: images/one_arm_three_obstacles_top_vector.png Graphic file (type png)
 <use images/one_arm_three_obstacles_top_vector.png>
 Package pdftex.def Info: images/one_arm_three_obstacles_top_vector.png  used on
- input line 286.
-(pdftex.def)             Requested size: 86.42134pt x 91.84149pt.
-<images/one_arm_three_obstacles_side_vector.png, id=40, 453.19313pt x 370.38374
-pt>
+ input line 290.
+(pdftex.def)             Requested size: 112.47105pt x 106.14737pt.
+<images/one_arm_three_obstacles_side_vector.png, id=43, 378.66469pt x 337.26pt>
+
 File: images/one_arm_three_obstacles_side_vector.png Graphic file (type png)
 <use images/one_arm_three_obstacles_side_vector.png>
 Package pdftex.def Info: images/one_arm_three_obstacles_side_vector.png  used o
-n input line 287.
-(pdftex.def)             Requested size: 90.63701pt x 74.07542pt.
-<images/two_arms.jpeg, id=41, 977.6525pt x 543.02875pt>
+n input line 291.
+(pdftex.def)             Requested size: 113.60028pt x 101.17877pt.
+<images/two_arms.jpeg, id=44, 977.6525pt x 543.02875pt>
 File: images/two_arms.jpeg Graphic file (type jpg)
 <use images/two_arms.jpeg>
-Package pdftex.def Info: images/two_arms.jpeg  used on input line 300.
+Package pdftex.def Info: images/two_arms.jpeg  used on input line 304.
 (pdftex.def)             Requested size: 146.64154pt x 81.45079pt.
-<images/two_arms.png, id=42, 384.6872pt x 301.8778pt>
+
+Underfull \vbox (badness 5756) has occurred while \output is active []
+
+<images/two_arms.png, id=45, 394.47375pt x 362.85562pt>
 File: images/two_arms.png Graphic file (type png)
 <use images/two_arms.png>
-Package pdftex.def Info: images/two_arms.png  used on input line 309.
-(pdftex.def)             Requested size: 96.17155pt x 75.46925pt.
-<images/two_arms_top.png, id=43, 319.1925pt x 242.40562pt>
+Package pdftex.def Info: images/two_arms.png  used on input line 313.
+(pdftex.def)             Requested size: 98.6182pt x 90.71368pt.
+<images/two_arms_top.png, id=46, 371.88937pt x 361.35pt>
 File: images/two_arms_top.png Graphic file (type png)
 <use images/two_arms_top.png>
-Package pdftex.def Info: images/two_arms_top.png  used on input line 310.
-(pdftex.def)             Requested size: 79.79793pt x 60.60124pt.
-<images/two_arms_side.png, id=44, 462.528pt x 346.896pt>
+Package pdftex.def Info: images/two_arms_top.png  used on input line 314.
+(pdftex.def)             Requested size: 92.9721pt x 90.33728pt.
+<images/two_arms_side.png, id=47, 337.26pt x 335.00156pt>
 File: images/two_arms_side.png Graphic file (type png)
 <use images/two_arms_side.png>
-Package pdftex.def Info: images/two_arms_side.png  used on input line 311.
-(pdftex.def)             Requested size: 115.63171pt x 86.72379pt.
-<images/two_arms_vector.png, id=45, 571.38469pt x 511.15968pt>
+Package pdftex.def Info: images/two_arms_side.png  used on input line 315.
+(pdftex.def)             Requested size: 84.31479pt x 83.75018pt.
+<images/two_arms_vector.png, id=48, 453.19313pt x 359.84438pt>
 File: images/two_arms_vector.png Graphic file (type png)
 <use images/two_arms_vector.png>
-Package pdftex.def Info: images/two_arms_vector.png  used on input line 318.
-(pdftex.def)             Requested size: 114.2749pt x 102.23012pt.
-<images/two_arms_vector_top.png, id=46, 441.90094pt x 351.56343pt>
+Package pdftex.def Info: images/two_arms_vector.png  used on input line 322.
+(pdftex.def)             Requested size: 113.298pt x 89.96086pt.
+<images/two_arms_vector_top.png, id=49, 450.9347pt x 335.75438pt>
 File: images/two_arms_vector_top.png Graphic file (type png)
 <use images/two_arms_vector_top.png>
-Package pdftex.def Info: images/two_arms_vector_top.png  used on input line 319
+Package pdftex.def Info: images/two_arms_vector_top.png  used on input line 323
 .
-(pdftex.def)             Requested size: 88.37862pt x 70.31143pt.
-<images/two_arms_vector_side.png, id=47, 472.01344pt x 351.56343pt>
+(pdftex.def)             Requested size: 112.7334pt x 83.93839pt.
+<images/two_arms_vector_side.png, id=50, 432.86719pt x 335.75438pt>
 File: images/two_arms_vector_side.png Graphic file (type png)
 <use images/two_arms_vector_side.png>
 Package pdftex.def Info: images/two_arms_vector_side.png  used on input line 32
-0.
-(pdftex.def)             Requested size: 94.401pt x 70.31143pt.
- [5 <./images/one_arm_three_obstacles.png> <./images/one_arm_three_obstacles_to
-p.png> <./images/one_arm_three_obstacles_side.png> <./images/one_arm_three_obst
-acles_vector.png> <./images/one_arm_three_obstacles_top_vector.png> <./images/o
-ne_arm_three_obstacles_side_vector.png> <./images/two_arms.jpeg> <./images/two_
-arms.png> <./images/two_arms_top.png> <./images/two_arms_side.png> <./images/tw
-o_arms_vector.png> <./images/two_arms_vector_top.png> <./images/two_arms_vector
-_side.png>]
+4.
+(pdftex.def)             Requested size: 108.21652pt x 83.93839pt.
+ [5 <./images/one_arm_three_obstacles.png (PNG copy)> <./images/one_arm_three_o
+bstacles_top.png (PNG copy)> <./images/one_arm_three_obstacles_side.png (PNG co
+py)> <./images/one_arm_three_obstacles_vector.png (PNG copy)> <./images/one_arm
+_three_obstacles_top_vector.png (PNG copy)> <./images/one_arm_three_obstacles_s
+ide_vector.png (PNG copy)> <./images/two_arms.jpeg> <./images/two_arms.png (PNG
+ copy)> <./images/two_arms_top.png (PNG copy)> <./images/two_arms_side.png (PNG
+ copy)> <./images/two_arms_vector.png (PNG copy)> <./images/two_arms_vector_top
+.png (PNG copy)> <./images/two_arms_vector_side.png (PNG copy)>]
+Overfull \hbox (3.74992pt too wide) in paragraph at lines 349--349
+[][][][]\OT1/ptm/m/n/10 The 
+ []
+
+
+Overfull \hbox (3.75967pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 first 
+ []
+
+
+Overfull \hbox (3.19972pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 line 
+ []
+
+
+Overfull \hbox (13.46976pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 weird, 
+ []
+
+
+Overfull \hbox (14.86978pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 should 
+ []
+
+
+Overfull \hbox (8.74979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 more 
+ []
+
+
+Overfull \hbox (4.85979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 spe- 
+ []
+
+
+Overfull \hbox (5.41971pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 cific 
+ []
+
+
+Overfull \hbox (10.41983pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 about 
+ []
+
+
+Overfull \hbox (3.74979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 ma- 
+ []
+
+
+Overfull \hbox (4.30984pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 nip- 
+ []
+
+
+Overfull \hbox (3.19974pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 tors  
+ []
+
+
+Overfull \hbox (3.74992pt too wide) in paragraph at lines 349--349
+[][][][]\OT1/ptm/m/n/10 The 
+ []
+
+
+Overfull \hbox (3.75967pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 first 
+ []
+
+
+Overfull \hbox (3.19972pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 line 
+ []
+
+
+Overfull \hbox (13.46976pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 weird, 
+ []
+
+
+Overfull \hbox (14.86978pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 should 
+ []
+
+
+Overfull \hbox (8.74979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 more 
+ []
+
+
+Overfull \hbox (4.85979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 spe- 
+ []
+
+
+Overfull \hbox (5.41971pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 cific 
+ []
+
+
+Overfull \hbox (10.41983pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 about 
+ []
+
+
+Overfull \hbox (3.74979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 ma- 
+ []
+
+
+Overfull \hbox (4.30984pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 nip- 
+ []
+
+
+Overfull \hbox (3.19974pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 tors  
+ []
+
+
+Overfull \hbox (3.74992pt too wide) in paragraph at lines 349--349
+[][][][]\OT1/ptm/m/n/10 The 
+ []
+
+
+Overfull \hbox (3.75967pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 first 
+ []
+
+
+Overfull \hbox (3.19972pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 line 
+ []
+
+
+Overfull \hbox (13.46976pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 weird, 
+ []
+
+
+Overfull \hbox (14.86978pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 should 
+ []
+
+
+Overfull \hbox (8.74979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 more 
+ []
+
+
+Overfull \hbox (4.85979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 spe- 
+ []
+
+
+Overfull \hbox (5.41971pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 cific 
+ []
+
+
+Overfull \hbox (10.41983pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 about 
+ []
+
+
+Overfull \hbox (3.74979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 ma- 
+ []
+
+
+Overfull \hbox (4.30984pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 nip- 
+ []
+
+
+Overfull \hbox (3.19974pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 tors  
+ []
+
+
+Overfull \hbox (3.74992pt too wide) in paragraph at lines 349--349
+[][][][]\OT1/ptm/m/n/10 The 
+ []
+
+
+Overfull \hbox (3.75967pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 first 
+ []
+
+
+Overfull \hbox (3.19972pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 line 
+ []
+
+
+Overfull \hbox (13.46976pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 weird, 
+ []
+
+
+Overfull \hbox (14.86978pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 should 
+ []
+
+
+Overfull \hbox (8.74979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 more 
+ []
+
+
+Overfull \hbox (4.85979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 spe- 
+ []
+
+
+Overfull \hbox (5.41971pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 cific 
+ []
+
+
+Overfull \hbox (10.41983pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 about 
+ []
+
+
+Overfull \hbox (3.74979pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 ma- 
+ []
+
+
+Overfull \hbox (4.30984pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 nip- 
+ []
+
+
+Overfull \hbox (3.19974pt too wide) in paragraph at lines 349--349
+\OT1/ptm/m/n/10 tors  
+ []
+
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ú in font ptmr7t!
@@ -601,22 +1637,22 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ù in font ptmr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--378
+Underfull \hbox (badness 10000) in paragraph at lines 387--388
 []\OT1/ptm/m/n/8 S. Adee, Dean Ka-mens Luke Arm Pros-the-sis Read-ies
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--378
+Underfull \hbox (badness 10000) in paragraph at lines 387--388
 \OT1/ptm/m/n/8 for Clin-i-cal Tri-als - IEEE Spec-trum, IEEE Spec-trum:
  []
 
 
-Underfull \hbox (badness 4291) in paragraph at lines 377--378
+Underfull \hbox (badness 4291) in paragraph at lines 387--388
 \OT1/ptm/m/n/8 Tech-nol-ogy, En-gi-neer-ing, and Sci-ence News, Feb. 01, 2008.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--378
+Underfull \hbox (badness 10000) in paragraph at lines 387--388
 \OT1/ptm/m/n/8 https://spectrum.ieee.org/biomedical/bionics/dean-kamens-luke-ar
 m-
  []
@@ -649,7 +1685,7 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ì in font ptmr7t!
 
-Underfull \hbox (badness 6493) in paragraph at lines 381--382
+Underfull \hbox (badness 6493) in paragraph at lines 391--392
 \OT1/ptm/m/n/8 A Wol-fram Web Re-source, cre-ated by Eric W. Weis-stein.
  []
 
@@ -670,13 +1706,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4337 strings out of 494923
- 68252 string characters out of 6180742
- 125933 words of memory out of 5000000
- 7554 multiletter control sequences out of 15000+600000
+ 14836 strings out of 494923
+ 291500 string characters out of 6180742
+ 331163 words of memory out of 5000000
+ 17821 multiletter control sequences out of 15000+600000
  61326 words of font info for 131 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,8n,40p,1692b,456s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,9n,77p,1692b,684s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
@@ -686,10 +1722,10 @@ type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol
 /share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on SS2020_Gomez_Parra_Penfold.pdf (6 pages, 1207576 bytes).
+Output written on SS2020_Gomez_Parra_Penfold.pdf (6 pages, 1390422 bytes).
 PDF statistics:
- 85 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 87 PDF objects out of 1000 (max. 8388607)
+ 46 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 106 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 118 words of extra memory for PDF output out of 10000 (max. 10000000)
 
