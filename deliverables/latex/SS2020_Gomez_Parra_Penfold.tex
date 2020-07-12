@@ -37,7 +37,7 @@
 \title{\LARGE \bf Implementation of biologically-inspired dynamical systems for movement generation: automatic real-time goal adaptation and obstacle avoidance}
 \usepackage[colorinlistoftodos]{todonotes}
 
-\author{Alan Gomez, Samuel Parra, and Brennan Penfold}
+\author{Alan Gomez, Samuel Parra, and Brennan Penfold \\ {\small \textbf{Advisor:} Djordje Vukcevic}}
 \setlength{\parskip}{0pt}
 
 \begin{document}
@@ -51,6 +51,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
+The control algorithms of current robotic manipulators are quite rigid in their operation, often following precomputed paths, which is unsuitable for uses in dynamic environments associated with assisting humans. This paper presents a method of combining two current methods of collision monitoring\cite{Khatib} and collision avoidance\cite{Hoffmann} to create safer more robust control algorithm. The collision monitoring algorithm is extended to monitor distances from all arm links but could not be implemented with the chosen collision avoidance method. The final collision monitoring library is able to operate at $\sim$ 200Hz, but would benefit greatly from optimisations to self collision monitoring, and the change to a null-space control algorithm would allow for collision avoidance to be implemented in all links.
 
 
 \end{abstract}
@@ -65,22 +66,19 @@ Humanoid robots and arm like manipulators have a great many current and potentia
 
 One solution to the control problem is to use dynamic movement primitives, which can be generated during the movement itself, allowing for real-time obstacle avoidance and goal changes. Previous approaches \cite{Janabi-Sharif} used were initially not able to handle moving goals, but improvements made by H. Hoffmann et al. \cite{Hoffmann} by applying a potential field method to the process overcame this limitation. The use of dynamic movement primitives in the potential field method also overcame the local minimum problem, that is typically inherent with potential fields. Hence this paper is the basis of the project. There are some limitations to this method the most significant being the representation of the obstacles and manipulator. The method presented by H. Hoffman et al.\cite{Hoffmann} only considers points in cartesian space, where other methods, like those discussed by O. Khatib \cite{Khatib}, represent objects as basic primitives with volume and shape. \\
 
-\todo{ Biologically-inspired dynamical systems for movement generation is repeated twice in the last paragraph of the introduction }
-
-For objects to be avoided first they must be located relative to the manipulator, and that is the core concept of the library built for this project. Biologically-inspired dynamical systems for movement generation \cite{Hoffmann} does not tackle the problem of distances between objects, instead a precursor paper was used, Real-Time Obstacle Avoidance for Manipulators and Mobile Robots \cite{Khatib}. This paper goes into details on how to find the distance between two obstacles, which was modified to find the shortest vector between the two obstacles, allowing for it to be applied to the dynamic movements primitives control algorithm discussed in Biologically-inspired dynamical systems for movement generation \cite{Hoffmann}. The these two techniques, along with the addition of distance monitoring with all links, has the potential to produce a better algorithm. The combination of the two techniques means that both the volume of the object is considered, and the trajectory planning can occur online allowing it to be adapted to any changes in a fast, efficient manner. These properties along with the addition of obstacle distance calculations for all links means that humanoid robots and manipulators would be more robust and safer to use in dynamic, human environments.
+For objects to be avoided first they must be located relative to the manipulator, and that is the core concept of the library built for this project. Biologically-inspired dynamical systems for movement generation \cite{Hoffmann} does not tackle the problem of distances between objects, instead a precursor paper was used, Real-Time Obstacle Avoidance for Manipulators and Mobile Robots \cite{Khatib}. This paper goes into details on how to find the distance between two obstacles, which was modified to find the shortest vector between the two obstacles, allowing for it to be applied to the dynamic movements primitives control algorithm discussed by H. Hoffmann et al. \cite{Hoffmann}. The these two techniques, along with the addition of distance monitoring with all links, has the potential to produce a better algorithm. The combination of the two techniques means that both the volume of the object is considered, and the trajectory planning can occur online allowing it to be adapted to any changes in a fast, efficient manner. These properties along with the addition of obstacle distance calculations for all links means that humanoid robots and manipulators would be more robust and safer to use in dynamic, human environments.
 %Robotic assistants
 
 \section{Approach}
 
 \subsection{Distance to objects} %Alan
-To compute the closest distance between two objects we first obtain the closest points between the objects and then the distance between these two points.
+To compute the closest distance between two objects we first obtain the closest points between the objects and then the distance between these two points. Since each shape is different in it mathematical representations, there is a unique case to consider for each combination of shapes, and these are as follows:
 
-\todo{Change between two spheres and so on}
-1) Sphere - Sphere: 
-To compute the closest distance between two spheres, one can easily calculate the distance between the center of both spheres and subtract the radius of both spheres.
+1) Between two Spheres: 
+To compute the closest distance between two spheres, one can just subtract the radii of the spheres from the distance between the center points of both spheres. The distance between the sphere center points can be easily calculated by finding the norm of the vector subtraction between the two center points, since the norm of the value is taken order of the vector subtraction does not matter.
 
-2) Sphere - Capsule:
-To compute the closest distance between a capsule $C$ and a sphere $S$, one can compute the distance between the center of $S$ = $p_S$ and the axis of symmetry of $C$ = $l_C$
+2) Between a Sphere and a Capsule:
+To compute the closest distance between a capsule $C$ and a sphere $S$, one can compute the distance between the center of the sphere, $p_S$, and the axis of symmetry of the cylinder, $l_C$
 and then subtract the radius of the sphere and the capsule. 
 
 The closest point, on $l_C$, to $p_S$ is given by \eqref{eq:capsule_point},
@@ -101,7 +99,7 @@ where the start point of $l_C$ is $m1(x_1, y_1, z_1)$, the end point is $m2(x_2,
     \end{matrix}
 \end{equation}
 
-3) Capsule - Capsule:
+3) Between two Capsules:
 To compute the closest distance between two capsules (capsule $A$ and capsule $B$), with axis of symmetry $l_A = \overline{m1_A m2_A}$ and $l_B = \overline{m1_B m2_B}$, 
 where $A$ is the longest capsule, one can consider four different cases:
 \begin{enumerate}
@@ -156,7 +154,7 @@ The last term is the potential field generated by the obstacles. This term has a
 \begin{figure}
 	\centering
 	\scalebox{0.55}{\includegraphics{images/steering_angle.png}}
-	\caption{Graphical representation of steering angle \cite{1}}
+	\caption{Graphical representation of steering angle \cite{Hoffmann}}
 	\label{steering_image}
 \end{figure}
 
@@ -170,7 +168,7 @@ This steering angle determines how sharp the end effector steers away from the o
 	p(x, v) = \gamma \sum_i R_i v \varphi_i exp(-\beta \varphi_i) 
 \end{equation}
 
-Where $\gamma$ and $\beta$ are constants, and R is a rotation matrix which rotates by the axis $r = (o-x) \times v $ with an angle of rotation of $\pi/2$. This rotation matrix can be calculated with the Rodrigues' rotation formula \cite{rodrigues}. The final potential field is the sum of the potential fields generated by all the obstacles. Our final equation converges towards the goal avoiding the obstacles in its way.
+Where $\gamma$ and $\beta$ are tune-able constants, and R is a rotation matrix which rotates by the axis $r = (o-x) \times v $ with an angle of rotation of $\pi/2$. This rotation matrix can be calculated with the Rodrigues' rotation formula \cite{rodrigues}. The final potential field is the sum of the potential fields generated by all the obstacles. Our final equation converges towards the goal avoiding the obstacles in its way.
 
 \begin{equation}
 \dot{v} = K ( g - x ) - D v + p(x, v)
@@ -195,23 +193,23 @@ The manipulator is controlled with a control loop that is executed at a specifie
  
  
 \section{Implementation} %Brennan
-The final product that combines all the obstacle monitoring and avoidance techniques was implemented using the Robotic operating system (ROS) framework, specifically ROS Kinetic. ROS has a few advantages in this area, the first and foremost being the Kinova Kortex library \cite{kortex}, which is a high and low level control API for Kinova robotic manipulators, including the one chosen for demonstration. This library has a lot of useful features from the MoveIt control algorithm to the fully fledged gazebo simulation of the arm. The final software produced does actually rely on any of the Kortex libraries, but was instrumental in testing and development.
+The final product that combines all the obstacle monitoring and avoidance techniques was implemented using the Robotic operating system (ROS) framework, specifically ROS Kinetic. ROS has a few advantages in this area, the first and foremost being the Kinova Kortex library \cite{kortex}, which is a high and low level control API for Kinova robotic manipulators, including the one chosen for demonstration. This library has a lot of useful features from the MoveIt control algorithm to the fully fledged gazebo simulation of the arm. The final software produced does actually rely on any of the Kortex libraries, but was instrumental in testing and development. \\
 
-The ROS package can be broken down into 3 sections, the controller, simulator and visualisation. The control section is the implementation of Biologically-inspired dynamical systems for movement generation \cite{Hoffmann}, the collision avoidance library is implemented inside a control loop that uses the monitor class to obtain the shortest distance vectors from the obstacles to the end-effector. This shortest distance is then passed into the potential field method along with the current velocity of the manipulator. From this the new velocity is derived and then passed into the simulator via an inverse kinematics function of the kinova\_arm class, mapping the velocity from cartesian space to the manipulators joint space.
+The ROS package can be broken down into 3 sections, the controller, simulator and visualisation. The control section is the implementation of Biologically-inspired dynamical systems for movement generation\cite{Hoffmann}, the collision avoidance library is implemented inside a control loop that uses the monitor class to obtain the shortest distance vectors from the obstacles to the end-effector. This shortest distance is then passed into the potential field method along with the current velocity of the manipulator. From this the new velocity is derived and then passed into the simulator via an inverse kinematics function of the KinovaArm class, mapping the velocity from cartesian space to the manipulators joint space. \\
 
 The simulation software takes the joint velocities from the controller and updates the current state of the simulated manipulator, and then passes the current state back to the controller as well as forwards to the visualisation. The simulation algorithm it's self is very basic and is based around a discrete time integration technique:
 $$
 \theta_i = \theta_{i-1} + \dot{\theta}_{i-1}\times (t_i - t_{i-1})
 $$ 
-While rudimentary, as it doesn't consider inertia or any other complex parameters, it functions as desired for the testing and demonstration of a robotic manipulators trajectory control algorithm.
+While rudimentary, as it doesn't consider inertia or any other complex parameters, it functions as desired for the testing and demonstration of a robotic manipulators trajectory control algorithm. \\
 
-The basic ROS node graph can be seen in \ref{fig:rosgraph_single} where the interfacer is a basic terminal interface to send goals to the arm controller and the visualisation is performed by the built-in robot\_state\_publisher node and Rviz.
+The basic ROS node graph can be seen in figure \ref{fig:rosgraph_single} where the interfacer is a basic terminal interface to send goals to the arm controller and the visualisation is performed by the built-in robot\_state\_publisher node and Rviz.
 
 
 \section{Experiments}
 
 \subsection{Collision Monitoring} %Brennan
-The collision monitoring library has no real room for errors, the distance between objects was confirmed using Geogebra models, and the rest of the software relies on those calculations. The core performance measure of the collision monitoring library can be considered speed, hence the use of C++ instead of a higher level interpreted language like python. The performance test was performed on an Ubuntu 16.04 machine with a Intel Core i5-7200U 2.5GHz CPU. The following operations were timed using the C++ chrono library:
+The collision monitoring library has no practical measure of accuracy because of its pure mathematical basis. To assert the accuracy of the mathematics applied the distance between objects was verified using Geogebra models, and the rest of the software relies on those calculations. So the core performance measure of the collision monitoring library can be considered speed, hence the use of C++ instead of a higher level interpreted language like python. The performance test was performed on an Ubuntu 16.04 machine with a Intel Core i5-7200U 2.5GHz CPU. The following operations were timed using the C++ chrono library:
 \begin{itemize}
 	\item The joint initialisation of one KinovaArm and Monitor class.
 	\item The combination of initialising a Sphere and adding it to the Monitor class.
@@ -221,7 +219,7 @@ The collision monitoring library has no real room for errors, the distance betwe
 \end{itemize}
 
 \subsubsection{Results}
-Each operation was performed 100 times with a single spherical obstacle and averaged to produce the final results given in Table \ref{table:Function Times} below.
+Each operation was performed 100 times with a single spherical obstacle and mean calculated to produce the final results given in Table \ref{table:Function Times} below.
 
 \begin{table}[H]
 	\centering
@@ -237,13 +235,13 @@ Each operation was performed 100 times with a single spherical obstacle and aver
 	\caption{Execution times for collision monitoring tasks}
 	\label{table:Function Times}
 \end{table}
-From a cursory glance it is clear that the functions are quite fast all operations take less than two milliseconds to complete, but some of the operations are not as fast as desired. The initialisation operations are not that important when is comes to overall speed, since they tend to only be run at the start of the program, and potentially at random intervals the program for the obstacle initialisation. The distance to obstacles and between arm links along with the update function are the main operations to be concerned with, these run every loop and determine the final update rate of the software. The update rate of the arm is very quick, and the distance to obstacles only taking twice as much. It is important to note though that the time for distance to obstacles to execute relies on the number of obstacles, as the number of obstacles increases so does the time to calculate, in a linear fashion. This means that with 40 obstacles the software will be restricted to ~10Hz. Assuming only one obstacle the other large impact to overall performance in the distance to self links operation, taking up over four times the time used by the other two core functions combined. This was somewhat expected, if not to this extent, since the software was designed for portability in mind, which limits the possible optimisations available, still further investigation into the limiting factors to should be performed. The final core loop time for the collision monitoring library is a little over 4.7 milliseconds, which would give a update rate of ~200hz, but this would benefit significantly by the exclusion of self monitoring functions.
+From a cursory glance it is clear that the functions are quite fast, all operations take less than two milliseconds to complete, but some of the operations are not as fast as desired. From a runtime perspective the initialisation operations are not that important when is comes to overall speed, since they tend to only be run at the start of the program, and potentially at random intervals the program in the case of the obstacle initialisation. The distance to obstacles, distance between arm links, and the update function are the main operations relevant to the software refresh rate, these run every loop and depict the final update rate of the software. The update function of the arm is very fast, and the distance to obstacles function is the same only taking twice as long. It is important to note though that the time for distance to obstacles to execute relies on the number of obstacles, as the number of obstacles increases so does the time to calculate, in a linear fashion. This means that with 40 obstacles the software will be restricted to $\sim$ 10Hz. Assuming only one obstacle the other large impact to overall performance in the distance to self links operation, taking up over four times the time used by the other two core functions combined. This was somewhat expected, if not to this extent, since the software was designed for portability in mind, which limits the possible optimisations available, still further investigation into the limiting factors should be performed. The final core loop time for the collision monitoring library is a little over 4.7 milliseconds, which would give a update rate of $\sim$ 200hz, but this would gain significant benefits from the exclusion of the distance to own links monitoring functions.
 
 
 
 \subsection{Single arm obstacle avoidance} %Sam
 % In order to visualize the obstacle avoidance we first simulated a single instance of the Kinova\textsuperscript{\tiny\textregistered} Gen3 robotic manipulator and placed obstacles in its workspace, as seen in Fig. \ref{fig:one_arm}. We then provided different commands to find tune the relevant parameters and assess the effectiveness of the algorithm. 
- To assess the effectiveness of the algorithm we place several obstacles in the vicinity of the manipulator, and then command it to move between points in the workspace. First, we used the same set of obstacles, initial point and goal point for two experiments with two different values for $\gamma$ as seen in Fig. 4. When $\gamma=0$ there is no influence of the potential field in the velocity, hence the end effector does not avoid the obstacle. Whereas when $\gamma=35$ the effect of the potential field steer away the end effector from the obstacle in its path. From these results we can assess that the DMP will converge to the goal point, and the value of $\gamma$ has an impact in the effectiveness of the algorithm. 
+ To assess the effectiveness of the algorithm we place several obstacles in the vicinity of the manipulator, and then command it to move between points in the workspace. First, we used the same set of obstacles, initial point and goal point for two experiments with two different values for $\gamma$ as seen in Fig. 4. When $\gamma=0$ there is no influence of the potential field in the velocity, hence the end effector does not avoid the obstacle. Whereas when $\gamma=35$ the effect of the potential field steers the end effector away from the obstacle in its path. From these results we can assess that the DMP will converge to the goal point, and the value of $\gamma$ has an impact in the effectiveness of the algorithm. 
 
 \begin{figure}[H]
 	\centering
@@ -262,7 +260,7 @@ From a cursory glance it is clear that the functions are quite fast all operatio
 	\caption{Movement with different values for $\gamma$}
 \end{figure}
 
-In Fig. \ref{fig:potential_field} we can observe the behavior of the potential field when several obstacles are nearby. Note that the potential field's magnitude is larger when the end effector is approaching the obstacles and gets smaller after it passes the obstacles. This is the effect of the steering angle, as when the end effector passes the obstacles the angle between the current velocity and the obstacles is large. It should also be noted that the direction of the potential field effect is not uniform between small steps.
+In Fig. \ref{fig:potential_field} we can observe the behaviour of the potential field when several obstacles are nearby. Note that the potential field's magnitude is larger when the end effector is approaching the obstacles and gets smaller after it passes the obstacles. This is the effect of the steering angle, as when the end effector passes the obstacles the angle between the current velocity and the obstacles is large. It should also be noted that the direction of the potential field effect is not uniform between small steps.
 
 \begin{figure}[H]
 	\centering
@@ -272,7 +270,7 @@ In Fig. \ref{fig:potential_field} we can observe the behavior of the potential f
 	\caption{Potential field generated during the movement}
 	\label{fig:potential_field}
 \end{figure}
-
+\pagebreak
 For one of the experiments we placed several obstacles in the workspace and command it to move between points. The results of the collision avoidance algorithm can be seen from several perspectives in fig \ref{fig:one_arm_avoidance}. The red line is the path of the end effector from the initial point to the goal. In fig \ref{fig:one_arm_avoidance_vector} the velocity vectors in their respective point in time can be observed. 
 
 \begin{figure}[H]
@@ -297,7 +295,7 @@ As it can be observed from Fig. \ref{fig:one_arm_avoidance} and Fig. \ref{fig:on
 
 \subsection{Dual arm collision avoidance} %Sam
 
-In order for two manipulators to work together in the same obstacles it is important that these do not collide with each other. In this experiment we simulated two instances of the Kinova arm placed close to each other so their workspaces would overlap. Each arm is individually controlled, meaning we could place one arm on the path of the other to assess if the arms avoided collisions with each other, as observed in Fig \ref{fig:two_arms}. The objective is to assess if the arms avoid colliding with each other.
+In order for two manipulators to operate with intersecting workspaces it is important that they do not collide with each other. In this experiment we simulated two instances of the Kinova arm placed close to each other so their workspaces would overlap. Each arm is individually controlled, meaning we could place one arm on the path of the other to assess if the arms avoided collisions with each other, an example setup can be seen in Fig \ref{fig:two_arms}. The objective is to assess if the arms avoid colliding with each other during operation.
 
 \begin{figure}[H]
 	\centering
@@ -325,8 +323,8 @@ In Fig. \ref{fig:two_arm_avoidance} the path of the end effector of first Kinova
 	\caption{Cartesian velocities generated}
 	\label{fig:two_arm_avoidance_vector}
 \end{figure}
-
-From these results we can see that a long as the geometric representation of the two arms is accurate, the collision avoidance algorithm can be use to avoid some collisions. the reason why some cases collisions cannot be avoided is because this algorithm only manages to avoid collisions with the end effector. This means that collisions between the body of the first arm the second arm are still plausible. 
+\pagebreak
+From these results we can see that a long as the geometric representation of the two arms is accurate, the collision avoidance algorithm can be use to avoid collisions between the arms. The collision avoidance algorithm only monitors the end effector of the moving robot, this means that not all collision between the two arms can be avoided. To fix this a null space control algorithm would need to be implemented. 
 
 \section{Use cases}
 
@@ -345,9 +343,8 @@ In the same way, as one can use the library with two manipulators, one can add a
 Finally, one can also use this library to prevent the collision of the end-effector of the manipulator with its other links.
 This can be done by implementing the Arm interface and adding each link of the robot as an obstacle represented by a capsule.
 
-\section{Conclusion} %Alan
-\todo{The first line is weird, it should be more specific about manipulators}
-For robots and robotic manipulators to be used in a human environment they first need to be able to adapt to a constantly changing, dynamic conditions. This can be done in a robust and safe manner using a combination of two different methods discussed by H. Hoffmann et al.\cite{Hoffmann} and O. Khatib \cite{Khatib}. by implementing the obstacle monitoring by O. Khatib \cite{Khatib} and the collision avoidance by H. Hoffmann et al.\cite{Hoffmann}, along with monitoring collisions for all links, robotic manipulators are more resilient to changes in obstacle and goal placement. The final collision monitoring library can have an update rate of ~200Hz with all features enabled, this is a viable update rate, but this would become drastically impacted if more that 10 obstacles were to be added to the environment. % Sam can sumarise about his results.
+\section{Conclusion}
+For robotic manipulators to be used in a human environment they first need to have the ability to adapt in constantly changing, dynamic environments. This can be done in a robust and safe manner using a combination of two different methods discussed by H. Hoffmann et al.\cite{Hoffmann} and O. Khatib \cite{Khatib}. by implementing the obstacle monitoring by O. Khatib \cite{Khatib} and the collision avoidance by H. Hoffmann et al.\cite{Hoffmann}, along with monitoring collisions for all links, robotic manipulators are more resilient to changes in obstacle and goal placement. The final collision monitoring library can have an update rate of $\sim$ 200Hz with all features enabled, this is a viable update rate, but this would become drastically impacted if more that 10 obstacles were to be added to the environment. % Sam can sumarise about his results.
 From the experiments it can be concluded that the DMPs used in this algorithm converge to the goal, and that the potential field term influences the end effector's path to steer away from obstacles. 
 It can also be observed that the effectiveness of the algorithm is dependent on the parameters of the DMP equation, hence it is important for a developer to fine tune this parameters until a certain level of performance is reached.
  
@@ -373,10 +370,8 @@ Finally, in order to avoid more serious collisions, the algorithm should conside
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Appendices}
-
-\section*{Acknowledgments}
-
+\section*{Acknowledgements}
+We would like to thank our supervisor Djordje Vukcevic for all the advice and help this semester.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
