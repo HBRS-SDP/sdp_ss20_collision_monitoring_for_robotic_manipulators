@@ -51,7 +51,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-The control algorithms of current robotic manipulators are quite rigid in their operation, often following precomputed paths, which is unsuitable for uses in dynamic environments associated with assisting humans. This paper presents a method of combining two current methods of collision monitoring \cite{Khatib} and collision avoidance \cite{Hoffmann} to create safer more robust control algorithm. The collision monitoring algorithm is extended to monitor distances from all arm links but could not be implemented with the chosen collision avoidance method. The final collision monitoring library is able to operate at $\sim$ 200Hz, but would benefit greatly from optimisations to self collision monitoring, and the change to a null-space control algorithm would allow for collision avoidance to be implemented in all links.
+The control algorithms of current robotic manipulators are quite rigid in their operation, often following precomputed paths, which is unsuitable for uses in dynamic environments associated with assisting humans. This paper presents a method of combining two current methods of collision monitoring \cite{Khatib} and collision avoidance \cite{Hoffmann} to create a safer more robust control algorithm. The collision monitoring algorithm is extended to monitor distances from all arm links but could not be implemented with the chosen collision avoidance method. The final collision monitoring library is able to operate at $\sim$ 200Hz, but would benefit greatly from optimisations to self collision monitoring, and the change to a null-space control algorithm would allow for collision avoidance to be implemented in all links.
 
 
 \end{abstract}
@@ -344,7 +344,7 @@ Finally, one can also use this library to prevent the collision of the end-effec
 This can be done by implementing the Arm interface and adding each link of the robot as an obstacle represented by a capsule.
 
 \section{Conclusion}
-For robotic manipulators to be used in a human environment they first need to have the ability to adapt in constantly changing, dynamic environments. This can be done in a robust and safe manner using a combination of two different methods discussed by H. Hoffmann et al. \cite{Hoffmann} and O. Khatib \cite{Khatib}. by implementing the obstacle monitoring by O. Khatib \cite{Khatib} and the collision avoidance by H. Hoffmann et al. \cite{Hoffmann}, along with monitoring collisions for all links, robotic manipulators are more resilient to changes in obstacle and goal placement. The final collision monitoring library can have an update rate of $\sim$ 200Hz with all features enabled, this is a viable update rate, but this would become drastically impacted if more that 10 obstacles were to be added to the environment. % Sam can sumarise about his results.
+For robotic manipulators to be used in a human environment they first need to have the ability to adapt in constantly changing, dynamic environments. This can be done in a robust and safe manner using a combination of two different methods discussed by H. Hoffmann et al. \cite{Hoffmann} and O. Khatib \cite{Khatib}. By implementing the obstacle monitoring by O. Khatib \cite{Khatib} and the collision avoidance by H. Hoffmann et al. \cite{Hoffmann}, along with monitoring collisions for all links, robotic manipulators are more resilient to changes in obstacle and goal placement. The final collision monitoring library can have an update rate of $\sim$ 200Hz with all features enabled, this is a viable update rate, but this would become drastically impacted if more that 10 obstacles were to be added to the environment. % Sam can sumarise about his results.
 From the experiments it can be concluded that the DMPs used in this algorithm converge to the goal, and that the potential field term influences the end effector's path to steer away from obstacles. 
 It can also be observed that the effectiveness of the algorithm is dependent on the parameters of the DMP equation, hence it is important for a developer to fine tune this parameters until a certain level of performance is reached.
  
@@ -376,13 +376,13 @@ We would like to thank our supervisor Djordje Vukcevic for all the advice and he
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{thebibliography}{99}
-
+\begin{thebibliography}{10}
+	
+\bibitem{Khatib} O. Khatib, “Real-Time Obstacle Avoidance for Manipulators and Mobile Robots” The International Journal of Robotics Research, vol. 5, no. 1, pp. 90–98, Mar. 1986, doi: 10.1177/027836498600500106.
+\bibitem{Hoffmann} H. Hoffmann, P. Pastor, D.-H. Park, and S. Schaal, “Biologically-inspired dynamical systems for movement generation: Automatic real-time goal adaptation and obstacle avoidance,” in 2009 IEEE International Conference on Robotics and Automation, Kobe, May 2009, pp. 2587–2592, doi: 10.1109/ROBOT.2009.5152423.
 \bibitem{Fadalil} M. S. Fadali and A. Visioli, “Introduction to Digital Control,” in Digital Control Engineering, Elsevier, 2013, pp. 1–8.
 \bibitem{Adee} S. Adee, “Dean Kamen’s ‘Luke Arm’ Prosthesis Readies for Clinical Trials - IEEE Spectrum,” IEEE Spectrum: Technology, Engineering, and Science News, Feb. 01, 2008. https://spectrum.ieee.org/biomedical/bionics/dean-kamens-luke-arm-prosthesis-readies-for-clinical-trials (accessed Jun. 25, 2020).
-\bibitem{Hoffmann} H. Hoffmann, P. Pastor, D.-H. Park, and S. Schaal, “Biologically-inspired dynamical systems for movement generation: Automatic real-time goal adaptation and obstacle avoidance,” in 2009 IEEE International Conference on Robotics and Automation, Kobe, May 2009, pp. 2587–2592, doi: 10.1109/ROBOT.2009.5152423.
 \bibitem{Janabi-Sharif} F. Janabi-Sharifi and D. Vinke, “Integration of the artificial potential field approach with simulated annealing for robot path planning,” in Proceedings of 8th IEEE International Symposium on Intelligent Control, Aug. 1993, pp. 536–541, doi: 10.1109/ISIC.1993.397640.
-\bibitem{Khatib} O. Khatib, “Real-Time Obstacle Avoidance for Manipulators and Mobile Robots” The International Journal of Robotics Research, vol. 5, no. 1, pp. 90–98, Mar. 1986, doi: 10.1177/027836498600500106.
 \bibitem{rodrigues}  Belongie, Serge. "Rodrigues' Rotation Formula." From MathWorld--A Wolfram Web Resource, created by Eric W. Weisstein. https://mathworld.wolfram.com/RodriguesRotationFormula.html 
 \bibitem{kortex} Kinovarobotics/ros\_kortex. Kinova Robotics, 2020.
 
