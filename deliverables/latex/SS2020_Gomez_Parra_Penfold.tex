@@ -66,18 +66,18 @@ Humanoid robots and arm like manipulators have a great many current and potentia
 
 One solution to the control problem is to use dynamic movement primitives, which can be generated during the movement itself, allowing for real-time obstacle avoidance and goal changes. Previous approaches \cite{Janabi-Sharif} used were initially not able to handle moving goals, but improvements made by H. Hoffmann et al. \cite{Hoffmann} by applying a potential field method to the process overcame this limitation. The use of dynamic movement primitives in the potential field method also overcame the local minimum problem, that is typically inherent with potential fields. Hence this paper is the basis of the project. There are some limitations to this method the most significant being the representation of the obstacles and manipulator. The method presented by H. Hoffman et al.\cite{Hoffmann} only considers points in cartesian space, where other methods, like those discussed by O. Khatib \cite{Khatib}, represent objects as basic primitives with volume and shape. \\
 
-For objects to be avoided first they must be located relative to the manipulator, and that is the core concept of the library built for this project. Biologically-inspired dynamical systems for movement generation \cite{Hoffmann} does not tackle the problem of distances between objects, instead a precursor paper was used, Real-Time Obstacle Avoidance for Manipulators and Mobile Robots \cite{Khatib}. This paper goes into details on how to find the distance between two obstacles, which was modified to find the shortest vector between the two obstacles, allowing for it to be applied to the dynamic movements primitives control algorithm discussed by H. Hoffmann et al. \cite{Hoffmann}. The these two techniques, along with the addition of distance monitoring with all links, has the potential to produce a better algorithm. The combination of the two techniques means that both the volume of the object is considered, and the trajectory planning can occur online allowing it to be adapted to any changes in a fast, efficient manner. These properties along with the addition of obstacle distance calculations for all links means that humanoid robots and manipulators would be more robust and safer to use in dynamic, human environments.
+For objects to be avoided first they must be located relative to the manipulator, and that is the core concept of the library built for this project. Biologically-inspired dynamical systems for movement generation \cite{Hoffmann} does not tackle the problem of distances between objects, instead a precursor paper was used, Real-Time Obstacle Avoidance for Manipulators and Mobile Robots \cite{Khatib}. This paper goes into details on how to find the distance between two obstacles, which was modified to find the shortest vector between the two obstacles, allowing for it to be applied to the dynamic movements primitives control algorithm discussed by H. Hoffmann et al. \cite{Hoffmann}. These two techniques, along with the addition of distance monitoring with all links, has the potential to produce a better algorithm. The combination of the two techniques means that both the volume of the object is considered, and the trajectory planning can occur online allowing it to be adapted to any changes in a fast, efficient manner. These properties along with the addition of obstacle distance calculations for all links means that humanoid robots and manipulators would be more robust and safer to use in dynamic, human environments.
 %Robotic assistants
 
 \section{Approach}
 
 \subsection{Distance to objects} %Alan
-To compute the closest distance between two objects we first obtain the closest points between the objects and then the distance between these two points. Since each shape is different in its mathematical representations, there is a unique case to consider for each combination of shapes, and these are as follows:
+To compute the closest distance between two objects we first obtain the closest points between the objects, and then the distance between these two points. Since each shape is different in its mathematical representations, there is a unique case to consider for each combination of shapes, and these are as follows:
 
-1) Between two Spheres: 
-To compute the closest distance between two spheres, one can just subtract the radius of the spheres from the distance between the center points of both spheres. The distance between the sphere center points can be easily calculated by finding the norm of the vector subtraction between the two center points, since the norm of the value is taken order of the vector subtraction does not matter.
+1) Between two spheres: 
+To compute the closest distance between two spheres, one can just subtract the radius of the spheres from the distance between the center points of the spheres. The distance between the sphere center points can be easily calculated by finding the norm of the vector subtraction between the two center points. Since the norm of the vector is taken, the order of the vector subtraction does not matter.
 
-2) Between a Sphere and a Capsule:
+2) Between a sphere and a capsule:
 To compute the closest distance between a capsule $C$ and a sphere $S$, one can compute the distance between the center of the sphere, $p_S$, and the axis of symmetry of the cylinder, $l_C$
 and then subtract the radius of the sphere and the capsule. 
 
@@ -99,7 +99,7 @@ where the start point of $l_C$ is $m1(x_1, y_1, z_1)$, the end point is $m2(x_2,
     \end{matrix}
 \end{equation}
 
-3) Between two Capsules:
+3) Between two capsules:
 To compute the closest distance between two capsules (capsule $A$ and capsule $B$), with axis of symmetry $l_A = \overline{m1_A m2_A}$ and $l_B = \overline{m1_B m2_B}$, 
 where $A$ is the longest capsule, one can consider four different cases:
 \begin{enumerate}
@@ -295,7 +295,7 @@ As it can be observed from Figure \ref{fig:one_arm_avoidance} and Figure \ref{fi
 
 \subsection{Dual arm collision avoidance} %Sam
 
-In order for two manipulators to operate with intersecting workspaces it is important that they do not collide with each other. In this experiment we simulated two instances of the Kinova arm placed close to each other so their workspaces would overlap. Each arm is individually controlled, meaning we could place one arm on the path of the other to assess if the arms avoided collisions with each other, an example setup can be seen in Figure \ref{fig:two_arms}. The objective is to assess if the arms avoid colliding with each other during operation.
+In order for two manipulators to operate with intersecting workspaces it is important that they do not collide with each other. In this experiment we simulated two instances of the Kinova arm placed close to each other so their workspaces would overlap. Each arm is individually controlled, meaning we could place one arm on the path of the other to assess if the arms avoided collisions. An example setup can be seen in Figure \ref{fig:two_arms}. The objective is to assess if the arms avoid colliding with each other during operation.
 
 \begin{figure}[H]
 	\centering
@@ -334,13 +334,13 @@ The user can use the Arm interface to provide the necessary information about th
 The user can then also add different obstacles that are present in the environment.
 The pose of the manipulator and the obstacles need to be updated using the methods given by the library.
 \subsection{Dual arm} %Alan
-One can also use the library with two manipulators by creating two instances of the implementation of the Arm interface and adding the links of 
+The user can also use the library with two manipulators by creating two instances of the implementation of the Arm interface and adding the links of 
 the opposite manipulator as obstacles represented by capsules.
 This will prevent the collision of the end-effector of both robots with the opposite manipulator
 \subsection{Multiple arms}
-In the same way, as one can use the library with two manipulators, one can add as many manipulators as the computational resources allow it.
+In the same way, the library can be used with more than two manipulators. The user can add as many manipulators as the computational resources allow.
 \subsection{Self collision} %Alan
-Finally, one can also use this library to prevent the collision of the end-effector of the manipulator with its other links.
+Finally, a user can also use this library to prevent the collision of the end-effector of the manipulator with its other links.
 This can be done by implementing the Arm interface and adding each link of the robot as an obstacle represented by a capsule.
 
 \section{Conclusion}
