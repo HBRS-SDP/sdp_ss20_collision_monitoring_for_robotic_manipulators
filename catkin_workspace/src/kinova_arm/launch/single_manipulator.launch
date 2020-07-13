@@ -1,0 +1,23 @@
+<launch>
+
+  <arg name="model" default="$(find kortex_description)/arms/gen3/7dof/urdf/GEN3_URDF_V12.urdf"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+  <param name="arm_controller/urdf_model" value="$(arg model)" />
+  <param name="arm_controller/input_joint_topic" value="joint_state" />
+  <param name="arm_controller/output_joint_topic" value="joint_command" />
+  <param name="arm_controller/goal_topic" value="/goal_point" />
+  <param name="kinova_interfacer/goal_topic" value="/goal_point" />
+  <param name="publish_frequency" value="100" />
+
+  <param name="K" value="0.1"/>
+  <param name="D" value="0.05"/>
+  <param name="gamma" value="35"/>
+  <param name="beta" value="6.366385485"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
+  <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find kinova_arm)/rviz/camera_1.rviz"/>
+  <node name="rviz2" pkg="rviz" type="rviz" required="true" args="-d $(find kinova_arm)/rviz/camera_2.rviz"/>
+</launch>

@@ -1,0 +1,296 @@
+\hypertarget{class_primitive}{}\section{Primitive Class Reference}
+\label{class_primitive}\index{Primitive@{Primitive}}
+
+
+{\ttfamily \#include $<$primitives.\+h$>$}
+
+
+
+Inheritance diagram for Primitive\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_primitive__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Primitive\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{class_primitive__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_primitive_ae838e4e129f05642994da59f08f85f56}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_primitive}{Primitive} $\ast$primitive)=0
+\item 
+virtual void \hyperlink{class_primitive_a2b8b8dea111d9eda31f72e06b47e9aa9}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_capsule}{Capsule} $\ast$capsule)=0
+\item 
+virtual void \hyperlink{class_primitive_ac86ef47d59c21448ce78c91490c7dbd4}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_sphere}{Sphere} $\ast$sphere)=0
+\item 
+virtual void \hyperlink{class_primitive_ae37bbdf5271bf278b19888e0428579a8}{get\+Shortest\+Direction} (Eigen\+::\+Vector3d \&shortest\+Direction, \hyperlink{class_primitive}{Primitive} $\ast$primitive)=0
+\item 
+virtual void \hyperlink{class_primitive_af9bd724a6618bd76e41e5682caa25023}{get\+Shortest\+Direction} (Eigen\+::\+Vector3d \&shortest\+Direction, \hyperlink{class_capsule}{Capsule} $\ast$capsule)=0
+\item 
+virtual void \hyperlink{class_primitive_a3f1bc91de29fa904657c1ba4c40eee53}{get\+Shortest\+Direction} (Eigen\+::\+Vector3d \&shortest\+Direction, \hyperlink{class_sphere}{Sphere} $\ast$sphere)=0
+\item 
+virtual double \hyperlink{class_primitive_a340b3e5540b910480ada939383985d66}{get\+Shortest\+Distance} (\hyperlink{class_primitive}{Primitive} $\ast$primitive)=0
+\item 
+virtual double \hyperlink{class_primitive_a46e60acfe4c005c0ec94e1e8b82d36db}{get\+Shortest\+Distance} (\hyperlink{class_capsule}{Capsule} $\ast$capsule)=0
+\item 
+virtual double \hyperlink{class_primitive_adaac4fc4fedf9cd76d4eb9c77e9ae560}{get\+Shortest\+Distance} (\hyperlink{class_sphere}{Sphere} $\ast$sphere)=0
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\+::\+Matrix4d \hyperlink{class_primitive_ad8b2afbad412f6046783d155c88fe312}{pose}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An abstract class that contains the basic attributes of all primitives
+
+This abstract class gets inherited by all primitive shapes. All shapes have a pose expressed by a Eigen Matrix4d, and a family of methods to get the shortest distrance from this primitive to another one depending the class of the latter. 
+
+Definition at line 30 of file primitives.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Primitive@{Primitive}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Primitive $\ast$primitive)=0}{getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Primitive\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Primitive} $\ast$}]{primitive}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_primitive_ae838e4e129f05642994da59f08f85f56}{}\label{class_primitive_ae838e4e129f05642994da59f08f85f56}
+Performs a dynamic cast to overload the direction functions
+
+This method takes an object that inherits from primitive and performs a dynamic cast to call the correct get\+Closest\+Points method depending on the class of the shape.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em primitive} & address of the primitive object. \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and primitive \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_sphere_a9290773136dacf81a9f147343a7a0486}{Sphere}, and \hyperlink{class_capsule_aec53e0cf5f8644f1413c3c208de64cc7}{Capsule}.
+
+\index{Primitive@{Primitive}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Capsule $\ast$capsule)=0}{getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Primitive\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Capsule} $\ast$}]{capsule}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_primitive_a2b8b8dea111d9eda31f72e06b47e9aa9}{}\label{class_primitive_a2b8b8dea111d9eda31f72e06b47e9aa9}
+Finds the shortest distance between this primitive and a \hyperlink{class_capsule}{Capsule} primitive
+
+This method takes a capsule object and returns the closest points in this primitive and in a capsule object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em capsule} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and capsule \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_sphere_a903c1c7a459e0c048b6f36a4f1376256}{Sphere}, and \hyperlink{class_capsule_a9da1b4c44adba1726446a4fb37b7a7e0}{Capsule}.
+
+\index{Primitive@{Primitive}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Sphere $\ast$sphere)=0}{getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Primitive\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Sphere} $\ast$}]{sphere}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_primitive_ac86ef47d59c21448ce78c91490c7dbd4}{}\label{class_primitive_ac86ef47d59c21448ce78c91490c7dbd4}
+Finds the shortest distance between this primitive and a \hyperlink{class_sphere}{Sphere} primitive
+
+This method takes a capsule object and returns the closest points in this primitive and in a sphere object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em sphere} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and sphere \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_sphere_ac2584cb5fb1d066a9527f8c95435093b}{Sphere}, and \hyperlink{class_capsule_aa0fea610bb1a1e4016bbda0f4f88264a}{Capsule}.
+
+\index{Primitive@{Primitive}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
+\index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Direction(\+Eigen\+::\+Vector3d \&shortest\+Direction, Primitive $\ast$primitive)=0}{getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Primitive\+::get\+Shortest\+Direction (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d \&}]{shortest\+Direction, }
+\item[{{\bf Primitive} $\ast$}]{primitive}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_primitive_ae37bbdf5271bf278b19888e0428579a8}{}\label{class_primitive_ae37bbdf5271bf278b19888e0428579a8}
+Performs a dynamic cast to overload the direction functions
+
+This method takes an object that inherits from primitive and performs a dynamic cast to call the correct get\+Shortest\+Direction method depending on the class of the shape.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em primitive} & address of the primitive object. \\
+\hline
+\mbox{\tt out}  & {\em shortest\+Direction} & a vector in 3D that represents the closes direction between this and the second primitive. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_sphere_a707fc14e03a6ff67ac012a18b2a8cb28}{Sphere}, and \hyperlink{class_capsule_ad569eae23b91f33e145f06745739e428}{Capsule}.
+
+\index{Primitive@{Primitive}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
+\index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Direction(\+Eigen\+::\+Vector3d \&shortest\+Direction, Capsule $\ast$capsule)=0}{getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Primitive\+::get\+Shortest\+Direction (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d \&}]{shortest\+Direction, }
+\item[{{\bf Capsule} $\ast$}]{capsule}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_primitive_af9bd724a6618bd76e41e5682caa25023}{}\label{class_primitive_af9bd724a6618bd76e41e5682caa25023}
+Finds the shortest distance between this primitive and a \hyperlink{class_capsule}{Capsule} primitive
+
+This method takes a capsule object and returns the closest direction between this primitive and a capsule object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em capsule} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em shortest\+Direction} & a vector in 3D that represents the closes direction between the primitive and capsule \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_sphere_af7ff30023363261cf118d1fb80c745a7}{Sphere}, and \hyperlink{class_capsule_a28274c18ef5a3b9ef869caa64d5f7d5e}{Capsule}.
+
+\index{Primitive@{Primitive}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
+\index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Direction(\+Eigen\+::\+Vector3d \&shortest\+Direction, Sphere $\ast$sphere)=0}{getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Primitive\+::get\+Shortest\+Direction (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d \&}]{shortest\+Direction, }
+\item[{{\bf Sphere} $\ast$}]{sphere}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_primitive_a3f1bc91de29fa904657c1ba4c40eee53}{}\label{class_primitive_a3f1bc91de29fa904657c1ba4c40eee53}
+Finds the shortest distance between this primitive and a \hyperlink{class_sphere}{Sphere} primitive
+
+This method takes a capsule object and returns the closest direction between this primitive and a sphere object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em sphere} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em shortest\+Direction} & a vector in 3D that represents the closes direction between the primitive and sphere \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_sphere_a719592bc6a8307060f49f289da631310}{Sphere}, and \hyperlink{class_capsule_aae076a389170bd6644f479bfe9c243bc}{Capsule}.
+
+\index{Primitive@{Primitive}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
+\index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Distance(\+Primitive $\ast$primitive)=0}{getShortestDistance(Primitive *primitive)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual double Primitive\+::get\+Shortest\+Distance (
+\begin{DoxyParamCaption}
+\item[{{\bf Primitive} $\ast$}]{primitive}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_primitive_a340b3e5540b910480ada939383985d66}{}\label{class_primitive_a340b3e5540b910480ada939383985d66}
+Performs a dynamic cast to overload the distance functions
+
+This method takes an object that inherits from primitive and performs a dynamic cast to call the correct get\+Shortest\+Distance method depending on the class of the shape. returns a double value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em primitive} & address of the primitive object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest distance between this and the second primitive. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_sphere_a7330816427e4099f4a8ccb8c34bd9ec6}{Sphere}, and \hyperlink{class_capsule_a43bcc7bb95425a4559f7fd0289ef8b45}{Capsule}.
+
+\index{Primitive@{Primitive}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
+\index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Distance(\+Capsule $\ast$capsule)=0}{getShortestDistance(Capsule *capsule)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual double Primitive\+::get\+Shortest\+Distance (
+\begin{DoxyParamCaption}
+\item[{{\bf Capsule} $\ast$}]{capsule}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_primitive_a46e60acfe4c005c0ec94e1e8b82d36db}{}\label{class_primitive_a46e60acfe4c005c0ec94e1e8b82d36db}
+Finds the shortest distance between this primitive and a \hyperlink{class_capsule}{Capsule} primitive
+
+This method takes a capsule object and returns the closest distance between this primitive and a capsule object. returns a double value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em capsule} & address of the primitive object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest distance between the primitive and capsule 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_sphere_a2b078585c4b272e9286eac12189b885b}{Sphere}, and \hyperlink{class_capsule_ade8880442a9230f893c296f0681ae9ad}{Capsule}.
+
+\index{Primitive@{Primitive}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
+\index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Distance(\+Sphere $\ast$sphere)=0}{getShortestDistance(Sphere *sphere)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual double Primitive\+::get\+Shortest\+Distance (
+\begin{DoxyParamCaption}
+\item[{{\bf Sphere} $\ast$}]{sphere}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_primitive_adaac4fc4fedf9cd76d4eb9c77e9ae560}{}\label{class_primitive_adaac4fc4fedf9cd76d4eb9c77e9ae560}
+Finds the shortest distance between this primitive and a \hyperlink{class_sphere}{Sphere} primitive
+
+This method takes a capsule object and returns the closest distance between this primitive and a sphere object. returns a double value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sphere} & address of the primitive object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest distance between the primitive and sphere 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_sphere_a6efb9b513c9b42a7b040969b802727ea}{Sphere}, and \hyperlink{class_capsule_a71d7821f3e7f9ac972bceb06d82f529d}{Capsule}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Primitive@{Primitive}!pose@{pose}}
+\index{pose@{pose}!Primitive@{Primitive}}
+\subsubsection[{\texorpdfstring{pose}{pose}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix4d Primitive\+::pose}\hypertarget{class_primitive_ad8b2afbad412f6046783d155c88fe312}{}\label{class_primitive_ad8b2afbad412f6046783d155c88fe312}
+Finds the shortest distance between this primitive and a Cylinder primitive
+
+This method takes a capsule object and returns the closest distance between this primitive and a cylinder object. returns a double value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cylinder} & address of the primitive object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest distance between the primitive and cylinder 
+\end{DoxyReturn}
+
+
+Definition at line 138 of file primitives.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{primitives_8h}{primitives.\+h}\end{DoxyCompactItemize}

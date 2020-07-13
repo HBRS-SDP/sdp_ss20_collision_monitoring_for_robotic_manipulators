@@ -1,0 +1,58 @@
+The package that implements the Collision monitoring library for the Kinova gen3 7\+D\+OF arm. This not only is done for testing but also gives an example of how the \hyperlink{class_arm}{Arm} interface can be implemented.
+
+\subsection*{Documentation}
+
+For U\+ML diagrams have a look in the /docs folder. A html A\+PI style documentation can be found under /deliverables/doxygen/html
+
+\subsection*{Requirements\+:}
+
+
+\begin{DoxyItemize}
+\item K\+DL (\href{https://www.orocos.org/kdl/installation-manual}{\tt https\+://www.\+orocos.\+org/kdl/installation-\/manual})
+\item Eigen (\href{http://eigen.tuxfamily.org}{\tt http\+://eigen.\+tuxfamily.\+org})
+\item C\+M\+A\+KE V3.\+5
+\end{DoxyItemize}
+
+\subsection*{Building}
+
+In the root folder of the repository create a build folder\+: 
+\begin{DoxyCode}
+1 ...$ mkdir build
+\end{DoxyCode}
+ cd into the build folder and run cmake for the first time to configure the build environment\+: 
+\begin{DoxyCode}
+1 ...$ cd build
+2 ...\(\backslash\)build$ cmake ..
+\end{DoxyCode}
+ If VS Code is being used the C\+M\+A\+KE Tools extension is helpful as it allows the library to be built by pressing F7.
+
+Otherwise the following commands need to be run from the build folder\+: 
+\begin{DoxyCode}
+1 ...\(\backslash\)build$ cmake ..
+2 ...\(\backslash\)build$ cmake --build .
+\end{DoxyCode}
+
+
+\subsection*{Testing}
+
+The test files are built in build/tests and need to be run from the build directory because of a relative file reference. These can be run using the following commands\+: 
+\begin{DoxyCode}
+1 ...\(\backslash\)build$ ./test/tests
+\end{DoxyCode}
+
+
+\subsection*{Notes on files\+:}
+
+The only following files are used in kinova\+\_\+arm and other files present in the /src and /include directories are for the R\+OS implementation. For more information on the R\+OS implementation see the R\+O\+S\+\_\+\+Package\+\_\+\+R\+E\+A\+D\+M\+E.\+md.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{kinova__arm_8cpp}{kinova\+\_\+arm.\+cpp}
+\item \hyperlink{kinova__arm_8h}{kinova\+\_\+arm.\+h}
+\end{DoxyItemize}
+
+\subsection*{U\+ML diagram}
+
+
+
+ 
