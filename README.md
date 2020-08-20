@@ -45,13 +45,11 @@ structure (note: symbolic links are used to for easy modification and tracking):
 Repository
 │
 └─── build/                    Where the KinovaArm package is to be built
-│
-└─── test/tests                The test file based off catch
 |
 └─── catkin_workspace/         The ros catkin workspace (run catkin_make here)
-|
-└─── docs/                     Contains UML diagrams associated with the ROS pkg
-└─── src/kinova_arm/           The ROS package used for testing and demonstration
+|   |
+|   └─── docs/                     Contains UML diagrams associated with the ROS pkg
+|   └─── src/kinova_arm/           The ROS package used for testing and demonstration
 |
 └─── collision_monitoring/     The base library built for the project
 |   |
