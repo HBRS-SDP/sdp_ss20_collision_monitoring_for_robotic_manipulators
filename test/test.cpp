@@ -501,3 +501,29 @@ TEST_CASE("Kinova_arm distance to obstacle", "[monitor]") {
         REQUIRE(norm < 0.1);
     }
 }
+
+TEST_CASE( "Custom test case box", "[Sphere - box]" ) {
+    double radius_1 = 12;
+    Eigen::Matrix4d pose_1;
+    pose_1 << -0.21308182,   0.24106113,  -0.94682927,  86,
+                0.24106113,   0.95209683,   0.18815197, -26,
+                0.94682927,  -0.18815197,  -0.26098499,  28,
+                0,           0,           0,           1;     
+     
+
+    
+    Eigen::Vector3d center (0.0,0.0,0.0);
+
+
+    Primitive *Sphere_1 = new Sphere(pose_1, radius_1);
+    //Primitive *mybox = new Mybox(&center);
+
+    //std::cout << Sphere_1->getShortestDistance(Link_2) << std::endl;
+    //std::cout << mybox->getShortestDistance(Sphere_1) << std::endl;
+
+    // REQUIRE( Sphere_1->getShortestDistance(Link_2) == Approx(5.9).margin(0.1) );
+    // REQUIRE( mybox->getShortestDistance(Sphere_1) == Approx(5.9).margin(0.1) );
+
+    //delete mybox;
+    delete Sphere_1;
+}

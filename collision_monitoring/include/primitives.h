@@ -16,6 +16,7 @@
 class Line;
 class Capsule;
 class Sphere;
+class Mybox;
 //class Cylinder;
 
 /**
@@ -328,5 +329,89 @@ class Sphere: public Primitive{
 };
 
 
+class Mybox{
+	
+public:
 
+      
+      /// Specifies center of box in world frame. 
+     Eigen::Vector3d c;
+
+     /// Specifies vector of how far the box extends on each axes.
+     Eigen::Vector3d extents; //should be (0.66,0.60,0.30);  // These fixed coardinated have been extracted form narko base urdf file
+    
+    
+
+		/// Specifies the minimum extent of this AABB in the world space x, y and z axes.
+	  Eigen::Vector3d minPoint; 
+	  
+	  /// Specifies the maximum extent of this AABB in the world space x, y and z axes.
+	  Eigen::Vector3d maxPoint;
+	  
+	 
+	  /// Constructs this AABB by specifying the minimum and maximum extending corners of the box.
+	
+	Mybox(const Eigen::Vector3d &minPoint, const Eigen::Vector3d &maxPoint);
+	 
+	 
+	 /** Constructor of Mybox class
+        * 
+        * @param    pose    center point of the box represented with a Matrix4d.
+        * @param    axis  axis lenths along 3 axis
+        */
+       
+      Mybox(Eigen::Vector3d &center);	 
+
+
+      //Mybox(Eigen::Matrix4d pose, Eigen::Vector3d basePoint);	  
+
+
+/// Returns the minimum world-space coordinate along the given axis.
+	float MinX() const { return minPoint[0]; } ///  minimum bound along x-axis
+	float MinY() const { return minPoint[1]; } ///  minimum bound along y-axis
+	float MinZ() const { return minPoint[2]; } ///  minimum bound along z-axis
+	/// Returns the maximum world-space coordinate along the given axis.
+	float MaxX() const { return maxPoint[0]; } ///  maximum bound along x-axis
+	float MaxY() const { return maxPoint[1]; } ///  maximum bound along y-axis
+	float MaxZ() const { return maxPoint[2]; } ///  maximum bound along z-axis
+
+/// Computes the closest point inside this AABB to the given point.
+	Eigen::Vector3d ClosestPoint(const Eigen::Vector3d  &targetPoint)const;
+
+/// Compute distance between this AABB and the given object.
+    float Distance(const Sphere &sphere);
+	
+    float Distance(const Eigen::Vector3d &point);
+	
+/// Checks for intersection between objects	
+	bool Intersects(const Mybox &aabb) ;
+	bool Intersects(const Line &line) ;
+	bool Intersects(const Capsule &capsule) ;
+    bool Intersects( Sphere &sphere) const;
+	// Mybox MinimalEnclosingAABB(const Eigen::Vector3d *pointArray, int numPoints);
+    // static Mybox MinimalEnclosingAABB(const Eigen::Vector3d *pointArray, int numPoints);
+	// Mybox MinimalEnclosingAABB() const { return *this; }
+	// void SetNegativeInfinity();
+	// void SetFrom(auto *pointArray, int numPoints);
+	// Mybox Translated(const Eigen::Vector3d  &offset) const;
+	void Enclose(Eigen::Vector3d &point);
+	
+    
+    void getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive);
+    void getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule);
+    void getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere);
+    
+    void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
+    void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
+    void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere);
+
+    double getShortestDistance(Primitive *primitive);
+    double getShortestDistance(Capsule *capsule);
+    // double getShortestDistance(Sphere *sphere);
+    double getShortestDistance(Sphere &sphere); 
+    Mybox MinimalEnclosingAABB() const { return *this; }
+    
+	
+
+};
 #endif // PRIMITIVES_H

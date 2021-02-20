@@ -438,3 +438,172 @@ double Sphere::getShortestDistance(Sphere *sphere){
 
     return shortestDistance;
 }
+
+// Adding my box -----------------------------------------------------------------------
+
+Mybox::Mybox(const Eigen::Vector3d &minPoint_, const Eigen::Vector3d &maxPoint_)
+:minPoint(minPoint_), maxPoint(maxPoint_)
+{
+
+}
+
+ Mybox::Mybox(Eigen::Vector3d &center)
+    {
+        c=center;
+        Eigen::Vector3d extents(0.66,0.60,0.30);
+        minPoint= c - extents;
+        maxPoint= c + extents;
+
+    }
+
+
+/// Computes the closest point inside this AABB to the given point.
+Eigen::Vector3d Mybox::ClosestPoint(const Eigen::Vector3d &targetPoint)const
+		{
+		  Eigen::Vector3d  point;	
+		  float x = std::max(minPoint[0], std::min(targetPoint[0], maxPoint[0]));
+		  float y = std::max(minPoint[1], std::min(targetPoint[1], maxPoint[1]));
+		  float z = std::max(minPoint[2], std::min(targetPoint[2], maxPoint[2]));		
+		  point[0]=x;
+          point[1]=y;
+          point[2]=z;
+                   	  
+		  return point;
+		  
+		}
+
+   
+///  calculate distance between other shape primitives
+
+/*
+ float Mybox::Distance(const Eigen::Vector3d &point) 
+    // Straight line distance between closeset point on box to given point.
+
+	{
+		Eigen::Vector3d pt= ClosestPoint(point);
+		 
+		return  std::sqrt(std::pow(pt[0] - point[0], 2) + std::pow(pt[1] - point[1], 2) + std::pow(pt[2] - point[2], 2)* 1.0); 
+	}
+	
+   
+double Mybox::getShortestDistance(Sphere &sphere) 
+	
+	{
+		//return Max(0.f, Distance(sphere.pose) - sphere.r);
+		
+		
+			   // Find the point on this AABB closest to the sphere center.
+	//    
+
+	 // here sphere.pose represents center of sphere
+  // get box closest point to sphere center by clamping
+      Eigen::Vector4d origin(0, 0, 0, 1);
+      Eigen::Vector3d sphere_pose = (sphere.pose* origin).head(3);
+      Eigen::Vector3d pt = ClosestPoint(sphere_pose);
+
+		  float x = std::max(minPoint[0], std::min(sphere_pose[0], maxPoint[0]));
+		  float y = std::max(minPoint[1], std::min(sphere_pose[1], maxPoint[1]));
+		  float z = std::max(minPoint[2], std::min(sphere_pose[2], maxPoint[2]));
+
+		  // this is the same as isPointInsideSphere
+        float distance = sqrt((x - sphere_pose[0]) * (x - sphere_pose[0]) +
+								   (y - sphere_pose[1]) * (y - sphere_pose[1]) +
+								   (z - sphere_pose[2]) * (z - sphere_pose[2]));
+
+		  return distance; 
+	}
+	*/
+     
+///  calculate distance between other shape primitives
+
+
+ float Mybox::Distance(const Eigen::Vector3d &point) 
+    // Straight line distance between closeset point on box to given point.
+
+	{
+		Eigen::Vector3d pt= ClosestPoint(point);
+		 
+		return  std::sqrt(std::pow(pt[0] - point[0], 2) + std::pow(pt[1] - point[1], 2) + std::pow(pt[2] - point[2], 2)* 1.0); 
+	}
+	
+   
+double Mybox::getShortestDistance(Sphere &sphere) 
+	
+	{
+		//return Max(0.f, Distance(sphere.pose) - sphere.r);
+		
+		
+			   // Find the point on this AABB closest to the sphere center.
+	//    
+
+	 // here sphere.pose represents center of sphere
+  // get box closest point to sphere center by clamping
+      Eigen::Vector4d origin(0, 0, 0, 1);
+      Eigen::Vector3d sphere_pose = (sphere.pose* origin).head(3);
+      Eigen::Vector3d pt = ClosestPoint(sphere_pose);
+
+		  float x = std::max(minPoint[0], std::min(sphere_pose[0], maxPoint[0]));
+		  float y = std::max(minPoint[1], std::min(sphere_pose[1], maxPoint[1]));
+		  float z = std::max(minPoint[2], std::min(sphere_pose[2], maxPoint[2]));
+
+		  // this is the same as isPointInsideSphere
+        float distance = sqrt((x - sphere_pose[0]) * (x - sphere_pose[0]) +
+								   (y - sphere_pose[1]) * (y - sphere_pose[1]) +
+								   (z - sphere_pose[2]) * (z - sphere_pose[2]));
+
+		  return distance; 
+	}
+	
+		
+   
+/// Checks for intersection between objects	
+bool Mybox::Intersects( Sphere &sphere) const
+	{  
+	
+	/// Checks for intersection between box and sphere
+	   
+	   // Find the point on this AABB closest to the sphere center.
+	  Eigen::Vector4d origin(0, 0, 0, 1);
+      Eigen::Vector3d sphere_pose = (sphere.pose* origin).head(3);
+      Eigen::Vector3d pt = ClosestPoint(sphere_pose);
+
+		  float x = std::max(minPoint[0], std::min(sphere_pose[0], maxPoint[0]));
+		  float y = std::max(minPoint[1], std::min(sphere_pose[1], maxPoint[1]));
+		  float z = std::max(minPoint[2], std::min(sphere_pose[2], maxPoint[2]));
+
+		  // this is the same as isPointInsideSphere
+        float distance = sqrt((x - sphere_pose[0]) * (x - sphere_pose[0]) +
+								   (y - sphere_pose[1]) * (y - sphere_pose[1]) +
+								   (z - sphere_pose[2]) * (z - sphere_pose[2]));
+        float radius = sphere.getRadius();
+		  return distance < radius;
+}
+
+
+
+	
+void Mybox::Enclose(Eigen::Vector3d &point)
+
+ {
+    minPoint= minPoint.cwiseMin(point);
+	maxPoint= minPoint.cwiseMax(point);
+	
+ }
+
+void Mybox::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive)
+{ 
+
+}
+ 
+void Mybox::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule)
+{}
+void Mybox::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){}
+
+void  Mybox::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule){}
+void Mybox::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere){}
+
+double Mybox::getShortestDistance(Primitive *primitive){ return 0.0;}
+double Mybox::getShortestDistance(Capsule *capsule){ return 0.0;}
+// double getShortestDistance(Sphere *sphere);
+//sdouble Mybox::getShortestDistance(Sphere &sphere){ return 0.0;}
+//Mybox Mybox::MinimalEnclosingAABB() const { return *this; }
