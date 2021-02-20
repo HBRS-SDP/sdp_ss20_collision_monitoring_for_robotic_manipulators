@@ -1,16 +1,14 @@
-# sdp_ss20_collision_monitoring_for_robotic_manipulators
+# sdp_ws20_collision_monitoring_for_robotic_manipulators
 ## Members:
-- Alan Gomez
-- Samuel Parra
-- Brennan Penfold
+- Urvashi Negi
+- Zain Ul Haq
+- Sreenivasa Hikkal Venugopala
 
 ## Client
 - Djordje Vukcevic
 
 ## Description
-This repository is a group submission for MAS Software Development Project. The
-goal of the project is to implement a given software algorithm from a research
-paper, while communicating with a client to add desired features. The paper
+This repository is a group submission for MAS Software Development Project. The goal of this project is to extend the existing implementation to perform the collision monitoring with respect to the mobile base. "Need to update here based on the paper references" The paper
 implemented is a method of obstacle avoidance for robotic manipulators and 
 at the request of the client a combination of 2 papers was implemented and can
 be found in the reference section \[1\]\[2\]
@@ -44,30 +42,30 @@ structure (note: symbolic links are used to for easy modification and tracking):
 ```
 Repository
 │
-└─── build/                    Where the KinovaArm package is to be built
+└─── build/                                         Where the KinovaArm package is to be built
 |
-└─── catkin_workspace/         The ros catkin workspace (run catkin_make here)
+└─── catkin_workspace/                              The ros catkin workspace (run catkin_make here)
 |   |
-|   └─── docs/                     Contains UML diagrams associated with the ROS pkg
-|   └─── src/kinova_arm/           The ROS package used for testing and demonstration
+|   └─── docs/                                      Contains UML diagrams associated with the ROS pkg
+|   └─── src/narko_kinova_base_collision/           The ROS package used for testing and demonstration
 |
-└─── collision_monitoring/     The base library built for the project
+└─── collision_monitoring/                          The base library built for the project
 |   |
-|   └─── docs/                 Contains associated UML diagrams
-|   └─── include/              The library header files
-|   └─── src/                  The libraries source files
+|   └─── docs/                                      Contains associated UML diagrams
+|   └─── include/                                   The library header files
+|   └─── src/                                       The libraries source files
 |
-└─── deliverables/             Contains other non-code submittable documents
+└─── deliverables/                                  Contains other non-code submittable documents
 |   |
-|   └─── doxygen/              Contains the html API docs and files to make them
-|   └─── latex/                Contains the latex files for the research paper
-|   └─── presentation/         Contains the final presentation
+|   └─── doxygen/                                   Contains the html API docs and files to make them
+|   └─── latex/                                     Contains the latex files for the research paper
+|   └─── presentation/                              Contains the final presentation
 |
-└─── docs/                     Contains the UML files for the kinova_arm package
-└─── include/                  Contains the header files for kinova_arm and ROS
-└─── src/                      Contains the source files for kinova_arm and ROS
-└─── test/                     Contains the test source files for kinova_arm
-└─── urdf/                     Contains the URDF file used for kinematic calcs
+└─── docs/                                          Contains the UML files for the kinova_arm package
+└─── include/                                       Contains the header files for kinova_arm and ROS
+└─── src/                                           Contains the source files for kinova_arm and ROS
+└─── test/                                          Contains the test source files for kinova_arm
+└─── urdf/                                          Contains the URDF file used for kinematic calcs
 ```
 
 ## License
