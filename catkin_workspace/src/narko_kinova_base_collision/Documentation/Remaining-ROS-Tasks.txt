@@ -1,0 +1,9 @@
+1. In the Narkin.urdf file located in this packages /environment/models/narkin folder, add the second kinova arm.
+	a. Copy and paste the second kinova portion.
+	b. Add 2nd_kinova arm tag to all the links and joints of the second arm.
+	c. Copy joint_8 to create a joint_9 for the second kinova_arm.
+2. Copy the robot_single_arm launch file and create a robot_dual_arm launch file.
+	a. Update the parameters of the dual_arm launch file and simply copy paste Brennan parties portion and rename the node names as ..._2nd_arm
+	b. Check to see if both the arm are succesfully placed and working with their respective joint controllers.
+3. Re-orient the kinova arms via joint 8 and joint 9 to in the Narkin.urdf file to match the required description.
+ 

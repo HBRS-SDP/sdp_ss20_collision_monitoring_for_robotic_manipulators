@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro"
+       name="narko" >
+  
+  <!-- The following xacro:included files set up definitions of parts of the robot body -->
+  <!-- misc common stuff? -->
+  <xacro:include filename="$(find narko_description)/urdf/common.xacro" />
+  
+  <!-- robot base -->
+  <xacro:include filename="$(find narko_description)/urdf/narko/narko_base.urdf.xacro" />
+ 
+
+  <!-- materials for visualization -->
+  <xacro:include filename="$(find narko_description)/urdf/materials.urdf.xacro" />
+						     
+  <!-- sensors -->
+  <xacro:include filename="$(find narko_description)/urdf/sensors/sick_lms1xx.urdf.xacro"/>
+
+
+  <xacro:narko_base name="base"/>
+
+  <xacro:sick_lms1xx>
+    <origin xyz="0.211 0 0.05" rpy="0 0 0"/>
+  </xacro:sick_lms1xx>
+
+  <!-- base laser front -->
+  <!-- <xacro:hokuyo_urg04_laser name="base_laser_front" parent="base" ros_topic="base_scan" update_rate="10" min_angle="-2.356" max_angle="2.356">
+    <origin xyz="0.211 0 0.05" rpy="0 0 0"/>
+  </xacro:hokuyo_urg04_laser> -->
+
+
+</robot>

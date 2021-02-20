@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<launch>
+
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <!-- <include file="$(find gazebo_ros)/launch/empty_world.launch"/>-->
+  <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find narko_kinova_base_collision)/environment/models/narkin/narkin.urdf -urdf -z 0 -model Narkin" />-->
+
+    <arg name="model" default="cat '$(find narko_kinova_base_collision)/environment/models/narkin/single_arm_narkin.urdf'"/>
+    
+    <param name="robot_description" command="cat '$(find narko_kinova_base_collision)/environment/models/narkin/single_arm_narkin.urdf'" /> 
+    <!-- Brennan party -->
+    <param name="arm_controller/urdf_model" value="$(find kinova_arm)/urdf/GEN3_URDF_V12.urdf" />
+    <param name="arm_controller/input_joint_topic" value="joint_state" />
+    <param name="arm_controller/output_joint_topic" value="joint_command" />
+    <param name="arm_controller/goal_topic" value="/goal_point" />
+    <param name="kinova_interfacer/goal_topic" value="/goal_point" />
+    <param name="publish_frequency" value="100" />
+
+    <param name="K" value="0.1"/>
+    <param name="D" value="0.05"/>
+    <param name="gamma" value="35"/>
+    <param name="beta" value="6.366385485"/>
+
+    <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
+    <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
+
+
+    <!-- After Party starts here --> 
+
+    <!-- Standard publishers -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">[base_feedback/joint_state]</rosparam>
+        <param name="use_gui" value="true"/>
+        <param name="rate" value="100" />
+    </node>
+
+    <!-- rviz for visualisation -->
+    <node pkg="rviz" type="rviz" name="custom_rviz" args="-d $(find narko_kinova_base_collision)/rviz/Single_arm_NK_settings.rviz" />
+
+    <!-- Python nodes -->
+
+    <!-- Publishes Narko collision box -->    
+    <node pkg="narko_kinova_base_collision" type="marker.py" name="Marker_publisher"/>
+
+    <!-- Create and Publish a fixed world frame -->  
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_frame_publisher" args="0 0 0 0 0 0 1 /world_frame /base_foot_print" />
+
+    <!-- Subscribe and transform link positions and pipeline them to collision monitor -->
+    <!--<node pkg="narko_kinova_base_collision" type="narkin.py" name="Narkin_transform_listener"/>-->
+
+</launch>
+
