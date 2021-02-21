@@ -29,6 +29,7 @@ this repository.
 - [Collision Avoidance ROS Package](catkin_workspace/README.md):
     The implementation of the obstacle avoidance and tracing algorithm that the
     base library is designed to suit.
+- [Setup Instructions](setup_instructions.pdf): Provides setup instructions for installation of dependency packages and compiling library.
 - Documentation & other related works: 
     The last section found in the /deliverables directory contains the paper,
     presentation and API documentation which is submitted along with this code.
