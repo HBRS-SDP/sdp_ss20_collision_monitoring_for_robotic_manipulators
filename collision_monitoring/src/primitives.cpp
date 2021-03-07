@@ -147,6 +147,10 @@ void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primit
         if(sphere){
             this->getClosestPoints(closestPoints, sphere);
         }else{
+            Box3 *box = dynamic_cast<Box3*>(primitive);
+        if(box){
+            this->getClosestPoints(closestPoints, box);
+        }
 
         }
     }
@@ -238,6 +242,28 @@ void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
     closestPoints.row(1) = obstacleClosestPoint;
 }
 
+void Capsule::getClosestPoints(Eigen::MatrixXd &closestPoints, Box3 *box){
+
+    Eigen::Vector3d basePoint, endPoint, ownClosestPoint, obstacleClosestPoint;
+
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    Eigen::Vector4d zDirectionCapsule(0, 0, this->length, 1);
+
+    basePoint = (this->pose * origin).head(3);
+    endPoint  = (this->pose * zDirectionCapsule).head(3);
+
+    Line axisOfSymmetryCapsule(basePoint, endPoint);
+
+
+    
+
+    obstacleClosestPoint = box->OwnClosestPoint(&axisOfSymmetryCapsule);
+    ownClosestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(obstacleClosestPoint);
+
+    closestPoints.row(0) = ownClosestPoint;
+    closestPoints.row(1) = obstacleClosestPoint;
+    
+}
 void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
     Capsule *capsule = dynamic_cast<Capsule*>(primitive);
     if(capsule){
@@ -246,7 +272,10 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive
         Sphere *sphere = dynamic_cast<Sphere*>(primitive);
         if(sphere){
             this->getShortestDirection(shortestDirection, sphere);
-        }else{
+        }else{Box3 *box = dynamic_cast<Box3*>(primitive);
+        if(box){
+            this->getShortestDirection(shortestDirection, box);
+        }
 
         }
     }
@@ -260,6 +289,14 @@ void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *
     ownClosestPoint = closestPoints.row(0);
     obstacleClosestPoint = closestPoints.row(1);
     
+    shortestDirection = obstacleClosestPoint - ownClosestPoint;
+}
+void Capsule::getShortestDirection(Eigen::Vector3d &shortestDirection, Box3 *box){
+    Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
+    Eigen::MatrixXd closestPoints(2, 3);
+    this->getClosestPoints(closestPoints, box);
+     ownClosestPoint = closestPoints.row(0);
+    obstacleClosestPoint = closestPoints.row(1);
     shortestDirection = obstacleClosestPoint - ownClosestPoint;
 }
 
@@ -308,6 +345,13 @@ double Capsule::getShortestDistance(Sphere *sphere){
     return shortestDistance;
 }
 
+double Capsule::getShortestDistance(Box3 *box){
+    double shortestDistance = 0;
+    Eigen::Vector3d shortestDirection;
+    this->getShortestDirection(shortestDirection, box);
+    shortestDistance = shortestDirection.norm() - this->radius;
+    return shortestDistance;
+}
 Sphere::Sphere(Eigen::Matrix4d pose, double radius){
     this->pose = pose;
     this->radius = radius;
@@ -369,6 +413,14 @@ void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
     closestPoints.row(1) = obstacleClosestPoint;
 }
 
+void Sphere::getClosestPoints(Eigen::MatrixXd &closestPoints, Box3 *box){
+    Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
+    Eigen::Vector4d origin(0, 0, 0, 1);
+    ownClosestPoint = (this->pose * origin).head(3);
+    obstacleClosestPoint = box->ClosestPoint( ownClosestPoint);
+    closestPoints.row(0) = ownClosestPoint;
+    closestPoints.row(1) = obstacleClosestPoint;
+}
 void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
     Capsule *capsule = dynamic_cast<Capsule*>(primitive);
     if(capsule){
@@ -405,6 +457,14 @@ void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sp
     shortestDirection = obstacleClosestPoint - ownClosestPoint;
 }
 
+void Sphere::getShortestDirection(Eigen::Vector3d &shortestDirection, Box3 *box){
+    Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
+    Eigen::MatrixXd closestPoints(2, 3);
+    this->getClosestPoints(closestPoints, box);
+    ownClosestPoint = closestPoints.row(0);
+    obstacleClosestPoint = closestPoints.row(1);
+    shortestDirection = obstacleClosestPoint - ownClosestPoint;
+}
 double Sphere::getShortestDistance(Primitive *primitive){
     Capsule *capsule = dynamic_cast<Capsule*>(primitive);
     if(capsule){
@@ -414,6 +474,10 @@ double Sphere::getShortestDistance(Primitive *primitive){
         if(sphere){
             return this->getShortestDistance(sphere);
         }else{
+            Box3 *box = dynamic_cast<Box3*>(primitive);
+        if(sphere){
+            return this->getShortestDistance(box);
+        }
 
         }
     }
@@ -439,26 +503,179 @@ double Sphere::getShortestDistance(Sphere *sphere){
     return shortestDistance;
 }
 
+double Sphere::getShortestDistance(Box3 *box){
+    double shortestDistance;
+    Eigen::Vector3d shortestDirection;
+    this->getShortestDirection(shortestDirection ,box);
+    shortestDistance = shortestDirection.norm() - this->getRadius() ;
+    return shortestDistance;
+}
 // Adding my box -----------------------------------------------------------------------
 
-Mybox::Mybox(const Eigen::Vector3d &minPoint_, const Eigen::Vector3d &maxPoint_)
-:minPoint(minPoint_), maxPoint(maxPoint_)
+  Box3::Box3(const Eigen::Vector3d &vmin, const Eigen::Vector3d &vmax) 
 {
-
+        bounds[0] = vmin;    // min point
+        bounds[1] = vmax;    // max point
+        minPoint = vmin;     // min point
+        maxPoint = vmax;    // max point
+        extents[0]=0.33;
+        extents[1]=0.30;
+        extents[2]=0.15;
+        box_center= (minPoint + maxPoint) * 0.5f;
 }
 
- Mybox::Mybox(Eigen::Vector3d &center)
+   Box3::Box3(Eigen::Vector3d &center)
     {
-        c=center;
-        Eigen::Vector3d extents(0.66,0.60,0.30);
-        minPoint= c - extents;
-        maxPoint= c + extents;
+        box_center = center;
+        minPoint = box_center -extents;
+        maxPoint = box_center +extents;
+    }
+    Box3::Box3(Eigen::Matrix4d &pose, double x,double y,double z){
+        extents[0]=x/2;
+        extents[1]=y/2;
+        extents[2]=z/2;
+        Eigen::Vector4d origin(0, 0, 0, 1);
+        box_center = (pose * origin).head(3);
+        minPoint = box_center -extents;
+        maxPoint = box_center +extents;
 
     }
 
+    Box3::Box3(Eigen::Vector3d &pose, double x,double y,double z){
+      extents[0]=x/2;
+        extents[1]=y/2;
+        extents[2]=z/2;
+        Eigen::Vector4d origin(0, 0, 0, 1);
+        box_center = pose;
+        minPoint = box_center -extents;
+        maxPoint = box_center +extents;
+    }
+    Box3::Box3(Box3* box){
 
+   this->minPoint= box->minPoint;
+   this->maxPoint= box->maxPoint;
+   this->box_center= box->box_center;
+    }
+   Box3::~Box3(){}
+    bool Box3::intersection ( const Ray &r) const 
+            {
+                float tmin, tmax, tymin, tymax, tzmin, tzmax; 
+                tmin = (bounds[r.sign[0]][0] - r.orig[0]) * r.invdir[0]; 
+                tmax = (bounds[1-r.sign[0]][0] - r.orig[0]) * r.invdir[0]; 
+                tymin = (bounds[r.sign[1]][1] - r.orig[1]) * r.invdir[1]; 
+                tymax = (bounds[1-r.sign[1]][1] - r.orig[1]) * r.invdir[1]; 
+                if ((tmin > tymax) || (tymin > tmax)) 
+                    return false; 
+                if (tymin > tmin) 
+                    tmin = tymin; 
+                if (tymax < tmax) 
+                    tmax = tymax; 
+                tzmin = (bounds[r.sign[2]][2] - r.orig[2]) * r.invdir[2]; 
+                tzmax = (bounds[1-r.sign[2]][2] - r.orig[2]) * r.invdir[2]; 
+                if ((tmin > tzmax) || (tzmin > tmax)) 
+                    return false; 
+                if (tzmin > tmin) 
+                    tmin = tzmin; 
+                if (tzmax < tmax) 
+                    tmax = tzmax; 
+                return true;
+            }   
+  Line* Box3::Edge(int edgeIndex) const
+    {        
+         Eigen::Vector3d minPoint =bounds[0];
+         Eigen::Vector3d maxPoint=bounds[1];
+	    Line* result;
+            switch(edgeIndex)
+            {   case 0: result=new Line(minPoint, Eigen::Vector3d(minPoint[0], minPoint[1], maxPoint[2]));
+                case 1: result=new Line(minPoint, Eigen::Vector3d(minPoint[0], maxPoint[1], minPoint[2]));
+                case 2: result=new Line(minPoint, Eigen::Vector3d(maxPoint[0], minPoint[1], minPoint[2]));
+                case 3: result=new Line(Eigen::Vector3d(minPoint[0], minPoint[1], maxPoint[2]), Eigen::Vector3d(minPoint[0], maxPoint[1], maxPoint[2]));
+                case 4: result=new Line(Eigen::Vector3d(minPoint[0], minPoint[1], maxPoint[2]), Eigen::Vector3d(maxPoint[0], minPoint[1], maxPoint[2]));
+                case 5: result=new Line(Eigen::Vector3d(minPoint[0], maxPoint[1], minPoint[2]), Eigen::Vector3d(minPoint[0], maxPoint[1], maxPoint[2]));
+                case 6: result=new Line(Eigen::Vector3d(minPoint[0], maxPoint[1], minPoint[2]), Eigen::Vector3d(maxPoint[0], maxPoint[1], minPoint[2]));
+                case 7: result=new Line(Eigen::Vector3d(minPoint[0], maxPoint[1], maxPoint[2]), maxPoint);
+                case 8: result=new Line(Eigen::Vector3d(maxPoint[0], minPoint[1], minPoint[2]), Eigen::Vector3d(maxPoint[0], minPoint[1], maxPoint[2]));
+                case 9: result=new Line(Eigen::Vector3d(maxPoint[0], minPoint[1], minPoint[2]), Eigen::Vector3d(maxPoint[0], maxPoint[1], minPoint[2]));
+                case 10: result=new Line(Eigen::Vector3d(maxPoint[0], minPoint[1], maxPoint[2]), maxPoint);
+                case 11: result=new Line(Eigen::Vector3d(maxPoint[0], maxPoint[1], minPoint[2]), maxPoint);
+            } return result;
+   }      
+  std::vector<Line*>  Box3::EdgeList() const
+    {
+        std::vector<Line*> eArray;
+                for(int i = 0; i < 12; ++i)
+            {
+                eArray.push_back(Edge(i));
+            }
+            return eArray;
+    }
+Eigen::Vector3d Box3:: CornerPoint(int cornerIndex) const
+{
+	switch(cornerIndex) 
+    { 
+		case 0: return minPoint;
+		case 1: return Eigen::Vector3d(minPoint[0], minPoint[1], maxPoint[2]);
+		case 2: return Eigen::Vector3d(minPoint[0], maxPoint[1], minPoint[2]);
+		case 3: return Eigen::Vector3d(minPoint[0], maxPoint[1], maxPoint[2]);
+		case 4: return Eigen::Vector3d(maxPoint[0], minPoint[1], minPoint[2]);
+		case 5: return Eigen::Vector3d(maxPoint[0], minPoint[1], maxPoint[2]);
+		case 6: return Eigen::Vector3d(maxPoint[0], maxPoint[1], minPoint[2]);
+		case 7: return maxPoint;
+	}
+}
+Eigen::Vector3d Box3:: SideCenterPoint(int sideIndex) const
+{
+	switch(sideIndex)
+	{
+	case 0: return Eigen::Vector3d(minPoint[0], box_center[1], box_center[2]);
+	case 1: return Eigen::Vector3d(maxPoint[0], box_center[1], box_center[2]);
+	case 2: return Eigen::Vector3d(box_center[0], minPoint[1], box_center[2]);
+	case 3: return Eigen::Vector3d(box_center[0], maxPoint[1], box_center[2]);
+	case 4: return Eigen::Vector3d(box_center[0], box_center[1], minPoint[2]);
+	case 5: return Eigen::Vector3d(box_center[0], box_center[1], maxPoint[2]);
+	}
+}
+Eigen::Vector3d  Box3::OwnClosestPoint(Line *line)
+{    
+     Eigen::Vector3d l_pt1[8];
+     Eigen::Vector3d l_pt2[6];
+     Eigen::Vector3d sideCenters[6];
+     Eigen::Vector3d Corners[8];
+    double  distance;
+    double min_distance=1000;
+    Eigen::Vector3d closest_point;
+      for (int i = 0; i < 8; i++)
+    {
+           Corners[i]=this->CornerPoint(i); 
+    }
+      for (int i = 0; i < 6; i++)
+    {
+           sideCenters[i]=this->SideCenterPoint(i); 
+    }
+for (int i = 0; i < 8; i++)
+{     
+      Eigen::Vector3d c_pt = Corners[i];
+      l_pt1[i] = line->getClosestPointToPoint(c_pt);
+      distance = std::sqrt((std::pow(l_pt1[i][0]-c_pt[0],2)+std::pow(l_pt1[i][1]-c_pt[1],2)+std::pow(l_pt1[i][2]-c_pt[2],2))*1.0);
+      if (distance<min_distance){
+          min_distance=distance;
+          closest_point= c_pt;
+      }
+}
+for (size_t i = 0; i < 6; i++)
+{
+      Eigen::Vector3d c_pt = sideCenters[i];
+      l_pt2[i] = line->getClosestPointToPoint(c_pt);
+      distance= std::sqrt((std::pow(l_pt2[i][0]-c_pt[0],2)+std::pow(l_pt2[i][1]-c_pt[1],2)+std::pow(l_pt2[i][2]-c_pt[2],2))*1.0);
+      if (distance<min_distance){
+          min_distance=distance;
+          closest_point= c_pt;
+      }
+}
+ return closest_point;
+}
 /// Computes the closest point inside this AABB to the given point.
-Eigen::Vector3d Mybox::ClosestPoint(const Eigen::Vector3d &targetPoint)const
+Eigen::Vector3d Box3::ClosestPoint(const Eigen::Vector3d &targetPoint)
 		{
 		  Eigen::Vector3d  point;	
 		  float x = std::max(minPoint[0], std::min(targetPoint[0], maxPoint[0]));
@@ -473,137 +690,170 @@ Eigen::Vector3d Mybox::ClosestPoint(const Eigen::Vector3d &targetPoint)const
 		}
 
    
-///  calculate distance between other shape primitives
-
-/*
- float Mybox::Distance(const Eigen::Vector3d &point) 
+ void Box3::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive){
+    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
+    if(capsule){
     // Straight line distance between closeset point on box to given point.
-
-	{
-		Eigen::Vector3d pt= ClosestPoint(point);
+        this->getClosestPoints(closestPoints, capsule);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            this->getClosestPoints(closestPoints, sphere);
+        }else{  
+            Box3 *box = dynamic_cast<Box3*>(primitive);
+        if(box){
+            this->getClosestPoints(closestPoints, box);
 		 
-		return  std::sqrt(std::pow(pt[0] - point[0], 2) + std::pow(pt[1] - point[1], 2) + std::pow(pt[2] - point[2], 2)* 1.0); 
+        }
+
 	}
+    }
+}
+
 	
-   
-double Mybox::getShortestDistance(Sphere &sphere) 
-	
-	{
+
 		//return Max(0.f, Distance(sphere.pose) - sphere.r);
 		
 		
-			   // Find the point on this AABB closest to the sphere center.
+   void Box3::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule){
 	//    
-
+      Eigen::Vector3d basePoint, endPoint, ownClosestPoint, obstacleClosestPoint;
 	 // here sphere.pose represents center of sphere
   // get box closest point to sphere center by clamping
       Eigen::Vector4d origin(0, 0, 0, 1);
-      Eigen::Vector3d sphere_pose = (sphere.pose* origin).head(3);
-      Eigen::Vector3d pt = ClosestPoint(sphere_pose);
+      Eigen::Vector4d zDirectionCapsule(0, 0, capsule->getLength(), 1);
 
-		  float x = std::max(minPoint[0], std::min(sphere_pose[0], maxPoint[0]));
-		  float y = std::max(minPoint[1], std::min(sphere_pose[1], maxPoint[1]));
-		  float z = std::max(minPoint[2], std::min(sphere_pose[2], maxPoint[2]));
 
+       basePoint = (capsule->pose * origin).head(3);
+       endPoint  = (capsule->pose * zDirectionCapsule).head(3);
 		  // this is the same as isPointInsideSphere
-        float distance = sqrt((x - sphere_pose[0]) * (x - sphere_pose[0]) +
-								   (y - sphere_pose[1]) * (y - sphere_pose[1]) +
-								   (z - sphere_pose[2]) * (z - sphere_pose[2]));
-
-		  return distance; 
-	}
-	*/
+       Line axisOfSymmetryCapsule(basePoint, endPoint);
      
 ///  calculate distance between other shape primitives
-
-
- float Mybox::Distance(const Eigen::Vector3d &point) 
+       ownClosestPoint = (this->pose * origin).head(3);
+        ownClosestPoint = this->OwnClosestPoint(&axisOfSymmetryCapsule);
     // Straight line distance between closeset point on box to given point.
-
-	{
-		Eigen::Vector3d pt= ClosestPoint(point);
+        obstacleClosestPoint = axisOfSymmetryCapsule.getClosestPointToPoint(ownClosestPoint );
+       closestPoints.row(0) = ownClosestPoint;
+    closestPoints.row(1) = obstacleClosestPoint;
 		 
-		return  std::sqrt(std::pow(pt[0] - point[0], 2) + std::pow(pt[1] - point[1], 2) + std::pow(pt[2] - point[2], 2)* 1.0); 
 	}
 	
    
-double Mybox::getShortestDistance(Sphere &sphere) 
+   void Box3::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){
 	
-	{
 		//return Max(0.f, Distance(sphere.pose) - sphere.r);
 		
 		
 			   // Find the point on this AABB closest to the sphere center.
 	//    
-
+     Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
 	 // here sphere.pose represents center of sphere
   // get box closest point to sphere center by clamping
       Eigen::Vector4d origin(0, 0, 0, 1);
-      Eigen::Vector3d sphere_pose = (sphere.pose* origin).head(3);
-      Eigen::Vector3d pt = ClosestPoint(sphere_pose);
 
-		  float x = std::max(minPoint[0], std::min(sphere_pose[0], maxPoint[0]));
-		  float y = std::max(minPoint[1], std::min(sphere_pose[1], maxPoint[1]));
-		  float z = std::max(minPoint[2], std::min(sphere_pose[2], maxPoint[2]));
+    obstacleClosestPoint = (sphere->pose * origin).head(3);
+    ownClosestPoint = this->ClosestPoint(obstacleClosestPoint);
 
+    closestPoints.row(0) = ownClosestPoint;
+    closestPoints.row(1) = obstacleClosestPoint;
 		  // this is the same as isPointInsideSphere
-        float distance = sqrt((x - sphere_pose[0]) * (x - sphere_pose[0]) +
-								   (y - sphere_pose[1]) * (y - sphere_pose[1]) +
-								   (z - sphere_pose[2]) * (z - sphere_pose[2]));
 
-		  return distance; 
+
 	}
-	
+   void Box3::getClosestPoints(Eigen::MatrixXd &closestPoints, Box3 *box){}
 		
    
-/// Checks for intersection between objects	
-bool Mybox::Intersects( Sphere &sphere) const
-	{  
-	
+   void Box3::getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive){
+    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
+    if(capsule){
+        this->getShortestDirection(shortestDirection, capsule);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            this->getShortestDirection(shortestDirection, sphere);
+        }else{Box3 *box = dynamic_cast<Box3*>(primitive);
+        if(box){
+            this->getShortestDirection(shortestDirection, box);
+        }
 	/// Checks for intersection between box and sphere
-	   
+        }
+    }
+}
 	   // Find the point on this AABB closest to the sphere center.
-	  Eigen::Vector4d origin(0, 0, 0, 1);
-      Eigen::Vector3d sphere_pose = (sphere.pose* origin).head(3);
-      Eigen::Vector3d pt = ClosestPoint(sphere_pose);
 
-		  float x = std::max(minPoint[0], std::min(sphere_pose[0], maxPoint[0]));
-		  float y = std::max(minPoint[1], std::min(sphere_pose[1], maxPoint[1]));
-		  float z = std::max(minPoint[2], std::min(sphere_pose[2], maxPoint[2]));
+   void Box3::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule){
+      Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
+    Eigen::MatrixXd closestPoints(2, 3);
+    
+    this->getClosestPoints(closestPoints, capsule);
+    ownClosestPoint = closestPoints.row(0);
+    obstacleClosestPoint = closestPoints.row(1);
+    shortestDirection = obstacleClosestPoint - ownClosestPoint;
 
+
+   }
+   void Box3::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere){
 		  // this is the same as isPointInsideSphere
-        float distance = sqrt((x - sphere_pose[0]) * (x - sphere_pose[0]) +
-								   (y - sphere_pose[1]) * (y - sphere_pose[1]) +
-								   (z - sphere_pose[2]) * (z - sphere_pose[2]));
-        float radius = sphere.getRadius();
-		  return distance < radius;
+   Eigen::Vector3d ownClosestPoint, obstacleClosestPoint;
+    Eigen::MatrixXd closestPoints(2, 3);
+    this->getClosestPoints(closestPoints, sphere);
+    ownClosestPoint = closestPoints.row(0);
+    obstacleClosestPoint = closestPoints.row(1);
+    shortestDirection = obstacleClosestPoint - ownClosestPoint;
+   }
+
+
+
+
+
+   void Box3::getShortestDirection(Eigen::Vector3d &shortestDirection, Box3 *box){
 }
 
 
 
-	
-void Mybox::Enclose(Eigen::Vector3d &point)
+   double Box3::getShortestDistance(Primitive *primitive){
+    Capsule *capsule = dynamic_cast<Capsule*>(primitive);
+    if(capsule){
+        return this->getShortestDistance(capsule);
+    }else{
+        Sphere *sphere = dynamic_cast<Sphere*>(primitive);
+        if(sphere){
+            return this->getShortestDistance(sphere);
+        }else{
+            Box3 *box = dynamic_cast<Box3*>(primitive);
+        if(box){
+            return this->getShortestDistance(box);
+        }
 
- {
-    minPoint= minPoint.cwiseMin(point);
-	maxPoint= minPoint.cwiseMax(point);
-	
+        }
+    }
  }
 
-void Mybox::getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive)
-{ 
 
+
+
+   double Box3::getShortestDistance(Capsule *capsule){
+        double shortestDistance = 0;
+    Eigen::Vector3d shortestDirection;
+    this->getShortestDirection(shortestDirection, capsule);
+    shortestDistance = shortestDirection.norm() - capsule->getRadius() ;
+    return shortestDistance;
 }
  
-void Mybox::getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule)
-{}
-void Mybox::getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere){}
+   
+   double Box3::getShortestDistance(Sphere *sphere){
 
-void  Mybox::getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule){}
-void Mybox::getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere){}
 
-double Mybox::getShortestDistance(Primitive *primitive){ return 0.0;}
-double Mybox::getShortestDistance(Capsule *capsule){ return 0.0;}
+    double shortestDistance = 0;
+    Eigen::Vector3d shortestDirection;
+    this->getShortestDirection(shortestDirection, sphere);
+
+    shortestDistance = shortestDirection.norm() - sphere->getRadius();
+
+    return shortestDistance;
 // double getShortestDistance(Sphere *sphere);
 //sdouble Mybox::getShortestDistance(Sphere &sphere){ return 0.0;}
+   }
 //Mybox Mybox::MinimalEnclosingAABB() const { return *this; }
+   double Box3::getShortestDistance(Box3 *box){};

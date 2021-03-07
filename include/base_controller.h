@@ -1,5 +1,5 @@
-#ifndef ARM_CONTROLLER_H
-#define ARM_CONTROLLER_H
+#ifndef BASE_CONTROLLER_H
+#define BASE_CONTROLLER_H
 
 // Standard libraries
 #include <vector>
@@ -11,14 +11,6 @@
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 
-// KDL libraries
-#include <kdl/tree.hpp>
-#include <kdl/chain.hpp>
-#include <kdl/chainfksolver.hpp>
-#include <kdl/chainfksolverpos_recursive.hpp>
-#include <kdl_parser/kdl_parser.hpp>
-#include <kdl/frames.hpp>
-#include <kdl/frames_io.hpp>
 
 //ROS libraries
 #include <ros/ros.h>
@@ -27,11 +19,21 @@
 #include <geometry_msgs/Point.h>
 #include <visualization_msgs/Marker.h>
 
+#include <tf/transform_broadcaster.h>
+#include <nav_msgs/Odometry.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <tf/tf.h>
+#include <geometry_msgs/Twist.h>
+
 //Collision monitoring imports
 #include "primitives.h"
 #include "kinova_arm.h"
 #include "monitor.h"
 #include "marker_publisher.h"
+// #include "arm_controller.h"
+
+//Math Libraries
+#include <math.h> 
 
 /**
  * A class for dealing with obstacle displaying in ROS.
@@ -80,37 +82,37 @@ class RvizObstacle
  * in 2009 IEEE International Conference on Robotics and Automation, 
  * Kobe, May 2009, pp. 2587–2592, doi: 10.1109/ROBOT.2009.5152423.
  */
-class ArmController
+class BaseController
 {
     public:
         /**
-         * KinovaArm constructor
+         * Base Controller constructor
          * 
          * @param monitorObject The monitor instance used to get the distance
-         *     from the arm to any obstacles
+         *     from the base to any obstacles
          * @param k Costant for the obstacle avoidance algorithim
          * @param d Costant for the obstacle avoidance algorithim
          * @param gamma Costant for the obstacle avoidance algorithim
          * @param beta Costant for the obstacle avoidance algorithim
          * @return An instance of CollisionMonitor class
          */
-        ArmController(Monitor* monitorObject, double k, double d, 
+        BaseController(Monitor* monitorObject, double k, double d, 
                                             double gamma, double beta);
-        /// KinovaArm Destructor
-        ~ArmController();
+        /// Base Destructor
+        ~BaseController();
 
         /// The monitor class used to perform collision monitoring
         Monitor* monitor;
 
-        /// The goal point of the endeffector
+        /// The goal point of the robot motion
         Eigen::Vector3d goal;
 
         /**
-         * Callback function updating the arm positions
+         * Callback function updating the base positions
          * 
-         * @param msg The ros sensor messsage containing the joint angles
+         * @param msg The ros sensor messsage containing the odometry messages
          */
-        void armCallback(const sensor_msgs::JointState::ConstPtr& msg);
+        void baseCallback(const nav_msgs::Odometry::ConstPtr &msg);      
 
         /**
          * Callback function updating goal position of the arms endeffector
@@ -125,10 +127,11 @@ class ArmController
          * This is where the obstacle avoidance is implemented and is based off 
          * of the paper: 
          */
-        KDL::Twist controlLoop(void);
+        
+	    geometry_msgs::Twist control_loop(void);
 
         /**
-        * Creates the obstacle potential feild value used in the control loop [1]
+        * Creates the obstacle potential field value used in the control loop [1]
         * 
         * @param currentPosition The current position of the endeffector
         * @param velocity The current velocity of the endeffector
@@ -159,15 +162,15 @@ class ArmController
         double beta;
 
         // Lists of parameters and objects passed between functions
-        std::vector<double> jointAngles;
-        std::vector<std::vector<double>> objectDistances;
+        Eigen::Vector3d basePosition;  // x,y,theta
+        std::vector<double> objectDistances;
         std::vector<std::vector<double>> armDistances;
         Eigen::Vector4d origin;
         std::vector<Primitive*> obstaclesAllocated;
-        KDL::Twist twist;
+        geometry_msgs::Twist speed;
         ros::NodeHandle n;
-        ros::Publisher arrowsPub, linksCylindersPub, linksSpheresPub, baseCubePub;
+        ros::Publisher CubePub,arrowsPub_base;
 
 };
 
-#endif // ARM_CONTROLLER_H
+#endif // BASE_CONTROLLER_H

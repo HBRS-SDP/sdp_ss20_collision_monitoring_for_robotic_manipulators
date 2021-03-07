@@ -1,4 +1,4 @@
-# sdp_ws20_collision_monitoring_for_robotic_manipulators
+# sdp_ws20_collision_monitoring_for_mobile_manipulator
 ## Members:
 - Urvashi Negi
 - Zain Ul Haq
@@ -8,10 +8,7 @@
 - Djordje Vukcevic
 
 ## Description
-This repository is a group submission for MAS Software Development Project. The goal of this project is to extend the existing implementation to perform the collision monitoring with respect to the mobile base. "Need to update here based on the paper references" The paper
-implemented is a method of obstacle avoidance for robotic manipulators and 
-at the request of the client a combination of 2 papers was implemented and can
-be found in the reference section \[1\]\[2\]
+This repository is a group submission for MAS Software Development Project. The goal of this project is to extend the existing implementation to perform the collision monitoring with respect to the mobile base. In this work, we extended the existing implementation such that the robot arms do not collide with the body and also implemented a base controller that controls and helps in collision avoidance and monitoring for the robot base.
 
 ## Structure
 This repository is structured to contain multiple implementations/libraries and
@@ -73,11 +70,11 @@ Repository
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-* We would like to thank our coach Djordje Vukcevic who supported us throughout
-the development of this library.
+* We would like to thank Djordje Vukcevic for his support and motivation throughout the course of this project.
 
 ## References
 This library is an implementation of the following papers:
 
 * [1] Real-Time Obstacle Avoidance for Manipulators and Mobile Robots, Oussama Khatib, 1986.
 * [2] Biologically-inspired dynamical systems for movement generation: automatic real-time goal adaptation and obstacle avoidance, H. Hoffmann et al., 2019.
+* [3] A fast procedure for computing the distance between complex objects in three-dimensional space, E. G. Gilbert et al., 1988.

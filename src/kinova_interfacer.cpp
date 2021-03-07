@@ -6,12 +6,14 @@
 #include "ros/ros.h"
 #include "visualization_msgs/Marker.h"
 #include "geometry_msgs/Point.h"
+#include "geometry_msgs/Vector3.h"
 #include "Eigen/Geometry"
 #include "Eigen/Dense"
 #include "marker_publisher.h"
 
 int main(int argc, char **argv)
 {
+    std::cout <<"I am in catkin_ws/src/kinova_arm"<<std::endl;
     // Init ROS listener
     ros::init(argc, argv, "kinova_interfacer");
     ros::NodeHandle n;
@@ -23,6 +25,7 @@ int main(int argc, char **argv)
     ros::Publisher obstaclePub = n.advertise<visualization_msgs::Marker>("kinova_controller/obstacles", 1000);
     ros::Publisher obstaclePubExtra = n.advertise<visualization_msgs::Marker>("kinova_controller/obstacles_extra", 1000);
     
+    ros::Publisher baseKinova_pub = n.advertise<visualization_msgs::Marker>("kinova_controller/obstacles", 1000); 
     ros::Rate loop_rate(10);
 
     visualization_msgs::Marker marker;
@@ -38,12 +41,41 @@ int main(int argc, char **argv)
         double length, radius, r, g, b;
         int shape;
 
-        std::string frame_id, ns;
-        int id;
-        double positionX, positionY, positionZ;
+        //================
+
+
+    	float rz = 136;
+    	float gz =  3;
+    	float bz = 252;
+
+     	auto scale = geometry_msgs::Vector3();//(0.66,0.60,0.30);
+     	scale.x= 0.66;
+     	scale.y= 0.60;
+     	scale.z= 0.30;
+
+	     int id= 20;
+
+	     float positionX=0.0;
+	     float positionY=0.0;
+	     float positionZ=-0.15;
+
+	     MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CUBE, "/Narko_base_link", "obstacles", id, positionX, positionY, positionZ, rz, gz, bz, 0.6);
+	     mPublisher.setScale(scale);               
+
+	     mPublisher.Publish();
+
+
+
+
+         //===============
+
+         std::string frame_id, ns;
+         // int id;
+         // double positionX, positionY, positionZ;
+         // auto scale = geometry_msgs::Vector3();//(0.66,0.60,0.30); // dimensions of narko base
         
         
-        std::cout << "Choose input mode; goal(1), obstacle(2) or exit (0): ";
+        std::cout << "DC_version - Choose input mode; goal(1), obstacle(2) or exit (0): ";
         std::cin >> mode;
         switch(mode) {
             case 1:
@@ -58,7 +90,7 @@ int main(int argc, char **argv)
                 break;
 
             case 2:
-                std::cout << "Choose an obstacle type; sphere(1), cylinder (2), capsule(3):\n";
+                std::cout << "Choose an obstacle type; sphere(1), cylinder (2), capsule(3), Box(4):\n";
                 std::cin >> shape;
                 switch(shape) {
                     case 1:
@@ -157,6 +189,35 @@ int main(int argc, char **argv)
                         mPublisher.Publish();
                         mPublisherBase.Publish();
                         mPublisherEnd.Publish();
+                        break;
+                    }
+                    case 4:
+                    {   double x,y,z;
+                        std::cout << "Box selected, please input the required values.\n";
+                        std::cout << "ID: ";
+                        std::cin >> id;
+                        std::cout << "Input position:\n";
+                        std::cout << "\tx: ";
+                        std::cin >> positionX;
+                        std::cout << "\ty: ";
+                        std::cin >> positionY;
+                        std::cout << "\tz: ";
+                        std::cin >> positionZ;
+                        std::cout<< "x_length: ";
+                        std::cin >> x;
+                        std::cout<< "y_length: ";
+                        std::cin >> y;
+                        std::cout<< "z_length: ";
+                        std::cin >> z;
+                        r = (float) rand() / RAND_MAX;
+                        g = (float) rand() / RAND_MAX;
+                        b = (float) rand() / RAND_MAX;
+                        scale.x=x;
+                        scale.y= y;
+                        scale.z= z;
+                        MarkerPublisher mPublisher(obstaclePub, visualization_msgs::Marker::CUBE, "base_link", "obstacles", id, positionX, positionY, positionZ, r, g, b, 0.5);
+                        mPublisher.setScale(scale);               
+                        mPublisher.Publish();
                         break;
                     }
                     default:

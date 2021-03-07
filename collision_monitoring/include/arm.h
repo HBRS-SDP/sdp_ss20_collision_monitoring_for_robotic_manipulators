@@ -48,5 +48,34 @@ class Arm
 
 };
 
+class Base
+{
+    public:
+    
+        //Destructor
+        virtual ~Base();
 
+        /**
+         * A function to update the current virtual representation of the base
+         * 
+         * @param basePose The Pose  of the base 
+         * @return The boolean true for a successful update, False otherwise
+         */
+        virtual bool updatePose(Eigen::Vector3d basePose);
+
+        /// Used to get the base frame of the base
+        virtual Eigen::Vector3d getPose(void) = 0;
+        /// Used to get the frame 
+        //virtual Eigen::Matrix4d getPose(int frameNumber) = 0;
+
+        /// The homogeneous transformation from the world to robot base frame
+        Eigen::Vector3d baseTransform;
+        
+        /// Primitives that represent the robot base
+         Box3* base_primitive;
+        
+        /// The number of frames in the arm
+        int nFrames;
+
+};
 #endif // ARM_H

@@ -8,6 +8,7 @@
 #include "ros/ros.h"
 #include "visualization_msgs/Marker.h"
 #include "geometry_msgs/Point.h"
+#include "geometry_msgs/Vector3.h"
 #include "Eigen/Geometry"
 #include "Eigen/Dense"
 
@@ -30,6 +31,7 @@ class MarkerPublisher {
 
         void setPoints(Eigen::Vector3d start, Eigen::Vector3d end);
 
+	void setScale(geometry_msgs::Vector3 scale);
         void Publish();
 };
 

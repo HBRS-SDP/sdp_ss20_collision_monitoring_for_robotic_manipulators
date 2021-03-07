@@ -13,16 +13,33 @@
 #include "arm_controller.h"
 #include "sensor_msgs/JointState.h"
 #include "visualization_msgs/Marker.h"
+#include <math.h> 
+#include <geometry_msgs/Twist.h>
+#include <geometry_msgs/Point.h>
 
+#include <tf/transform_broadcaster.h>
+#include <nav_msgs/Odometry.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <tf/tf.h>
+#include "marker_publisher.h"
+std::string goalTopic;
 class KinovaSimulator
 {
     public:
         std::string inputTopic;
         std::string outputTopic;
+        geometry_msgs::Twist speed; 
 
+        Eigen::Vector3d goal;
 
+        float x=0.0;
+        float y=0.0;
+        float th=0.0;
         ros::Subscriber subscriber;
         ros::Publisher velPub;
+        ros::Publisher motion_pub;
+        ros::Subscriber goalSub;
+        ros::Subscriber sub;
         uint64_t curTime;
         uint64_t prevTime;
         uint64_t deltaT;
@@ -30,6 +47,34 @@ class KinovaSimulator
         std::vector<double> jointPositions;
         sensor_msgs::JointState jointStates;
         ros::Time time;
+		
+		
+        void goalCallback(const geometry_msgs::Point::ConstPtr& msg){
+            goal[0] = msg->x;
+            goal[1] = msg->y;
+            goal[2] = msg->z;
+            std::cout<<"New goal point found: "<< goal<<std::endl;
+        }
+        void odom_callback(const nav_msgs::Odometry::ConstPtr &msg){
+            tf2::Quaternion q_orig, q_rot, q_new;
+                x=msg->pose.pose.position.x;
+                y=msg->pose.pose.position.y;
+            tf::Quaternion q(
+                msg->pose.pose.orientation.x,
+                msg->pose.pose.orientation.y,
+                msg->pose.pose.orientation.z,
+                msg->pose.pose.orientation.w);
+            tf::Matrix3x3 m(q);
+                double roll, pitch, yaw;
+                m.getRPY(roll, pitch, yaw);
+            th= yaw; 
+            double inc_x= goal[0] - x;
+            double  inc_y= goal[1] - y ;
+            double  inc_th= goal[2]-th;
+            speed.linear.x=inc_x*0.0;
+            speed.linear.y=inc_y*0.0;
+            speed.angular.z=inc_th*0.0;
+        }
         
 
         KinovaSimulator(){
@@ -92,6 +137,7 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "kinova_simulator");
     // setup the first monitor function
+    ros::NodeHandle n1;
 
     // Create the armController class based off the first monitor
     KinovaSimulator kinovaSimulator = KinovaSimulator();

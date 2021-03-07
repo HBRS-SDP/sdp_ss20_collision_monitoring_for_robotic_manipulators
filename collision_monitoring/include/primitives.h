@@ -16,7 +16,8 @@
 class Line;
 class Capsule;
 class Sphere;
-class Mybox;
+class Box3;
+class Ray;
 //class Cylinder;
 
 /**
@@ -62,6 +63,17 @@ class Primitive
         * @param[out]   closestPoints   the closest points in this primitive and sphere
         */
         virtual void getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere) = 0;
+        
+	/** Finds the shortest distance between this primitive and a Box primitive
+        * 
+        * This method takes a box object and returns the closest points
+        * in this primitive and in a box object.
+        *
+        * @param        box          address of the primitive object
+        * @param[out]   closestPoints   the closest points in this primitive and box
+        */
+
+         virtual void getClosestPoints(Eigen::MatrixXd &closestPoints, Box3 *box) = 0;
 
         /** Performs a dynamic cast to overload the direction functions
         * 
@@ -94,6 +106,18 @@ class Primitive
         * @param[out]   shortestDirection   a vector in 3D that represents the closes direction between the primitive and sphere
         */
         virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere) = 0;
+
+
+	/** Finds the shortest direction between this primitive and a Box primitive
+        * 
+        * This method takes a box object and returns the closest direction
+        * between this primitive and a box object.
+        *
+        * @param        box              address of the primitive object
+        * @param[out]   shortestDirection   a vector in 3D that represents the closes direction between the primitive and box
+        */
+        virtual void getShortestDirection(Eigen::Vector3d &shortestDirection, Box3 *box) = 0;
+
         /** Performs a dynamic cast to overload the distance functions
         * 
         * This method takes an object that inherits from primitive and
@@ -125,6 +149,17 @@ class Primitive
         * @return   the closest distance between the primitive and sphere
         */
         virtual double getShortestDistance(Sphere *sphere) = 0;
+
+
+	 /** Finds the shortest distance between this primitive and a Box primitive
+        * 
+        * This method takes a capsule object and returns the closest distance
+        * between this primitive and a box object. returns a double value.
+        *
+        * @param    box      address of the primitive object
+        * @return   the closest distance between the primitive and box
+        */
+        virtual double getShortestDistance(Box3 *box) = 0;
 
         /** Finds the shortest distance between this primitive and a Cylinder primitive
         * 
@@ -273,14 +308,17 @@ class Capsule: public Primitive{
         void getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive);
         void getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule);
         void getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere);
+        void getClosestPoints(Eigen::MatrixXd &closestPoints, Box3 *box);
         
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere);
+		void getShortestDirection(Eigen::Vector3d &shortestDirection, Box3 *box);
 
         double getShortestDistance(Primitive *primitive);
         double getShortestDistance(Capsule *capsule);
         double getShortestDistance(Sphere *sphere);
+		double getShortestDistance(Box3 *box);
 };
 
 /**
@@ -318,100 +356,174 @@ class Sphere: public Primitive{
         void getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive);
         void getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule);
         void getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere);
+        void getClosestPoints(Eigen::MatrixXd &closestPoints, Box3 *box);
 
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
         void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere);
+		void getShortestDirection(Eigen::Vector3d &shortestDirection, Box3 *box);
 
         double getShortestDistance(Primitive *primitive);
         double getShortestDistance(Capsule *capsule);
         double getShortestDistance(Sphere *sphere);
+		double getShortestDistance(Box3 *box);
 };
 
 
-class Mybox{
-	
-public:
+/**
+ * The Ray class
+ * 
+ * This class is a shape that describes the Ray in 3D space.
+ */
 
-      
-      /// Specifies center of box in world frame. 
-     Eigen::Vector3d c;
+class Ray 
+{ 
+public: 
 
-     /// Specifies vector of how far the box extends on each axes.
-     Eigen::Vector3d extents; //should be (0.66,0.60,0.30);  // These fixed coardinated have been extracted form narko base urdf file
+    Ray(const Eigen::Vector3d orig, const Eigen::Vector3d &dir); 
     
-    
+    Eigen::Vector3d orig; 
+    Eigen::Vector3d dir;       // ray orig and dir 
+    Eigen::Vector3d invdir; 
+    int sign[3]; 
 
-		/// Specifies the minimum extent of this AABB in the world space x, y and z axes.
-	  Eigen::Vector3d minPoint; 
-	  
-	  /// Specifies the maximum extent of this AABB in the world space x, y and z axes.
-	  Eigen::Vector3d maxPoint;
-	  
-	 
-	  /// Constructs this AABB by specifying the minimum and maximum extending corners of the box.
-	
-	Mybox(const Eigen::Vector3d &minPoint, const Eigen::Vector3d &maxPoint);
-	 
-	 
-	 /** Constructor of Mybox class
+};
+
+
+/**
+ * The Box class
+ * 
+ * This class is a shape that describes the base of the robot as well as obstacles of the shape of a 3D box (cube).
+ */
+
+
+class Box3:public Primitive{ 
+public: 
+
+    //axis bound limit of 3D box
+    Eigen::Vector3d bounds[2]; 
+
+    //Minimum axis bound of 3D Box
+    Eigen::Vector3d minPoint= bounds[0];
+
+    //Maximum axis bound of 3D Box.
+    Eigen::Vector3d maxPoint= bounds[1];
+
+    //Center position of 3D Box.
+    Eigen::Vector3d box_center;
+
+    //Describes how far apart the minimum and maximum axis bounds are from the center of the box.
+    Eigen::Vector3d extents;
+	   
+     
+    /** Constructor of Box class
         * 
-        * @param    pose    center point of the box represented with a Matrix4d.
-        * @param    axis  axis lenths along 3 axis
+        * @param    center center point of the 3D Box represented with a Vector3d.
         */
-       
-      Mybox(Eigen::Vector3d &center);	 
+    Box3(Eigen::Vector3d &center);
 
+    /** Constructor of Box class
+        * 
+        * @param    vmin minimum axis bound of 3D Box represented with a Vector3d.
+        * @param    vmax maximum axis bound of 3D Box represented with a Vector3d.
+        */
+    Box3(const Eigen::Vector3d &vmin, const Eigen::Vector3d &vmax); 
 
-      //Mybox(Eigen::Matrix4d pose, Eigen::Vector3d basePoint);	  
+    /** Constructor of Box class
+        * 
+        * @param    box an object of the class box
+        * s
+        */
 
+    Box3(Box3* box);
 
-/// Returns the minimum world-space coordinate along the given axis.
-	float MinX() const { return minPoint[0]; } ///  minimum bound along x-axis
-	float MinY() const { return minPoint[1]; } ///  minimum bound along y-axis
-	float MinZ() const { return minPoint[2]; } ///  minimum bound along z-axis
-	/// Returns the maximum world-space coordinate along the given axis.
-	float MaxX() const { return maxPoint[0]; } ///  maximum bound along x-axis
-	float MaxY() const { return maxPoint[1]; } ///  maximum bound along y-axis
-	float MaxZ() const { return maxPoint[2]; } ///  maximum bound along z-axis
-
-/// Computes the closest point inside this AABB to the given point.
-	Eigen::Vector3d ClosestPoint(const Eigen::Vector3d  &targetPoint)const;
-
-/// Compute distance between this AABB and the given object.
-    float Distance(const Sphere &sphere);
-	
-    float Distance(const Eigen::Vector3d &point);
-	
-/// Checks for intersection between objects	
-	bool Intersects(const Mybox &aabb) ;
-	bool Intersects(const Line &line) ;
-	bool Intersects(const Capsule &capsule) ;
-    bool Intersects( Sphere &sphere) const;
-	// Mybox MinimalEnclosingAABB(const Eigen::Vector3d *pointArray, int numPoints);
-    // static Mybox MinimalEnclosingAABB(const Eigen::Vector3d *pointArray, int numPoints);
-	// Mybox MinimalEnclosingAABB() const { return *this; }
-	// void SetNegativeInfinity();
-	// void SetFrom(auto *pointArray, int numPoints);
-	// Mybox Translated(const Eigen::Vector3d  &offset) const;
-	void Enclose(Eigen::Vector3d &point);
-	
     
-    void getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive);
-    void getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule);
-    void getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere);
-    
-    void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
-    void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
-    void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere);
+    Box3(Eigen::Matrix4d &pose, double x,double y,double z);
+    Box3(Eigen::Vector3d &pose, double x,double y,double z);
 
-    double getShortestDistance(Primitive *primitive);
-    double getShortestDistance(Capsule *capsule);
-    // double getShortestDistance(Sphere *sphere);
-    double getShortestDistance(Sphere &sphere); 
-    Mybox MinimalEnclosingAABB() const { return *this; }
-    
-	
 
+
+
+    /* Destructor of the class Box */
+    ~Box3();
+    
+   
+    
+   /** Function to check intersection of box with the ray.
+        * 
+        * @param    r object of class Ray.
+        * @return true or false based on intersection.
+        */
+   bool intersection ( const Ray &r) const; 
+
+   /** Function to check intersection of box with the ray.
+        * 
+        * @param edgeIndex    index of the edge.
+        * @return edge of the box as a line object.
+        */
+   Line* Edge(int edgeIndex) const; 
+
+   /** Function to check intersection of box with the ray.
+        * 
+        * @return vector filled with all the edges of the box.
+        */ 
+   std::vector<Line*>  EdgeList() const;
+
+   /** Function to check intersection of box with the ray.
+        * 
+        * @param    cornerIndex index of the corner of the box.
+        * @return corner of the box as a Vector3d.
+        */
+   Eigen::Vector3d CornerPoint(int cornerIndex) const;
+
+   /** Function to check intersection of box with the ray.
+        * 
+        * @param    sideIndex index of the face/side of the box.
+        * @return midpoint of the center of the side of the box as a Vector3d.
+        */
+   Eigen::Vector3d SideCenterPoint(int sideIndex) const;
+
+   /** Function to check intersection of box with the ray
+        * 
+        * @param    line line Class object
+        * @return closest point on the box to the line obstacle
+        */
+   Eigen::Vector3d OwnClosestPoint(Line *line);
+
+   /** Function to check intersection of box with the ray
+        * 
+        * @param    sphere sphere Class object
+        * @return closest point on the box to the sphere obstacle
+        */
+   Eigen::Vector3d OwnClosestPoint(Sphere *sphere);
+
+ 
+   /** Function to get the closest point inside the box (AABB ) to an external point
+        * 
+        * @param targetPoint An external point to Box
+        * @return closest point inside the box to the external point 
+        */
+
+   Eigen::Vector3d ClosestPoint(const Eigen::Vector3d &targetPoint);
+
+
+
+
+   void getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive);
+   void getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule);
+   void getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere);
+   void getClosestPoints(Eigen::MatrixXd &closestPoints, Box3 *box);
+        
+   void getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive);
+   void getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule);
+   void getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere);
+   void getShortestDirection(Eigen::Vector3d &shortestDirection, Box3 *box);
+
+
+   double getShortestDistance(Primitive *primitive);
+   double getShortestDistance(Capsule *capsule);
+   double getShortestDistance(Sphere *sphere);
+   double getShortestDistance(Box3 *box);
+   
 };
 #endif // PRIMITIVES_H

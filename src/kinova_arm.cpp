@@ -81,6 +81,22 @@ KinovaArm::KinovaArm(std::string urdf_filename){
                 0, 0, 1;
 }
 
+NarkinBase::NarkinBase(Eigen::Vector3d inputBaseTransform){
+    this->baseTransform = inputBaseTransform;
+
+    // localPose =new KDL::Frame();
+    Eigen::Vector3d pose = inputBaseTransform;
+    double x= 0.66;
+    double y= 0.60;
+    double z= 0.30;
+    
+    // ======================= need to import pose of narkin base from urdf model          
+    //Eigen::Matrix4d pose = linkFramesToPose(*localPoses[linkNum], *localPoses[linkNum+1]);
+    Box3* base = new Box3(pose, x, y, z);
+    this->base_primitive =base;
+
+
+}
 KinovaArm::KinovaArm(std::string urdf_filename, Eigen::Matrix4d inputBaseTransform){
 
     // ------------- import and initialise the KDL model --------------- //
@@ -160,6 +176,22 @@ KinovaArm::~KinovaArm(){
     for(int i=0; i < localPoses.size(); i++){
         delete(localPoses[i]);
     }
+}
+
+
+NarkinBase::~NarkinBase(){
+
+    
+    delete(base_primitive);
+
+    delete(localPose);
+    
+}
+
+bool NarkinBase::updatePose(Eigen::Vector3d basePositions){
+    this->baseTransform = basePositions;
+    // this->base_primitive->box_center = basePositions;
+    return true;
 }
 
 bool KinovaArm::updatePose(std::vector<double> jointPositions){
@@ -251,6 +283,31 @@ std::vector<double> KinovaArm::ikVelocitySolver(KDL::Twist twist){
     return jointVelocitiesOut;
 }
 
+Eigen::Vector3d NarkinBase::getPose(void){
+
+   //must return latest pose from frames
+    
+    
+    // init a matrix to fill
+    // Eigen::Matrix4d matrix;
+
+    // // Copy the values across index by index
+    // for(int i=0; i < 4; i++)
+    // {
+    //     for(int j=0; j < 4; j++)
+    //     {
+    //         matrix(i, j) = frame(i, j);
+    //     }
+    // }
+
+    // // return the eigen matrix
+    // return baseTransform * matrix;
+
+	return this->baseTransform;
+
+
+
+}
 
 Eigen::Matrix4d KinovaArm::getPose(void)
 {

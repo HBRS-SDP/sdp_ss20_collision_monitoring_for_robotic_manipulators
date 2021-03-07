@@ -878,7 +878,7 @@
 
 \ifx\@IEEEptsize\@IEEEptsizenine
 \typeout{-- This is a 9 point document.}
-\def\normalsize{\@setfontsize{\normalsize}{9}{11.0476pt}}%
+\def\normalsize{\@setfontsize{\normalsize}{10}{11.0476pt}}%
 \setlength{\@IEEEnormalsizefontbaselineskip}{11.0476pt}%
 \normalsize
 \abovedisplayskip 1.5ex plus3pt minus1pt%

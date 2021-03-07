@@ -139,4 +139,61 @@ class KinovaArm: public Arm
 
 };
 
+
+
+
+
+class NarkinBase: public Base
+{
+    public:
+
+        /**
+         * NarkinBase constructor with set baseposition
+         * 
+         * @param inputBaseTransform The global position of the robot base
+         * @return An instance of NarkinBase class
+         */
+        NarkinBase( Eigen::Vector3d inputBaseTransform);
+        /// KinovaArm Destructor
+        ~NarkinBase();
+
+        /**
+         * A function to update the current virtual representation of the base
+         * 
+         * @param basePositions (center) The 3D pose of robot base.
+         * @return The boolean true for a successful update, False otherwise
+         */
+        bool updatePose(Eigen::Vector3d basePositions);
+
+        
+
+        /**
+         * A function to find the final base pose
+         * 
+         * @return The last base pose
+         */
+        Eigen::Vector3d getPose(void);
+
+        // Eigen::Matrix4d  getPose(int frameNumber);
+
+        /**
+         * A function to find the joint pose of a given joint
+         * 
+         * @param frameNumber The joint number to solve for the pose of
+         * @return The last joint pose
+         */
+        
+
+    private:
+
+
+        /// Mathematical constants, declared in constructor for speed
+        Eigen::Vector3d center;
+        Eigen::Vector3d half_dimensions;
+        Eigen::Matrix3d i3;
+        KDL::Frame* localPose;
+
+        
+};
+
 #endif // KINOVA_ARM_H

@@ -3,42 +3,69 @@
 
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
-  <!-- <include file="$(find gazebo_ros)/launch/empty_world.launch"/>-->
-  <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find narko_kinova_base_collision)/environment/models/narkin/narkin.urdf -urdf -z 0 -model Narkin" />-->
+<include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="gui" value="false"/>
+    <arg name="headless" value="true"/>
+</include>
+ <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find narko_kinova_base_collision)/environment/models/narkin/narkin.urdf -urdf -z 0 -model Narkin" />
 
-    <arg name="model" default="cat '$(find narko_kinova_base_collision)/environment/models/narkin/single_arm_narkin.urdf'"/>
-    
-    <param name="robot_description" command="cat '$(find narko_kinova_base_collision)/environment/models/narkin/single_arm_narkin.urdf'" /> 
+
+    <param name="robot_description" command="cat '$(find narko_kinova_base_collision)/environment/models/narkin/narkin.urdf'" /> 
+
     <!-- Brennan party -->
-    <param name="arm_controller/urdf_model" value="$(find kinova_arm)/urdf/GEN3_URDF_V12.urdf" />
-    <param name="arm_controller/input_joint_topic" value="joint_state" />
-    <param name="arm_controller/output_joint_topic" value="joint_command" />
-    <param name="arm_controller/goal_topic" value="/goal_point" />
-    <param name="kinova_interfacer/goal_topic" value="/goal_point" />
-    <param name="publish_frequency" value="100" />
+   <arg name="model" default="$(find kinova_arm)/urdf/GEN3_URDF_V12.urdf"/>
+  <arg name="namespace_1" default="kinova_1" />
+  <arg name="namespace_2" default="kinova_2" />
 
-    <param name="K" value="0.1"/>
-    <param name="D" value="0.05"/>
-    <param name="gamma" value="35"/>
-    <param name="beta" value="6.366385485"/>
-
-    <node name="arm_controller" pkg="kinova_arm" type="KinovaCollisionMonitoring"/>
+  <group ns = "$(arg namespace_1)">
+    <param name="tf_prefix" value="$(arg namespace_1)"/>
+    <param name="velocity_topic" value="joint_command" />
+    <param name="joint_state_topic" value="joint_states" />
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
+  </group>
+
+  <group ns = "$(arg namespace_2)">
+    <param name="tf_prefix" value="$(arg namespace_2)"/>
+    <param name="velocity_topic" value="joint_command" />
+    <param name="joint_state_topic" value="joint_states" />
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="arm_simulator" pkg="kinova_arm" type="KinovaSimulator"/>
+  </group>
+
+  <param name="arm_controller/urdf_model" value="$(arg model)" />
+  <param name="publish_frequency" value="100" />
+
+  <param name="K" value="0.1"/>
+  <param name="D" value="0"/>
+  <param name="gamma" value="25"/>
+  <param name="beta" value="6.366385485"/>
 
 
+  <param name="arm_controller/joint_state_topic" value="/joint_states" />
+  <param name="arm_controller/velocity_topic" value="/joint_command" />
+  <param name="/goal_topic" value="/goal_point" />
+  <param name="/set_arm_1_namespace" value="/kinova_1" />
+  <param name="/set_arm_2_namespace" value="/kinova_2" />
+  <param name="/obstacle_topic" value="/obstacles_update" />
+  <param name="arm_controller/urdf_model" value="$(arg model)" />
+
+  <node name="arm_controller" pkg="kinova_arm" type="DualKinovaCollisionMonitoring"/>
     <!-- After Party starts here --> 
 
     <!-- Standard publishers -->
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
 
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+   <!--   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
         <rosparam param="source_list">[base_feedback/joint_state]</rosparam>
         <param name="use_gui" value="true"/>
-        <param name="rate" value="100" />
-    </node>
+        <param name="rate" value="30" />
+    </node> -->
 
     <!-- rviz for visualisation -->
-    <node pkg="rviz" type="rviz" name="custom_rviz" args="-d $(find narko_kinova_base_collision)/rviz/Single_arm_NK_settings.rviz" />
+    <node pkg="rviz" type="rviz" name="custom_rviz" args="-d $(find narko_kinova_base_collision)/rviz/NK_settings.rviz" />
 
     <!-- Python nodes -->
 

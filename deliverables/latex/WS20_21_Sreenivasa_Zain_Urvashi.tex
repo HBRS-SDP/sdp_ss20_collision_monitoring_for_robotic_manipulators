@@ -4,7 +4,7 @@
 
 % \documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
 
-\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+\documentclass[a4paper, 11.5pt, conference]{ieeeconf}      % Use this line for a4 paper
 
 \IEEEoverridecommandlockouts                              % This command is only needed if 
                                                           % you want to use the \thanks command
@@ -34,10 +34,10 @@
 \usepackage{subcaption}
 \usepackage{caption}
 
-\title{\LARGE \bf Implementation of biologically-inspired dynamical systems for movement generation: automatic real-time goal adaptation and obstacle avoidance}
+\title{\LARGE \bf Collision Monitoring for a Mobile Manipulator Based on Biologically-Inspired Dynamical Systems for Movement Generation}
 \usepackage[colorinlistoftodos]{todonotes}
 
-\author{Alan Gomez, Samuel Parra, and Brennan Penfold \\ {\small \textbf{Advisor:} Djordje Vukcevic}}
+\author{Sreenivasa Hikkal Venugopala, Zain Ul Haq, and Urvashi Negi \\ {\small \textbf{Advisor:} Djordje Vukcevic}}
 \setlength{\parskip}{0pt}
 
 \begin{document}
@@ -51,107 +51,95 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-The control algorithms of current robotic manipulators are quite rigid in their operation, often following precomputed paths, which is unsuitable for uses in dynamic environments associated with assisting humans. This paper presents a method of combining two current methods of collision monitoring \cite{Khatib} and collision avoidance \cite{Hoffmann} to create a safer more robust control algorithm. The collision monitoring algorithm is extended to monitor distances from all arm links but could not be implemented with the chosen collision avoidance method. The final collision monitoring library is able to operate at $\sim$ 250Hz, but would benefit greatly from optimisations to self collision monitoring, and the change to a null-space control algorithm would allow for collision avoidance to be implemented in all links.
-
+The computations involving the robotic manipulators, that is robotic arms and the mobile manipulators, that is mobile base (robot base) up until recent times are limited in the degree of operation and have several restrictions due to rigid movements, the control algorithms for these manipulators are usually complex involving various operations such as planning, perception, and so on. This makes the computations complex and time consuming and make it hard for its usage in the dynamic environments involving other robots, humans. To overcome these issues, in this research work, we propose to extend the implementation of the control algorithms which is implemented based on collision monitoring \cite{Khatib} and collision avoidance \cite{Hoffmann} for controlling the movements of the robotic arms from colliding each other and to extend it to avoid collision with the mobile base as well. Along with this, we also implement the control algorithms for mobile base that helps in monitoring and avoiding the collision with any obstacles and helps in safe maneuvering towards the goal.
 
 \end{abstract}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction} %Brennan
-% Background, motivation and state of the art
+\section{Introduction} 
 
 %Background ---------------
-Humanoid robots and arm like manipulators have a great many current and potential, useful applications. Currently robotic manipulators are used in a range of manufacturing processes like painting and spot welding \cite{Fadalil}. Another great application of humanoid robotics is to help people who cannot help themselves, as a separate system, or as a prosthetic. Robotic prosthetics have been implemented previously, like Dean Kamen's Luke Arm \cite{Adee}, but the control of such device is limited. In human applications the control system used in areas like manufacturing cannot be just dropped into place, there are many considerations that are required from both the software and hardware perspectives. In manufacturing applications manipulators typically use precomputed trajectories for robustness and efficiency, but this is unsuitable in a human environment, where obstacles and goals are constantly on the move \cite{Hoffmann}. The current approach in prosthetics is to use a human controller to solve this problem, by adding a joystick in a shoe \cite{Adee} or another such interface, so the operator can directly control the movement of the arm. While this addresses the adaptable control issue, it can be quite taxing for the user, requiring a lot of concentration just to perform basic tasks. This solution is also not very viable for stand-alone assistant robots, the cost of training an operator would far outweigh the benefit of using a robot and operator instead of a single human nurse or assistant. \\
+The robotic arms or the robotic manipulators are used in various applications ranging from industrial applications to domestic applications. They are widely used in industrial applications such as to support human in the production lines of heavy machineries for the purpose of assembling spare parts, welding, painting and so on, and in domestic applications such as robotic prosthetics, robotic assistants, and so on. Along with these applications, A robot as a whole, that is including both arms and the mobile base, poses useful in various applications such as warehouse management. All these applications require more robust and highly adaptable software and hardware components. For increasing the efficiency and the robustness of the functioning of the robotic manipulators in industrial applications, a precomputed trajectories will be provided \cite{Hoffmann}, but these precomputed trajectories will not consider the dynamic movement of human and other obstacles. On the other hand, various operators are used to control the movement and functioning of the robotic prosthetics, but this does not provide free flow motion for the arms or prosthetics. On contrary it takes a lot of time and effort to train the robotic manipulators to perform a safe and free flow movement, but this is a high cost solution which is not weighable in all scenarios.
 
-One solution to the control problem is to use dynamic movement primitives, which can be generated during the movement itself, allowing for real-time obstacle avoidance and goal changes. Previous approaches \cite{Janabi-Sharif} used were initially not able to handle moving goals, but improvements made by H. Hoffmann et al. \cite{Hoffmann} by applying a potential field method to the process overcame this limitation. The use of dynamic movement primitives in the potential field method also overcame the local minimum problem, that is typically inherent with potential fields. Hence this paper is the basis of the project. There are some limitations to this method the most significant being the representation of the obstacles and manipulator. The method presented by H. Hoffman et al.\cite{Hoffmann} only considers points in cartesian space, where other methods, like those discussed by O. Khatib \cite{Khatib}, represent objects as basic primitives with volume and shape. \\
+One of the solution approach to handle the control algorithm problem is to make use of the dynamic movement primitives, these are generated during the movement of the robot manipulators resulting in real-time collision monitoring and avoidance. There were many approaches proposed as a solution to this problem, based on the approaches proposed by \cite{Hoffmann} and \cite{Khatib} a library named `Implementation of biologically-inspired dynamical systems for
+movement generation: automatic real-time goal adaptation and obstacle avoidance' was developed (https://github.com/HBRS-SDP/sdp\_ss20\_collision\_monitoring\_for\_robotic\_manipulators). This library handles the collision monitoring and collision avoidance for robotic arms in real-time and it incorporates the idea of dynamic movement primitives and the potential field method for active collision monitoring and avoidance. Here the dynamic primitives and the obstacles are considered as the basic primitives having shape and volume.
 
-For objects to be avoided first they must be located relative to the manipulator, and that is the core concept of the library built for this project. Biologically-inspired dynamical systems for movement generation \cite{Hoffmann} does not tackle the problem of distances between objects, instead a precursor paper was used, Real-Time Obstacle Avoidance for Manipulators and Mobile Robots \cite{Khatib}. This paper goes into details on how to find the distance between two obstacles, which was modified to find the shortest vector between the two obstacles, allowing for it to be applied to the dynamic movements primitives control algorithm discussed by H. Hoffmann et al. \cite{Hoffmann}. These two techniques, along with the addition of distance monitoring with all links, has the potential to produce a better algorithm. The combination of the two techniques means that both the volume of the object is considered, and the trajectory planning can occur online allowing it to be adapted to any changes in a fast, efficient manner. These properties along with the addition of obstacle distance calculations for all links means that humanoid robots and manipulators would be more robust and safer to use in dynamic, human environments.
+In this work, we propose to implement and extend the previous work by formulating the mobile manipulator or the robot base as a 3D box shape and extend the control algorithm to avoid and monitor the collision between the robot arms and its base. Along with this we also implement the control algorithm for the base to avoid and monitor the base from colliding with other obstacles. Initially we planned and tried to model the base as a convex hull using the approach proposed by \cite{GJK}, and it turned out to be complex and cost ineffective for this application. To overcome this, we modeled the robot base to be a 3D box and calculate the distance between other dynamic primitives which are discussed in the future sections. Extension of previous work to monitor and avoid collision between the arms and the base, along with implementation of the control algorithm for controlling the base from avoiding and active monitoring of collision makes the robot more robust, adaptable, and safe to use in dynamic environments including for domestic purposes.
+
+This report is further structured as follows. Section 2 describes modeling and  calculating the distances between the dynamic primitives, Section 3 highlights the implementation details, Section 4 describes various experiments conducted, and Section 5 provides information on use cases followed by the conclusion.
 %Robotic assistants
 
 \section{Approach}
 
-\subsection{Distance to objects} %Alan
-To compute the closest distance between two objects we first obtain the closest points between the objects, and then the distance between these two points. Since each shape is different in its mathematical representations, there is a unique case to consider for each combination of shapes, and these are as follows:
+\subsection{Distance between primitives}
+In previous work, the links and joints, along with the end-effector and obstacles were modeled as spheres and cylinders. In this work, along with the previous implementations, we model the robot base as a 3D box, this helps in easier calculations for the distance between the arms and robot body, and robot body and other obstacles. Following we will discuss the distance calculations between various primitive objects.
 
-1) Between two spheres: 
-To compute the closest distance between two spheres, one can just subtract the radius of the spheres from the distance between the center points of the spheres. The distance between the sphere center points can be easily calculated by finding the norm of the vector subtraction between the two center points. Since the norm of the vector is taken, the order of the vector subtraction does not matter.
+1) Distance between two spheres:
+We calculate distance between two spheres using below formula:
+\begin{equation}
+	Distance = |\bar{C_1}-\bar{C_2}| - (r_1 + r_2)
+\end{equation}
+where $\bar{C_1}$ and $\bar{C_2}$ represent the center points of the two spheres, and $r_1$ and $r_2$ are the radius the two spheres.
 
-2) Between a sphere and a capsule:
-To compute the closest distance between a capsule $C$ and a sphere $S$, one can compute the distance between the center of the sphere, $p_S$, and the axis of symmetry of the cylinder, $l_C$
-and then subtract the radius of the sphere and the capsule. 
-
-The closest point, on $l_C$, to $p_S$ is given by \eqref{eq:capsule_point},
-
-\begin{equation}       
-    \begin{matrix} 
+2) Distance between sphere and cylinder:
+We calculate the distance between the sphere and a cylinder using below equation and the same is shown in the Figure \ref{fig:sphere_capsule}.
+\begin{equation}
+	Closest point = X = 	\begin{cases}
         x = x_1 + \lambda(x_2 - x_1) \\
         y = y_1 + \lambda(y_2 - y_1) \\
-        z = z_1 + \lambda(z_2 - z_1) \label{eq:capsule_point}
-    \end{matrix}
+        z = z_1 + \lambda(z_2 - z_1) 
+        \label{eq:capsule_point}
+    \end{cases}
 \end{equation}
 
-where the start point of $l_C$ is $m1(x_1, y_1, z_1)$, the end point is $m2(x_2, y_2, z_2)$, and $\lambda$ is given by \eqref{eq:lambda}.
-
-\begin{equation}       
-    \begin{matrix} 
-        \lambda = \frac{(c - m_1) \cdot (m_2 - m_1 )}{l^2} \label{eq:lambda}
-    \end{matrix}
+\begin{equation}
+	\lambda = \frac{(c-m_1).(m_2-m_1)}{La^2}
 \end{equation}
 
-3) Between two capsules:
-To compute the closest distance between two capsules (capsule $A$ and capsule $B$), with axis of symmetry $l_A = \overline{m1_A m2_A}$ and $l_B = \overline{m1_B m2_B}$, 
-where $A$ is the longest capsule, one can consider four different cases:
-\begin{enumerate}
-    \item $m1_B$ and $m2_B$ can be perpendicularly projected onto $l_A$
-    \item $m1_B$ and $m2_B$ cannot be perpendicularly projected onto $l_A$
-    \item only $m1_B$ can be perpendicularly projected onto $l_A$
-    \item only $m2_B$ can be perpendicularly projected onto $l_A$
-\end{enumerate} 
-
-Depending on these cases, the following steps are going to be calculated with different objects.
-
-In case 1, capsule $M$ will be capsule $A$, and capsule $O$ will be capsule $B$.
-
-In case 2, if $m1_B$ is closer to $l_A$ than $m2_A$ is to $l_B$, then capsule $M$ will be capsule $A$, and capsule $O$ will be capsule $B$.
-Else capsule $M$ will be capsule $B$, and capsule $O$ will be capsule $A$.
-
-In case 3, if $m2_B$ is closer to $l_A$ than $m1_A$ is to $l_B$, then capsule $M$ will be capsule $A$, and capsule $O$ will be capsule $B$.
-Else capsule $M$ will be capsule $B$, and capsule $O$ will be capsule $A$.
-
-In case 4, if if $m1_B$ is closer to $l_A$ than $m2_B$ is to $l_A$, then capsule $M$ will be capsule $A$, and capsule $O$ will be capsule $B$.
-Else capsule $M$ will be capsule $B$, and capsule $O$ will be capsule $A$.
-
-With capsule $M$ and capsule $P$, one can follow the next steps.
-The first step is to place the reference frame of $M$ in its center of mass, with the Z-axis in the direction of $l_M$. 
-The second step is to project $l_O$ onto the XY-plane given by the reference frame of $M$ (Figure \ref{fig:capsule_capsule}),
-the result of this projection would be the line $l_P$.
-The third step is to calculate the closest point on $l_P$ to the origin of the reference frame of $P$ by using \eqref{eq:capsule_point}. 
-The final step is to compute the distance and subtract the radius of the capsule and the sphere.
-If the true closest points on the original axis of symmetry of the capsules are needed, one can project back the obtained points.
+\begin{equation}
+	Distance = |X-C| - (r_a + r_s)
+\end{equation}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.15]{images/capsule-capsule.png}
-    \caption{Capsule - capsule}
+    \includegraphics[scale=0.3]{images/sphere_capsule.png}
+    \caption{Sphere - capsule}
+    \label{fig:sphere_capsule}
+\end{figure}
+
+3) Distance between two cylinders:
+We compute the distance between the two cylinders based on the following four cases:
+\begin{enumerate}
+	\item m1 and m2 can be perpendicularly projected on to La.
+	\item m1 and m2 cannot be perpendicularly projected on to La.
+	\item Only m2 can be perpendicularly projected on to La.
+	\item Only m1 can be perpendicularly projected on to La.
+\end{enumerate}
+Here, m1 and m2 refers to the starting point and end point of the symmetrical axis of shorter cylinder, La is the symmetrical axis of the longer cylinder. This is shown in Figure \ref{fig:capsule_capsule}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.21]{images/capsule_capsule.png}
+    \caption{Cylinder - cylinder}
     \label{fig:capsule_capsule}
 \end{figure}
 
+4) Distance between box and sphere:
+NEED TO FILL THE DETAILS
 
-\subsection{Potential field} %Sam
+5) Distance between box and cylinder:
+NEED TO FILL THE DETAILS
 
-To avoid collisions we decided to implement the method presented by Hoffmann et al. \cite{Hoffmann}. This method is based on dynamic movement primitives (DMP), which are used to generate a trajectory $x(t)$ with a velocity $v(t)$. These DMP are motivated from the dynamic of damped spring and can generate trajectories in many dimensions. These can be used to describe accelerations in 3D space that move towards a goal:
-
+\subsection{Potential field calculations}
+In previous work, to avoid and monitor the collision between the robotic arms and the obstacles, the algorithm from \cite{Hoffmann} is implemented. This algorithm is based on the dynamic movement primitives (DMP) and is used to generate the new trajectories and velocities in real-time as given in below equations,
 \begin{equation} \label{eq:1}
 	\dot{v} = K ( g - x ) - D v - K (g - x_0) s + K f(s) + p(x, v)
 \end{equation}
+Where $g$ is goal position, $x$ is current position, $x_0$ is starting position, $v$ is current velocity, $s$ is phase variable, $D$ is damping constant, and $K$ is spring constant. The term $p(x,v)$ refers to the potential field generated by the obstacles which in turn helps in avoiding obstacles.
 
-Where $g$ is the goal, $x$ is the current position, $x_0$ is the starting position, $v$ is the current velocity, $s$ is the phase variable, $D$ is the damping constant, and $K$ is the spring constant. The function $f(s)$ is a non-linear function used to define a learned path for the manipulator to take. However, the terms dependent on $s$ are not relevant for our application; thus we decided to not include it in the final equation.  
+This potential field is calculated by determining the steering angle (Figure \ref{steering_image}) between the velocity vector and the vector from the obstacle to the end effector as shown in \ref{eq:2}. This steering angle provides information on the sharpness of the steering of end effector from obstacle. Using this angle, the potential field is calculated as given in Equation \ref{eq:3}.
 
-The last term is the potential field generated by the obstacles. This term has a repel effect on the end effector, making it avoid obstacles. The potential field is calculated as follow: We first determine the steering angle $\varphi$ using equation \ref{eq:2}, which is the angle between the velocity vector and a vector from the end effector to the obstacle as seen in Figure \ref{steering_image}. In our implementation, this vector is the shortest distance between the end-effector and the obstacle, as the original method considered points instead of volumes.
-
-
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\scalebox{0.55}{\includegraphics{images/steering_angle.png}}
 	\caption{Graphical representation of steering angle \cite{Hoffmann}}
@@ -159,20 +147,19 @@ The last term is the potential field generated by the obstacles. This term has a
 \end{figure}
 
 \begin{equation} \label{eq:2}
-	\varphi = cos^{-1} ((o-v)^T v / (\|o-x\| \cdot \|v\|));
+	\varphi = cos^{-1}\Bigg( \frac{(o-v)^T v}{\|o-x\| \cdot \|v\|}\Bigg)
 \end{equation}
-
-This steering angle determines how sharp the end effector steers away from the obstacle. The closer the angle is to 0, the more abrupt is the change of direction. The potential field is given by:
-
-\begin{equation}
+\begin{equation} \label{eq:3}
 	p(x, v) = \gamma \sum_i R_i v \varphi_i exp(-\beta \varphi_i) 
 \end{equation}
 
-Where $\gamma$ and $\beta$ are tune-able constants, and R is a rotation matrix which rotates by the axis $r = (o-x) \times v $ with an angle of rotation of $\pi/2$. This rotation matrix can be calculated with the Rodrigues' rotation formula \cite{rodrigues}. The final potential field is the sum of the potential fields generated by all the obstacles. Our final equation converges towards the goal avoiding the obstacles in its way.
+Where $\gamma$ and $\beta$ are tune-able constants, and R is a rotation matrix which rotates by the axis $r = (o-x) \times v $ with an angle of rotation of $\pi/2$. This rotation matrix can be calculated using the following approach described in \cite{rodrigues}. The final potential field is the sum of the potential fields generated by all the obstacles. The final equation converges towards the goal avoiding the obstacles as given below.
 
 \begin{equation}
 \dot{v} = K ( g - x ) - D v + p(x, v)
 \end{equation}
+
+ADD INFORMATION ON POTENTIAL FIELD CALCULATION FOR MOBILE BASE
 
 \begin{figure*}[t]
 	\centering
@@ -181,18 +168,19 @@ Where $\gamma$ and $\beta$ are tune-able constants, and R is a rotation matrix w
 	\label{fig:rosgraph_single}
 \end{figure*}
 
-\subsection{Collision monitoring library} %Sam
+\subsection{Collision monitoring library}
+This work is an extension of the the previous work. Here along with the robot arms from previous implementation, we also model the robot base such that the arms do not collide with the base while performing some actions. Along with this extension, we also implemented the base control algorithm which actively helps in monitoring and avoiding collision between the robot base and other obstacles in the workspace.
 
-Our library was designed to be platform and framework independent. To achieve this, the library user must implement the Arm interface. This provides the flexibility of choosing how to describe mathematically the manipulator and update its position. Consider the case of two developers, one wants to use KDL for the forward and backwards kinematics, while the other one wants to derive the equations manually for a closed form solution. Both developers are supported by this library. 
+In order to monitor the distance between the links of the robot arm, obstacles, robot base in the workspace, the links are modeled as the cylinders, end effectors are modeled as spheres, and the robot base is modeled as the 3D box. This type of modeling helps in easier calculations of distance between two primitives which results in monitoring of the self collision of the arms and base. This kind of modeling helps in easier calculation of potential fields, determining the nearest points or closest points on the primitives and obstacles that helps in calculating the distances, which in turn results in real-time collision monitoring and avoidance.
 
-In order to monitor the distances from the links of the arm to the obstacles in the workspace we represent the geometry of the links with the use of capsules. This representation enables us to calculate the distances between the links themselves in order to monitor self-collisions along with regular obstacles. This requires that the developer updates the geometric representation alongside the arm’s movement in the Arm implementation. 
+ADD EXTRA CONTENT IF REQUIRED.
 
-\subsection{Controller} %Sam
+\subsection{Controller} 
+In this work, we follow the same architecture for the base controller as the previous work. Since we perform the collision monitoring and avoidance between the arms and the base, both the arm controller and the base controller are necessary. As per the previous work, the arm controller is controlled via a control loop which executes at a specific rate which provides the geometric locations and updates the velocity of the arms in real-time. Similarly, the base controller also controlled via a control loop which executes at a specific rate and provides information on the geometric location of the mobile base and the velocity updates. This real-time information on the positions of arm and the base helps in quicker calculation of distances and helps in collision avoidance and monitoring with self and other obstacles in the workspace.
 
-The manipulator is controlled with a control loop that is executed at a specified rate. This loop is responsible for updating the geometric representation to match the real life manipulator and calculate the new velocity with the collision avoidance algorithm. In the loop the developer must keep the current position, velocity, positions of obstacles, and goal updated for the algorithm to produce an accurate output. 
+ADD EXTRA CONTENT IF REQUIRED. 
  
- 
-\section{Implementation} %Brennan
+\section{Implementation} 
 The final product that combines all the obstacle monitoring and avoidance techniques was implemented using the Robotic operating system (ROS) framework, specifically ROS Kinetic. ROS has a few advantages in this area, the first and foremost being the Kinova Kortex library \cite{kortex}, which is a high and low level control API for Kinova robotic manipulators, including the one chosen for demonstration. This library has a lot of useful features from the MoveIt control algorithm to the fully fledged gazebo simulation of the arm. The final software produced does actually rely on any of the Kortex libraries, but was instrumental in testing and development. \\
 
 The ROS package can be broken down into 3 sections, the controller, simulator and visualisation. The control section is the implementation of Biologically-inspired dynamical systems for movement generation \cite{Hoffmann}, the collision avoidance library is implemented inside a control loop that uses the monitor class to obtain the shortest distance vectors from the obstacles to the end-effector. This shortest distance is then passed into the potential field method along with the current velocity of the manipulator. From this the new velocity is derived and then passed into the simulator via an inverse kinematics function of the KinovaArm class, mapping the velocity from cartesian space to the manipulators joint space. \\
@@ -207,7 +195,7 @@ The basic ROS node graph can be seen in figure \ref{fig:rosgraph_single} where t
 
 
 \section{Experiments}
-
+ADD INFORMATION ON THE EXPERIMENTS AND TESTS PERFORMED.
 \subsection{Collision Monitoring} %Brennan
 The collision monitoring library has no practical measure of accuracy because of its pure mathematical basis. To assert the accuracy of the mathematics applied the distance between objects was verified using Geogebra models, and the rest of the software relies on those calculations. So the core performance measure of the collision monitoring library can be considered speed, hence the use of C++ instead of a higher level interpreted language like python. The performance test was performed on an Ubuntu 16.04 machine with a Intel Core i5-7200U 2.5GHz CPU. The following operations were timed using the C++ chrono library:
 \begin{itemize}
@@ -385,7 +373,7 @@ We would like to thank our supervisor Djordje Vukcevic for all the advice and he
 \bibitem{Janabi-Sharif} F. Janabi-Sharifi and D. Vinke, “Integration of the artificial potential field approach with simulated annealing for robot path planning,” in Proceedings of 8th IEEE International Symposium on Intelligent Control, Aug. 1993, pp. 536–541, doi: 10.1109/ISIC.1993.397640.
 \bibitem{rodrigues}  Belongie, Serge. "Rodrigues' Rotation Formula." From MathWorld--A Wolfram Web Resource, created by Eric W. Weisstein. https://mathworld.wolfram.com/RodriguesRotationFormula.html 
 \bibitem{kortex} Kinovarobotics/ros\_kortex. Kinova Robotics, 2020.
-
+\bibitem{GJK} E. G. Gilbert, D. W. Johnson and S. S. Keerthi, "A fast procedure for computing the distance between complex objects in three-dimensional space," in IEEE Journal on Robotics and Automation, vol. 4, no. 2, pp. 193-203, April 1988, doi: 10.1109/56.2083.
 %\bibitem{Velliste} M. Velliste, S. Perel, M. C. Spalding, A. S. Whitford, and A. B. Schwartz, “Cortical control of a prosthetic arm for self-feeding,” Nature, vol. 453, no. 7198, Art. no. 7198, Jun. 2008, doi: 10.1038/nature06996.
 
 

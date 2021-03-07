@@ -9,8 +9,8 @@ from std_msgs.msg import ColorRGBA
 
 
 
-rospy.init_node('Narko_base_marker')
-marker_pub = rospy.Publisher('Narko_base_marker', Marker)
+rospy.init_node('Narko_neck_base_marker')
+marker_pub = rospy.Publisher('Narko_base_neck_marker', Marker)
 
 def make_marker(marker_type, scale, r, g, b, a):
     # make a visualization marker array for the occupancy grid
@@ -22,9 +22,9 @@ def make_marker(marker_type, scale, r, g, b, a):
     m.id = 0
     m.type = marker_type
 
-    m.pose.position.x = 0
+    m.pose.position.x = 0.17
     m.pose.position.y = 0
-    m.pose.position.z = 0
+    m.pose.position.z = 0.62
 
     m.pose.orientation.w = 0
     m.pose.orientation.x = 0
@@ -45,7 +45,7 @@ def make_marker(marker_type, scale, r, g, b, a):
 
 rate = rospy.Rate(10)  
 while not rospy.is_shutdown():
-    rospy.loginfo('Publishing Narko_base_marker')
-    scale = Vector3(0.66,0.60,0.30)
-    marker_pub.publish(make_marker(Marker.CUBE, scale, .2, 1, .5, .3))
+    rospy.loginfo('Publishing Narko_neck_base_marker')
+    scale = Vector3(0.22,0.3,1)
+    marker_pub.publish(make_marker(Marker.CUBE, scale, 3, 1, 1.5, .3))
     rate.sleep()

@@ -56,6 +56,9 @@ void MarkerPublisher::setLength(double length){
     case visualization_msgs::Marker::ARROW:
         this->marker.scale.x = length;
         break;
+    case visualization_msgs::Marker::CUBE:
+        this->marker.scale.x = length;
+        break;
     default:
         break;
     }
@@ -72,6 +75,11 @@ void MarkerPublisher::setOrientation(double orientationX, double orientationY, d
     this->marker.pose.orientation.y = orientationY;
     this->marker.pose.orientation.z = orientationZ;
     this->marker.pose.orientation.w = orientationW;
+}
+void MarkerPublisher::setScale(geometry_msgs::Vector3 scale){
+        this->marker.scale.x = scale.x ;
+        this->marker.scale.y = scale.y ;
+        this->marker.scale.z = scale.z ;
 }
 
 void MarkerPublisher::setPoints(Eigen::Vector3d start, Eigen::Vector3d end){
