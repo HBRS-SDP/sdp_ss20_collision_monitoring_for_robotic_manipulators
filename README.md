@@ -26,6 +26,8 @@ this repository.
 - [Collision Avoidance ROS Package](catkin_workspace/README.md):
     The implementation of the obstacle avoidance and tracing algorithm that the
     base library is designed to suit.
+- [Narkin Base Collision Monitoring](catkin_workspace/src/narko_kinova_base_collision/README.md):
+    The ROS package for visualization and demonstration of extended implementations.
 - [Setup Instructions](setup_instructions.pdf): Provides setup instructions for installation of dependency packages and compiling library.
 - Documentation & other related works: 
     The last section found in the /deliverables directory contains the paper,
@@ -78,3 +80,4 @@ This library is an implementation of the following papers:
 * [1] Real-Time Obstacle Avoidance for Manipulators and Mobile Robots, Oussama Khatib, 1986.
 * [2] Biologically-inspired dynamical systems for movement generation: automatic real-time goal adaptation and obstacle avoidance, H. Hoffmann et al., 2019.
 * [3] A fast procedure for computing the distance between complex objects in three-dimensional space, E. G. Gilbert et al., 1988.
+* [4] AABB 3DCollisions - https://gdbooks.gitbooks.io/3dcollisions/content/Chapter1/aabb.html, Accessed on 03/07/2021.

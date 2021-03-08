@@ -25,7 +25,7 @@
 % The following packages can be found on http:\\www.ctan.org
 \usepackage{graphics}
 %\usepackage{parskip} % for pdf, bitmapped graphics files
-\usepackage{epsfig} % for postscript graphics files
+%\usepackage{epsfig} % for postscript graphics files
 \usepackage{mathptmx} % assumes new font selection scheme installed
 \usepackage{times} % assumes new font selection scheme installed
 \usepackage{amsmath} % assumes amsmath package installed
@@ -33,7 +33,8 @@
 \usepackage{float}
 \usepackage{subcaption}
 \usepackage{caption}
-
+\usepackage{hyperref}
+\hypersetup{hidelinks}
 \title{\LARGE \bf Collision Monitoring for a Mobile Manipulator Based on Biologically-Inspired Dynamical Systems for Movement Generation}
 \usepackage[colorinlistoftodos]{todonotes}
 
@@ -63,7 +64,7 @@ The computations involving the robotic manipulators, that is robotic arms and th
 The robotic arms or the robotic manipulators are used in various applications ranging from industrial applications to domestic applications. They are widely used in industrial applications such as to support human in the production lines of heavy machineries for the purpose of assembling spare parts, welding, painting and so on, and in domestic applications such as robotic prosthetics, robotic assistants, and so on. Along with these applications, A robot as a whole, that is including both arms and the mobile base, poses useful in various applications such as warehouse management. All these applications require more robust and highly adaptable software and hardware components. For increasing the efficiency and the robustness of the functioning of the robotic manipulators in industrial applications, a precomputed trajectories will be provided \cite{Hoffmann}, but these precomputed trajectories will not consider the dynamic movement of human and other obstacles. On the other hand, various operators are used to control the movement and functioning of the robotic prosthetics, but this does not provide free flow motion for the arms or prosthetics. On contrary it takes a lot of time and effort to train the robotic manipulators to perform a safe and free flow movement, but this is a high cost solution which is not weighable in all scenarios.
 
 One of the solution approach to handle the control algorithm problem is to make use of the dynamic movement primitives, these are generated during the movement of the robot manipulators resulting in real-time collision monitoring and avoidance. There were many approaches proposed as a solution to this problem, based on the approaches proposed by \cite{Hoffmann} and \cite{Khatib} a library named `Implementation of biologically-inspired dynamical systems for
-movement generation: automatic real-time goal adaptation and obstacle avoidance' was developed (https://github.com/HBRS-SDP/sdp\_ss20\_collision\_monitoring\_for\_robotic\_manipulators). This library handles the collision monitoring and collision avoidance for robotic arms in real-time and it incorporates the idea of dynamic movement primitives and the potential field method for active collision monitoring and avoidance. Here the dynamic primitives and the obstacles are considered as the basic primitives having shape and volume.
+movement generation: automatic real-time goal adaptation and obstacle avoidance' was developed (\url{https://github.com/HBRS-SDP/sdp\_ss20\_collision\_monitoring\_for\_robotic\_manipulators}). This library handles the collision monitoring and collision avoidance for robotic arms in real-time and it incorporates the idea of dynamic movement primitives and the potential field method for active collision monitoring and avoidance. Here the dynamic primitives and the obstacles are considered as the basic primitives having shape and volume.
 
 In this work, we propose to implement and extend the previous work by formulating the mobile manipulator or the robot base as a 3D box shape and extend the control algorithm to avoid and monitor the collision between the robot arms and its base. Along with this we also implement the control algorithm for the base to avoid and monitor the base from colliding with other obstacles. Initially we planned and tried to model the base as a convex hull using the approach proposed by \cite{GJK}, and it turned out to be complex and cost ineffective for this application. To overcome this, we modeled the robot base to be a 3D box and calculate the distance between other dynamic primitives which are discussed in the future sections. Extension of previous work to monitor and avoid collision between the arms and the base, along with implementation of the control algorithm for controlling the base from avoiding and active monitoring of collision makes the robot more robust, adaptable, and safe to use in dynamic environments including for domestic purposes.
 
@@ -80,17 +81,24 @@ We calculate distance between two spheres using below formula:
 \begin{equation}
 	Distance = |\bar{C_1}-\bar{C_2}| - (r_1 + r_2)
 \end{equation}
-where $\bar{C_1}$ and $\bar{C_2}$ represent the center points of the two spheres, and $r_1$ and $r_2$ are the radius the two spheres.
+where $\bar{C_1}$ and $\bar{C_2}$ represent the center points of the two spheres, and $r_1$ and $r_2$ are the radius the two spheres and the same is visualized in Figure \ref{fig:sphere_sphere}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.23]{images/sphere_sphere.png}
+    \caption{Sphere - sphere}
+    \label{fig:sphere_sphere}
+\end{figure}
 
 2) Distance between sphere and cylinder:
-We calculate the distance between the sphere and a cylinder using below equation and the same is shown in the Figure \ref{fig:sphere_capsule}.
+We calculate the distance between the sphere and a cylinder using below equation and the same is shown in the Figure \ref{fig:spherecapsule}.
 \begin{equation}
 	Closest point = X = 	\begin{cases}
         x = x_1 + \lambda(x_2 - x_1) \\
         y = y_1 + \lambda(y_2 - y_1) \\
         z = z_1 + \lambda(z_2 - z_1) 
-        \label{eq:capsule_point}
     \end{cases}
+    \label{eq:cpcyl}
 \end{equation}
 
 \begin{equation}
@@ -105,7 +113,7 @@ We calculate the distance between the sphere and a cylinder using below equation
     \centering
     \includegraphics[scale=0.3]{images/sphere_capsule.png}
     \caption{Sphere - capsule}
-    \label{fig:sphere_capsule}
+    \label{fig:spherecapsule}
 \end{figure}
 
 3) Distance between two cylinders:
@@ -124,11 +132,28 @@ Here, m1 and m2 refers to the starting point and end point of the symmetrical ax
     \label{fig:capsule_capsule}
 \end{figure}
 
-4) Distance between box and sphere:
-NEED TO FILL THE DETAILS
+4) Box configuration and closest point on the box:
+As an extension to previous work, here we have modeled the robot base as a 3D box or of cuboid shape. This box is considered as Axis Aligned Bounding Box (AABB) \cite{3ddet}, it means that the AABB doesn't have to have equal length, width, and height, but one condition here is that once it is configured the box should not be rotated. These AABBs are pivotal towards spatial partitioning. An example visualization is provided in Figure \ref{fig:aabb}. These boxes can be stored in two ways, first is to store the leftmost and rightmost corners and the second way is to store the center point of the box and a vector representing how far it extends in each x, y, z directions.
 
-5) Distance between box and cylinder:
-NEED TO FILL THE DETAILS
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{images/aabb.png}
+    \caption{Representation of AABB, image referenced from \cite{3ddet}}
+    \label{fig:aabb}
+\end{figure}
+
+Initially we check if the given point is inside or on the box by comparing it to the position of leftmost corner (min) and rightmost corner (max). Since box has many edges and sides, we do have to figure out the closest point on the box that is closest to the obstacle. The algorithm to determine the closest point shows that the point will be clamped to AABB, that is we check if the point is outside the box and then compare the position of point with respect to min and max of the AABB and clamp the point to the nearest edge based on this comparison. If the point is inside the box, then the algorithm just returns the position of the point itself.
+
+5) Distance between box and sphere:
+To find the distance between the box and the sphere, first we have to consider the distance between the center of the sphere and the closest point on AABB. To find out the closest point of AABB we consider the sphere center to be the point of consideration. Once we have the closest point on box, we calculate the distance by using Equation \ref{eq:boxsp}. If this distance is less than the radius of the sphere, then we say that the box and sphere are intersecting \cite{3ddet}.
+
+\begin{equation}
+	Distance = Sphere.Position - ClosestPoint
+	\label{eq:boxsp}
+\end{equation}
+
+6) Distance between box and cylinder:
+To find the distance between the box and the cylinder, fist we have to determine the closest point on the cylinder or capsule using the Equation \ref{eq:cpcyl}. We then clamp this closest point on to the AABB to find the closest point on the box. Once we have the two closest points, we consider the closest point of the cylinder or capsule to be the center point of the sphere and continue with the calculations by using the Equation \ref{eq:boxsp}. If this distance is less than the radius of the sphere (that is considered from the closest point on the cylinder or capsule to the edge of cylinder or capsule), then we say that the box is colliding with the cylinder or sphere \cite{3ddet}.
 
 \subsection{Potential field calculations}
 In previous work, to avoid and monitor the collision between the robotic arms and the obstacles, the algorithm from \cite{Hoffmann} is implemented. This algorithm is based on the dynamic movement primitives (DMP) and is used to generate the new trajectories and velocities in real-time as given in below equations,
@@ -159,12 +184,10 @@ Where $\gamma$ and $\beta$ are tune-able constants, and R is a rotation matrix w
 \dot{v} = K ( g - x ) - D v + p(x, v)
 \end{equation}
 
-ADD INFORMATION ON POTENTIAL FIELD CALCULATION FOR MOBILE BASE
-
 \begin{figure*}[t]
 	\centering
-	\includegraphics[scale=0.25]{images/rosgraph_single.png}
-	\caption{ROS node graph for single arm}
+	\includegraphics[width=1.0\linewidth, height=0.2\linewidth]{images/ros_graph.png}
+	\caption{ROS node graph showing the communication flow between the subcomponents of the package.}
 	\label{fig:rosgraph_single}
 \end{figure*}
 
@@ -173,26 +196,19 @@ This work is an extension of the the previous work. Here along with the robot ar
 
 In order to monitor the distance between the links of the robot arm, obstacles, robot base in the workspace, the links are modeled as the cylinders, end effectors are modeled as spheres, and the robot base is modeled as the 3D box. This type of modeling helps in easier calculations of distance between two primitives which results in monitoring of the self collision of the arms and base. This kind of modeling helps in easier calculation of potential fields, determining the nearest points or closest points on the primitives and obstacles that helps in calculating the distances, which in turn results in real-time collision monitoring and avoidance.
 
-ADD EXTRA CONTENT IF REQUIRED.
-
 \subsection{Controller} 
 In this work, we follow the same architecture for the base controller as the previous work. Since we perform the collision monitoring and avoidance between the arms and the base, both the arm controller and the base controller are necessary. As per the previous work, the arm controller is controlled via a control loop which executes at a specific rate which provides the geometric locations and updates the velocity of the arms in real-time. Similarly, the base controller also controlled via a control loop which executes at a specific rate and provides information on the geometric location of the mobile base and the velocity updates. This real-time information on the positions of arm and the base helps in quicker calculation of distances and helps in collision avoidance and monitoring with self and other obstacles in the workspace.
-
-ADD EXTRA CONTENT IF REQUIRED. 
  
-\section{Implementation} 
-The final product that combines all the obstacle monitoring and avoidance techniques was implemented using the Robotic operating system (ROS) framework, specifically ROS Kinetic. ROS has a few advantages in this area, the first and foremost being the Kinova Kortex library \cite{kortex}, which is a high and low level control API for Kinova robotic manipulators, including the one chosen for demonstration. This library has a lot of useful features from the MoveIt control algorithm to the fully fledged gazebo simulation of the arm. The final software produced does actually rely on any of the Kortex libraries, but was instrumental in testing and development. \\
+\section{Implementation}
+In this work, we built the extension and the base controller implementation on the ROS platform, and tested with ROS kinetic and melodic versions. There are various libraries such as Kinova Kortex library \cite{kortex}, this library provides various high and low level control APIs for handling the robotic manipulators, Kinova\_arm package that provides the design details, and implementation details for the robotic arms. Along with these libraries, in this work we make use of narko\_description for creating the robot mobile base and connect the arms and the base. The final standalone library does not depend on any ROS components, and these ROS components are used only for testing and simulation of the collision avoidance and monitoring library.
 
-The ROS package can be broken down into 3 sections, the controller, simulator and visualisation. The control section is the implementation of Biologically-inspired dynamical systems for movement generation \cite{Hoffmann}, the collision avoidance library is implemented inside a control loop that uses the monitor class to obtain the shortest distance vectors from the obstacles to the end-effector. This shortest distance is then passed into the potential field method along with the current velocity of the manipulator. From this the new velocity is derived and then passed into the simulator via an inverse kinematics function of the KinovaArm class, mapping the velocity from cartesian space to the manipulators joint space. \\
+The standalone library for collision monitoring and avoidance is purely developed using the C++ programming language, we make use of ROS and python for testing, simulation, and publishing of the robot base nodes. Similar to the previous work, the package is is divided into three subcomponents, the controller for base and arms, simulator and visualization. From previous work we have the arm controller implementation based on \cite{Hoffmann}, and as an addition to this, we extended by adding the robot base as a box primitive to monitor and avoid the collision of arms with robot base. Addition to this, we implemented a base controller that helps in avoiding and monitoring the collisions with obstacles in the workspace. To visualize this, we have implemented a differential drive setup for movement and visualization of robot.
 
-The simulation software takes the joint velocities from the controller and updates the current state of the simulated manipulator, and then passes the current state back to the controller as well as forwards to the visualisation. The simulation algorithm it's self is very basic and is based around a discrete time integration technique:
-$$
-\theta_i = \theta_{i-1} + \dot{\theta}_{i-1}\times (t_i - t_{i-1})
-$$ 
-While rudimentary, as it doesn't consider inertia or any other complex parameters, it functions as desired for the testing and demonstration of a robotic manipulators trajectory control algorithm. \\
+Similar to previous implementation, here we have implemented the collision avoidance part of the library in a control loop, that executes continuously to obtain the shortest distance vectors from the robot base and the obstacles. This shortest distance is then used for calculating the potential field along with the current velocity resulting in a new velocity and path for avoiding the collision and maneuvering towards goal position. This new velocity is then provided to the NarkinBase class for mapping the new velocity from Cartesian space to the robot base space.
 
-The basic ROS node graph can be seen in figure \ref{fig:rosgraph_single} where the interfacer is a basic terminal interface to send goals to the arm controller and the visualisation is performed by the built-in robot\_state\_publisher node and Rviz.
+The simulation software takes the new velocity, obstacle position and information on the potential field and generates a new position for the robot, and this new position is then passed on to the base controller such that it avoids the collision with obstacle and moves towards the goal position. This works in a loop until the robot reaches the goal position. 
 
+A basic ROS node graph showing the communication flow between the subcomponents of the standalone package is shown in Figure \ref{fig:rosgraph_single}. Here we use the interfaces to add the obstacle to the workspace, and also to provide the goal position. For visualization, we make use of the in-built robot\_state\_publisher node and Rviz.
 
 \section{Experiments}
 ADD INFORMATION ON THE EXPERIMENTS AND TESTS PERFORMED.
@@ -258,7 +274,7 @@ In Figure \ref{fig:potential_field} we can observe the behaviour of the potentia
 	\caption{Potential field generated during the movement}
 	\label{fig:potential_field}
 \end{figure}
-\pagebreak
+
 For one of the experiments we placed several obstacles in the workspace and command it to move between points. The results of the collision avoidance algorithm can be seen from several perspectives in fig \ref{fig:one_arm_avoidance}. The red line is the path of the end effector from the initial point to the goal. In fig \ref{fig:one_arm_avoidance_vector} the velocity vectors in their respective point in time can be observed. 
 
 \begin{figure}[H]
@@ -311,25 +327,16 @@ In Figure \ref{fig:two_arm_avoidance} the path of the end effector of first Kino
 	\caption{Cartesian velocities generated}
 	\label{fig:two_arm_avoidance_vector}
 \end{figure}
-\pagebreak
+
 From these results we can see that a long as the geometric representation of the two arms is accurate, the collision avoidance algorithm can be use to avoid collisions between the arms. The collision avoidance algorithm only monitors the end effector of the moving robot, this means that not all collision between the two arms can be avoided. To fix this a null space control algorithm would need to be implemented. 
 
 \section{Use cases}
 
-\subsection{Single arm} %Alan
-The library presented in this paper can be used with a single manipulator to avoid the collision of its end-effector with objects in the environment.
-The user can use the Arm interface to provide the necessary information about the manipulator.
-The user can then also add different obstacles that are present in the environment.
-The pose of the manipulator and the obstacles need to be updated using the methods given by the library.
-\subsection{Dual arm} %Alan
-The user can also use the library with two manipulators by creating two instances of the implementation of the Arm interface and adding the links of 
-the opposite manipulator as obstacles represented by capsules.
-This will prevent the collision of the end-effector of both robots with the opposite manipulator
-\subsection{Multiple arms}
-In the same way, the library can be used with more than two manipulators. The user can add as many manipulators as the computational resources allow.
-\subsection{Self collision} %Alan
-Finally, a user can also use this library to prevent the collision of the end-effector of the manipulator with its other links.
-This can be done by implementing the Arm interface and adding each link of the robot as an obstacle represented by a capsule.
+\subsection{Arm}
+Since this work is an extension of previous work, all the features that were implemented related to the arms still functions and can be used to create and experiment with multiple number of arms. Considering single arm, the arm controller looks and helps in avoiding and monitoring the collision of end-effector with the obstacles in the workspace. Considering dual arms, the links and joints of the arms are represented as obstacles, hence both arms do not collide with each other and also they do not collide with the obstacles. Any number of obstacles can be added to the workspace using the interfacer provided in the library. Similarly, the library is capable of handling more than two arms and they have to be configured before execution of the library.
+
+\subsection{Base}
+In this work, the robot base is modeled as a 3D box or can be referred to as a cuboid. This cuboid is treated as an obstacle from the arm controller point of view and this helps in avoiding and monitoring of self collision between arm and the base. This cuboid representation acts as a generic representation since most of the robot's base is either of a cuboid shape or of cylindrical shape and can be enclosed using a cuboid. Along with this, the base controller implementation looks out for obstacles in the workspace and actively monitors and avoids collision.
 
 \section{Conclusion}
 For robotic manipulators to be used in a human environment they first need to have the ability to adapt in constantly changing, dynamic environments. This can be done in a robust and safe manner using a combination of two different methods discussed by H. Hoffmann et al. \cite{Hoffmann} and O. Khatib \cite{Khatib}. By implementing the obstacle monitoring by O. Khatib \cite{Khatib} and the collision avoidance by H. Hoffmann et al. \cite{Hoffmann}, along with monitoring collisions for all links, robotic manipulators are more resilient to changes in obstacle and goal placement. The final collision monitoring library can have an update rate of $\sim$ 200Hz with all features enabled, this is a viable update rate, but this would become drastically impacted if more that 10 obstacles were to be added to the environment. % Sam can sumarise about his results.
@@ -354,12 +361,12 @@ Finally, in order to avoid more serious collisions, the algorithm should conside
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
+\section*{Appendix}
+The code for the collision monitoring library is accessible at the following link: \url{https://github.com/Sreeni1204/sdp\_ws20\_collision\_monitoring\_for\_mobile\_manipulators}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgements}
-We would like to thank our supervisor Djordje Vukcevic for all the advice and help this semester.
+We would like to thank Djordje Vukcevic for his support and motivation throughout the course of this project.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -374,6 +381,7 @@ We would like to thank our supervisor Djordje Vukcevic for all the advice and he
 \bibitem{rodrigues}  Belongie, Serge. "Rodrigues' Rotation Formula." From MathWorld--A Wolfram Web Resource, created by Eric W. Weisstein. https://mathworld.wolfram.com/RodriguesRotationFormula.html 
 \bibitem{kortex} Kinovarobotics/ros\_kortex. Kinova Robotics, 2020.
 \bibitem{GJK} E. G. Gilbert, D. W. Johnson and S. S. Keerthi, "A fast procedure for computing the distance between complex objects in three-dimensional space," in IEEE Journal on Robotics and Automation, vol. 4, no. 2, pp. 193-203, April 1988, doi: 10.1109/56.2083.
+\bibitem{3ddet} AABB · 3DCollisions - \url{https://gdbooks.gitbooks.io/3dcollisions/content/Chapter1/aabb.html}, Accessed on 03/07/2021
 %\bibitem{Velliste} M. Velliste, S. Perel, M. C. Spalding, A. S. Whitford, and A. B. Schwartz, “Cortical control of a prosthetic arm for self-feeding,” Nature, vol. 453, no. 7198, Art. no. 7198, Jun. 2008, doi: 10.1038/nature06996.
 
 
