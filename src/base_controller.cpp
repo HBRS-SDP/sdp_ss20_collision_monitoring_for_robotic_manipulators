@@ -22,6 +22,9 @@
     //D= ;
     speed.linear.x=0.0;
     speed.linear.y=0.0;
+    speed.linear.z=0.0;
+    speed.angular.x=0.0;
+    speed.angular.y=0.0;
     speed.angular.z=0.0;
      
     // ======== need to describe these topics to be subscribed these are for potnetial fields
@@ -30,7 +33,7 @@
     // this->linksCylindersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/links_cylinders", 1000);
     // this->linksSpheresPub = n.advertise<visualization_msgs::Marker>("kinova_controller/links_spheres", 1000);
 
-    this->arrowsPub_base = n.advertise<visualization_msgs::Marker>("kinova_controller/distance_field_base", 1000);
+    this->arrowsPub_base = n.advertise<visualization_msgs::Marker>("base_controller/distance_field_base", 1000);
     this->CubePub = n.advertise<visualization_msgs::Marker>("/Narko_base_marker_cpp", 1000);
 
     origin << 0, 0, 0, 1;
@@ -155,7 +158,7 @@ void BaseController::updateObstacles(const visualization_msgs::Marker::ConstPtr&
     //========================================================================
 
     else {
-        ROS_ERROR("Wrong shape for obstacle");
+       // ROS_ERROR("Wrong shape for obstacle");
     }
 
 }
@@ -239,12 +242,15 @@ Eigen::Vector3d BaseController::obstaclePotentialField(Eigen::Vector3d currentPo
                     m_st_0  +  m_vt_1_2,
                     ct      +  m_vt_2*rotvec(2);
         rotation.normalize();
-        double phi_denominator = velocity.norm()*direction.norm();
+        // double phi_denominator = velocity.norm()*direction.norm();
+        Eigen::Vector3d velocity_abs = velocity.cwiseAbs();
+        Eigen::Vector3d direction_abs = direction.cwiseAbs();
+        double phi_denominator= velocity_abs.dot(direction_abs); 
         double phi_numerator = direction.transpose()*velocity;
         double phi = std::acos(phi_numerator/phi_denominator);
         double exp = std::exp(-beta*phi);
         potentialField += (rotation * velocity) * phi * exp;
-        ROS_WARN_STREAM("PField in basecontroller: \n " << potentialField<<"\n\n");
+       // ROS_WARN_STREAM("PField in basecontroller: \n " << potentialField<<"\n\n");
         MarkerPublisher mPublisherPotentialField(arrowsPub_base, visualization_msgs::Marker::ARROW, "base_link_arrow", "potential_field_base", i, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
         mPublisherPotentialField.setRadius(0.005);
         mPublisherPotentialField.setLength(0.005);
