@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.3.10)  7 MAR 2021 22:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.3.10)  9 MAR 2021 04:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -825,12 +825,6 @@ Underfull \hbox (badness 2080) in paragraph at lines 66--68
  []
 
 
-Underfull \hbox (badness 6675) in paragraph at lines 66--68
-\OT1/ptm/m/n/10 avoid-ance' was de-vel-oped ([]$\OT1/pcr/m/n/10 https : / / git
-hub . com /
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 66--68
 \OT1/pcr/m/n/10 HBRS-[]SDP / sdp _ ss20 _ collision _ monitoring _
  []
@@ -839,21 +833,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--68
 
 
 ]
-<images/sphere_sphere.png, id=89, 1028.643pt x 226.8475pt>
+<images/sphere_sphere.png, id=85, 1028.643pt x 226.8475pt>
 File: images/sphere_sphere.png Graphic file (type png)
 
 <use images/sphere_sphere.png>
 Package pdftex.def Info: images/sphere_sphere.png used on input line 88.
 (pdftex.def)             Requested size: 236.58292pt x 52.17381pt.
 
-<images/sphere_capsule.png, id=92, 478.588pt x 359.3425pt>
+<images/sphere_capsule.png, id=88, 478.588pt x 359.3425pt>
 File: images/sphere_capsule.png Graphic file (type png)
 
 <use images/sphere_capsule.png>
 Package pdftex.def Info: images/sphere_capsule.png used on input line 114.
 (pdftex.def)             Requested size: 143.5775pt x 107.80357pt.
 
-<images/capsule_capsule.png, id=94, 1202.4925pt x 253.3465pt>
+<images/capsule_capsule.png, id=90, 1202.4925pt x 253.3465pt>
 File: images/capsule_capsule.png Graphic file (type png)
 
 <use images/capsule_capsule.png>
@@ -864,7 +858,7 @@ Overfull \hbox (6.81276pt too wide) in paragraph at lines 130--131
  [][] 
  []
 
-<images/aabb.png, id=96, 583.3795pt x 222.8325pt>
+<images/aabb.png, id=92, 583.3795pt x 222.8325pt>
 File: images/aabb.png Graphic file (type png)
  <use images/aabb.png>
 Package pdftex.def Info: images/aabb.png used on input line 140.
@@ -872,195 +866,87 @@ Package pdftex.def Info: images/aabb.png used on input line 140.
 
 [2 <./images/sphere_sphere.png> <./images/sphere_capsule.png> <./images/capsule
 _capsule.png> <./images/aabb.png>]
+<images/box_capsule.jpeg, id=121, 1061.9675pt x 796.9775pt>
+File: images/box_capsule.jpeg Graphic file (type jpg)
+
+<use images/box_capsule.jpeg>
+Package pdftex.def Info: images/box_capsule.jpeg used on input line 162.
+(pdftex.def)             Requested size: 171.99242pt x 98.28424pt.
+
+<images/box_capsule1.jpeg, id=122, 1606.0pt x 1105.12875pt>
+File: images/box_capsule1.jpeg Graphic file (type jpg)
+
+<use images/box_capsule1.jpeg>
+Package pdftex.def Info: images/box_capsule1.jpeg used on input line 169.
+(pdftex.def)             Requested size: 171.97998pt x 98.27689pt.
+
 <images/steering_angle.png, id=129, 268.00125pt x 130.23656pt>
 File: images/steering_angle.png Graphic file (type png)
 
 <use images/steering_angle.png>
-Package pdftex.def Info: images/steering_angle.png used on input line 169.
+Package pdftex.def Info: images/steering_angle.png used on input line 186.
 (pdftex.def)             Requested size: 268.00058pt x 130.23624pt.
 
 <images/ros_graph.png, id=130, 1126.2075pt x 491.0345pt>
 File: images/ros_graph.png Graphic file (type png)
 
 <use images/ros_graph.png>
-Package pdftex.def Info: images/ros_graph.png used on input line 189.
+Package pdftex.def Info: images/ros_graph.png used on input line 206.
 (pdftex.def)             Requested size: 505.89511pt x 101.17221pt.
- [3 <./images/steering_angle.png (PNG copy)>]
-[4 <./images/ros_graph.png>]
-<images/no_potential.png, id=150, 334.24875pt x 313.9228pt>
-File: images/no_potential.png Graphic file (type png)
+ [3 <./images/box_capsule.jpeg> <./images/box_capsule1.jpeg> <./images/steering
+_angle.png (PNG copy)>] [4 <./images/ros_graph.png>]
+<images/robot.png, id=151, 446.468pt x 690.1785pt>
+File: images/robot.png Graphic file (type png)
+ <use images/robot.png>
+Package pdftex.def Info: images/robot.png used on input line 242.
+(pdftex.def)             Requested size: 446.4669pt x 690.17682pt.
 
-<use images/no_potential.png>
-Package pdftex.def Info: images/no_potential.png used on input line 255.
-(pdftex.def)             Requested size: 116.9888pt x 109.87462pt.
+<images/robot1.png, id=153, 385.8415pt x 505.89pt>
+File: images/robot1.png Graphic file (type png)
+ <use images/robot1.png>
+Package pdftex.def Info: images/robot1.png used on input line 255.
+(pdftex.def)             Requested size: 105.33253pt x 138.10509pt.
 
-Overfull \hbox (15.81235pt too wide) in paragraph at lines 255--256
+Overfull \hbox (4.15608pt too wide) in paragraph at lines 255--256
  [][] 
  []
 
-<images/yes_potential.png, id=151, 338.01282pt x 321.45094pt>
-File: images/yes_potential.png Graphic file (type png)
+<images/robot2.png, id=154, 440.044pt x 554.873pt>
+File: images/robot2.png Graphic file (type png)
+ <use images/robot2.png>
+Package pdftex.def Info: images/robot2.png used on input line 261.
+(pdftex.def)             Requested size: 110.01073pt x 138.71791pt.
 
-<use images/yes_potential.png>
-Package pdftex.def Info: images/yes_potential.png used on input line 261.
-(pdftex.def)             Requested size: 118.30624pt x 112.5095pt.
-
-Overfull \hbox (17.12979pt too wide) in paragraph at lines 261--262
+Overfull \hbox (8.83427pt too wide) in paragraph at lines 261--262
  [][] 
  []
 
-<images/potential_field.png, id=153, 382.42876pt x 393.72093pt>
-File: images/potential_field.png Graphic file (type png)
+<images/robot5.png, id=157, 365.7665pt x 238.0895pt>
+File: images/robot5.png Graphic file (type png)
+ <use images/robot5.png>
+Package pdftex.def Info: images/robot5.png used on input line 276.
+(pdftex.def)             Requested size: 365.7656pt x 238.08891pt.
 
-<use images/potential_field.png>
-Package pdftex.def Info: images/potential_field.png used on input line 271.
-(pdftex.def)             Requested size: 114.7295pt x 118.11719pt.
+<images/robot6.png, id=159, 190.311pt x 291.8905pt>
+File: images/robot6.png Graphic file (type png)
+ <use images/robot6.png>
+Package pdftex.def Info: images/robot6.png used on input line 285.
+(pdftex.def)             Requested size: 190.31052pt x 291.88977pt.
 
-<images/potential_field_top.png, id=154, 394.47375pt x 389.20406pt>
-File: images/potential_field_top.png Graphic file (type png)
-
-<use images/potential_field_top.png>
-Package pdftex.def Info: images/potential_field_top.png used on input line 272.
-
-(pdftex.def)             Requested size: 118.34303pt x 116.76212pt.
-
-<images/potential_field_side.png, id=155, 362.85562pt x 362.10281pt>
-File: images/potential_field_side.png Graphic file (type png)
-
-<use images/potential_field_side.png>
-Package pdftex.def Info: images/potential_field_side.png used on input line 273
-.
-(pdftex.def)             Requested size: 108.85751pt x 108.63167pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-<images/one_arm_three_obstacles.png, id=158, 325.215pt x 285.31593pt>
-File: images/one_arm_three_obstacles.png Graphic file (type png)
-
-<use images/one_arm_three_obstacles.png>
-Package pdftex.def Info: images/one_arm_three_obstacles.png used on input line 
-282.
-(pdftex.def)             Requested size: 97.56525pt x 85.59543pt.
-
-<images/one_arm_three_obstacles_top.png, id=159, 296.60812pt x 308.65312pt>
-File: images/one_arm_three_obstacles_top.png Graphic file (type png)
-
-<use images/one_arm_three_obstacles_top.png>
-Package pdftex.def Info: images/one_arm_three_obstacles_top.png used on input l
-ine 283.
-(pdftex.def)             Requested size: 88.98311pt x 92.59665pt.
-
-<images/one_arm_three_obstacles_side.png, id=160, 330.48468pt x 278.54062pt>
-File: images/one_arm_three_obstacles_side.png Graphic file (type png)
-
-<use images/one_arm_three_obstacles_side.png>
-Package pdftex.def Info: images/one_arm_three_obstacles_side.png used on input 
-line 284.
-(pdftex.def)             Requested size: 99.14616pt x 83.56282pt.
-
-<images/one_arm_three_obstacles_vector.png, id=161, 393.72093pt x 343.2825pt>
-File: images/one_arm_three_obstacles_vector.png Graphic file (type png)
-
-<use images/one_arm_three_obstacles_vector.png>
-Package pdftex.def Info: images/one_arm_three_obstacles_vector.png used on inpu
-t line 291.
-(pdftex.def)             Requested size: 118.11719pt x 102.98553pt.
-
-<images/one_arm_three_obstacles_top_vector.png, id=162, 374.90062pt x 353.82187
-pt>
-File: images/one_arm_three_obstacles_top_vector.png Graphic file (type png)
- <use images/one_arm_three_obstacles_top_vector.png>
-Package pdftex.def Info: images/one_arm_three_obstacles_top_vector.png used on 
-input line 292.
-(pdftex.def)             Requested size: 112.47105pt x 106.14737pt.
-
-<images/one_arm_three_obstacles_side_vector.png, id=163, 378.66469pt x 337.26pt
->
-File: images/one_arm_three_obstacles_side_vector.png Graphic file (type png)
- <use images/one_arm_three_obstacles_side_vector.png>
-Package pdftex.def Info: images/one_arm_three_obstacles_side_vector.png used on
- input line 293.
-(pdftex.def)             Requested size: 113.60028pt x 101.17877pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5 <./images/no_potential.png (PNG copy)> <./images/yes_potential.png (PNG cop
-y)> <./images/potential_field.png (PNG copy)> <./images/potential_field_top.png
- (PNG copy)> <./images/potential_field_side.png (PNG copy)> <./images/one_arm_t
-hree_obstacles.png (PNG copy)> <./images/one_arm_three_obstacles_top.png (PNG c
-opy)> <./images/one_arm_three_obstacles_side.png (PNG copy)>]
-<images/two_arms.jpeg, id=176, 977.6525pt x 543.02875pt>
-File: images/two_arms.jpeg Graphic file (type jpg)
-
-<use images/two_arms.jpeg>
-Package pdftex.def Info: images/two_arms.jpeg used on input line 306.
-(pdftex.def)             Requested size: 146.64154pt x 81.45079pt.
-
-<images/two_arms.png, id=178, 394.47375pt x 362.85562pt>
-File: images/two_arms.png Graphic file (type png)
-
-<use images/two_arms.png>
-Package pdftex.def Info: images/two_arms.png used on input line 315.
-(pdftex.def)             Requested size: 98.6182pt x 90.71368pt.
-
-<images/two_arms_top.png, id=179, 371.88937pt x 361.35pt>
-File: images/two_arms_top.png Graphic file (type png)
-
-<use images/two_arms_top.png>
-Package pdftex.def Info: images/two_arms_top.png used on input line 316.
-(pdftex.def)             Requested size: 92.9721pt x 90.33728pt.
-
-<images/two_arms_side.png, id=180, 337.26pt x 335.00156pt>
-File: images/two_arms_side.png Graphic file (type png)
-
-<use images/two_arms_side.png>
-Package pdftex.def Info: images/two_arms_side.png used on input line 317.
-(pdftex.def)             Requested size: 84.31479pt x 83.75018pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-<images/two_arms_vector.png, id=181, 453.19313pt x 359.84438pt>
-File: images/two_arms_vector.png Graphic file (type png)
-
-<use images/two_arms_vector.png>
-Package pdftex.def Info: images/two_arms_vector.png used on input line 324.
-(pdftex.def)             Requested size: 113.298pt x 89.96086pt.
-
-<images/two_arms_vector_top.png, id=182, 450.9347pt x 335.75438pt>
-File: images/two_arms_vector_top.png Graphic file (type png)
-
-<use images/two_arms_vector_top.png>
-Package pdftex.def Info: images/two_arms_vector_top.png used on input line 325.
-
-(pdftex.def)             Requested size: 112.7334pt x 83.93839pt.
-
-<images/two_arms_vector_side.png, id=183, 432.86719pt x 335.75438pt>
-File: images/two_arms_vector_side.png Graphic file (type png)
-
-<use images/two_arms_vector_side.png>
-Package pdftex.def Info: images/two_arms_vector_side.png used on input line 326
-.
-(pdftex.def)             Requested size: 108.21652pt x 83.93839pt.
- [6 <./images/one_arm_three_obstacles_vector.png (PNG copy)> <./images/one_arm_
-three_obstacles_top_vector.png (PNG copy)> <./images/one_arm_three_obstacles_si
-de_vector.png (PNG copy)> <./images/two_arms.jpeg> <./images/two_arms.png (PNG 
-copy)> <./images/two_arms_top.png (PNG copy)> <./images/two_arms_side.png (PNG 
-copy)> <./images/two_arms_vector.png (PNG copy)> <./images/two_arms_vector_top.
-png (PNG copy)> <./images/two_arms_vector_side.png (PNG copy)>]
-Underfull \hbox (badness 5802) in paragraph at lines 365--366
+[5 <./images/robot.png> <./images/robot1.png> <./images/robot2.png> <./images/r
+obot5.png> <./images/robot6.png>]
+Underfull \hbox (badness 5802) in paragraph at lines 322--323
 []\OT1/ptm/m/n/10 The code for the col-li-sion mon-i-tor-ing li-brary is
  []
 
 
-Underfull \hbox (badness 2269) in paragraph at lines 365--366
+Underfull \hbox (badness 2269) in paragraph at lines 322--323
 \OT1/ptm/m/n/10 ac-ces-si-ble at the fol-low-ing link: []$\OT1/pcr/m/n/10 https
  : / / github .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 365--366
+Underfull \hbox (badness 10000) in paragraph at lines 322--323
 \OT1/pcr/m/n/10 com / Sreeni1204 / sdp _ ws20 _ collision _
  []
 
@@ -1107,22 +993,22 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ù in font ptmr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 379--380
+Underfull \hbox (badness 10000) in paragraph at lines 336--337
 []\OT1/ptm/m/n/8 S. Adee, Dean Ka-mens Luke Arm Pros-the-sis Read-ies
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 379--380
+Underfull \hbox (badness 10000) in paragraph at lines 336--337
 \OT1/ptm/m/n/8 for Clin-i-cal Tri-als - IEEE Spec-trum, IEEE Spec-trum:
  []
 
 
-Underfull \hbox (badness 4291) in paragraph at lines 379--380
+Underfull \hbox (badness 4291) in paragraph at lines 336--337
 \OT1/ptm/m/n/8 Tech-nol-ogy, En-gi-neer-ing, and Sci-ence News, Feb. 01, 2008.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 379--380
+Underfull \hbox (badness 10000) in paragraph at lines 336--337
 \OT1/ptm/m/n/8 https://spectrum.ieee.org/biomedical/bionics/dean-kamens-luke-ar
 m-
  []
@@ -1137,24 +1023,30 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ì in font ptmr7t!
 
-Underfull \hbox (badness 6493) in paragraph at lines 381--382
+Underfull \hbox (badness 6493) in paragraph at lines 338--339
 \OT1/ptm/m/n/8 A Wol-fram Web Re-source, cre-ated by Eric W. Weis-stein.
  []
 
 Missing character: There is no ¬ in font ptmr7t!
 Missing character: There is no ∑ in font ptmr7t!
 
-Underfull \hbox (badness 2856) in paragraph at lines 384--386
+Underfull \hbox (badness 2856) in paragraph at lines 341--342
 []\OT1/ptm/m/n/8 AABB  3DCol-li-sions - []$\OT1/pcr/m/n/8 https : / / gdbooks .
  gitbooks . io /
  []
 
 
-Underfull \hbox (badness 8038) in paragraph at lines 384--386
+Underfull \hbox (badness 8038) in paragraph at lines 341--342
 \OT1/pcr/m/n/8 3dcollisions / content / Chapter1 / aabb . html$[]\OT1/ptm/m/n/8
  , Ac-cessed
  []
 
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ú in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ù in font ptmr7t!
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1166,25 +1058,29 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 392.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 392.
+[6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 351.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 351.
  (./WS20_21_Sreenivasa_Zain_Urvashi.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 392.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 392.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 351.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 351.
 Package rerunfilecheck Info: File `WS20_21_Sreenivasa_Zain_Urvashi.out' has not
  changed.
-(rerunfilecheck)             Checksum: 306435BA248672DC71F12BD793675C2A;1013.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 392.
+(rerunfilecheck)             Checksum: 4F40F6829B20D79218B49039AE51F56A;1005.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 351.
  ) 
 Here is how much of TeX's memory you used:
- 18362 strings out of 493029
- 344302 string characters out of 6136234
- 412191 words of memory out of 5000000
- 21480 multiletter control sequences out of 15000+600000
- 59541 words of font info for 131 fonts, out of 8000000 for 9000
+ 18285 strings out of 493029
+ 341714 string characters out of 6136234
+ 411312 words of memory out of 5000000
+ 21420 multiletter control sequences out of 15000+600000
+ 52945 words of font info for 114 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,77p,1814b,585s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,9n,77p,1404b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
@@ -1196,11 +1092,11 @@ re/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on WS20_21_Sreenivasa_Zain_Urvashi.pdf (7 pages, 3024249 bytes).
+Output written on WS20_21_Sreenivasa_Zain_Urvashi.pdf (6 pages, 4318177 bytes).
 
 PDF statistics:
- 266 PDF objects out of 1000 (max. 8388607)
- 214 compressed objects within 3 object streams
- 63 named destinations out of 1000 (max. 500000)
- 269 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 249 PDF objects out of 1000 (max. 8388607)
+ 204 compressed objects within 3 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 206 words of extra memory for PDF output out of 10000 (max. 10000000)
 

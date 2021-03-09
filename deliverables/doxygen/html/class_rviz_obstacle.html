@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Collision monitoring for robotic manipulators: RvizObstacle Class Reference</title>
+<title>Collision monitoring for a mobile manipulator: RvizObstacle Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Collision monitoring for robotic manipulators
+   <div id="projectname">Collision monitoring for a mobile manipulator
    </div>
   </td>
  </tr>
@@ -114,15 +114,24 @@ $(document).ready(function(){initNavTree('class_rviz_obstacle.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="arm__controller_8h_source.html">arm_controller.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="">arm_controller.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for RvizObstacle:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_rviz_obstacle__coll__graph.png" border="0" usemap="#_rviz_obstacle_coll__map" alt="Collaboration graph"/></div>
+<map name="_rviz_obstacle_coll__map" id="_rviz_obstacle_coll__map">
+</map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a3fb19f60434581b669c0dc063c026943"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rviz_obstacle.html#a3fb19f60434581b669c0dc063c026943">RvizObstacle</a> (visualization_msgs::Marker::ConstPtr markerIn, int index)</td></tr>
+<tr class="separator:a3fb19f60434581b669c0dc063c026943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefa092d8dcad532408308c34cb4cddbe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rviz_obstacle.html#aefa092d8dcad532408308c34cb4cddbe">~RvizObstacle</a> ()</td></tr>
+<tr class="memdesc:aefa092d8dcad532408308c34cb4cddbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#aefa092d8dcad532408308c34cb4cddbe">More...</a><br /></td></tr>
+<tr class="separator:aefa092d8dcad532408308c34cb4cddbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30101e2a3c65776bb4abbb139f10b14a"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix4d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rviz_obstacle.html#a30101e2a3c65776bb4abbb139f10b14a">updatePose</a> (visualization_msgs::Marker::ConstPtr markerIn)</td></tr>
+<tr class="separator:a30101e2a3c65776bb4abbb139f10b14a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fb19f60434581b669c0dc063c026943"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rviz_obstacle.html#a3fb19f60434581b669c0dc063c026943">RvizObstacle</a> (visualization_msgs::Marker::ConstPtr markerIn, int index)</td></tr>
 <tr class="separator:a3fb19f60434581b669c0dc063c026943"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefa092d8dcad532408308c34cb4cddbe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rviz_obstacle.html#aefa092d8dcad532408308c34cb4cddbe">~RvizObstacle</a> ()</td></tr>
@@ -145,8 +154,6 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class for dealing with obstacle displaying in ROS. </p>
-
-<p>Definition at line <a class="el" href="arm__controller_8h_source.html#l00039">39</a> of file <a class="el" href="arm__controller_8h_source.html">arm_controller.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3fb19f60434581b669c0dc063c026943"></a>
 <div class="memitem">
@@ -180,8 +187,6 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00328">328</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="aefa092d8dcad532408308c34cb4cddbe"></a>
@@ -199,7 +204,56 @@ Public Attributes</h2></td></tr>
 
 <p>Destructor. </p>
 
-<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00344">344</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a3fb19f60434581b669c0dc063c026943"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RvizObstacle::RvizObstacle </td>
+          <td>(</td>
+          <td class="paramtype">visualization_msgs::Marker::ConstPtr&#160;</td>
+          <td class="paramname"><em>markerIn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Constructor</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">markerIn</td><td>The marker with dimensions suiting the obstacle </td></tr>
+    <tr><td class="paramname">index</td><td>The location of the obstacle in the monitor obstacle list </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aefa092d8dcad532408308c34cb4cddbe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RvizObstacle::~RvizObstacle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
 
 </div>
 </div>
@@ -226,7 +280,29 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The new Pose of the obstacle </dd></dl>
 
-<p>Definition at line <a class="el" href="arm__controller_8cpp_source.html#l00347">347</a> of file <a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a30101e2a3c65776bb4abbb139f10b14a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Matrix4d RvizObstacle::updatePose </td>
+          <td>(</td>
+          <td class="paramtype">visualization_msgs::Marker::ConstPtr&#160;</td>
+          <td class="paramname"><em>markerIn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Function for updating the position of the obstacle</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">markerIn</td><td>The marker representing the new position of the obstacle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The new Pose of the obstacle </dd></dl>
 
 </div>
 </div>
@@ -243,8 +319,6 @@ Public Attributes</h2></td></tr>
 
 <p>The index of the obstacle in <a class="el" href="class_monitor.html">Monitor</a> obstacle list. </p>
 
-<p>Definition at line <a class="el" href="arm__controller_8h_source.html#l00043">43</a> of file <a class="el" href="arm__controller_8h_source.html">arm_controller.h</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a9edb18553236c56fb49e9d181e0ed052"></a>
@@ -258,8 +332,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The marker that represents the obstacle in rviz. </p>
-
-<p>Definition at line <a class="el" href="arm__controller_8h_source.html#l00046">46</a> of file <a class="el" href="arm__controller_8h_source.html">arm_controller.h</a>.</p>
 
 </div>
 </div>
@@ -275,13 +347,13 @@ Public Attributes</h2></td></tr>
 
 <p>The pose of the marker. </p>
 
-<p>Definition at line <a class="el" href="arm__controller_8h_source.html#l00049">49</a> of file <a class="el" href="arm__controller_8h_source.html">arm_controller.h</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="arm__controller_8h_source.html">arm_controller.h</a></li>
-<li><a class="el" href="arm__controller_8cpp_source.html">arm_controller.cpp</a></li>
+<li>include/<a class="el" href="">arm_controller.h</a></li>
+<li>include/<a class="el" href="">base_controller.h</a></li>
+<li>src/<a class="el" href="">arm_controller.cpp</a></li>
+<li>src/<a class="el" href="">base_controller.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

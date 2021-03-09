@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['obstaclepotentialfield',['obstaclePotentialField',['../class_arm_controller.html#ad0b1f28333e2a3be76258153a745803d',1,'ArmController']]],
-  ['obstacles',['obstacles',['../class_monitor.html#a05fd42482269ad65432d5400c8f0f9b5',1,'Monitor']]],
-  ['obstaclestodelete',['obstaclesToDelete',['../class_monitor.html#a2207169c2b32b3bbf9925f3254064dee',1,'Monitor']]]
+  ['narkinbase',['NarkinBase',['../class_narkin_base.html',1,'NarkinBase'],['../class_narkin_base.html#a35e4edf9bb144fd8dee636e41d9ae9e9',1,'NarkinBase::NarkinBase()']]],
+  ['nframes',['nFrames',['../class_arm.html#ac7955a5e8e9c6681b55d0d80d7e31df7',1,'Arm::nFrames()'],['../class_base.html#a22cb3f7de315b27b1b2b0b00848c2f4b',1,'Base::nFrames()']]],
+  ['njoints',['nJoints',['../class_arm.html#ac3734a2ca38b0312fd42894ab6886bc9',1,'Arm']]],
+  ['nlinks',['nLinks',['../class_arm.html#a911ba9a8c719c090a305f88ab0ae7490',1,'Arm']]]
 ];

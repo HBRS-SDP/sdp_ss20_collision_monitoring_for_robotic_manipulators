@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['idx',['idx',['../class_rviz_obstacle.html#aac6f99fde043e8d9c0e9d0bab32fd375',1,'RvizObstacle']]]
+  ['extents',['extents',['../class_box3.html#a5aea4c92dc0926d4a9577b65c402b1b2',1,'Box3']]]
 ];

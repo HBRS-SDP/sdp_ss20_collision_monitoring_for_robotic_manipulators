@@ -1,0 +1,194 @@
+\hypertarget{class_base_controller}{}\section{Base\+Controller Class Reference}
+\label{class_base_controller}\index{Base\+Controller@{Base\+Controller}}
+
+
+{\ttfamily \#include $<$base\+\_\+controller.\+h$>$}
+
+
+
+Collaboration diagram for Base\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_base_controller__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_base_controller_a0821816ec5a6012eac19f853ab0c2044}{Base\+Controller} (\hyperlink{class_monitor}{Monitor} $\ast$monitor\+Object, double k, double d, double gamma, double beta)
+\item 
+\hyperlink{class_base_controller_ab50e8c6a966189b4d6000e057e5978ed}{$\sim$\+Base\+Controller} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_base}{Base} Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_base_controller_a8ebbdf4ee3ad99e304f8643d58b03cbf}{base\+Callback} (const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&msg)
+\item 
+void \hyperlink{class_base_controller_a50fb5111564b5ae2c7918829883f81a2}{goal\+Callback} (const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&msg)
+\item 
+geometry\+\_\+msgs\+::\+Twist \hyperlink{class_base_controller_a7129f47562f34ff49f2ccba7274488ca}{control\+\_\+loop} (void)
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_base_controller_a93753486d3cd87303aa4ba0a70602d64}{obstacle\+Potential\+Field} (Eigen\+::\+Vector3d current\+Position, Eigen\+::\+Vector3d velocity)
+\item 
+void \hyperlink{class_base_controller_ae7ddb6970a0beca3893f12d1d4b20743}{update\+Obstacles} (const visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr \&msg)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_monitor}{Monitor} $\ast$ \hyperlink{class_base_controller_ae6cddbeb20a2a7f3f6b8c840aa59c063}{monitor}
+\begin{DoxyCompactList}\small\item\em The monitor class used to perform collision monitoring. \end{DoxyCompactList}\item 
+Eigen\+::\+Vector3d \hyperlink{class_base_controller_a48f4aa3cf599a55627b87d36d7b2c148}{goal}
+\begin{DoxyCompactList}\small\item\em The goal point of the robot motion. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{class_rviz_obstacle}{Rviz\+Obstacle} $\ast$ $>$ \hyperlink{class_base_controller_abb0f1c2c9cbd953d95268ff4cb7ff3b4}{rviz\+Obstacles}
+\begin{DoxyCompactList}\small\item\em A list of obstacles that are displayed in rviz. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_arm}{Arm} controller class to demonstate the use of the Collision monitoring library.
+
+The class uses the monitor class from the custom library to control a 7\+D\+OF kinova arm implementing the paper\+: \mbox{[}1\mbox{]}H. Hoffmann, P. Pastor, D.-\/H. Park, and S. Schaal, “\+Biologically-\/inspired dynamical systems for movement generation\+: Automatic real-\/time goal adaptation and obstacle avoidance,” in 2009 I\+E\+EE International Conference on Robotics and Automation, Kobe, May 2009, pp. 2587–2592, doi\+: 10.\+1109/\+R\+O\+B\+OT.2009.\+5152423. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Base\+Controller@{Base\+Controller}!Base\+Controller@{Base\+Controller}}
+\index{Base\+Controller@{Base\+Controller}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{Base\+Controller(\+Monitor $\ast$monitor\+Object, double k, double d, double gamma, double beta)}{BaseController(Monitor *monitorObject, double k, double d, double gamma, double beta)}}]{\setlength{\rightskip}{0pt plus 5cm}Base\+Controller\+::\+Base\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf Monitor} $\ast$}]{monitor\+Object, }
+\item[{double}]{k, }
+\item[{double}]{d, }
+\item[{double}]{gamma, }
+\item[{double}]{beta}
+\end{DoxyParamCaption}
+)}\hypertarget{class_base_controller_a0821816ec5a6012eac19f853ab0c2044}{}\label{class_base_controller_a0821816ec5a6012eac19f853ab0c2044}
+\hyperlink{class_base}{Base} Controller constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em monitor\+Object} & The monitor instance used to get the distance from the base to any obstacles \\
+\hline
+{\em k} & Costant for the obstacle avoidance algorithim \\
+\hline
+{\em d} & Costant for the obstacle avoidance algorithim \\
+\hline
+{\em gamma} & Costant for the obstacle avoidance algorithim \\
+\hline
+{\em beta} & Costant for the obstacle avoidance algorithim \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An instance of Collision\+Monitor class 
+\end{DoxyReturn}
+\index{Base\+Controller@{Base\+Controller}!````~Base\+Controller@{$\sim$\+Base\+Controller}}
+\index{````~Base\+Controller@{$\sim$\+Base\+Controller}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{$\sim$\+Base\+Controller()}{~BaseController()}}]{\setlength{\rightskip}{0pt plus 5cm}Base\+Controller\+::$\sim$\+Base\+Controller (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_base_controller_ab50e8c6a966189b4d6000e057e5978ed}{}\label{class_base_controller_ab50e8c6a966189b4d6000e057e5978ed}
+
+
+\hyperlink{class_base}{Base} Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Base\+Controller@{Base\+Controller}!base\+Callback@{base\+Callback}}
+\index{base\+Callback@{base\+Callback}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{base\+Callback(const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&msg)}{baseCallback(const nav_msgs::Odometry::ConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Base\+Controller\+::base\+Callback (
+\begin{DoxyParamCaption}
+\item[{const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{class_base_controller_a8ebbdf4ee3ad99e304f8643d58b03cbf}{}\label{class_base_controller_a8ebbdf4ee3ad99e304f8643d58b03cbf}
+Callback function updating the base positions
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The ros sensor messsage containing the odometry messages \\
+\hline
+\end{DoxyParams}
+\index{Base\+Controller@{Base\+Controller}!control\+\_\+loop@{control\+\_\+loop}}
+\index{control\+\_\+loop@{control\+\_\+loop}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{control\+\_\+loop(void)}{control_loop(void)}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Twist Base\+Controller\+::control\+\_\+loop (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_base_controller_a7129f47562f34ff49f2ccba7274488ca}{}\label{class_base_controller_a7129f47562f34ff49f2ccba7274488ca}
+Function that uses internal parameters to send instructions to arm
+
+This is where the obstacle avoidance is implemented and is based off of the paper\+: \index{Base\+Controller@{Base\+Controller}!goal\+Callback@{goal\+Callback}}
+\index{goal\+Callback@{goal\+Callback}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{goal\+Callback(const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&msg)}{goalCallback(const geometry_msgs::Point::ConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Base\+Controller\+::goal\+Callback (
+\begin{DoxyParamCaption}
+\item[{const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{class_base_controller_a50fb5111564b5ae2c7918829883f81a2}{}\label{class_base_controller_a50fb5111564b5ae2c7918829883f81a2}
+Callback function updating goal position of the arms endeffector
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The ros sensor messsage containing the goal position \\
+\hline
+\end{DoxyParams}
+\index{Base\+Controller@{Base\+Controller}!obstacle\+Potential\+Field@{obstacle\+Potential\+Field}}
+\index{obstacle\+Potential\+Field@{obstacle\+Potential\+Field}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{obstacle\+Potential\+Field(\+Eigen\+::\+Vector3d current\+Position, Eigen\+::\+Vector3d velocity)}{obstaclePotentialField(Eigen::Vector3d currentPosition, Eigen::Vector3d velocity)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Base\+Controller\+::obstacle\+Potential\+Field (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d}]{current\+Position, }
+\item[{Eigen\+::\+Vector3d}]{velocity}
+\end{DoxyParamCaption}
+)}\hypertarget{class_base_controller_a93753486d3cd87303aa4ba0a70602d64}{}\label{class_base_controller_a93753486d3cd87303aa4ba0a70602d64}
+Creates the obstacle potential field value used in the control loop \mbox{[}1\mbox{]}
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Position} & The current position of the endeffector \\
+\hline
+{\em velocity} & The current velocity of the endeffector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The potential feild vector produced from the obstacles 
+\end{DoxyReturn}
+\index{Base\+Controller@{Base\+Controller}!update\+Obstacles@{update\+Obstacles}}
+\index{update\+Obstacles@{update\+Obstacles}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{update\+Obstacles(const visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr \&msg)}{updateObstacles(const visualization_msgs::Marker::ConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Base\+Controller\+::update\+Obstacles (
+\begin{DoxyParamCaption}
+\item[{const visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{class_base_controller_ae7ddb6970a0beca3893f12d1d4b20743}{}\label{class_base_controller_ae7ddb6970a0beca3893f12d1d4b20743}
+A callback function that updates or adds obstacles
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & the ros marker message with the object parameters \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Base\+Controller@{Base\+Controller}!goal@{goal}}
+\index{goal@{goal}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{goal}{goal}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Base\+Controller\+::goal}\hypertarget{class_base_controller_a48f4aa3cf599a55627b87d36d7b2c148}{}\label{class_base_controller_a48f4aa3cf599a55627b87d36d7b2c148}
+
+
+The goal point of the robot motion. 
+
+\index{Base\+Controller@{Base\+Controller}!monitor@{monitor}}
+\index{monitor@{monitor}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{monitor}{monitor}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Monitor}$\ast$ Base\+Controller\+::monitor}\hypertarget{class_base_controller_ae6cddbeb20a2a7f3f6b8c840aa59c063}{}\label{class_base_controller_ae6cddbeb20a2a7f3f6b8c840aa59c063}
+
+
+The monitor class used to perform collision monitoring. 
+
+\index{Base\+Controller@{Base\+Controller}!rviz\+Obstacles@{rviz\+Obstacles}}
+\index{rviz\+Obstacles@{rviz\+Obstacles}!Base\+Controller@{Base\+Controller}}
+\subsubsection[{\texorpdfstring{rviz\+Obstacles}{rvizObstacles}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Rviz\+Obstacle}$\ast$$>$ Base\+Controller\+::rviz\+Obstacles}\hypertarget{class_base_controller_abb0f1c2c9cbd953d95268ff4cb7ff3b4}{}\label{class_base_controller_abb0f1c2c9cbd953d95268ff4cb7ff3b4}
+
+
+A list of obstacles that are displayed in rviz. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{base__controller_8h}{base\+\_\+controller.\+h}\item 
+src/\hyperlink{base__controller_8cpp}{base\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

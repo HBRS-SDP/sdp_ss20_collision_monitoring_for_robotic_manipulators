@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Collision monitoring for robotic manipulators: Monitor Class Reference</title>
+<title>Collision monitoring for a mobile manipulator: Monitor Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Collision monitoring for robotic manipulators
+   <div id="projectname">Collision monitoring for a mobile manipulator
    </div>
   </td>
  </tr>
@@ -114,20 +114,25 @@ $(document).ready(function(){initNavTree('class_monitor.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="monitor_8h_source.html">monitor.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="">monitor.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Monitor:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_monitor__coll__graph.png" border="0" usemap="#_monitor_coll__map" alt="Collaboration graph"/></div>
 <map name="_monitor_coll__map" id="_monitor_coll__map">
-<area shape="rect" id="node2" href="class_arm.html" title="{Arm\n|+ baseTransform\l+ links\l+ nLinks\l+ nJoints\l+ nFrames\l|+ ~Arm()\l+ updatePose()\l+ getPose()\l+ getPose()\l}" alt="" coords="43,5,165,185"/>
+<area shape="rect" id="node2" href="class_base.html" title="{Base\n|+ baseTransform\l+ nFrames\l|+ ~Base()\l+ updatePose()\l+ getPose()\l}" alt="" coords="25,888,147,1009"/>
+<area shape="rect" id="node3" href="class_box3.html" title="{Box3\n|+ bounds\l+ minPoint\l+ maxPoint\l+ box_center\l+ extents\l|+ Box3()\l+ Box3()\l+ Box3()\l+ Box3()\l+ Box3()\l+ ~Box3()\l+ intersection()\l+ Edge()\l+ EdgeList()\l+ CornerPoint()\l+ SideCenterPoint()\l+ OwnClosestPoint()\l+ OwnClosestPoint()\l+ ClosestPoint()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l}" alt="" coords="5,293,167,796"/>
+<area shape="rect" id="node4" href="class_primitive.html" title="{Primitive\n|+ pose\l|+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l}" alt="" coords="5,5,167,244"/>
+<area shape="rect" id="node5" href="class_arm.html" title="{Arm\n|+ baseTransform\l+ links\l+ nLinks\l+ nJoints\l+ nFrames\l|+ ~Arm()\l+ updatePose()\l+ getPose()\l+ getPose()\l}" alt="" coords="171,859,292,1039"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afefe8eeab13fd3f8f3c59ae53d25a00e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#afefe8eeab13fd3f8f3c59ae53d25a00e">distanceToObjects</a> (void)</td></tr>
-<tr class="separator:afefe8eeab13fd3f8f3c59ae53d25a00e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1801675787693435342ae799975b1120"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a1801675787693435342ae799975b1120">distanceToObjects</a> ()</td></tr>
+<tr class="separator:a1801675787693435342ae799975b1120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4ef4f45f75dcc38d6283644a4bfdbe"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a1e4ef4f45f75dcc38d6283644a4bfdbe">baseDistanceToObjects</a> ()</td></tr>
+<tr class="separator:a1e4ef4f45f75dcc38d6283644a4bfdbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe72152adc0d2d2faf8fb01563417033"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#afe72152adc0d2d2faf8fb01563417033">distanceBetweenArmLinks</a> ()</td></tr>
 <tr class="separator:afe72152adc0d2d2faf8fb01563417033"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c448bcff703af93489cc4f0847d4245"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a8c448bcff703af93489cc4f0847d4245">addObstacle</a> (<a class="el" href="class_primitive.html">Primitive</a> *obstacle)</td></tr>
@@ -138,6 +143,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a192497730489ebcd6a6580875cfbeee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a580dedf3090ffff7a452dbe32cc585f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a580dedf3090ffff7a452dbe32cc585f4">addObstacle</a> (<a class="el" href="class_arm.html">Arm</a> *<a class="el" href="class_monitor.html#a8b75571f6224f999a3dc05cf9a83fa68">arm</a>)</td></tr>
 <tr class="separator:a580dedf3090ffff7a452dbe32cc585f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0a962c56c54acb79a900dd9ef555b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#ada0a962c56c54acb79a900dd9ef555b6">addObstacle</a> (<a class="el" href="class_base.html">Base</a> *base_obstacle)</td></tr>
+<tr class="separator:ada0a962c56c54acb79a900dd9ef555b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4f85c0ea9c00b1d633f69fa5ffef4cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#aa4f85c0ea9c00b1d633f69fa5ffef4cd">addObstacle</a> (<a class="el" href="class_box3.html">Box3</a> *box)</td></tr>
+<tr class="separator:aa4f85c0ea9c00b1d633f69fa5ffef4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0761228d7a5ca8c0e272e5e3bec5bef8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a0761228d7a5ca8c0e272e5e3bec5bef8">Monitor</a> (<a class="el" href="class_base.html">Base</a> *<a class="el" href="class_monitor.html#a62aac32130c77d66f9cec4a06d5e75a7">base</a>)</td></tr>
+<tr class="separator:a0761228d7a5ca8c0e272e5e3bec5bef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda7d547e1226e159836356dd8af14bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#adda7d547e1226e159836356dd8af14bb">Monitor</a> (<a class="el" href="class_arm.html">Arm</a> *<a class="el" href="class_monitor.html#a8b75571f6224f999a3dc05cf9a83fa68">arm</a>)</td></tr>
 <tr class="separator:adda7d547e1226e159836356dd8af14bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64aba8195effc068092ddea5a71e8176"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a64aba8195effc068092ddea5a71e8176">~Monitor</a> ()</td></tr>
@@ -148,6 +159,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a8b75571f6224f999a3dc05cf9a83fa68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_arm.html">Arm</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a8b75571f6224f999a3dc05cf9a83fa68">arm</a></td></tr>
 <tr class="memdesc:a8b75571f6224f999a3dc05cf9a83fa68"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_arm.html">Arm</a> for the monitor.  <a href="#a8b75571f6224f999a3dc05cf9a83fa68">More...</a><br /></td></tr>
 <tr class="separator:a8b75571f6224f999a3dc05cf9a83fa68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62aac32130c77d66f9cec4a06d5e75a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_base.html">Base</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a62aac32130c77d66f9cec4a06d5e75a7">base</a></td></tr>
+<tr class="separator:a62aac32130c77d66f9cec4a06d5e75a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05fd42482269ad65432d5400c8f0f9b5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_primitive.html">Primitive</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_monitor.html#a05fd42482269ad65432d5400c8f0f9b5">obstacles</a></td></tr>
 <tr class="memdesc:a05fd42482269ad65432d5400c8f0f9b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obstacles in the workspace.  <a href="#a05fd42482269ad65432d5400c8f0f9b5">More...</a><br /></td></tr>
 <tr class="separator:a05fd42482269ad65432d5400c8f0f9b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,9 +171,34 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A collision monitor to determine the distance to obstacles and other links</p>
 <p>The <a class="el" href="class_monitor.html">Monitor</a> class is a collision monitor which stores the address of an instance of the class <a class="el" href="class_arm.html">Arm</a> and maintains a list of obstacles. It can perform collision monitoring with obstacles by determining the distance to obstacles in the workspace, or collision monitoring with the arm itself by monitoring the distance between the links. </p>
-
-<p>Definition at line <a class="el" href="monitor_8h_source.html#l00018">18</a> of file <a class="el" href="monitor_8h_source.html">monitor.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a0761228d7a5ca8c0e272e5e3bec5bef8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Monitor::Monitor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_base.html">Base</a> *&#160;</td>
+          <td class="paramname"><em>base</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Constructor of <a class="el" href="class_monitor.html">Monitor</a></p>
+<p>This is the constructor for the monitor class, it takes as paramter the arm to be monitored.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arm</td><td>arm to monitor collision.Constructor of <a class="el" href="class_monitor.html">Monitor</a> <pre class="fragment">This is the constructor for the monitor class, it takes as 
+paramter the base to be monitored. 
+
+@param base base to monitor collision.</pre> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="adda7d547e1226e159836356dd8af14bb"></a>
 <div class="memitem">
 <div class="memproto">
@@ -174,16 +212,6 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Constructor of <a class="el" href="class_monitor.html">Monitor</a></p>
-<p>This is the constructor for the monitor class, it takes as paramter the arm to be monitored.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">arm</td><td>arm to monitor collision. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="monitor_8cpp_source.html#l00006">6</a> of file <a class="el" href="monitor_8cpp_source.html">monitor.cpp</a>.</p>
 
 </div>
 </div>
@@ -200,8 +228,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Destructor for the monitor class </p>
-
-<p>Definition at line <a class="el" href="monitor_8cpp_source.html#l00013">13</a> of file <a class="el" href="monitor_8cpp_source.html">monitor.cpp</a>.</p>
 
 </div>
 </div>
@@ -227,8 +253,6 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="monitor_8cpp_source.html#l00023">23</a> of file <a class="el" href="monitor_8cpp_source.html">monitor.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="af5979d8f05c2d945ddc055e329fad5d2"></a>
@@ -252,8 +276,6 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="monitor_8cpp_source.html#l00039">39</a> of file <a class="el" href="monitor_8cpp_source.html">monitor.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a192497730489ebcd6a6580875cfbeee3"></a>
@@ -276,8 +298,6 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p>Definition at line <a class="el" href="monitor_8cpp_source.html#l00048">48</a> of file <a class="el" href="monitor_8cpp_source.html">monitor.cpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +323,70 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="monitor_8cpp_source.html#l00058">58</a> of file <a class="el" href="monitor_8cpp_source.html">monitor.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="ada0a962c56c54acb79a900dd9ef555b6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Monitor::addObstacle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_base.html">Base</a> *&#160;</td>
+          <td class="paramname"><em>base_obstacle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds base to list of obstacles</p>
+<p>This method decomposes a base into its box3 primitive to add it into the vector of obstacles.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">base</td><td>address of the base to be treated as an obstacle. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa4f85c0ea9c00b1d633f69fa5ffef4cd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Monitor::addObstacle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_box3.html">Box3</a> *&#160;</td>
+          <td class="paramname"><em>box</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds box to list of obstacles</p>
+<p>Adds a box to the list of obstacles. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">box</td><td>address of the box obstacle to be added. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1e4ef4f45f75dcc38d6283644a4bfdbe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; Monitor::baseDistanceToObjects </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Collision monitoring with the base and other obstacles.</p>
+<p>This methods monitors the distance from base of the robot to other obstacles.</p>
+<dl class="section return"><dt>Returns</dt><dd>a matrix with the distance of each link to the other links. </dd></dl>
 
 </div>
 </div>
@@ -323,18 +406,15 @@ Public Attributes</h2></td></tr>
 <p>This methods monitors the distance from one link of the arm to other links.</p>
 <dl class="section return"><dt>Returns</dt><dd>a matrix with the distance of each link to the other links. </dd></dl>
 
-<p>Definition at line <a class="el" href="monitor_8cpp_source.html#l00108">108</a> of file <a class="el" href="monitor_8cpp_source.html">monitor.cpp</a>.</p>
-
 </div>
 </div>
-<a class="anchor" id="afefe8eeab13fd3f8f3c59ae53d25a00e"></a>
+<a class="anchor" id="a1801675787693435342ae799975b1120"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt; std::vector&lt; double &gt; &gt; Monitor::distanceToObjects </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -343,8 +423,6 @@ Public Attributes</h2></td></tr>
 <p>Collision monitoring with obstacles.</p>
 <p>This methods monitors the distance from one link of the arm to obstacles in the workspace.</p>
 <dl class="section return"><dt>Returns</dt><dd>a matrix with the distance of each link to the other obstacles. </dd></dl>
-
-<p>Definition at line <a class="el" href="monitor_8cpp_source.html#l00075">75</a> of file <a class="el" href="monitor_8cpp_source.html">monitor.cpp</a>.</p>
 
 </div>
 </div>
@@ -361,7 +439,17 @@ Public Attributes</h2></td></tr>
 
 <p><a class="el" href="class_arm.html">Arm</a> for the monitor. </p>
 
-<p>Definition at line <a class="el" href="monitor_8h_source.html#l00024">24</a> of file <a class="el" href="monitor_8h_source.html">monitor.h</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a62aac32130c77d66f9cec4a06d5e75a7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_base.html">Base</a>* Monitor::base</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -377,8 +465,6 @@ Public Attributes</h2></td></tr>
 
 <p>Obstacles in the workspace. </p>
 
-<p>Definition at line <a class="el" href="monitor_8h_source.html#l00027">27</a> of file <a class="el" href="monitor_8h_source.html">monitor.h</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a2207169c2b32b3bbf9925f3254064dee"></a>
@@ -393,13 +479,11 @@ Public Attributes</h2></td></tr>
 
 <p>Obstacles to delete in destructor. </p>
 
-<p>Definition at line <a class="el" href="monitor_8h_source.html#l00029">29</a> of file <a class="el" href="monitor_8h_source.html">monitor.h</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="monitor_8h_source.html">monitor.h</a></li>
-<li><a class="el" href="monitor_8cpp_source.html">monitor.cpp</a></li>
+<li>/home/srini/hbrs/Fourthsem/SDP/ROS_setup/08032021/updated_1/sdp_ws20_collision_monitoring_for_mobile_manipulators/collision_monitoring/include/<a class="el" href="">monitor.h</a></li>
+<li>/home/srini/hbrs/Fourthsem/SDP/ROS_setup/08032021/updated_1/sdp_ws20_collision_monitoring_for_mobile_manipulators/collision_monitoring/src/<a class="el" href="">monitor.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

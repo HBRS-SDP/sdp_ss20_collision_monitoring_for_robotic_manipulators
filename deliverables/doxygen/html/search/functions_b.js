@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['updateobstacles',['updateObstacles',['../class_arm_controller.html#a17d05bd19286dc4e04355e3d4f6bb372',1,'ArmController']]],
-  ['updatepose',['updatePose',['../class_arm.html#a9bfe3a3f230c8fa8a39f88cce2d6b597',1,'Arm::updatePose()'],['../class_rviz_obstacle.html#a30101e2a3c65776bb4abbb139f10b14a',1,'RvizObstacle::updatePose()'],['../class_kinova_arm.html#a3374988c7b3d9ae8773bc63f950629f7',1,'KinovaArm::updatePose()']]]
+  ['obstaclepotentialfield',['obstaclePotentialField',['../class_arm_controller.html#ad0b1f28333e2a3be76258153a745803d',1,'ArmController::obstaclePotentialField()'],['../class_base_controller.html#a93753486d3cd87303aa4ba0a70602d64',1,'BaseController::obstaclePotentialField()']]],
+  ['ownclosestpoint',['OwnClosestPoint',['../class_box3.html#ac329cb319677766639aaac40dc327a85',1,'Box3::OwnClosestPoint(Line *line)'],['../class_box3.html#ac8d506eddf64b2b97049e895250cd8b4',1,'Box3::OwnClosestPoint(Sphere *sphere)']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rvizobstacle',['RvizObstacle',['../class_rviz_obstacle.html',1,'']]]
+  ['narkinbase',['NarkinBase',['../class_narkin_base.html',1,'']]]
 ];

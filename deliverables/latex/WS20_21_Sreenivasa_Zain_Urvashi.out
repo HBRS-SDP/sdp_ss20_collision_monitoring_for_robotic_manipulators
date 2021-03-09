@@ -5,13 +5,12 @@
 \BOOKMARK [2][-]{subsection.2.3}{Collision monitoring library}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Controller}{section.2}% 6
 \BOOKMARK [1][-]{section.3}{Implementation}{}% 7
-\BOOKMARK [1][-]{section.4}{Experiments}{}% 8
+\BOOKMARK [1][-]{section.4}{Evaluation}{}% 8
 \BOOKMARK [2][-]{subsection.4.1}{Collision Monitoring}{section.4}% 9
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Results}{subsection.4.1}% 10
-\BOOKMARK [2][-]{subsection.4.2}{Single arm obstacle avoidance}{section.4}% 11
-\BOOKMARK [2][-]{subsection.4.3}{Dual arm collision avoidance}{section.4}% 12
-\BOOKMARK [1][-]{section.5}{Use cases}{}% 13
-\BOOKMARK [2][-]{subsection.5.1}{Arm}{section.5}% 14
-\BOOKMARK [2][-]{subsection.5.2}{Base}{section.5}% 15
-\BOOKMARK [1][-]{section.6}{Conclusion}{}% 16
-\BOOKMARK [1][-]{section*.17}{References}{}% 17
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Collision avoidance between arm and robot body}{subsection.4.1}% 10
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Collision avoidance between robot and the obstacles}{subsection.4.1}% 11
+\BOOKMARK [1][-]{section.5}{Use cases}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Arm}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Base}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 15
+\BOOKMARK [1][-]{section*.15}{References}{}% 16

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['marker',['marker',['../class_rviz_obstacle.html#a9edb18553236c56fb49e9d181e0ed052',1,'RvizObstacle']]],
-  ['monitor',['monitor',['../class_arm_controller.html#a939747279bba6db315f80092a74c2629',1,'ArmController']]]
+  ['jointarray',['jointArray',['../class_kinova_arm.html#a47ddba255203039c2d7d3ceb48b2c4ac',1,'KinovaArm']]],
+  ['jointvels',['jointVels',['../class_kinova_arm.html#adeab92c27d6555029a30f5bcbba8bfab',1,'KinovaArm']]]
 ];

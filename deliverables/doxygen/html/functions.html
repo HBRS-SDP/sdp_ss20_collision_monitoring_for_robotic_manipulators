@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Collision monitoring for robotic manipulators: Class Members</title>
+<title>Collision monitoring for a mobile manipulator: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Collision monitoring for robotic manipulators
+   <div id="projectname">Collision monitoring for a mobile manipulator
    </div>
   </td>
  </tr>
@@ -88,6 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_b"><span>b</span></a></li>
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_e"><span>e</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
       <li><a href="#index_j"><span>j</span></a></li>
@@ -152,8 +153,33 @@ $(document).ready(function(){initNavTree('functions.html','');});
 
 
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
+<li>base
+: <a class="el" href="class_monitor.html#a62aac32130c77d66f9cec4a06d5e75a7">Monitor</a>
+</li>
+<li>base_primitive
+: <a class="el" href="class_base.html#a662c575c05c933392961e26a6a3d3467">Base</a>
+</li>
+<li>baseCallback()
+: <a class="el" href="class_base_controller.html#a8ebbdf4ee3ad99e304f8643d58b03cbf">BaseController</a>
+</li>
+<li>BaseController()
+: <a class="el" href="class_base_controller.html#a0821816ec5a6012eac19f853ab0c2044">BaseController</a>
+</li>
+<li>baseDistanceToObjects()
+: <a class="el" href="class_monitor.html#a1e4ef4f45f75dcc38d6283644a4bfdbe">Monitor</a>
+</li>
 <li>baseTransform
 : <a class="el" href="class_arm.html#ab568839905191e1e5abb83119a4a445d">Arm</a>
+, <a class="el" href="class_base.html#a4f5441222a770a86d5c2e653a3936e04">Base</a>
+</li>
+<li>bounds
+: <a class="el" href="class_box3.html#aad114a73fc86f48a459d97036afacdd1">Box3</a>
+</li>
+<li>Box3()
+: <a class="el" href="class_box3.html#aad6fb7ce9a1349ebc77d53bae2518d6e">Box3</a>
+</li>
+<li>box_center
+: <a class="el" href="class_box3.html#ad3d48cf0bac3a7963fbf1fec90d06836">Box3</a>
 </li>
 </ul>
 
@@ -162,18 +188,43 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>Capsule()
 : <a class="el" href="class_capsule.html#aab6d0827aa8179c3f258129161a67e2e">Capsule</a>
 </li>
+<li>ClosestPoint()
+: <a class="el" href="class_box3.html#a4e348447918fb2af753b3db5f162de37">Box3</a>
+</li>
+<li>control_loop()
+: <a class="el" href="class_base_controller.html#a7129f47562f34ff49f2ccba7274488ca">BaseController</a>
+</li>
 <li>controlLoop()
 : <a class="el" href="class_arm_controller.html#ad7e00a70c968a23087415b1bd0ac8bf1">ArmController</a>
+</li>
+<li>CornerPoint()
+: <a class="el" href="class_box3.html#a7fe8dce86382a1313b1031a498b8a0a0">Box3</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>dir
+: <a class="el" href="class_ray.html#a2983ad86d7a77c150fccad39c7e423fa">Ray</a>
+</li>
 <li>distanceBetweenArmLinks()
 : <a class="el" href="class_monitor.html#afe72152adc0d2d2faf8fb01563417033">Monitor</a>
 </li>
 <li>distanceToObjects()
-: <a class="el" href="class_monitor.html#afefe8eeab13fd3f8f3c59ae53d25a00e">Monitor</a>
+: <a class="el" href="class_monitor.html#a1801675787693435342ae799975b1120">Monitor</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>Edge()
+: <a class="el" href="class_box3.html#a171b1ab6451b5ca9dafbe235bd42cff5">Box3</a>
+</li>
+<li>EdgeList()
+: <a class="el" href="class_box3.html#ac34df9b1130d1123e88fd6533f82cfe3">Box3</a>
+</li>
+<li>extents
+: <a class="el" href="class_box3.html#a5aea4c92dc0926d4a9577b65c402b1b2">Box3</a>
 </li>
 </ul>
 
@@ -183,9 +234,10 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_line.html#a649b65b3ddb9702ad3800a76ad8ca274">Line</a>
 </li>
 <li>getClosestPoints()
-: <a class="el" href="class_capsule.html#aec53e0cf5f8644f1413c3c208de64cc7">Capsule</a>
+: <a class="el" href="class_box3.html#a538b1b04d58f58478b7094dcc4d91e3e">Box3</a>
+, <a class="el" href="class_capsule.html#a9da1b4c44adba1726446a4fb37b7a7e0">Capsule</a>
 , <a class="el" href="class_primitive.html#ac86ef47d59c21448ce78c91490c7dbd4">Primitive</a>
-, <a class="el" href="class_sphere.html#a9290773136dacf81a9f147343a7a0486">Sphere</a>
+, <a class="el" href="class_sphere.html#ac2584cb5fb1d066a9527f8c95435093b">Sphere</a>
 </li>
 <li>getClosestPointsBetweenLines()
 : <a class="el" href="class_line.html#a61228b3629e0f8b204c60a6d337bb546">Line</a>
@@ -200,22 +252,26 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="class_capsule.html#a8ff7a408a608ee32dea8c187fce5dbea">Capsule</a>
 </li>
 <li>getPose()
-: <a class="el" href="class_arm.html#a994d35ca0dae04725fe0921c4f7d7e38">Arm</a>
+: <a class="el" href="class_arm.html#af89cd963a4321584dfb8f9715c02f5be">Arm</a>
+, <a class="el" href="class_base.html#ae1de47bdc7b87d0c78934946658640ee">Base</a>
 , <a class="el" href="class_kinova_arm.html#aea7c01f72eb70387ff71ca130db3bd3f">KinovaArm</a>
+, <a class="el" href="class_narkin_base.html#a8a9784395d2070c5276dbf80def713e4">NarkinBase</a>
 </li>
 <li>getRadius()
 : <a class="el" href="class_capsule.html#a4e98e8545ea57fe682c5a2002bd49bdb">Capsule</a>
 , <a class="el" href="class_sphere.html#a330dd34c7c7b6dfff106c4c71ec80028">Sphere</a>
 </li>
 <li>getShortestDirection()
-: <a class="el" href="class_capsule.html#ad569eae23b91f33e145f06745739e428">Capsule</a>
-, <a class="el" href="class_primitive.html#ae37bbdf5271bf278b19888e0428579a8">Primitive</a>
+: <a class="el" href="class_box3.html#a033c3685ad82e29c8e26b921d0334ecd">Box3</a>
+, <a class="el" href="class_capsule.html#ad569eae23b91f33e145f06745739e428">Capsule</a>
+, <a class="el" href="class_primitive.html#a4f478b272b35ba4f2188a8f1308b5b3b">Primitive</a>
 , <a class="el" href="class_sphere.html#a707fc14e03a6ff67ac012a18b2a8cb28">Sphere</a>
 </li>
 <li>getShortestDistance()
-: <a class="el" href="class_capsule.html#a71d7821f3e7f9ac972bceb06d82f529d">Capsule</a>
-, <a class="el" href="class_primitive.html#adaac4fc4fedf9cd76d4eb9c77e9ae560">Primitive</a>
-, <a class="el" href="class_sphere.html#a6efb9b513c9b42a7b040969b802727ea">Sphere</a>
+: <a class="el" href="class_box3.html#ae02730af56a2c60295513122afbc2150">Box3</a>
+, <a class="el" href="class_capsule.html#a2a4a8932b27143c1d199b4c028f1348e">Capsule</a>
+, <a class="el" href="class_primitive.html#a46e60acfe4c005c0ec94e1e8b82d36db">Primitive</a>
+, <a class="el" href="class_sphere.html#a886f59804b4296211960829a6362e082">Sphere</a>
 </li>
 <li>getShortestDistanceToLine()
 : <a class="el" href="class_line.html#a4097eed5d653a46fe18b760c67a53a37">Line</a>
@@ -225,9 +281,11 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>goal
 : <a class="el" href="class_arm_controller.html#a5246aa4a2072b1511d510717fc253f88">ArmController</a>
+, <a class="el" href="class_base_controller.html#a48f4aa3cf599a55627b87d36d7b2c148">BaseController</a>
 </li>
 <li>goalCallback()
 : <a class="el" href="class_arm_controller.html#acbd85ddee96c8d6fd76728c68fb12d3c">ArmController</a>
+, <a class="el" href="class_base_controller.html#a50fb5111564b5ae2c7918829883f81a2">BaseController</a>
 </li>
 </ul>
 
@@ -238,6 +296,12 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>ikVelocitySolver()
 : <a class="el" href="class_kinova_arm.html#a0a5a3bd128b420d58d92d242c075db92">KinovaArm</a>
+</li>
+<li>intersection()
+: <a class="el" href="class_box3.html#a9bf53c640569dd979156eed253752f00">Box3</a>
+</li>
+<li>invdir
+: <a class="el" href="class_ray.html#ae02778cbe6b925ca200c4492b9c414c4">Ray</a>
 </li>
 </ul>
 
@@ -276,8 +340,15 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>marker
 : <a class="el" href="class_rviz_obstacle.html#a9edb18553236c56fb49e9d181e0ed052">RvizObstacle</a>
 </li>
+<li>maxPoint
+: <a class="el" href="class_box3.html#a34149a4c4b920189fac72cc67bd4a156">Box3</a>
+</li>
+<li>minPoint
+: <a class="el" href="class_box3.html#aa4e23702bbefb388799ad2ed7cfa0633">Box3</a>
+</li>
 <li>monitor
 : <a class="el" href="class_arm_controller.html#a939747279bba6db315f80092a74c2629">ArmController</a>
+, <a class="el" href="class_base_controller.html#ae6cddbeb20a2a7f3f6b8c840aa59c063">BaseController</a>
 </li>
 <li>Monitor()
 : <a class="el" href="class_monitor.html#adda7d547e1226e159836356dd8af14bb">Monitor</a>
@@ -286,8 +357,12 @@ $(document).ready(function(){initNavTree('functions.html','');});
 
 
 <h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
+<li>NarkinBase()
+: <a class="el" href="class_narkin_base.html#a35e4edf9bb144fd8dee636e41d9ae9e9">NarkinBase</a>
+</li>
 <li>nFrames
 : <a class="el" href="class_arm.html#ac7955a5e8e9c6681b55d0d80d7e31df7">Arm</a>
+, <a class="el" href="class_base.html#a22cb3f7de315b27b1b2b0b00848c2f4b">Base</a>
 </li>
 <li>nJoints
 : <a class="el" href="class_arm.html#ac3734a2ca38b0312fd42894ab6886bc9">Arm</a>
@@ -301,12 +376,19 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
 <li>obstaclePotentialField()
 : <a class="el" href="class_arm_controller.html#ad0b1f28333e2a3be76258153a745803d">ArmController</a>
+, <a class="el" href="class_base_controller.html#a93753486d3cd87303aa4ba0a70602d64">BaseController</a>
 </li>
 <li>obstacles
 : <a class="el" href="class_monitor.html#a05fd42482269ad65432d5400c8f0f9b5">Monitor</a>
 </li>
 <li>obstaclesToDelete
 : <a class="el" href="class_monitor.html#a2207169c2b32b3bbf9925f3254064dee">Monitor</a>
+</li>
+<li>orig
+: <a class="el" href="class_ray.html#a21776ed09fa0cff97b5eb3d35cd40c97">Ray</a>
+</li>
+<li>OwnClosestPoint()
+: <a class="el" href="class_box3.html#ac329cb319677766639aaac40dc327a85">Box3</a>
 </li>
 </ul>
 
@@ -323,16 +405,26 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>radius
 : <a class="el" href="class_capsule.html#a9b7e591748a2b735b35d99a2d7792f39">Capsule</a>
 </li>
+<li>Ray()
+: <a class="el" href="class_ray.html#a629584b29ff42f0bc196bc41ef3a5233">Ray</a>
+</li>
 <li>RvizObstacle()
 : <a class="el" href="class_rviz_obstacle.html#a3fb19f60434581b669c0dc063c026943">RvizObstacle</a>
 </li>
 <li>rvizObstacles
 : <a class="el" href="class_arm_controller.html#ab94a1abce40096f6476404d49d00860f">ArmController</a>
+, <a class="el" href="class_base_controller.html#abb0f1c2c9cbd953d95268ff4cb7ff3b4">BaseController</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>SideCenterPoint()
+: <a class="el" href="class_box3.html#a03b398c46370091bea527b09ffe4a14e">Box3</a>
+</li>
+<li>sign
+: <a class="el" href="class_ray.html#aa9c97528be491d67e22755de4b2a60b7">Ray</a>
+</li>
 <li>Sphere()
 : <a class="el" href="class_sphere.html#a7a9a9cfc01f619bb8cda60ae907d6372">Sphere</a>
 </li>
@@ -342,10 +434,13 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
 <li>updateObstacles()
 : <a class="el" href="class_arm_controller.html#a17d05bd19286dc4e04355e3d4f6bb372">ArmController</a>
+, <a class="el" href="class_base_controller.html#ae7ddb6970a0beca3893f12d1d4b20743">BaseController</a>
 </li>
 <li>updatePose()
 : <a class="el" href="class_arm.html#a9bfe3a3f230c8fa8a39f88cce2d6b597">Arm</a>
+, <a class="el" href="class_base.html#a5ea313e6980f658e22d14bf3020c1905">Base</a>
 , <a class="el" href="class_kinova_arm.html#a3374988c7b3d9ae8773bc63f950629f7">KinovaArm</a>
+, <a class="el" href="class_narkin_base.html#abb56af256ebb5c152d0a5c4c3904c66e">NarkinBase</a>
 , <a class="el" href="class_rviz_obstacle.html#a30101e2a3c65776bb4abbb139f10b14a">RvizObstacle</a>
 </li>
 </ul>
@@ -358,6 +453,15 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <li>~ArmController()
 : <a class="el" href="class_arm_controller.html#ad2b44ab21366148d89980e942b26d232">ArmController</a>
 </li>
+<li>~Base()
+: <a class="el" href="class_base.html#a722da881b6c70cfcbde9243abcfbf334">Base</a>
+</li>
+<li>~BaseController()
+: <a class="el" href="class_base_controller.html#ab50e8c6a966189b4d6000e057e5978ed">BaseController</a>
+</li>
+<li>~Box3()
+: <a class="el" href="class_box3.html#a4ececcc0019ac56a491d3e491d491d97">Box3</a>
+</li>
 <li>~Capsule()
 : <a class="el" href="class_capsule.html#abfd7f0348ce8e7f8ee4e70374ae27533">Capsule</a>
 </li>
@@ -369,6 +473,9 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>~Monitor()
 : <a class="el" href="class_monitor.html#a64aba8195effc068092ddea5a71e8176">Monitor</a>
+</li>
+<li>~NarkinBase()
+: <a class="el" href="class_narkin_base.html#ad42db1b25986d226e5667579568d1705">NarkinBase</a>
 </li>
 <li>~RvizObstacle()
 : <a class="el" href="class_rviz_obstacle.html#aefa092d8dcad532408308c34cb4cddbe">RvizObstacle</a>

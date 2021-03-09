@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Collision monitoring for robotic manipulators: ROS</title>
+<title>Collision monitoring for a mobile manipulator: ROS</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Collision monitoring for robotic manipulators
+   <div id="projectname">Collision monitoring for a mobile manipulator
    </div>
   </td>
  </tr>
@@ -101,32 +101,11 @@ $(document).ready(function(){initNavTree('md_catkin_workspace_README.html','');}
 <div class="title">ROS </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The package that implements the Kinova <a class="el" href="class_arm.html">Arm</a> package in a ros package for demonstration purposes.</p>
+<div class="textblock"><p>The package that implements extended version of the existing library is available under narko_kinova_base_collision and is used for visualization and demonstration purposes.</p>
 <h2>Documentation</h2>
-<p>For UML diagrams have a look in the /docs folder and for basic ROS commands see <a href="http://wiki.ros.org/ROS/Tutorials">http://wiki.ros.org/ROS/Tutorials</a>.</p>
-<h2>Requirements:</h2>
-<ul>
-<li>KDL (<a href="https://www.orocos.org/kdl/installation-manual">https://www.orocos.org/kdl/installation-manual</a>)</li>
-<li>Eigen (<a href="http://eigen.tuxfamily.org">http://eigen.tuxfamily.org</a>)</li>
-<li>ROS kinetic (<a href="http://wiki.ros.org/">http://wiki.ros.org/</a>)</li>
-<li>CMAKE V3.5</li>
-</ul>
-<h2>Packaged dependencies</h2>
-<p>The kinova kortex library is packaged with this catkin workspace for easy building and implementation. This is pulled directly from the <a href="https://github.com/kinovarobotics/ros_kortex">ros kortex</a> github page and the associated licences and readme can be found in the catkin/src directory.</p>
-<h2>Building</h2>
-<p>In the catkin_workspace folder of the repository make sure you have ros setup.bash sourced in the current terminal: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...\catkin_workspace$ source /opt/ros/kinetic/setup.bash </div></div><!-- fragment --><p> Then run catkin build (or catkin_make: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...\catkin_workspace$ catkin build</div></div><!-- fragment --><p> Finally source the new setup.bash, or add it to your .bashrc to be run on the terminals startup: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...\catkin_workspace$ source devel/setup.bash</div></div><!-- fragment --><h2>Running the software</h2>
-<p>There are 2 modes the software can be run in, single or dual arm, each with its separate interface node types.</p>
-<h3>Single arm</h3>
-<p>First make sure that the correct setup.bash file is sourced. </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...\catkin_workspace$ source devel/setup.bash</div></div><!-- fragment --><p> Then launch the single arm simulation with: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ roslaunch kinova_arm single_manipulator.launch </div></div><!-- fragment --><p> This will bring up the rviz display where the kinova arm model can be seen. To interface with the model the single interfacer node needs to be opened, so in a new terminal source the setup file (if you didn't add it to your .bashrc) and then run: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ rosrun kinova_arm KinovaInterface </div></div><!-- fragment --><p> Where using basic keyboard commands you can set goals and add obstacles to the environment.</p>
-<h3>Dual arm</h3>
-<p>First make sure that the correct setup.bash file is sourced. </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...\catkin_workspace$ source devel/setup.bash</div></div><!-- fragment --><p> Then launch the dual arm simulation with: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ roslaunch kinova_arm dual_manipulators.launch  </div></div><!-- fragment --><p> This will bring up the rviz display where the kinova arm models can be seen. To interface with the model the dual interfacer node needs to be opened, so in a new terminal source the setup file (if you didn't add it to your .bashrc) and then run: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;...$ rosrun kinova_arm DualArmKinovaInterface </div></div><!-- fragment --><p> Where using basic keyboard commands you can set goals and add obstacles to the environment.</p>
-<h2>UML diagram</h2>
-<div class="image">
-<img src="https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/docs/Kinova_Controller_UML.png"  alt="UML Diagram"/>
-</div>
- <div class="image">
-<img src="Kinova_Controller_UML.png" alt="Kinova_Controller_UML.png"/>
-</div>
+<p>For documentation and other details, please refer to /docs folder.</p>
+<h2>Building and Execution</h2>
+<p>Instructions are provided under the file setup_instructions.pdf whivh details about the dependency requirements, setup instructions, and execution instructions.</p>
 <h2>ROS Node diagrams</h2>
 <h3>Single arm</h3>
 <div class="image">
@@ -141,6 +120,13 @@ $(document).ready(function(){initNavTree('md_catkin_workspace_README.html','');}
 </div>
  <div class="image">
 <img src="rosgraph_dual.png" alt="rosgraph_dual.png"/>
+</div>
+ <h3><a class="el" href="class_base.html">Base</a> and <a class="el" href="class_arm.html">Arm</a></h3>
+<div class="image">
+<img src="https://github.com/broccan/sdp_ss20_collision_monitoring_for_robotic_manipulators/blob/master/catkin_workspace/docs/ros_graph.png"  alt="Base"/>
+</div>
+ <div class="image">
+<img src="ros_graph.png" alt="ros_graph.png"/>
 </div>
  </div></div><!-- contents -->
 </div><!-- doc-content -->

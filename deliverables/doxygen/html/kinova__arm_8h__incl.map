@@ -1,4 +1,4 @@
-<map id="kinova_arm.h" name="kinova_arm.h">
+<map id="include/kinova_arm.h" name="include/kinova_arm.h">
 <area shape="rect" id="node16" href="$primitives_8h.html" title="primitives.h" alt="" coords="1631,169,1720,196"/>
 <area shape="rect" id="node19" href="$arm_8h.html" title="arm.h" alt="" coords="1616,87,1671,114"/>
 </map>

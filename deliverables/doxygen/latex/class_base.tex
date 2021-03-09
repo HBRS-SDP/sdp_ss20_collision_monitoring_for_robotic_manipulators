@@ -1,0 +1,126 @@
+\hypertarget{class_base}{}\section{Base Class Reference}
+\label{class_base}\index{Base@{Base}}
+
+
+{\ttfamily \#include $<$arm.\+h$>$}
+
+
+
+Inheritance diagram for Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{class_base__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_base__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{class_base_a722da881b6c70cfcbde9243abcfbf334}{$\sim$\+Base} ()
+\item 
+virtual bool \hyperlink{class_base_a5ea313e6980f658e22d14bf3020c1905}{update\+Pose} (Eigen\+::\+Vector3d base\+Pose)
+\item 
+virtual Eigen\+::\+Vector3d \hyperlink{class_base_ae1de47bdc7b87d0c78934946658640ee}{get\+Pose} (void)=0
+\begin{DoxyCompactList}\small\item\em Used to get the base frame of the base. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_base_a4f5441222a770a86d5c2e653a3936e04}{base\+Transform}
+\begin{DoxyCompactList}\small\item\em Used to get the frame. \end{DoxyCompactList}\item 
+\hyperlink{class_box3}{Box3} $\ast$ \hyperlink{class_base_a662c575c05c933392961e26a6a3d3467}{base\+\_\+primitive}
+\begin{DoxyCompactList}\small\item\em Primitives that represent the robot base. \end{DoxyCompactList}\item 
+int \hyperlink{class_base_a22cb3f7de315b27b1b2b0b00848c2f4b}{n\+Frames}
+\begin{DoxyCompactList}\small\item\em The number of frames in the arm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Base@{Base}!````~Base@{$\sim$\+Base}}
+\index{````~Base@{$\sim$\+Base}!Base@{Base}}
+\subsubsection[{\texorpdfstring{$\sim$\+Base()}{~Base()}}]{\setlength{\rightskip}{0pt plus 5cm}Base\+::$\sim$\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_base_a722da881b6c70cfcbde9243abcfbf334}{}\label{class_base_a722da881b6c70cfcbde9243abcfbf334}
+
+
+\subsection{Member Function Documentation}
+\index{Base@{Base}!get\+Pose@{get\+Pose}}
+\index{get\+Pose@{get\+Pose}!Base@{Base}}
+\subsubsection[{\texorpdfstring{get\+Pose(void)=0}{getPose(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Eigen\+::\+Vector3d Base\+::get\+Pose (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_base_ae1de47bdc7b87d0c78934946658640ee}{}\label{class_base_ae1de47bdc7b87d0c78934946658640ee}
+
+
+Used to get the base frame of the base. 
+
+
+
+Implemented in \hyperlink{class_narkin_base_a8a9784395d2070c5276dbf80def713e4}{Narkin\+Base}.
+
+\index{Base@{Base}!update\+Pose@{update\+Pose}}
+\index{update\+Pose@{update\+Pose}!Base@{Base}}
+\subsubsection[{\texorpdfstring{update\+Pose(\+Eigen\+::\+Vector3d base\+Pose)}{updatePose(Eigen::Vector3d basePose)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Base\+::update\+Pose (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d}]{base\+Pose}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_base_a5ea313e6980f658e22d14bf3020c1905}{}\label{class_base_a5ea313e6980f658e22d14bf3020c1905}
+A function to update the current virtual representation of the base
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Pose} & The Pose of the base \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The boolean true for a successful update, False otherwise 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_narkin_base_abb56af256ebb5c152d0a5c4c3904c66e}{Narkin\+Base}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Base@{Base}!base\+\_\+primitive@{base\+\_\+primitive}}
+\index{base\+\_\+primitive@{base\+\_\+primitive}!Base@{Base}}
+\subsubsection[{\texorpdfstring{base\+\_\+primitive}{base_primitive}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Box3}$\ast$ Base\+::base\+\_\+primitive}\hypertarget{class_base_a662c575c05c933392961e26a6a3d3467}{}\label{class_base_a662c575c05c933392961e26a6a3d3467}
+
+
+Primitives that represent the robot base. 
+
+\index{Base@{Base}!base\+Transform@{base\+Transform}}
+\index{base\+Transform@{base\+Transform}!Base@{Base}}
+\subsubsection[{\texorpdfstring{base\+Transform}{baseTransform}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Base\+::base\+Transform}\hypertarget{class_base_a4f5441222a770a86d5c2e653a3936e04}{}\label{class_base_a4f5441222a770a86d5c2e653a3936e04}
+
+
+Used to get the frame. 
+
+The homogeneous transformation from the world to robot base frame \index{Base@{Base}!n\+Frames@{n\+Frames}}
+\index{n\+Frames@{n\+Frames}!Base@{Base}}
+\subsubsection[{\texorpdfstring{n\+Frames}{nFrames}}]{\setlength{\rightskip}{0pt plus 5cm}int Base\+::n\+Frames}\hypertarget{class_base_a22cb3f7de315b27b1b2b0b00848c2f4b}{}\label{class_base_a22cb3f7de315b27b1b2b0b00848c2f4b}
+
+
+The number of frames in the arm. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/srini/hbrs/\+Fourthsem/\+S\+D\+P/\+R\+O\+S\+\_\+setup/08032021/updated\+\_\+1/sdp\+\_\+ws20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+mobile\+\_\+manipulators/collision\+\_\+monitoring/include/\hyperlink{arm_8h}{arm.\+h}\item 
+/home/srini/hbrs/\+Fourthsem/\+S\+D\+P/\+R\+O\+S\+\_\+setup/08032021/updated\+\_\+1/sdp\+\_\+ws20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+mobile\+\_\+manipulators/collision\+\_\+monitoring/src/\hyperlink{arm_8cpp}{arm.\+cpp}\end{DoxyCompactItemize}
