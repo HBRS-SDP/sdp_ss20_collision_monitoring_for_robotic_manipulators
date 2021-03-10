@@ -10,6 +10,12 @@ Monitor::Monitor(Arm* arm){
     this->arm = arm;
 }
 
+Monitor::Monitor(Base* base){
+    #ifdef DEBUG
+    std::cout << "Monitor have a base added." << std::endl;
+    #endif
+    this->base = base;
+}
 Monitor::~Monitor(){
     #ifdef DEBUG
     std::cout << "Monitor had:" << this->obstacles.size() << "obstacles before destruction" << std::endl;
@@ -32,8 +38,14 @@ void Monitor::addObstacle(Primitive* obstacle) {
         if(sphere){
             this->addObstacle(sphere);
         }
+        else{
+        Box3 *box = dynamic_cast<Box3*>(obstacle);
+        if(box){
+            this->addObstacle(box);
+        }
     }
 
+}
 }
 
 void Monitor::addObstacle(Sphere* obstacle) {
@@ -45,6 +57,14 @@ void Monitor::addObstacle(Sphere* obstacle) {
     obstacles.push_back(obstacleCopy);
 }
 
+void Monitor::addObstacle(Box3 *box) {
+    #ifdef DEBUG
+    std::cout << "[Monitor] obstacle box method" << std::endl;
+    #endif
+    Box3* obstacleCopy = new Box3(box);
+    obstaclesToDelete.push_back(obstacleCopy);
+    obstacles.push_back(obstacleCopy);
+}
 void Monitor::addObstacle(Capsule* obstacle) {
     #ifdef DEBUG
     std::cout << "[Monitor] obstacle capsule method" << std::endl;
@@ -70,6 +90,24 @@ void Monitor::addObstacle(Arm* arm_obstacle) {
     #ifdef DEBUG
     std::cout << "[Monitor] new obstacle length: " << obstacles.size() << std::endl;
     #endif
+}
+void Monitor::addObstacle(Base* base_obstacle) {
+    #ifdef DEBUG
+    std::cout << "[Monitor] obstacle base method" << std::endl;
+    #endif
+    Box3* base_prim = new Box3(base_obstacle->base_primitive);
+    obstacles.push_back(base_prim);
+    #ifdef DEBUG
+    std::cout << "[Monitor] new obstacle length: " << obstacles.size() << std::endl;
+    #endif
+}
+  std::vector<double> Monitor:: baseDistanceToObjects(){
+   std::vector<double> distances;
+  std::vector<double> distanceToObjects;
+  for (int i = 0; i < this->obstacles.size(); i++ ) {
+        distances.push_back(this->base->base_primitive->getShortestDistance( this->obstacles[i])); 
+     }
+     return distances;
 }
 
 std::vector<std::vector<double>> Monitor::distanceToObjects(){
@@ -105,7 +143,8 @@ std::vector<std::vector<double>> Monitor::distanceToObjects(){
     return distanceToObjects;
 }
 
-std::vector<std::vector<double>> Monitor::distanceBetweenArmLinks(){
+std::vector<std::vector<double>> Monitor::distanceBetweenArmLinks()
+{
     
     std::vector<std::vector<double>> distanceToObjects;
 

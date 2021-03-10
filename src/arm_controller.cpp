@@ -1,5 +1,8 @@
 // A simple program that computes the square root of a number
 #include "arm_controller.h"
+#include <ros/console.h>
+#include <ros/ros.h>
+#include <std_msgs/String.h>
 #define PI 3.14159265
 // #define DEBUG
 // #define PRINTDATA
@@ -33,7 +36,7 @@ ArmController::ArmController(Monitor* monitorObject, double k, double d,
     this->arrowsPub = n.advertise<visualization_msgs::Marker>("kinova_controller/distance_field", 1000);
     this->linksCylindersPub = n.advertise<visualization_msgs::Marker>("kinova_controller/links_cylinders", 1000);
     this->linksSpheresPub = n.advertise<visualization_msgs::Marker>("kinova_controller/links_spheres", 1000);
-
+    this->baseCubePub = n.advertise<visualization_msgs::Marker>("kinova_controller/base_cube", 1000);
     // Init the controller to the current arm state
     origin << 0, 0, 0, 1;
     this->goal = (currEndPose * origin).head(3);
@@ -175,6 +178,7 @@ Eigen::Vector3d ArmController::obstaclePotentialField(Eigen::Vector3d currentPos
         potentialField += (rotation * velocity) * phi * exp;
 
 
+        ROS_WARN_STREAM("PField in armcontroller: \n " << potentialField<<"\n\n");
         // Publish the markers for potential feild visualization 
         #ifdef DEBUG
         std::cout << "direction: " << direction << std::endl;
@@ -211,8 +215,29 @@ KDL::Twist ArmController::controlLoop(void) {
     this->monitor->arm->updatePose(this->jointAngles);
     Eigen::Matrix4d currEndPose = monitor->arm->getPose();
     Eigen::Vector3d currEndPoint = (currEndPose * origin).head(3);
+    std::cout<<"End Pose: "<<currEndPoint<<std::endl;
+    ROS_WARN_STREAM("End Pose Stream: \n " << currEndPoint<<"\n");
     objectDistances = monitor->distanceToObjects();
     armDistances = monitor->distanceBetweenArmLinks();
+    Box3 *narkobase;
+    narkobase = dynamic_cast<Box3*>(monitor->base->base_primitive);
+    if(narkobase){
+        //  Eigen::Vector4d startPoint(0, 0, 0, 1);
+        // Eigen::Vector4d endPoint(0, 0, capsuleLink->getLength(), 1);
+        // Eigen::Vector3d endQuat(0, 0, 1);
+        // startArrow = (narkobase->pose * startPoint).head(3);
+        // endArrow = (narkobase->pose * endPoint).head(3);
+        
+
+
+    }
+    geometry_msgs::Vector3 scale;
+        scale.x=0.0;
+        scale.y=0.0;
+        scale.z=0.0;
+        MarkerPublisher mPublisher(baseCubePub, visualization_msgs::Marker::CUBE, "narko_base_link", "base", 21, 0.0, 0.0, 0.0, 0.0, 2.0, 1.0, 0.5);
+        mPublisher.setScale(scale);
+        mPublisher.Publish();
 
     //Show links as a cylinders
     Capsule *capsuleLink;
@@ -342,6 +367,28 @@ void ArmController::updateObstacles(const visualization_msgs::Marker::ConstPtr& 
             monitor->addObstacle(capsule);
         }
     }
+	// ==================== Box obstacle ======================================
+
+	else if(msg->type == visualization_msgs::Marker::CUBE){
+        bool newObstacle = true;
+        for(int i=0; i<rvizObstacles.size();i++){
+            if(rvizObstacles[i]->marker.id == msg->id) {
+                newObstacle = false;
+                int index = rvizObstacles[i]->idx;
+                monitor->obstacles[index]->pose = rvizObstacles[i]->updatePose(msg);
+            }
+        }
+
+        if(newObstacle) {
+            RvizObstacle* rvizObstacle = new RvizObstacle(msg, rvizObstacles.size());
+            rvizObstacles.push_back(rvizObstacle);
+        Box3* box = new Box3(rvizObstacle->pose, rvizObstacle->marker.scale.x/2,rvizObstacle->marker.scale.y/2, rvizObstacle->marker.scale.z/2);
+            obstaclesAllocated.push_back(box);
+            monitor->addObstacle(box);
+        }
+    }
+
+    //====================================================================================================================================
     else {
         ROS_ERROR("Wrong shape for obstacle");
     }

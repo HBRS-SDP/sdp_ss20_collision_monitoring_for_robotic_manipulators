@@ -6,14 +6,17 @@ var class_capsule =
     [ "getClosestPoints", "class_capsule.html#aec53e0cf5f8644f1413c3c208de64cc7", null ],
     [ "getClosestPoints", "class_capsule.html#a9da1b4c44adba1726446a4fb37b7a7e0", null ],
     [ "getClosestPoints", "class_capsule.html#aa0fea610bb1a1e4016bbda0f4f88264a", null ],
+    [ "getClosestPoints", "class_capsule.html#af2be9cfca9bad47e6deab5a9eed34bff", null ],
     [ "getLength", "class_capsule.html#a8ff7a408a608ee32dea8c187fce5dbea", null ],
     [ "getRadius", "class_capsule.html#a4e98e8545ea57fe682c5a2002bd49bdb", null ],
     [ "getShortestDirection", "class_capsule.html#ad569eae23b91f33e145f06745739e428", null ],
     [ "getShortestDirection", "class_capsule.html#a28274c18ef5a3b9ef869caa64d5f7d5e", null ],
     [ "getShortestDirection", "class_capsule.html#aae076a389170bd6644f479bfe9c243bc", null ],
+    [ "getShortestDirection", "class_capsule.html#ac062f76b08302e07d3377d5aadd5b3a9", null ],
     [ "getShortestDistance", "class_capsule.html#a43bcc7bb95425a4559f7fd0289ef8b45", null ],
     [ "getShortestDistance", "class_capsule.html#ade8880442a9230f893c296f0681ae9ad", null ],
     [ "getShortestDistance", "class_capsule.html#a71d7821f3e7f9ac972bceb06d82f529d", null ],
+    [ "getShortestDistance", "class_capsule.html#a2a4a8932b27143c1d199b4c028f1348e", null ],
     [ "length", "class_capsule.html#af62f20ecfc37b4c8ae88dd505ca1f196", null ],
     [ "radius", "class_capsule.html#a9b7e591748a2b735b35d99a2d7792f39", null ]
 ];

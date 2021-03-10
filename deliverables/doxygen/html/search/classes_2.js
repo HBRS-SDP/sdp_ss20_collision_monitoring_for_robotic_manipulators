@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kinovaarm',['KinovaArm',['../class_kinova_arm.html',1,'']]]
+  ['capsule',['Capsule',['../class_capsule.html',1,'']]]
 ];

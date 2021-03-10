@@ -4,12 +4,14 @@
 #include <iostream>
 #include <string>
 #include <kdl/chain.hpp>
+#include "kinova_arm.h"
 #include "primitives.h"
 #include "ros/ros.h"
 #include "std_msgs/Float64.h"
 #include "arm_controller.h"
 #include "sensor_msgs/JointState.h"
 #include "visualization_msgs/Marker.h"
+#include "arm.h"
 
 
 int main(int argc, char **argv)
@@ -53,6 +55,7 @@ int main(int argc, char **argv)
     ros::Subscriber armSub = n.subscribe(jointStatesTopic, 1000, &ArmController::armCallback, &armController1);
     ros::Subscriber goalSub = n.subscribe(goalTopic, 1000, &ArmController::goalCallback, &armController1);
     ros::Subscriber obstacleSub = n.subscribe("kinova_controller/obstacles", 1000, &ArmController::updateObstacles, &armController1);
+    ros::Subscriber baseobstacleSub = n.subscribe("Narko_base_marker", 1000, &ArmController::updateObstacles, &armController1);
 
 
     ros::Publisher armPub = n.advertise<sensor_msgs::JointState>(jointVelocityTopic, 1000);

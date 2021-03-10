@@ -2,9 +2,9 @@
 
 
 \begin{DoxyItemize}
-\item Alan Gomez
-\item Samuel Parra
-\item Brennan Penfold
+\item Urvashi Negi
+\item Zain Ul Haq
+\item Sreenivasa Hikkal Venugopala
 \end{DoxyItemize}
 
 \subsection*{Client}
@@ -16,7 +16,7 @@
 
 \subsection*{Description}
 
-This repository is a group submission for M\+AS Software Development Project. The goal of the project is to implement a given software algorithm from a research paper, while communicating with a client to add desired features. The paper implemented is a method of obstacle avoidance for robotic manipulators and at the request of the client a combination of 2 papers was implemented and can be found in the reference section \mbox{[}1\mbox{]}\mbox{[}2\mbox{]}
+This repository is a group submission for M\+AS Software Development Project. The goal of this project is to extend the existing implementation to perform the collision monitoring with respect to the mobile base. In this work, we extended the existing implementation such that the robot arms do not collide with the body and also implemented a base controller that controls and helps in collision avoidance and monitoring for the robot base.
 
 \subsection*{Structure}
 
@@ -29,6 +29,8 @@ This repository is structured to contain multiple implementations/libraries and 
 \item \hyperlink{collision__monitoring_2_r_e_a_d_m_e_8md}{Collision Monitoring Library}\+: The base library designed to be highly portable and used for any manipulator type
 \item \hyperlink{md_src_README}{Kinova Arm Package}\+: The test implementation of the Collision monitoring library designed for a Kinova gen3 7\+D\+OF manipulator.
 \item \hyperlink{md_catkin_workspace_README}{Collision Avoidance R\+OS Package}\+: The implementation of the obstacle avoidance and tracing algorithm that the base library is designed to suit.
+\item \hyperlink{md_catkin_workspace_src_narko_kinova_base_collision_README}{Narkin Base Collision Monitoring}\+: The R\+OS package for visualization and demonstration of extended implementations.
+\item \href{setup_instructions.pdf}{\tt Setup Instructions}\+: Provides setup instructions for installation of dependency packages and compiling library.
 \item Documentation \& other related works\+: The last section found in the /deliverables directory contains the paper, presentation and A\+PI documentation which is submitted along with this code.
 \end{DoxyItemize}
 
@@ -40,32 +42,30 @@ Here is the basic layout of the folder structure (note\+: symbolic links are use
 \begin{DoxyCode}
 1 Repository
 2 │
-3 └─── build/                    Where the KinovaArm package is to be built
-4 │
-5 └─── test/tests                The test file based off catch
-6 |
-7 └─── catkin\_workspace/         The ros catkin workspace (run catkin\_make here)
-8 |
-9 └─── docs/                     Contains UML diagrams associated with the ROS pkg
-10 └─── src/kinova\_arm/           The ROS package used for testing and demonstration
-11 |
-12 └─── collision\_monitoring/     The base library built for the project
-13 |   |
-14 |   └─── docs/                 Contains associated UML diagrams
-15 |   └─── include/              The library header files
-16 |   └─── src/                  The libraries source files
-17 |
-18 └─── deliverables/             Contains other non-code submittable documents
-19 |   |
-20 |   └─── doxygen/              Contains the html API docs and files to make them
-21 |   └─── latex/                Contains the latex files for the research paper
-22 |   └─── presentation/         Contains the final presentation
-23 |
-24 └─── docs/                     Contains the UML files for the kinova\_arm package
-25 └─── include/                  Contains the header files for kinova\_arm and ROS
-26 └─── src/                      Contains the source files for kinova\_arm and ROS
-27 └─── test/                     Contains the test source files for kinova\_arm
-28 └─── urdf/                     Contains the URDF file used for kinematic calcs
+3 └─── build/                                         Where the KinovaArm package is to be built
+4 |
+5 └─── catkin\_workspace/                              The ros catkin workspace (run catkin\_make here)
+6 |   |
+7 |   └─── docs/                                      Contains UML diagrams associated with the ROS pkg
+8 |   └─── src/narko\_kinova\_base\_collision/           The ROS package used for testing and demonstration
+9 |
+10 └─── collision\_monitoring/                          The base library built for the project
+11 |   |
+12 |   └─── docs/                                      Contains associated UML diagrams
+13 |   └─── include/                                   The library header files
+14 |   └─── src/                                       The libraries source files
+15 |
+16 └─── deliverables/                                  Contains other non-code submittable documents
+17 |   |
+18 |   └─── doxygen/                                   Contains the html API docs and files to make them
+19 |   └─── latex/                                     Contains the latex files for the research paper
+20 |   └─── presentation/                              Contains the final presentation
+21 |
+22 └─── docs/                                          Contains the UML files for the kinova\_arm package
+23 └─── include/                                       Contains the header files for kinova\_arm and ROS
+24 └─── src/                                           Contains the source files for kinova\_arm and ROS
+25 └─── test/                                          Contains the test source files for kinova\_arm
+26 └─── urdf/                                          Contains the URDF file used for kinematic calcs
 \end{DoxyCode}
 
 
@@ -77,7 +77,7 @@ This project is licensed under the M\+IT License -\/ see the \hyperlink{md_LICEN
 
 
 \begin{DoxyItemize}
-\item We would like to thank our coach Djordje Vukcevic who supported us throughout the development of this library.
+\item We would like to thank Djordje Vukcevic for his support and motivation throughout the course of this project.
 \end{DoxyItemize}
 
 \subsection*{References}
@@ -87,5 +87,7 @@ This library is an implementation of the following papers\+:
 
 \begin{DoxyItemize}
 \item \mbox{[}1\mbox{]} Real-\/\+Time Obstacle Avoidance for Manipulators and Mobile Robots, Oussama Khatib, 1986.
-\item \mbox{[}2\mbox{]} Biologically-\/inspired dynamical systems for movement generation\+: automatic real-\/time goal adaptation and obstacle avoidance, H. Hoffmann et al., 2019. 
+\item \mbox{[}2\mbox{]} Biologically-\/inspired dynamical systems for movement generation\+: automatic real-\/time goal adaptation and obstacle avoidance, H. Hoffmann et al., 2019.
+\item \mbox{[}3\mbox{]} A fast procedure for computing the distance between complex objects in three-\/dimensional space, E. G. Gilbert et al., 1988.
+\item \mbox{[}4\mbox{]} A\+A\+BB 3\+D\+Collisions -\/ \href{https://gdbooks.gitbooks.io/3dcollisions/content/Chapter1/aabb.html,}{\tt https\+://gdbooks.\+gitbooks.\+io/3dcollisions/content/\+Chapter1/aabb.\+html,} Accessed on 03/07/2021. 
 \end{DoxyItemize}

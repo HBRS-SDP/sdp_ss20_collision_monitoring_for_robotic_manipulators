@@ -1,0 +1,612 @@
+\hypertarget{class_box3}{}\section{Box3 Class Reference}
+\label{class_box3}\index{Box3@{Box3}}
+
+
+{\ttfamily \#include $<$primitives.\+h$>$}
+
+
+
+Inheritance diagram for Box3\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_box3__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Box3\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_box3__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_box3_aad6fb7ce9a1349ebc77d53bae2518d6e}{Box3} (Eigen\+::\+Vector3d \&center)
+\item 
+\hyperlink{class_box3_aa871a15d2ffdedb128f3b29c40a880a1}{Box3} (const Eigen\+::\+Vector3d \&vmin, const Eigen\+::\+Vector3d \&vmax)
+\item 
+\hyperlink{class_box3_acb6924ddd5dd9f976c0fc6335b77f5f2}{Box3} (\hyperlink{class_box3}{Box3} $\ast$box)
+\item 
+\hyperlink{class_box3_a3c411ee95120b8c1704ba62432bd8554}{Box3} (Eigen\+::\+Matrix4d \&\hyperlink{class_primitive_ad8b2afbad412f6046783d155c88fe312}{pose}, double x, double y, double z)
+\item 
+\hyperlink{class_box3_aa681aebc8053b437bda41ea430bf44cb}{Box3} (Eigen\+::\+Vector3d \&\hyperlink{class_primitive_ad8b2afbad412f6046783d155c88fe312}{pose}, double x, double y, double z)
+\item 
+\hyperlink{class_box3_a4ececcc0019ac56a491d3e491d491d97}{$\sim$\+Box3} ()
+\item 
+bool \hyperlink{class_box3_a9bf53c640569dd979156eed253752f00}{intersection} (const \hyperlink{class_ray}{Ray} \&r) const 
+\item 
+\hyperlink{class_line}{Line} $\ast$ \hyperlink{class_box3_a171b1ab6451b5ca9dafbe235bd42cff5}{Edge} (int edge\+Index) const 
+\item 
+std\+::vector$<$ \hyperlink{class_line}{Line} $\ast$ $>$ \hyperlink{class_box3_ac34df9b1130d1123e88fd6533f82cfe3}{Edge\+List} () const 
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_a7fe8dce86382a1313b1031a498b8a0a0}{Corner\+Point} (int corner\+Index) const 
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_a03b398c46370091bea527b09ffe4a14e}{Side\+Center\+Point} (int side\+Index) const 
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_ac329cb319677766639aaac40dc327a85}{Own\+Closest\+Point} (\hyperlink{class_line}{Line} $\ast$line)
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_ac8d506eddf64b2b97049e895250cd8b4}{Own\+Closest\+Point} (\hyperlink{class_sphere}{Sphere} $\ast$sphere)
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_a4e348447918fb2af753b3db5f162de37}{Closest\+Point} (const Eigen\+::\+Vector3d \&target\+Point)
+\begin{DoxyCompactList}\small\item\em Computes the closest point inside this A\+A\+BB to the given point. \end{DoxyCompactList}\item 
+void \hyperlink{class_box3_a19facb9f58656715206d50e0a1ef0527}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_primitive}{Primitive} $\ast$primitive)
+\item 
+void \hyperlink{class_box3_a3d389f14454f38310d2a77212c112957}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_capsule}{Capsule} $\ast$capsule)
+\item 
+void \hyperlink{class_box3_a538b1b04d58f58478b7094dcc4d91e3e}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_sphere}{Sphere} $\ast$sphere)
+\item 
+void \hyperlink{class_box3_a298425cb241cb0f0194316e4d25aafe4}{get\+Closest\+Points} (Eigen\+::\+Matrix\+Xd \&closest\+Points, \hyperlink{class_box3}{Box3} $\ast$box)
+\item 
+void \hyperlink{class_box3_a52abf43c224fa75af10dc146920fd4fd}{get\+Shortest\+Direction} (Eigen\+::\+Vector3d \&shortest\+Direction, \hyperlink{class_primitive}{Primitive} $\ast$primitive)
+\item 
+void \hyperlink{class_box3_a2e7de5b181e49c49232d494340ed0415}{get\+Shortest\+Direction} (Eigen\+::\+Vector3d \&shortest\+Direction, \hyperlink{class_capsule}{Capsule} $\ast$capsule)
+\item 
+void \hyperlink{class_box3_a033c3685ad82e29c8e26b921d0334ecd}{get\+Shortest\+Direction} (Eigen\+::\+Vector3d \&shortest\+Direction, \hyperlink{class_sphere}{Sphere} $\ast$sphere)
+\item 
+void \hyperlink{class_box3_abd93d14e07b6d985543bd20a7aa322f9}{get\+Shortest\+Direction} (Eigen\+::\+Vector3d \&shortest\+Direction, \hyperlink{class_box3}{Box3} $\ast$box)
+\item 
+double \hyperlink{class_box3_a6e3b4ac3d13e84b77f616e682d40762d}{get\+Shortest\+Distance} (\hyperlink{class_primitive}{Primitive} $\ast$primitive)
+\item 
+double \hyperlink{class_box3_ae02730af56a2c60295513122afbc2150}{get\+Shortest\+Distance} (\hyperlink{class_capsule}{Capsule} $\ast$capsule)
+\item 
+double \hyperlink{class_box3_a37f0dedde1849d2c6ab61468c81ae32d}{get\+Shortest\+Distance} (\hyperlink{class_sphere}{Sphere} $\ast$sphere)
+\item 
+double \hyperlink{class_box3_a5c009c518b97e950820513914d12d16a}{get\+Shortest\+Distance} (\hyperlink{class_box3}{Box3} $\ast$box)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_aad114a73fc86f48a459d97036afacdd1}{bounds} \mbox{[}2\mbox{]}
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_aa4e23702bbefb388799ad2ed7cfa0633}{min\+Point} = \hyperlink{class_box3_aad114a73fc86f48a459d97036afacdd1}{bounds}\mbox{[}0\mbox{]}
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_a34149a4c4b920189fac72cc67bd4a156}{max\+Point} = \hyperlink{class_box3_aad114a73fc86f48a459d97036afacdd1}{bounds}\mbox{[}1\mbox{]}
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_ad3d48cf0bac3a7963fbf1fec90d06836}{box\+\_\+center}
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_box3_a5aea4c92dc0926d4a9577b65c402b1b2}{extents}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Box class
+
+This class is a shape that describes the base of the robot as well as obstacles of the shape of a 3D box (cube). 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Box3@{Box3}!Box3@{Box3}}
+\index{Box3@{Box3}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Box3(\+Eigen\+::\+Vector3d \&center)}{Box3(Eigen::Vector3d &center)}}]{\setlength{\rightskip}{0pt plus 5cm}Box3\+::\+Box3 (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d \&}]{center}
+\end{DoxyParamCaption}
+)}\hypertarget{class_box3_aad6fb7ce9a1349ebc77d53bae2518d6e}{}\label{class_box3_aad6fb7ce9a1349ebc77d53bae2518d6e}
+Constructor of Box class
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & center point of the 3D Box represented with a Vector3d. \\
+\hline
+\end{DoxyParams}
+\index{Box3@{Box3}!Box3@{Box3}}
+\index{Box3@{Box3}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Box3(const Eigen\+::\+Vector3d \&vmin, const Eigen\+::\+Vector3d \&vmax)}{Box3(const Eigen::Vector3d &vmin, const Eigen::Vector3d &vmax)}}]{\setlength{\rightskip}{0pt plus 5cm}Box3\+::\+Box3 (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector3d \&}]{vmin, }
+\item[{const Eigen\+::\+Vector3d \&}]{vmax}
+\end{DoxyParamCaption}
+)}\hypertarget{class_box3_aa871a15d2ffdedb128f3b29c40a880a1}{}\label{class_box3_aa871a15d2ffdedb128f3b29c40a880a1}
+Constructor of Box class
+
+
+\begin{DoxyParams}{Parameters}
+{\em vmin} & minimum axis bound of 3D Box represented with a Vector3d. \\
+\hline
+{\em vmax} & maximum axis bound of 3D Box represented with a Vector3d. \\
+\hline
+\end{DoxyParams}
+\index{Box3@{Box3}!Box3@{Box3}}
+\index{Box3@{Box3}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Box3(\+Box3 $\ast$box)}{Box3(Box3 *box)}}]{\setlength{\rightskip}{0pt plus 5cm}Box3\+::\+Box3 (
+\begin{DoxyParamCaption}
+\item[{{\bf Box3} $\ast$}]{box}
+\end{DoxyParamCaption}
+)}\hypertarget{class_box3_acb6924ddd5dd9f976c0fc6335b77f5f2}{}\label{class_box3_acb6924ddd5dd9f976c0fc6335b77f5f2}
+Constructor of Box class
+
+
+\begin{DoxyParams}{Parameters}
+{\em box} & an object of the class box s \\
+\hline
+\end{DoxyParams}
+\index{Box3@{Box3}!Box3@{Box3}}
+\index{Box3@{Box3}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Box3(\+Eigen\+::\+Matrix4d \&pose, double x, double y, double z)}{Box3(Eigen::Matrix4d &pose, double x, double y, double z)}}]{\setlength{\rightskip}{0pt plus 5cm}Box3\+::\+Box3 (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix4d \&}]{pose, }
+\item[{double}]{x, }
+\item[{double}]{y, }
+\item[{double}]{z}
+\end{DoxyParamCaption}
+)}\hypertarget{class_box3_a3c411ee95120b8c1704ba62432bd8554}{}\label{class_box3_a3c411ee95120b8c1704ba62432bd8554}
+\index{Box3@{Box3}!Box3@{Box3}}
+\index{Box3@{Box3}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Box3(\+Eigen\+::\+Vector3d \&pose, double x, double y, double z)}{Box3(Eigen::Vector3d &pose, double x, double y, double z)}}]{\setlength{\rightskip}{0pt plus 5cm}Box3\+::\+Box3 (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d \&}]{pose, }
+\item[{double}]{x, }
+\item[{double}]{y, }
+\item[{double}]{z}
+\end{DoxyParamCaption}
+)}\hypertarget{class_box3_aa681aebc8053b437bda41ea430bf44cb}{}\label{class_box3_aa681aebc8053b437bda41ea430bf44cb}
+\index{Box3@{Box3}!````~Box3@{$\sim$\+Box3}}
+\index{````~Box3@{$\sim$\+Box3}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{$\sim$\+Box3()}{~Box3()}}]{\setlength{\rightskip}{0pt plus 5cm}Box3\+::$\sim$\+Box3 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_box3_a4ececcc0019ac56a491d3e491d491d97}{}\label{class_box3_a4ececcc0019ac56a491d3e491d491d97}
+
+
+\subsection{Member Function Documentation}
+\index{Box3@{Box3}!Closest\+Point@{Closest\+Point}}
+\index{Closest\+Point@{Closest\+Point}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Closest\+Point(const Eigen\+::\+Vector3d \&target\+Point)}{ClosestPoint(const Eigen::Vector3d &targetPoint)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::\+Closest\+Point (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector3d \&}]{target\+Point}
+\end{DoxyParamCaption}
+)}\hypertarget{class_box3_a4e348447918fb2af753b3db5f162de37}{}\label{class_box3_a4e348447918fb2af753b3db5f162de37}
+
+
+Computes the closest point inside this A\+A\+BB to the given point. 
+
+Function to get the closest point inside the box (A\+A\+BB ) to an external point
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Point} & An external point to Box \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+closest point inside the box to the external point 
+\end{DoxyReturn}
+\index{Box3@{Box3}!Corner\+Point@{Corner\+Point}}
+\index{Corner\+Point@{Corner\+Point}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Corner\+Point(int corner\+Index) const }{CornerPoint(int cornerIndex) const }}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::\+Corner\+Point (
+\begin{DoxyParamCaption}
+\item[{int}]{corner\+Index}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_box3_a7fe8dce86382a1313b1031a498b8a0a0}{}\label{class_box3_a7fe8dce86382a1313b1031a498b8a0a0}
+Function to check intersection of box with the ray.
+
+
+\begin{DoxyParams}{Parameters}
+{\em corner\+Index} & index of the corner of the box. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+corner of the box as a Vector3d. 
+\end{DoxyReturn}
+\index{Box3@{Box3}!Edge@{Edge}}
+\index{Edge@{Edge}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Edge(int edge\+Index) const }{Edge(int edgeIndex) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Line} $\ast$ Box3\+::\+Edge (
+\begin{DoxyParamCaption}
+\item[{int}]{edge\+Index}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_box3_a171b1ab6451b5ca9dafbe235bd42cff5}{}\label{class_box3_a171b1ab6451b5ca9dafbe235bd42cff5}
+Function to check intersection of box with the ray.
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge\+Index} & index of the edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+edge of the box as a line object. 
+\end{DoxyReturn}
+\index{Box3@{Box3}!Edge\+List@{Edge\+List}}
+\index{Edge\+List@{Edge\+List}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Edge\+List() const }{EdgeList() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Line} $\ast$ $>$ Box3\+::\+Edge\+List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_box3_ac34df9b1130d1123e88fd6533f82cfe3}{}\label{class_box3_ac34df9b1130d1123e88fd6533f82cfe3}
+Function to check intersection of box with the ray.
+
+\begin{DoxyReturn}{Returns}
+vector filled with all the edges of the box. 
+\end{DoxyReturn}
+\index{Box3@{Box3}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Primitive $\ast$primitive)}{getClosestPoints(Eigen::MatrixXd &closestPoints, Primitive *primitive)}}]{\setlength{\rightskip}{0pt plus 5cm}void Box3\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Primitive} $\ast$}]{primitive}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a19facb9f58656715206d50e0a1ef0527}{}\label{class_box3_a19facb9f58656715206d50e0a1ef0527}
+Performs a dynamic cast to overload the direction functions
+
+This method takes an object that inherits from primitive and performs a dynamic cast to call the correct get\+Closest\+Points method depending on the class of the shape.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em primitive} & address of the primitive object. \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and primitive \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_primitive_ae838e4e129f05642994da59f08f85f56}{Primitive}.
+
+\index{Box3@{Box3}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Capsule $\ast$capsule)}{getClosestPoints(Eigen::MatrixXd &closestPoints, Capsule *capsule)}}]{\setlength{\rightskip}{0pt plus 5cm}void Box3\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Capsule} $\ast$}]{capsule}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a3d389f14454f38310d2a77212c112957}{}\label{class_box3_a3d389f14454f38310d2a77212c112957}
+Finds the shortest distance between this primitive and a \hyperlink{class_capsule}{Capsule} primitive
+
+This method takes a capsule object and returns the closest points in this primitive and in a capsule object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em capsule} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and capsule \\
+\hline
+\end{DoxyParams}
+calculate distance between other shape primitives 
+
+Implements \hyperlink{class_primitive_a2b8b8dea111d9eda31f72e06b47e9aa9}{Primitive}.
+
+\index{Box3@{Box3}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Sphere $\ast$sphere)}{getClosestPoints(Eigen::MatrixXd &closestPoints, Sphere *sphere)}}]{\setlength{\rightskip}{0pt plus 5cm}void Box3\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Sphere} $\ast$}]{sphere}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a538b1b04d58f58478b7094dcc4d91e3e}{}\label{class_box3_a538b1b04d58f58478b7094dcc4d91e3e}
+Finds the shortest distance between this primitive and a \hyperlink{class_sphere}{Sphere} primitive
+
+This method takes a capsule object and returns the closest points in this primitive and in a sphere object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em sphere} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and sphere \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_primitive_ac86ef47d59c21448ce78c91490c7dbd4}{Primitive}.
+
+\index{Box3@{Box3}!get\+Closest\+Points@{get\+Closest\+Points}}
+\index{get\+Closest\+Points@{get\+Closest\+Points}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Points(\+Eigen\+::\+Matrix\+Xd \&closest\+Points, Box3 $\ast$box)}{getClosestPoints(Eigen::MatrixXd &closestPoints, Box3 *box)}}]{\setlength{\rightskip}{0pt plus 5cm}void Box3\+::get\+Closest\+Points (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Matrix\+Xd \&}]{closest\+Points, }
+\item[{{\bf Box3} $\ast$}]{box}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a298425cb241cb0f0194316e4d25aafe4}{}\label{class_box3_a298425cb241cb0f0194316e4d25aafe4}
+Finds the shortest distance between this primitive and a Box primitive
+
+This method takes a box object and returns the closest points in this primitive and in a box object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em box} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em closest\+Points} & the closest points in this primitive and box \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_primitive_a1c5cfb220351b16f538e2085c717a52f}{Primitive}.
+
+\index{Box3@{Box3}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
+\index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Direction(\+Eigen\+::\+Vector3d \&shortest\+Direction, Primitive $\ast$primitive)}{getShortestDirection(Eigen::Vector3d &shortestDirection, Primitive *primitive)}}]{\setlength{\rightskip}{0pt plus 5cm}void Box3\+::get\+Shortest\+Direction (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d \&}]{shortest\+Direction, }
+\item[{{\bf Primitive} $\ast$}]{primitive}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a52abf43c224fa75af10dc146920fd4fd}{}\label{class_box3_a52abf43c224fa75af10dc146920fd4fd}
+Performs a dynamic cast to overload the direction functions
+
+This method takes an object that inherits from primitive and performs a dynamic cast to call the correct get\+Shortest\+Direction method depending on the class of the shape.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em primitive} & address of the primitive object. \\
+\hline
+\mbox{\tt out}  & {\em shortest\+Direction} & a vector in 3D that represents the closes direction between this and the second primitive. \\
+\hline
+\end{DoxyParams}
+Checks for intersection between box and sphere 
+
+Implements \hyperlink{class_primitive_ae37bbdf5271bf278b19888e0428579a8}{Primitive}.
+
+\index{Box3@{Box3}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
+\index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Direction(\+Eigen\+::\+Vector3d \&shortest\+Direction, Capsule $\ast$capsule)}{getShortestDirection(Eigen::Vector3d &shortestDirection, Capsule *capsule)}}]{\setlength{\rightskip}{0pt plus 5cm}void Box3\+::get\+Shortest\+Direction (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d \&}]{shortest\+Direction, }
+\item[{{\bf Capsule} $\ast$}]{capsule}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a2e7de5b181e49c49232d494340ed0415}{}\label{class_box3_a2e7de5b181e49c49232d494340ed0415}
+Finds the shortest distance between this primitive and a \hyperlink{class_capsule}{Capsule} primitive
+
+This method takes a capsule object and returns the closest direction between this primitive and a capsule object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em capsule} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em shortest\+Direction} & a vector in 3D that represents the closes direction between the primitive and capsule \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_primitive_af9bd724a6618bd76e41e5682caa25023}{Primitive}.
+
+\index{Box3@{Box3}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
+\index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Direction(\+Eigen\+::\+Vector3d \&shortest\+Direction, Sphere $\ast$sphere)}{getShortestDirection(Eigen::Vector3d &shortestDirection, Sphere *sphere)}}]{\setlength{\rightskip}{0pt plus 5cm}void Box3\+::get\+Shortest\+Direction (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d \&}]{shortest\+Direction, }
+\item[{{\bf Sphere} $\ast$}]{sphere}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a033c3685ad82e29c8e26b921d0334ecd}{}\label{class_box3_a033c3685ad82e29c8e26b921d0334ecd}
+Finds the shortest distance between this primitive and a \hyperlink{class_sphere}{Sphere} primitive
+
+This method takes a capsule object and returns the closest direction between this primitive and a sphere object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em sphere} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em shortest\+Direction} & a vector in 3D that represents the closes direction between the primitive and sphere \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_primitive_a3f1bc91de29fa904657c1ba4c40eee53}{Primitive}.
+
+\index{Box3@{Box3}!get\+Shortest\+Direction@{get\+Shortest\+Direction}}
+\index{get\+Shortest\+Direction@{get\+Shortest\+Direction}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Direction(\+Eigen\+::\+Vector3d \&shortest\+Direction, Box3 $\ast$box)}{getShortestDirection(Eigen::Vector3d &shortestDirection, Box3 *box)}}]{\setlength{\rightskip}{0pt plus 5cm}void Box3\+::get\+Shortest\+Direction (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d \&}]{shortest\+Direction, }
+\item[{{\bf Box3} $\ast$}]{box}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_abd93d14e07b6d985543bd20a7aa322f9}{}\label{class_box3_abd93d14e07b6d985543bd20a7aa322f9}
+Finds the shortest direction between this primitive and a Box primitive
+
+This method takes a box object and returns the closest direction between this primitive and a box object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em box} & address of the primitive object \\
+\hline
+\mbox{\tt out}  & {\em shortest\+Direction} & a vector in 3D that represents the closes direction between the primitive and box \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_primitive_a4f478b272b35ba4f2188a8f1308b5b3b}{Primitive}.
+
+\index{Box3@{Box3}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
+\index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Distance(\+Primitive $\ast$primitive)}{getShortestDistance(Primitive *primitive)}}]{\setlength{\rightskip}{0pt plus 5cm}double Box3\+::get\+Shortest\+Distance (
+\begin{DoxyParamCaption}
+\item[{{\bf Primitive} $\ast$}]{primitive}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a6e3b4ac3d13e84b77f616e682d40762d}{}\label{class_box3_a6e3b4ac3d13e84b77f616e682d40762d}
+Performs a dynamic cast to overload the distance functions
+
+This method takes an object that inherits from primitive and performs a dynamic cast to call the correct get\+Shortest\+Distance method depending on the class of the shape. returns a double value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em primitive} & address of the primitive object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest distance between this and the second primitive. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_primitive_a340b3e5540b910480ada939383985d66}{Primitive}.
+
+\index{Box3@{Box3}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
+\index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Distance(\+Capsule $\ast$capsule)}{getShortestDistance(Capsule *capsule)}}]{\setlength{\rightskip}{0pt plus 5cm}double Box3\+::get\+Shortest\+Distance (
+\begin{DoxyParamCaption}
+\item[{{\bf Capsule} $\ast$}]{capsule}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_ae02730af56a2c60295513122afbc2150}{}\label{class_box3_ae02730af56a2c60295513122afbc2150}
+Finds the shortest distance between this primitive and a \hyperlink{class_capsule}{Capsule} primitive
+
+This method takes a capsule object and returns the closest distance between this primitive and a capsule object. returns a double value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em capsule} & address of the primitive object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest distance between the primitive and capsule 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_primitive_a46e60acfe4c005c0ec94e1e8b82d36db}{Primitive}.
+
+\index{Box3@{Box3}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
+\index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Distance(\+Sphere $\ast$sphere)}{getShortestDistance(Sphere *sphere)}}]{\setlength{\rightskip}{0pt plus 5cm}double Box3\+::get\+Shortest\+Distance (
+\begin{DoxyParamCaption}
+\item[{{\bf Sphere} $\ast$}]{sphere}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a37f0dedde1849d2c6ab61468c81ae32d}{}\label{class_box3_a37f0dedde1849d2c6ab61468c81ae32d}
+Finds the shortest distance between this primitive and a \hyperlink{class_sphere}{Sphere} primitive
+
+This method takes a capsule object and returns the closest distance between this primitive and a sphere object. returns a double value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sphere} & address of the primitive object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest distance between the primitive and sphere 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_primitive_adaac4fc4fedf9cd76d4eb9c77e9ae560}{Primitive}.
+
+\index{Box3@{Box3}!get\+Shortest\+Distance@{get\+Shortest\+Distance}}
+\index{get\+Shortest\+Distance@{get\+Shortest\+Distance}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{get\+Shortest\+Distance(\+Box3 $\ast$box)}{getShortestDistance(Box3 *box)}}]{\setlength{\rightskip}{0pt plus 5cm}double Box3\+::get\+Shortest\+Distance (
+\begin{DoxyParamCaption}
+\item[{{\bf Box3} $\ast$}]{box}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_box3_a5c009c518b97e950820513914d12d16a}{}\label{class_box3_a5c009c518b97e950820513914d12d16a}
+Finds the shortest distance between this primitive and a Box primitive
+
+This method takes a capsule object and returns the closest distance between this primitive and a box object. returns a double value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em box} & address of the primitive object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the closest distance between the primitive and box 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_primitive_abe0be322f473e299109b9dda724b2972}{Primitive}.
+
+\index{Box3@{Box3}!intersection@{intersection}}
+\index{intersection@{intersection}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{intersection(const Ray \&r) const }{intersection(const Ray &r) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Box3\+::intersection (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ray} \&}]{r}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_box3_a9bf53c640569dd979156eed253752f00}{}\label{class_box3_a9bf53c640569dd979156eed253752f00}
+Function to check intersection of box with the ray.
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & object of class \hyperlink{class_ray}{Ray}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false based on intersection. 
+\end{DoxyReturn}
+\index{Box3@{Box3}!Own\+Closest\+Point@{Own\+Closest\+Point}}
+\index{Own\+Closest\+Point@{Own\+Closest\+Point}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Own\+Closest\+Point(\+Line $\ast$line)}{OwnClosestPoint(Line *line)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::\+Own\+Closest\+Point (
+\begin{DoxyParamCaption}
+\item[{{\bf Line} $\ast$}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{class_box3_ac329cb319677766639aaac40dc327a85}{}\label{class_box3_ac329cb319677766639aaac40dc327a85}
+Function to check intersection of box with the ray
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & line Class object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+closest point on the box to the line obstacle 
+\end{DoxyReturn}
+\index{Box3@{Box3}!Own\+Closest\+Point@{Own\+Closest\+Point}}
+\index{Own\+Closest\+Point@{Own\+Closest\+Point}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Own\+Closest\+Point(\+Sphere $\ast$sphere)}{OwnClosestPoint(Sphere *sphere)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::\+Own\+Closest\+Point (
+\begin{DoxyParamCaption}
+\item[{{\bf Sphere} $\ast$}]{sphere}
+\end{DoxyParamCaption}
+)}\hypertarget{class_box3_ac8d506eddf64b2b97049e895250cd8b4}{}\label{class_box3_ac8d506eddf64b2b97049e895250cd8b4}
+Function to check intersection of box with the ray
+
+
+\begin{DoxyParams}{Parameters}
+{\em sphere} & sphere Class object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+closest point on the box to the sphere obstacle 
+\end{DoxyReturn}
+\index{Box3@{Box3}!Side\+Center\+Point@{Side\+Center\+Point}}
+\index{Side\+Center\+Point@{Side\+Center\+Point}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{Side\+Center\+Point(int side\+Index) const }{SideCenterPoint(int sideIndex) const }}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::\+Side\+Center\+Point (
+\begin{DoxyParamCaption}
+\item[{int}]{side\+Index}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_box3_a03b398c46370091bea527b09ffe4a14e}{}\label{class_box3_a03b398c46370091bea527b09ffe4a14e}
+Function to check intersection of box with the ray.
+
+
+\begin{DoxyParams}{Parameters}
+{\em side\+Index} & index of the face/side of the box. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+midpoint of the center of the side of the box as a Vector3d. 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Box3@{Box3}!bounds@{bounds}}
+\index{bounds@{bounds}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{bounds}{bounds}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::bounds\mbox{[}2\mbox{]}}\hypertarget{class_box3_aad114a73fc86f48a459d97036afacdd1}{}\label{class_box3_aad114a73fc86f48a459d97036afacdd1}
+\index{Box3@{Box3}!box\+\_\+center@{box\+\_\+center}}
+\index{box\+\_\+center@{box\+\_\+center}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{box\+\_\+center}{box_center}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::box\+\_\+center}\hypertarget{class_box3_ad3d48cf0bac3a7963fbf1fec90d06836}{}\label{class_box3_ad3d48cf0bac3a7963fbf1fec90d06836}
+\index{Box3@{Box3}!extents@{extents}}
+\index{extents@{extents}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{extents}{extents}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::extents}\hypertarget{class_box3_a5aea4c92dc0926d4a9577b65c402b1b2}{}\label{class_box3_a5aea4c92dc0926d4a9577b65c402b1b2}
+\index{Box3@{Box3}!max\+Point@{max\+Point}}
+\index{max\+Point@{max\+Point}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{max\+Point}{maxPoint}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::max\+Point = {\bf bounds}\mbox{[}1\mbox{]}}\hypertarget{class_box3_a34149a4c4b920189fac72cc67bd4a156}{}\label{class_box3_a34149a4c4b920189fac72cc67bd4a156}
+\index{Box3@{Box3}!min\+Point@{min\+Point}}
+\index{min\+Point@{min\+Point}!Box3@{Box3}}
+\subsubsection[{\texorpdfstring{min\+Point}{minPoint}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Box3\+::min\+Point = {\bf bounds}\mbox{[}0\mbox{]}}\hypertarget{class_box3_aa4e23702bbefb388799ad2ed7cfa0633}{}\label{class_box3_aa4e23702bbefb388799ad2ed7cfa0633}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/srini/hbrs/\+Fourthsem/\+S\+D\+P/\+R\+O\+S\+\_\+setup/08032021/updated\+\_\+1/sdp\+\_\+ws20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+mobile\+\_\+manipulators/collision\+\_\+monitoring/include/\hyperlink{primitives_8h}{primitives.\+h}\item 
+/home/srini/hbrs/\+Fourthsem/\+S\+D\+P/\+R\+O\+S\+\_\+setup/08032021/updated\+\_\+1/sdp\+\_\+ws20\+\_\+collision\+\_\+monitoring\+\_\+for\+\_\+mobile\+\_\+manipulators/collision\+\_\+monitoring/src/\hyperlink{primitives_8cpp}{primitives.\+cpp}\end{DoxyCompactItemize}

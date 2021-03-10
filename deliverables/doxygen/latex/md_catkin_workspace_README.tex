@@ -1,78 +1,12 @@
-The package that implements the Kinova \hyperlink{class_arm}{Arm} package in a ros package for demonstration purposes.
+The package that implements extended version of the existing library is available under narko\+\_\+kinova\+\_\+base\+\_\+collision and is used for visualization and demonstration purposes.
 
 \subsection*{Documentation}
 
-For U\+ML diagrams have a look in the /docs folder and for basic R\+OS commands see \href{http://wiki.ros.org/ROS/Tutorials}{\tt http\+://wiki.\+ros.\+org/\+R\+O\+S/\+Tutorials}.
+For documentation and other details, please refer to /docs folder.
 
-\subsection*{Requirements\+:}
+\subsection*{Building and Execution}
 
-
-\begin{DoxyItemize}
-\item K\+DL (\href{https://www.orocos.org/kdl/installation-manual}{\tt https\+://www.\+orocos.\+org/kdl/installation-\/manual})
-\item Eigen (\href{http://eigen.tuxfamily.org}{\tt http\+://eigen.\+tuxfamily.\+org})
-\item R\+OS kinetic (\href{http://wiki.ros.org/}{\tt http\+://wiki.\+ros.\+org/})
-\item C\+M\+A\+KE V3.\+5
-\end{DoxyItemize}
-
-\subsection*{Packaged dependencies}
-
-The kinova kortex library is packaged with this catkin workspace for easy building and implementation. This is pulled directly from the \href{https://github.com/kinovarobotics/ros_kortex}{\tt ros kortex} github page and the associated licences and readme can be found in the catkin/src directory.
-
-\subsection*{Building}
-
-In the catkin\+\_\+workspace folder of the repository make sure you have ros setup.\+bash sourced in the current terminal\+: 
-\begin{DoxyCode}
-1 ...\(\backslash\)catkin\_workspace$ source /opt/ros/kinetic/setup.bash 
-\end{DoxyCode}
- Then run catkin build (or catkin\+\_\+make\+: 
-\begin{DoxyCode}
-1 ...\(\backslash\)catkin\_workspace$ catkin build
-\end{DoxyCode}
- Finally source the new setup.\+bash, or add it to your .bashrc to be run on the terminals startup\+: 
-\begin{DoxyCode}
-1 ...\(\backslash\)catkin\_workspace$ source devel/setup.bash
-\end{DoxyCode}
-
-
-\subsection*{Running the software}
-
-There are 2 modes the software can be run in, single or dual arm, each with its separate interface node types.
-
-\subsubsection*{Single arm}
-
-First make sure that the correct setup.\+bash file is sourced. 
-\begin{DoxyCode}
-1 ...\(\backslash\)catkin\_workspace$ source devel/setup.bash
-\end{DoxyCode}
- Then launch the single arm simulation with\+: 
-\begin{DoxyCode}
-1 ...$ roslaunch kinova\_arm single\_manipulator.launch 
-\end{DoxyCode}
- This will bring up the rviz display where the kinova arm model can be seen. To interface with the model the single interfacer node needs to be opened, so in a new terminal source the setup file (if you didn\textquotesingle{}t add it to your .bashrc) and then run\+: 
-\begin{DoxyCode}
-1 ...$ rosrun kinova\_arm KinovaInterface 
-\end{DoxyCode}
- Where using basic keyboard commands you can set goals and add obstacles to the environment.
-
-\subsubsection*{Dual arm}
-
-First make sure that the correct setup.\+bash file is sourced. 
-\begin{DoxyCode}
-1 ...\(\backslash\)catkin\_workspace$ source devel/setup.bash
-\end{DoxyCode}
- Then launch the dual arm simulation with\+: 
-\begin{DoxyCode}
-1 ...$ roslaunch kinova\_arm dual\_manipulators.launch  
-\end{DoxyCode}
- This will bring up the rviz display where the kinova arm models can be seen. To interface with the model the dual interfacer node needs to be opened, so in a new terminal source the setup file (if you didn\textquotesingle{}t add it to your .bashrc) and then run\+: 
-\begin{DoxyCode}
-1 ...$ rosrun kinova\_arm DualArmKinovaInterface 
-\end{DoxyCode}
- Where using basic keyboard commands you can set goals and add obstacles to the environment.
-
-\subsection*{U\+ML diagram}
-
- 
+Instructions are provided under the file setup\+\_\+instructions.\+pdf whivh details about the dependency requirements, setup instructions, and execution instructions.
 
 \subsection*{R\+OS Node diagrams}
 
@@ -81,5 +15,7 @@ First make sure that the correct setup.\+bash file is sourced.
  
 
 \subsubsection*{Dual arm}
+
+  \subsubsection*{\hyperlink{class_base}{Base} and \hyperlink{class_arm}{Arm}}
 
   

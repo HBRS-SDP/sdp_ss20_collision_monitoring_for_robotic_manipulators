@@ -1,4 +1,4 @@
-<map id="arm_controller.h" name="arm_controller.h">
+<map id="include/arm_controller.h" name="include/arm_controller.h">
 <area shape="rect" id="node20" href="$primitives_8h.html" title="primitives.h" alt="" coords="1916,259,2006,285"/>
 <area shape="rect" id="node23" href="$kinova__arm_8h.html" title="kinova_arm.h" alt="" coords="804,87,904,114"/>
 <area shape="rect" id="node26" href="$monitor_8h.html" title="monitor.h" alt="" coords="1895,87,1971,114"/>

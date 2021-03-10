@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Collision monitoring for robotic manipulators: Capsule Class Reference</title>
+<title>Collision monitoring for a mobile manipulator: Capsule Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -31,7 +31,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Collision monitoring for robotic manipulators
+   <div id="projectname">Collision monitoring for a mobile manipulator
    </div>
   </td>
  </tr>
@@ -114,13 +114,13 @@ $(document).ready(function(){initNavTree('class_capsule.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="primitives_8h_source.html">primitives.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="">primitives.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Capsule:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_capsule__inherit__graph.png" border="0" usemap="#_capsule_inherit__map" alt="Inheritance graph"/></div>
 <map name="_capsule_inherit__map" id="_capsule_inherit__map">
-<area shape="rect" id="node2" href="class_primitive.html" title="{Primitive\n|+ pose\l|+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l}" alt="" coords="5,5,167,200"/>
+<area shape="rect" id="node2" href="class_primitive.html" title="{Primitive\n|+ pose\l|+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l}" alt="" coords="5,5,167,244"/>
 </map>
 </div>
 <div class="dynheader">
@@ -128,7 +128,7 @@ Collaboration diagram for Capsule:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_capsule__coll__graph.png" border="0" usemap="#_capsule_coll__map" alt="Collaboration graph"/></div>
 <map name="_capsule_coll__map" id="_capsule_coll__map">
-<area shape="rect" id="node2" href="class_primitive.html" title="{Primitive\n|+ pose\l|+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l}" alt="" coords="5,5,167,200"/>
+<area shape="rect" id="node2" href="class_primitive.html" title="{Primitive\n|+ pose\l|+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getClosestPoints()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDirection()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l+ getShortestDistance()\l}" alt="" coords="5,5,167,244"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -150,18 +150,24 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9da1b4c44adba1726446a4fb37b7a7e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0fea610bb1a1e4016bbda0f4f88264a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#aa0fea610bb1a1e4016bbda0f4f88264a">getClosestPoints</a> (Eigen::MatrixXd &amp;closestPoints, <a class="el" href="class_sphere.html">Sphere</a> *sphere)</td></tr>
 <tr class="separator:aa0fea610bb1a1e4016bbda0f4f88264a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2be9cfca9bad47e6deab5a9eed34bff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#af2be9cfca9bad47e6deab5a9eed34bff">getClosestPoints</a> (Eigen::MatrixXd &amp;closestPoints, <a class="el" href="class_box3.html">Box3</a> *box)</td></tr>
+<tr class="separator:af2be9cfca9bad47e6deab5a9eed34bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad569eae23b91f33e145f06745739e428"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#ad569eae23b91f33e145f06745739e428">getShortestDirection</a> (Eigen::Vector3d &amp;shortestDirection, <a class="el" href="class_primitive.html">Primitive</a> *primitive)</td></tr>
 <tr class="separator:ad569eae23b91f33e145f06745739e428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28274c18ef5a3b9ef869caa64d5f7d5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#a28274c18ef5a3b9ef869caa64d5f7d5e">getShortestDirection</a> (Eigen::Vector3d &amp;shortestDirection, <a class="el" href="class_capsule.html">Capsule</a> *capsule)</td></tr>
 <tr class="separator:a28274c18ef5a3b9ef869caa64d5f7d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae076a389170bd6644f479bfe9c243bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#aae076a389170bd6644f479bfe9c243bc">getShortestDirection</a> (Eigen::Vector3d &amp;shortestDirection, <a class="el" href="class_sphere.html">Sphere</a> *sphere)</td></tr>
 <tr class="separator:aae076a389170bd6644f479bfe9c243bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac062f76b08302e07d3377d5aadd5b3a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#ac062f76b08302e07d3377d5aadd5b3a9">getShortestDirection</a> (Eigen::Vector3d &amp;shortestDirection, <a class="el" href="class_box3.html">Box3</a> *box)</td></tr>
+<tr class="separator:ac062f76b08302e07d3377d5aadd5b3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43bcc7bb95425a4559f7fd0289ef8b45"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#a43bcc7bb95425a4559f7fd0289ef8b45">getShortestDistance</a> (<a class="el" href="class_primitive.html">Primitive</a> *primitive)</td></tr>
 <tr class="separator:a43bcc7bb95425a4559f7fd0289ef8b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade8880442a9230f893c296f0681ae9ad"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#ade8880442a9230f893c296f0681ae9ad">getShortestDistance</a> (<a class="el" href="class_capsule.html">Capsule</a> *capsule)</td></tr>
 <tr class="separator:ade8880442a9230f893c296f0681ae9ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71d7821f3e7f9ac972bceb06d82f529d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#a71d7821f3e7f9ac972bceb06d82f529d">getShortestDistance</a> (<a class="el" href="class_sphere.html">Sphere</a> *sphere)</td></tr>
 <tr class="separator:a71d7821f3e7f9ac972bceb06d82f529d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a4a8932b27143c1d199b4c028f1348e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_capsule.html#a2a4a8932b27143c1d199b4c028f1348e">getShortestDistance</a> (<a class="el" href="class_box3.html">Box3</a> *box)</td></tr>
+<tr class="separator:a2a4a8932b27143c1d199b4c028f1348e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -181,8 +187,6 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_capsule.html">Capsule</a> class. A cylinder with two half spheres at both ends.</p>
 <p>This class is a shape that inherits from primitive. It's similar to a cylinder containing half spheres in the ends, making a capsule. </p>
-
-<p>Definition at line <a class="el" href="primitives_8h_source.html#l00236">236</a> of file <a class="el" href="primitives_8h_source.html">primitives.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aab6d0827aa8179c3f258129161a67e2e"></a>
 <div class="memitem">
@@ -223,8 +227,6 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00117">117</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a94838c4642111c07dbf83fdc775d1a68"></a>
@@ -248,8 +250,6 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00123">123</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="abfd7f0348ce8e7f8ee4e70374ae27533"></a>
@@ -264,8 +264,6 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00129">129</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -313,8 +311,6 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#ae838e4e129f05642994da59f08f85f56">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00141">141</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a9da1b4c44adba1726446a4fb37b7a7e0"></a>
@@ -359,8 +355,6 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Implements <a class="el" href="class_primitive.html#a2b8b8dea111d9eda31f72e06b47e9aa9">Primitive</a>.</p>
-
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00155">155</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -407,7 +401,50 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#ac86ef47d59c21448ce78c91490c7dbd4">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00223">223</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="af2be9cfca9bad47e6deab5a9eed34bff"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Capsule::getClosestPoints </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>closestPoints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_box3.html">Box3</a> *&#160;</td>
+          <td class="paramname"><em>box</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Finds the shortest distance between this primitive and a Box primitive</p>
+<p>This method takes a box object and returns the closest points in this primitive and in a box object.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">box</td><td>address of the primitive object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">closestPoints</td><td>the closest points in this primitive and box </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_primitive.html#a1c5cfb220351b16f538e2085c717a52f">Primitive</a>.</p>
 
 </div>
 </div>
@@ -426,8 +463,6 @@ Additional Inherited Members</h2></td></tr>
 <p>Getter of length</p>
 <dl class="section return"><dt>Returns</dt><dd>the length of the capsule </dd></dl>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00133">133</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a4e98e8545ea57fe682c5a2002bd49bdb"></a>
@@ -444,8 +479,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Getter of radius</p>
 <dl class="section return"><dt>Returns</dt><dd>the radius of the capsule </dd></dl>
-
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00137">137</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -492,8 +525,6 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#ae37bbdf5271bf278b19888e0428579a8">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00241">241</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a28274c18ef5a3b9ef869caa64d5f7d5e"></a>
@@ -538,8 +569,6 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Implements <a class="el" href="class_primitive.html#af9bd724a6618bd76e41e5682caa25023">Primitive</a>.</p>
-
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00255">255</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -586,7 +615,50 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#a3f1bc91de29fa904657c1ba4c40eee53">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00266">266</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="ac062f76b08302e07d3377d5aadd5b3a9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Capsule::getShortestDirection </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::Vector3d &amp;&#160;</td>
+          <td class="paramname"><em>shortestDirection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_box3.html">Box3</a> *&#160;</td>
+          <td class="paramname"><em>box</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Finds the shortest direction between this primitive and a Box primitive</p>
+<p>This method takes a box object and returns the closest direction between this primitive and a box object.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">box</td><td>address of the primitive object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">shortestDirection</td><td>a vector in 3D that represents the closes direction between the primitive and box </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_primitive.html#a4f478b272b35ba4f2188a8f1308b5b3b">Primitive</a>.</p>
 
 </div>
 </div>
@@ -623,8 +695,6 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#a340b3e5540b910480ada939383985d66">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00277">277</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="ade8880442a9230f893c296f0681ae9ad"></a>
@@ -659,8 +729,6 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>the closest distance between the primitive and capsule </dd></dl>
 
 <p>Implements <a class="el" href="class_primitive.html#a46e60acfe4c005c0ec94e1e8b82d36db">Primitive</a>.</p>
-
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00291">291</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
 
 </div>
 </div>
@@ -697,7 +765,40 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_primitive.html#adaac4fc4fedf9cd76d4eb9c77e9ae560">Primitive</a>.</p>
 
-<p>Definition at line <a class="el" href="primitives_8cpp_source.html#l00301">301</a> of file <a class="el" href="primitives_8cpp_source.html">primitives.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a2a4a8932b27143c1d199b4c028f1348e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Capsule::getShortestDistance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_box3.html">Box3</a> *&#160;</td>
+          <td class="paramname"><em>box</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Finds the shortest distance between this primitive and a Box primitive</p>
+<p>This method takes a capsule object and returns the closest distance between this primitive and a box object. returns a double value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">box</td><td>address of the primitive object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the closest distance between the primitive and box </dd></dl>
+
+<p>Implements <a class="el" href="class_primitive.html#abe0be322f473e299109b9dda724b2972">Primitive</a>.</p>
 
 </div>
 </div>
@@ -722,8 +823,6 @@ Additional Inherited Members</h2></td></tr>
 
 <p>length of the capsule </p>
 
-<p>Definition at line <a class="el" href="primitives_8h_source.html#l00239">239</a> of file <a class="el" href="primitives_8h_source.html">primitives.h</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a9b7e591748a2b735b35d99a2d7792f39"></a>
@@ -746,13 +845,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>radius of the capsule </p>
 
-<p>Definition at line <a class="el" href="primitives_8h_source.html#l00241">241</a> of file <a class="el" href="primitives_8h_source.html">primitives.h</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="primitives_8h_source.html">primitives.h</a></li>
-<li><a class="el" href="primitives_8cpp_source.html">primitives.cpp</a></li>
+<li>/home/srini/hbrs/Fourthsem/SDP/ROS_setup/08032021/updated_1/sdp_ws20_collision_monitoring_for_mobile_manipulators/collision_monitoring/include/<a class="el" href="">primitives.h</a></li>
+<li>/home/srini/hbrs/Fourthsem/SDP/ROS_setup/08032021/updated_1/sdp_ws20_collision_monitoring_for_mobile_manipulators/collision_monitoring/src/<a class="el" href="">primitives.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

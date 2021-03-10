@@ -1,5 +1,7 @@
-<map id="kinova_arm.h" name="kinova_arm.h">
-<area shape="rect" id="node2" href="$arm__controller_8h.html" title="arm_controller.h" alt="" coords="13,80,127,107"/>
-<area shape="rect" id="node4" href="$kinova__arm_8cpp.html" title="kinova_arm.cpp" alt="" coords="151,80,266,107"/>
-<area shape="rect" id="node3" href="$arm__controller_8cpp.html" title="arm_controller.cpp" alt="" coords="5,155,135,181"/>
+<map id="include/kinova_arm.h" name="include/kinova_arm.h">
+<area shape="rect" id="node2" href="$arm__controller_8h.html" title="include/arm_controller.h" alt="" coords="5,80,165,107"/>
+<area shape="rect" id="node4" href="$base__controller_8h.html" title="include/base_controller.h" alt="" coords="190,80,357,107"/>
+<area shape="rect" id="node6" href="$kinova__arm_8cpp.html" title="src/kinova_arm.cpp" alt="" coords="381,80,517,107"/>
+<area shape="rect" id="node3" href="$arm__controller_8cpp.html" title="src/arm_controller.cpp" alt="" coords="10,155,161,181"/>
+<area shape="rect" id="node5" href="$base__controller_8cpp.html" title="src/base_controller.cpp" alt="" coords="195,155,352,181"/>
 </map>

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['radius',['radius',['../class_capsule.html#a9b7e591748a2b735b35d99a2d7792f39',1,'Capsule']]],
-  ['rvizobstacles',['rvizObstacles',['../class_arm_controller.html#ab94a1abce40096f6476404d49d00860f',1,'ArmController']]]
+  ['obstacles',['obstacles',['../class_monitor.html#a05fd42482269ad65432d5400c8f0f9b5',1,'Monitor']]],
+  ['obstaclestodelete',['obstaclesToDelete',['../class_monitor.html#a2207169c2b32b3bbf9925f3254064dee',1,'Monitor']]],
+  ['orig',['orig',['../class_ray.html#a21776ed09fa0cff97b5eb3d35cd40c97',1,'Ray']]]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['capsule',['Capsule',['../class_capsule.html#aab6d0827aa8179c3f258129161a67e2e',1,'Capsule::Capsule(Eigen::Matrix4d pose, double length, double radius)'],['../class_capsule.html#a94838c4642111c07dbf83fdc775d1a68',1,'Capsule::Capsule(Capsule *capsule)']]],
-  ['controlloop',['controlLoop',['../class_arm_controller.html#ad7e00a70c968a23087415b1bd0ac8bf1',1,'ArmController']]]
+  ['basecallback',['baseCallback',['../class_base_controller.html#a8ebbdf4ee3ad99e304f8643d58b03cbf',1,'BaseController']]],
+  ['basecontroller',['BaseController',['../class_base_controller.html#a0821816ec5a6012eac19f853ab0c2044',1,'BaseController']]],
+  ['basedistancetoobjects',['baseDistanceToObjects',['../class_monitor.html#a1e4ef4f45f75dcc38d6283644a4bfdbe',1,'Monitor']]],
+  ['box3',['Box3',['../class_box3.html#aad6fb7ce9a1349ebc77d53bae2518d6e',1,'Box3::Box3(Eigen::Vector3d &amp;center)'],['../class_box3.html#aa871a15d2ffdedb128f3b29c40a880a1',1,'Box3::Box3(const Eigen::Vector3d &amp;vmin, const Eigen::Vector3d &amp;vmax)'],['../class_box3.html#acb6924ddd5dd9f976c0fc6335b77f5f2',1,'Box3::Box3(Box3 *box)'],['../class_box3.html#a3c411ee95120b8c1704ba62432bd8554',1,'Box3::Box3(Eigen::Matrix4d &amp;pose, double x, double y, double z)'],['../class_box3.html#aa681aebc8053b437bda41ea430bf44cb',1,'Box3::Box3(Eigen::Vector3d &amp;pose, double x, double y, double z)']]]
 ];

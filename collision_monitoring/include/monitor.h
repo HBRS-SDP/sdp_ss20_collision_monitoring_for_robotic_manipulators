@@ -22,6 +22,7 @@ class Monitor
 
         /// Arm for the monitor
         Arm* arm; 
+		Base* base;
 
         /// Obstacles in the workspace
         std::vector<Primitive*> obstacles; 
@@ -35,7 +36,15 @@ class Monitor
         * @returns a matrix with the distance of each link to the other 
         * obstacles.
         */
-        std::vector<std::vector<double>> distanceToObjects(void);
+        std::vector<std::vector<double>> distanceToObjects();
+	 /** Collision monitoring with the base and other obstacles.
+        *
+        * This methods monitors the distance from base of the robot 
+        * to other obstacles. 
+        *
+        * @returns a matrix with the distance of each link to the other links.
+        */
+        std::vector<double> baseDistanceToObjects();
 
         /** Collision monitoring with the arm itself.
         *
@@ -72,7 +81,24 @@ class Monitor
         * @param arm address of the arm to be treated as an obstacle.
         */
         void addObstacle(Arm* arm);
+	
+        /** Adds base to list of obstacles
+        *
+        * This method decomposes a base into its box3 primitive to add it into 
+        * the vector of obstacles.
+        *
+        * @param base address of the base to be treated as an obstacle.
+        */
+        void addObstacle(Base* base_obstacle);
+	/** Adds box to list of obstacles
+         *
+        * Adds a box to the list of obstacles.
+        * @param box address of the box obstacle to be added.
+        */
 
+
+
+	void addObstacle(Box3* box); 
         /** Constructor of Monitor
         *
         * This is the constructor for the monitor class, it takes as 
@@ -80,6 +106,16 @@ class Monitor
         *
         * @param arm arm to monitor collision.
         */
+  /** Constructor of Monitor
+        *
+        * This is the constructor for the monitor class, it takes as 
+        * paramter the base to be monitored. 
+        *
+        * @param base base to monitor collision.
+        */
+
+        
+        Monitor(Base* base);
         Monitor(Arm* arm);
 
         /** Destructor for the monitor class

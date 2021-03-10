@@ -6,7 +6,8 @@
 
 
 
-Collaboration diagram for Rviz\+Obstacle\+:\nopagebreak
+Collaboration diagram for Rviz\+Obstacle\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -15,6 +16,12 @@ Collaboration diagram for Rviz\+Obstacle\+:\nopagebreak
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_rviz_obstacle_a3fb19f60434581b669c0dc063c026943}{Rviz\+Obstacle} (visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr marker\+In, int index)
+\item 
+\hyperlink{class_rviz_obstacle_aefa092d8dcad532408308c34cb4cddbe}{$\sim$\+Rviz\+Obstacle} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix4d \hyperlink{class_rviz_obstacle_a30101e2a3c65776bb4abbb139f10b14a}{update\+Pose} (visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr marker\+In)
 \item 
 \hyperlink{class_rviz_obstacle_a3fb19f60434581b669c0dc063c026943}{Rviz\+Obstacle} (visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr marker\+In, int index)
 \item 
@@ -36,10 +43,6 @@ Eigen\+::\+Matrix4d \hyperlink{class_rviz_obstacle_aa48c4d1a26938cb932aac1439373
 \subsection{Detailed Description}
 A class for dealing with obstacle displaying in R\+OS. 
 
-Definition at line 39 of file arm\+\_\+controller.\+h.
-
-
-
 \subsection{Constructor \& Destructor Documentation}
 \index{Rviz\+Obstacle@{Rviz\+Obstacle}!Rviz\+Obstacle@{Rviz\+Obstacle}}
 \index{Rviz\+Obstacle@{Rviz\+Obstacle}!Rviz\+Obstacle@{Rviz\+Obstacle}}
@@ -58,10 +61,6 @@ Constructor
 {\em index} & The location of the obstacle in the monitor obstacle list \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 328 of file arm\+\_\+controller.\+cpp.
-
 \index{Rviz\+Obstacle@{Rviz\+Obstacle}!````~Rviz\+Obstacle@{$\sim$\+Rviz\+Obstacle}}
 \index{````~Rviz\+Obstacle@{$\sim$\+Rviz\+Obstacle}!Rviz\+Obstacle@{Rviz\+Obstacle}}
 \subsubsection[{\texorpdfstring{$\sim$\+Rviz\+Obstacle()}{~RvizObstacle()}}]{\setlength{\rightskip}{0pt plus 5cm}Rviz\+Obstacle\+::$\sim$\+Rviz\+Obstacle (
@@ -73,9 +72,33 @@ Definition at line 328 of file arm\+\_\+controller.\+cpp.
 
 Destructor. 
 
+\index{Rviz\+Obstacle@{Rviz\+Obstacle}!Rviz\+Obstacle@{Rviz\+Obstacle}}
+\index{Rviz\+Obstacle@{Rviz\+Obstacle}!Rviz\+Obstacle@{Rviz\+Obstacle}}
+\subsubsection[{\texorpdfstring{Rviz\+Obstacle(visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr marker\+In, int index)}{RvizObstacle(visualization_msgs::Marker::ConstPtr markerIn, int index)}}]{\setlength{\rightskip}{0pt plus 5cm}Rviz\+Obstacle\+::\+Rviz\+Obstacle (
+\begin{DoxyParamCaption}
+\item[{visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr}]{marker\+In, }
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{class_rviz_obstacle_a3fb19f60434581b669c0dc063c026943}{}\label{class_rviz_obstacle_a3fb19f60434581b669c0dc063c026943}
+Constructor
 
 
-Definition at line 344 of file arm\+\_\+controller.\+cpp.
+\begin{DoxyParams}{Parameters}
+{\em marker\+In} & The marker with dimensions suiting the obstacle \\
+\hline
+{\em index} & The location of the obstacle in the monitor obstacle list \\
+\hline
+\end{DoxyParams}
+\index{Rviz\+Obstacle@{Rviz\+Obstacle}!````~Rviz\+Obstacle@{$\sim$\+Rviz\+Obstacle}}
+\index{````~Rviz\+Obstacle@{$\sim$\+Rviz\+Obstacle}!Rviz\+Obstacle@{Rviz\+Obstacle}}
+\subsubsection[{\texorpdfstring{$\sim$\+Rviz\+Obstacle()}{~RvizObstacle()}}]{\setlength{\rightskip}{0pt plus 5cm}Rviz\+Obstacle\+::$\sim$\+Rviz\+Obstacle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_rviz_obstacle_aefa092d8dcad532408308c34cb4cddbe}{}\label{class_rviz_obstacle_aefa092d8dcad532408308c34cb4cddbe}
+
+
+Destructor. 
 
 
 
@@ -97,10 +120,23 @@ Function for updating the position of the obstacle
 \begin{DoxyReturn}{Returns}
 The new Pose of the obstacle 
 \end{DoxyReturn}
+\index{Rviz\+Obstacle@{Rviz\+Obstacle}!update\+Pose@{update\+Pose}}
+\index{update\+Pose@{update\+Pose}!Rviz\+Obstacle@{Rviz\+Obstacle}}
+\subsubsection[{\texorpdfstring{update\+Pose(visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr marker\+In)}{updatePose(visualization_msgs::Marker::ConstPtr markerIn)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix4d Rviz\+Obstacle\+::update\+Pose (
+\begin{DoxyParamCaption}
+\item[{visualization\+\_\+msgs\+::\+Marker\+::\+Const\+Ptr}]{marker\+In}
+\end{DoxyParamCaption}
+)}\hypertarget{class_rviz_obstacle_a30101e2a3c65776bb4abbb139f10b14a}{}\label{class_rviz_obstacle_a30101e2a3c65776bb4abbb139f10b14a}
+Function for updating the position of the obstacle
 
 
-Definition at line 347 of file arm\+\_\+controller.\+cpp.
-
+\begin{DoxyParams}{Parameters}
+{\em marker\+In} & The marker representing the new position of the obstacle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new Pose of the obstacle 
+\end{DoxyReturn}
 
 
 \subsection{Member Data Documentation}
@@ -111,20 +147,12 @@ Definition at line 347 of file arm\+\_\+controller.\+cpp.
 
 The index of the obstacle in \hyperlink{class_monitor}{Monitor} obstacle list. 
 
-
-
-Definition at line 43 of file arm\+\_\+controller.\+h.
-
 \index{Rviz\+Obstacle@{Rviz\+Obstacle}!marker@{marker}}
 \index{marker@{marker}!Rviz\+Obstacle@{Rviz\+Obstacle}}
 \subsubsection[{\texorpdfstring{marker}{marker}}]{\setlength{\rightskip}{0pt plus 5cm}visualization\+\_\+msgs\+::\+Marker Rviz\+Obstacle\+::marker}\hypertarget{class_rviz_obstacle_a9edb18553236c56fb49e9d181e0ed052}{}\label{class_rviz_obstacle_a9edb18553236c56fb49e9d181e0ed052}
 
 
 The marker that represents the obstacle in rviz. 
-
-
-
-Definition at line 46 of file arm\+\_\+controller.\+h.
 
 \index{Rviz\+Obstacle@{Rviz\+Obstacle}!pose@{pose}}
 \index{pose@{pose}!Rviz\+Obstacle@{Rviz\+Obstacle}}
@@ -135,11 +163,9 @@ The pose of the marker.
 
 
 
-Definition at line 49 of file arm\+\_\+controller.\+h.
-
-
-
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{arm__controller_8h}{arm\+\_\+controller.\+h}\item 
-\hyperlink{arm__controller_8cpp}{arm\+\_\+controller.\+cpp}\end{DoxyCompactItemize}
+include/\hyperlink{arm__controller_8h}{arm\+\_\+controller.\+h}\item 
+include/\hyperlink{base__controller_8h}{base\+\_\+controller.\+h}\item 
+src/\hyperlink{arm__controller_8cpp}{arm\+\_\+controller.\+cpp}\item 
+src/\hyperlink{base__controller_8cpp}{base\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

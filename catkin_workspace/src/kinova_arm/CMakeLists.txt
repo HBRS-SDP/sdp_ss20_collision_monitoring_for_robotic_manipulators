@@ -148,6 +148,11 @@ add_library(KinovaArm STATIC
   src/kinova_arm.cpp
   include/kinova_arm.h
 )
+add_library(Narkin STATIC
+  src/base_controller.cpp
+  include/base_controller.h
+  include/kinova_arm.h
+)
 add_subdirectory(collision_monitoring)
 
 ## Add cmake target dependencies of the library
@@ -165,6 +170,13 @@ add_executable(KinovaCollisionMonitoring
   src/marker_publisher.cpp
 )
 
+ add_executable(NarkinCollisionMonitoring
+   src/base_controller.cpp
+   src/base_CM_node.cpp
+   src/marker_publisher.cpp
+)
+add_executable(basic_shapes src/base_marker_publisher.cpp)
+target_link_libraries(basic_shapes ${catkin_LIBRARIES})
 add_executable(DualKinovaCollisionMonitoring
   src/arm_controller.cpp
   src/dual_kinova_CM_node.cpp
@@ -173,6 +185,7 @@ add_executable(DualKinovaCollisionMonitoring
 
 add_executable(KinovaSimulator
   src/robot_sim.cpp
+  src/marker_publisher.cpp
 )
 
 add_executable(KinovaInterface
@@ -201,6 +214,15 @@ add_executable(DualArmKinovaInterface
 # )
 target_link_libraries(KinovaCollisionMonitoring PRIVATE
   KinovaArm
+  CollisionMonitoring
+  orocos-kdl
+  kdl_parser
+  ${orocos-kdl_LIBRARIES}
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(NarkinCollisionMonitoring PRIVATE
+   KinovaArm
+   Narkin
   CollisionMonitoring
   orocos-kdl
   kdl_parser

@@ -33,7 +33,10 @@ add_library(KinovaArm STATIC
     src/kinova_arm.cpp
     include/kinova_arm.h
 )
-
+add_library(Narkin STATIC
+   src/base_controller.cpp
+   include/base_controller.h
+)
 target_include_directories(KinovaArm PUBLIC
                            "${PROJECT_BINARY_DIR}"
 )

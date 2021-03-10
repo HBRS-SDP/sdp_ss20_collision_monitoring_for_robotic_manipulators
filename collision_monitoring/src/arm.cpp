@@ -4,3 +4,5 @@
 
 Arm::~Arm (){}
 bool Arm::updatePose(std::vector<double>) {}
+Base::~Base (){}
+bool Base::updatePose( Eigen::Vector3d ) {}

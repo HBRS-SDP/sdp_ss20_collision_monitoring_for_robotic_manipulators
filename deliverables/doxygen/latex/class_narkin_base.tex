@@ -1,0 +1,118 @@
+\hypertarget{class_narkin_base}{}\section{Narkin\+Base Class Reference}
+\label{class_narkin_base}\index{Narkin\+Base@{Narkin\+Base}}
+
+
+{\ttfamily \#include $<$kinova\+\_\+arm.\+h$>$}
+
+
+
+Inheritance diagram for Narkin\+Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{class_narkin_base__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Narkin\+Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_narkin_base__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_narkin_base_a35e4edf9bb144fd8dee636e41d9ae9e9}{Narkin\+Base} (Eigen\+::\+Vector3d input\+Base\+Transform)
+\item 
+\hyperlink{class_narkin_base_ad42db1b25986d226e5667579568d1705}{$\sim$\+Narkin\+Base} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_kinova_arm}{Kinova\+Arm} Destructor. \end{DoxyCompactList}\item 
+bool \hyperlink{class_narkin_base_abb56af256ebb5c152d0a5c4c3904c66e}{update\+Pose} (Eigen\+::\+Vector3d base\+Positions)
+\item 
+Eigen\+::\+Vector3d \hyperlink{class_narkin_base_a8a9784395d2070c5276dbf80def713e4}{get\+Pose} (void)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Narkin\+Base@{Narkin\+Base}!Narkin\+Base@{Narkin\+Base}}
+\index{Narkin\+Base@{Narkin\+Base}!Narkin\+Base@{Narkin\+Base}}
+\subsubsection[{\texorpdfstring{Narkin\+Base(\+Eigen\+::\+Vector3d input\+Base\+Transform)}{NarkinBase(Eigen::Vector3d inputBaseTransform)}}]{\setlength{\rightskip}{0pt plus 5cm}Narkin\+Base\+::\+Narkin\+Base (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d}]{input\+Base\+Transform}
+\end{DoxyParamCaption}
+)}\hypertarget{class_narkin_base_a35e4edf9bb144fd8dee636e41d9ae9e9}{}\label{class_narkin_base_a35e4edf9bb144fd8dee636e41d9ae9e9}
+\hyperlink{class_narkin_base}{Narkin\+Base} constructor with set baseposition
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+Base\+Transform} & The global position of the robot base \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An instance of \hyperlink{class_narkin_base}{Narkin\+Base} class 
+\end{DoxyReturn}
+\index{Narkin\+Base@{Narkin\+Base}!````~Narkin\+Base@{$\sim$\+Narkin\+Base}}
+\index{````~Narkin\+Base@{$\sim$\+Narkin\+Base}!Narkin\+Base@{Narkin\+Base}}
+\subsubsection[{\texorpdfstring{$\sim$\+Narkin\+Base()}{~NarkinBase()}}]{\setlength{\rightskip}{0pt plus 5cm}Narkin\+Base\+::$\sim$\+Narkin\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_narkin_base_ad42db1b25986d226e5667579568d1705}{}\label{class_narkin_base_ad42db1b25986d226e5667579568d1705}
+
+
+\hyperlink{class_kinova_arm}{Kinova\+Arm} Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Narkin\+Base@{Narkin\+Base}!get\+Pose@{get\+Pose}}
+\index{get\+Pose@{get\+Pose}!Narkin\+Base@{Narkin\+Base}}
+\subsubsection[{\texorpdfstring{get\+Pose(void)}{getPose(void)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector3d Narkin\+Base\+::get\+Pose (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_narkin_base_a8a9784395d2070c5276dbf80def713e4}{}\label{class_narkin_base_a8a9784395d2070c5276dbf80def713e4}
+A function to find the final base pose
+
+\begin{DoxyReturn}{Returns}
+The last base pose 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_base_ae1de47bdc7b87d0c78934946658640ee}{Base}.
+
+\index{Narkin\+Base@{Narkin\+Base}!update\+Pose@{update\+Pose}}
+\index{update\+Pose@{update\+Pose}!Narkin\+Base@{Narkin\+Base}}
+\subsubsection[{\texorpdfstring{update\+Pose(\+Eigen\+::\+Vector3d base\+Positions)}{updatePose(Eigen::Vector3d basePositions)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Narkin\+Base\+::update\+Pose (
+\begin{DoxyParamCaption}
+\item[{Eigen\+::\+Vector3d}]{base\+Positions}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_narkin_base_abb56af256ebb5c152d0a5c4c3904c66e}{}\label{class_narkin_base_abb56af256ebb5c152d0a5c4c3904c66e}
+A function to update the current virtual representation of the base
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Positions} & (center) The 3D pose of robot base. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The boolean true for a successful update, False otherwise 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_base_a5ea313e6980f658e22d14bf3020c1905}{Base}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{kinova__arm_8h}{kinova\+\_\+arm.\+h}\item 
+src/\hyperlink{kinova__arm_8cpp}{kinova\+\_\+arm.\+cpp}\end{DoxyCompactItemize}

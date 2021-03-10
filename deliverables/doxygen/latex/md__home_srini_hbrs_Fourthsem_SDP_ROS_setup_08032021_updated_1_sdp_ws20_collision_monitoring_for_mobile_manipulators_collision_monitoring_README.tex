@@ -1,0 +1,41 @@
+This work is an extension of the existing library \textquotesingle{}\href{https://github.com/HBRS-SDP/sdp_ss20_collision_monitoring_for_robotic_manipulators}{\tt collision monitoring}\textquotesingle{}. The extension here is to add the robot base as additional primitive and also to implement the collision monitoring and avoidance for the movement of base.
+
+This library was developed for the software development project course at the Hochschule Bonn-\/\+Rhein-\/\+Sieg.
+
+\subsubsection*{Prerequisites}
+
+Prerequisites and instructions for compiling the library are provided in setup\+\_\+instructions.\+pdf
+
+\subsubsection*{Installing}
+
+For every type of manipulator you would like to monitor you must implement the \hyperlink{class_arm}{Arm} interface. This ensures that the geometric descriptions used to monitor the distances suit your manipulator. Please refer to the documentation on how to do so.
+
+After implementing the arm you can build your project and use the monitor class. To build the prjoect, follow the instructions provided in setup\+\_\+instructions.\+pdf
+
+\subsection*{Running the tests}
+
+After building you may run the test located in the build directory by running the command\+:
+
+
+\begin{DoxyCode}
+1 ./build/test/tests
+\end{DoxyCode}
+ \subsection*{Authors}
+
+
+\begin{DoxyItemize}
+\item {\bfseries Urvashi Negi} -\/ \href{https://github.com/urvashi07}{\tt urvashi07}
+\item {\bfseries Zain Ul Haq} -\/ \href{https://github.com/zaindroid}{\tt zaindroid}
+\item {\bfseries Sreenivasa Hikkal Venugopala} -\/ \href{https://github.com/Sreeni1204}{\tt Sreeni1204}
+\end{DoxyItemize}
+
+\subsection*{License}
+
+This project is licensed under the M\+IT License -\/ see the \hyperlink{md_LICENSE}{L\+I\+C\+E\+N\+SE.md} file for details
+
+\subsection*{Acknowledgments}
+
+
+\begin{DoxyItemize}
+\item We would like to thank Djordje Vukcevic for his support and motivation throughout the course of this project. 
+\end{DoxyItemize}
